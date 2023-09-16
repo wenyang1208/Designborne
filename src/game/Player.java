@@ -1,40 +1,195 @@
+// declare package
 package game;
 
+// import engine and game packages
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.actors.attributes.ActorAttributeOperations;
+import edu.monash.fit2099.engine.actors.attributes.BaseActorAttribute;
+import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
+import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
+import game.utils.Ability;
+import game.utils.FancyMessage;
+import game.utils.Status;
+
 
 /**
  * Class representing the Player.
+ *
  * Created by:
  * @author Adrian Kristanto
  * Modified by:
+ * @author Koe Rui En
  *
  */
 public class Player extends Actor {
+
+    // declare instance variable
+
+    // player has its own damage and hit rate
+
+    // damage
     /**
-     * Constructor.
+     * damage to health
+     */
+    private final int damage;
+
+    // hit rate
+    /**
+     * the chance to hit the target
+     */
+    private final int hitRate;
+
+
+    /**
+     * Constructor for the Player class
      *
      * @param name        Name to call the player in the UI
      * @param displayChar Character to represent the player in the UI
-     * @param hitPoints   Player's starting number of hitpoints
+     * @param hitPoints   Player's starting number of hitpoints (health attribute)
+     * @param stamina     Player's starting number of stamina
+     *
      */
-    public Player(String name, char displayChar, int hitPoints) {
+    public Player(String name, char displayChar, int hitPoints, int stamina) {
+
+        // initialise actor constructor
         super(name, displayChar, hitPoints);
+
+        // capability of the player
         this.addCapability(Status.HOSTILE_TO_ENEMY);
+        this.addCapability(Ability.ENTER_FLOOR);
+
+        // stamina attributes
+        // BaseActorAttribute is basic attribute of player, ie stamina
+        this.addAttribute(BaseActorAttributes.STAMINA, new BaseActorAttribute(stamina));
+
+        // hit rate and damage
+        this.damage = 15;
+        this.hitRate = 80;
+
     }
 
+    // user uses limb to attack enemy (ie Intrinsic Weapon)
+    // damage 15
+    // attack accuracy 80%
+    /**
+     * Creates and returns an intrinsic weapon for Player with different damage.
+     *
+     * @return a freshly-instantiated IntrinsicWeapon for Player
+     */
+    @Override
+    public IntrinsicWeapon getIntrinsicWeapon() {
+
+        return new IntrinsicWeapon(damage, "bonks", hitRate);
+
+    }
+
+    // Display method - to dump all states of Player instance
+    /**
+     * Displays all states of instance of Player class before console menu is printed
+     *
+     * @return a String that representing all states of instance of Player class
+     */
+    public String Display(){
+
+        // declare output
+        String ret = "";
+
+        // from Actor cls
+        ret += name + "\n";
+        ret += String.format("HP: %d/%d\n", this.getAttribute(BaseActorAttributes.HEALTH), this.getAttributeMaximum(BaseActorAttributes.HEALTH));
+        ret += String.format("Stamina: %d/%d\n", this.getAttribute(BaseActorAttributes.STAMINA), this.getAttributeMaximum(BaseActorAttributes.STAMINA));
+
+        // return output
+        return ret;
+
+    }
+
+    /**
+     * Select and return an action to perform on the current turn.
+     *
+     * @param actions    collection of possible Actions for this Actor
+     * @param lastAction The Action this Actor took last turn. Can do interesting things in conjunction with Action.getNextAction()
+     * @param map        the map containing the Actor
+     * @param display    the I/O object to which messages may be written
+     *
+     * @return the Action to be performed
+     */
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
-        // Handle multi-turn Actions
+
+        // At each turn, the player’s stamina will recover by 1% of their maximum stamina
+        if (this.getAttribute(BaseActorAttributes.STAMINA) <= this.getAttributeMaximum(BaseActorAttributes.STAMINA)){
+
+            modifyAttribute(BaseActorAttributes.STAMINA, ActorAttributeOperations.INCREASE,(int)(getAttributeMaximum(BaseActorAttributes.STAMINA)* 0.01));
+
+        }
+
+
+       // Handle multi-turn Actions
         if (lastAction.getNextAction() != null)
             return lastAction.getNextAction();
 
+
         // return/print the console menu
+
+        // print out current player status
+        new Display().println("\n" + Display());
+
         Menu menu = new Menu(actions);
         return menu.showMenu(this, display);
+
     }
+
+    /**
+     * Method that can be executed when the Player is unconscious due to the action of another actor
+     *
+     * @param actor the perpetrator
+     * @param map where the player fell unconscious
+     *
+     * @return a string describing what happened when the Player is unconscious
+     */
+    public String unconscious(Actor actor, GameMap map) {
+
+        // print fancy message
+        for (String line : FancyMessage.YOU_DIED.split("\n")) {
+            new Display().println(line);
+            try {
+                Thread.sleep(200);
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
+        }
+
+        return super.unconscious(actor, map);
+
+    }
+
+    /**
+     * Method that can be executed when the Player is unconscious due to natural causes or accident
+     *
+     * @param map where the Player fell unconscious
+     *
+     * @return a string describing what happened when the Player is unconscious
+     */
+    public String unconscious(GameMap map) {
+
+        // print fancy message
+        for (String line : FancyMessage.YOU_DIED.split("\n")) {
+            new Display().println(line);
+            try {
+                Thread.sleep(200);
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
+        }
+
+        return super.unconscious(map);
+    }
+
+
 }
