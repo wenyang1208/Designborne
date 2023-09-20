@@ -8,7 +8,8 @@ package game.utils;
  */
 public enum Ability {
 
-    ENTER_FLOOR,
+    SKILL,
+    UNLOCK_GATE,
 
 
 }

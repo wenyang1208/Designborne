@@ -11,14 +11,13 @@ import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.actors.Behaviour;
 
 /**
- * Created by:
- * @author Riordan D. Alfredo
- * Modified by:
- *
+ * class representing the behaviour of wandering
  */
 public class WanderBehaviour implements Behaviour {
 
+
     private final Random random = new Random();
+
 
     /**
      * Returns a MoveAction to wander to a random location, if possible.
@@ -38,7 +37,7 @@ public class WanderBehaviour implements Behaviour {
                 actions.add(exit.getDestination().getMoveAction(actor, "around", exit.getHotKey()));
             }
         }
-
+        // randomly choose one action
         if (!actions.isEmpty()) {
             return actions.get(random.nextInt(actions.size()));
         }

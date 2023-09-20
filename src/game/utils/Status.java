@@ -9,10 +9,11 @@ package game.utils;
  * @author Koe Rui En
  */
 public enum Status {
-    HOSTILE_TO_ENEMY,
-    HAS_SPECIAL_SKILL,
-    FRIENDLY_TO_ENEMY,
 
-    UNLOCK_GATE,
+    HOSTILE_TO_ENEMY,
+    JUST_ACTIVATED,
+    FULLY_ACTIVATED,
+    HOSTILE_TO_PLAYER,
+    LOCKED
 
 }

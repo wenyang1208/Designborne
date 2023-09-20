@@ -3,6 +3,8 @@ package game.grounds;
 
 //import engine packages
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.actors.attributes.ActorAttributeOperations;
+import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
@@ -42,21 +44,11 @@ public class Void extends Ground {
     @Override
     public void tick(Location location) {
 
-        String ret  = "";
-
-        // check current location contains actor or not
         if (location.containsAnActor()){
-
-            // get actor at this location
-            Actor target = location.getActor();
-
-            ret += target + " has stepped into the void" + "\n";
-
-            ret += target.unconscious(location.map());
-
-            // display what happened after this action has been executed
-            new Display().println(ret);
-
+            Actor actor = location.getActor();
+            actor.modifyAttribute(BaseActorAttributes.HEALTH, ActorAttributeOperations.UPDATE, 0);
+            new Display().println( actor + " has stepped into the void" );
+            new Display().println( actor.unconscious(location.map()) );
         }
 
     }

@@ -1,125 +1,67 @@
-// declare package
 package game.grounds;
 
-
-// import engine
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
-import game.utils.Status;
 import game.actions.TravelAction;
+import game.utils.Ability;
+import game.utils.Status;
 import game.actions.UnlockAction;
 
-
 /**
- * A class that represents the gate on the map
- *
- * Created by:
- * @author Koe Rui En
- *
+ * class representing gate to a new map
  */
 public class Gate extends Ground {
 
-    //  name of destination to be traveled
-    /**
-     * name of destination to be travelled
-     */
-    private String name;
 
-    // location of gate to travel to
-    /**
-     * location of gate to travel to
-     */
-    private Location locationToMove;
-
-    // gate status
-    /**
-     * status of gate (true: open, false: close)
-     */
-    private boolean gateStatus;
+    private String name; //  name of destination to be traveled
+    private Location locationToMove; // location of gate to travel to
 
 
     /**
-     * Constructor of the Gate class
-     *
-     * @param name the name of destination to be traveled
-     * @param location the location of gate to teleport
-     *
+     * Constructor of gate
+     * It is locked initially
      */
-    public Gate (String name, Location location){
-
+    public Gate(String name, Location locationToMove) {
         super('=');
+        this.addCapability(Status.LOCKED);
         this.name = name;
-        this.locationToMove = location;
-        setGateStatus(false);
+        this.locationToMove = locationToMove;
     }
 
-    // getter
-    /**
-     * A getter to get the status of the gate
-     */
-    public boolean getGateStatus() {return gateStatus;}
 
-    // setter
     /**
-     * A setter to set the status of the gate
+     * All entities can step on the 'Gate' ground when it is unlocked.
      *
-     * @param newStatus a boolean to indicate the status of the gate
+     * @param actor the Actor to check
+     * @return true if the gate is unlocked
      */
-    public void setGateStatus(boolean newStatus){
-
-        gateStatus = newStatus;
-
+    @Override
+    public boolean canActorEnter(Actor actor) {
+        return ! this.hasCapability(Status.LOCKED);
     }
 
-    // create action to move the actor is actor has old key
-    // create action to unlock the gate
+
+
     /**
-     * Returns Action list to allow actors act on it.
+     * Returns a collection of Actions that an actor can perform when the actor get closer to the gate
      *
      * @param actor the Actor acting
      * @param location the current Location
      * @param direction the direction of the Ground from the Actor
-     *
-     * @return a new collection of Actions
+     * @return a collection of Actions
      */
-    public ActionList allowableActions(Actor actor, Location location, String direction){
-
-        // declare output
-        ActionList actions = new ActionList();
-
-        // add actions to list
-
-        // check gate is opened or not
-        if (getGateStatus()) {
-
-            // other actor except player cannot travel
-            if (actor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
-
-                actions.add(new TravelAction(locationToMove, location.toString(), name));
-
+    @Override
+    public ActionList allowableActions(Actor actor, Location location, String direction) {
+        if (this.hasCapability(Status.LOCKED)){ // actor can perform Unlock Gate Action when the gate is locked
+            return new ActionList( new UnlockAction(this) );
+        } else {
+            if (actor.hasCapability(Ability.UNLOCK_GATE)){ // Only actor with the key can travel to the new map
+                return new ActionList( new TravelAction(locationToMove, location.toString(), name) );
+            } else {
+                return new ActionList();
             }
-
         }
-
-        // unlock the gate
-        else{
-
-            actions.add(new UnlockAction(this, "Gate"));
-
-        }
-
-
-
-
-        // return output
-        return actions;
-
     }
-
-
-
-
-
 }

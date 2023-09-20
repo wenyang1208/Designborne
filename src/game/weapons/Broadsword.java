@@ -1,197 +1,114 @@
-// declare package
 package game.weapons;
 
-// import engine and game package
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.Location;
+import edu.monash.fit2099.engine.weapons.WeaponItem;
+import game.actions.ActivateSkillAction;
 import game.actions.AttackAction;
-import game.actions.FocusAction;
+import game.utils.Ability;
 import game.utils.Status;
 
-// starting weapon item for the player
-// extend from weapon item class that implement item
 /**
- * Class representing the Broadsword weapon that can be used to attack the enemy.
- *
- * Created by:
- * @author Koe Rui En
- *
+ * Broadsword class representing the weapon broad sword
  */
-public class Broadsword extends SkillWeapon {
+public class Broadsword extends WeaponItem {
 
-    // skill turn
+
+    /* Default constants for the Broadsword object */
+    private static final float DEFAULT_DAMAGE_MULTIPLIER = 1.0f;
+    private static final int DEFAULT_IT_RATE = 80;
+
+    /* Default constants for the skill activation */
+    private static final float INCREASED_DAMAGE_MULTIPLIER = 0.1f;
+    private static final int ACTIVATED_HIT_RATE = 90;
+    private static final float REDUCED_STAMINA_RATE = 0.2f;
+    private static final int FOCUS_DURATION = 5;
+
+    /* Attribute of the Broadsword */
+    private int remainingFocusTurn;
+
+
     /**
-     * Number of turns of skill
+     * Constructor of the Broadsword object
+     * It has one skill
+     * remainingFocusTurn will be set to 5 when it is created
      */
-    private int skillTurn;
-
-    // broadsword special skill: Focus status (true: active, false: inactive)
-    /**
-     * Broadsword's skill status (true: active, false: inactive)
-     */
-    private boolean skillActiveStatus;
-
-
-    /**
-     * Constructor of the Broadsword class
-     *
-     */
-
-    // default constructor
     public Broadsword() {
-
-        // instantiate weapon item with corresponding attributes
-        // damage = 110, attack accuracy = 80%
-        // char 1
-        super("Broadsword", '1', 110, "slashes", 80);
-
-        // Broadsword has to be picked up, override value again
-        portable = true;
-
-        // set skill turn (initial 5 turns）
-        setSkillTurn(5);
-
-        // skill initial status
-        setSkillStatus(false);
-
-        // broadsword has focus skill action
-        this.addCapability(Status.HAS_SPECIAL_SKILL);
-
+        super("BroadSword", '1', 110, "slashes", DEFAULT_IT_RATE);
+        this.remainingFocusTurn = FOCUS_DURATION;
+        this.addCapability(Ability.SKILL);
     }
 
-    // get skill turn
+
     /**
-     * Get the number of turns of skill
-     *
-     * @return an integer containing the number of turns of skill
+     * Reset the attribute 'remainingFocusTurn' to 5
      */
-    public int getSkillTurn() {
-        return skillTurn;
+    public void resetFocusTurn(){
+        this.remainingFocusTurn = FOCUS_DURATION;
     }
 
-    // set skill turn
+
     /**
-     * Set the number of turns of skill
-     *
-     * @param newTurn a integer containing the number of turns of skill
-     *
+     * When the broad sword is on the ground and it is still activated.
+     * It means that the player just dropped it last turn. It should be inactivated by
+     * reverting everything back to default.
+     * @param currentLocation The location of the ground on which we lie.
      */
-    public void setSkillTurn(int newTurn) {
-
-        if (newTurn >= 0) {
-
-            skillTurn = newTurn;
+    @Override
+    public void tick(Location currentLocation) {
+        if (this.hasCapability(Status.FULLY_ACTIVATED)){
+            this.removeCapability(Status.FULLY_ACTIVATED);
+            this.updateDamageMultiplier(DEFAULT_DAMAGE_MULTIPLIER);
+            this.updateHitRate(DEFAULT_IT_RATE);
+            this.resetFocusTurn();
         }
-
-    }
-
-    // get skill status
-    /**
-     * Get the status of the skill
-     *
-     * @return a boolean containing the initial status of the skill
-     */
-    public boolean getSkillStatus() {
-        return skillActiveStatus;
-    }
-
-    // set skill status
-    /**
-     * Set the initial status of the skill (True: active, false: inactive)
-     *
-     * @param newStatus a boolean representing the initial status of the skill
-     */
-    public void setSkillStatus(boolean newStatus) {
-
-        skillActiveStatus = newStatus;
-
     }
 
 
-    // reset the weapon status to ori state
     /**
-     * Reset the weapon to its original state
+     * When the broad sword is in player's inventory, the duration of the focus effect should be reduced by 1
+     * if it is been activated.
+     * @param currentLocation The location of the actor carrying this Item.
+     * @param actor The actor carrying this Item.
      */
-   public void resetWeapon() {
+    @Override
+    public void tick(Location currentLocation, Actor actor) {
+        if (this.hasCapability(Status.JUST_ACTIVATED)){
+            this.resetFocusTurn();
+            this.addCapability(Status.FULLY_ACTIVATED);
+            this.removeCapability(Status.JUST_ACTIVATED);
+        } else if(this.hasCapability(Status.FULLY_ACTIVATED)){ // normally reduce the duration by 1
+            this.remainingFocusTurn--;
+        }
+        // If the effect time of the weapon in the inventory has expired, revert it back.
+        if (this.remainingFocusTurn == 0){
+            this.removeCapability(Status.FULLY_ACTIVATED);
+            this.updateDamageMultiplier(DEFAULT_DAMAGE_MULTIPLIER);
+            this.updateHitRate(DEFAULT_IT_RATE);
+        }
+    }
 
-        this.updateHitRate(80);
-        this.updateDamageMultiplier(1.0f);
-        this.setSkillStatus(false);
 
-   }
-
-    // allowable action
-    // Broadsword has special skill (create focus action)
     /**
-     * List of allowable actions that the Broadsword can perform to the current actor
-     *
-     * @param owner the actor that owns the broadsword
-     *
+     * Player can use 'Focus' skill as long as this broad sword is in the inventory.
+     * @param owner the actor that owns the item
      * @return an unmodifiable list of Actions
      */
     @Override
     public ActionList allowableActions(Actor owner) {
-
-        // declare ret, list of actions
-        ActionList actions = new ActionList();
-
-        // add relevant actions into list
-        actions.add(new FocusAction(this));
-
-        // return output, list of actions
-        return actions;
-
+        return new ActionList( new ActivateSkillAction(this, INCREASED_DAMAGE_MULTIPLIER, ACTIVATED_HIT_RATE, REDUCED_STAMINA_RATE) );
     }
 
     /**
-     * List of allowable actions that the Broadsword allows its owner do to other actor.
+     * Player can attack other actor with this broad sword.
      *
      * @param otherActor the other actor
      * @param location the location of the other actor
-     *
      * @return an unmodifiable list of Actions
      */
     @Override
-    public ActionList allowableActions (Actor otherActor, Location location){
-
-        // declare ret, list of actions
-        ActionList actions = new ActionList();
-
-        // add actions into list
-        actions.add(new AttackAction(otherActor, location.toString(),this));
-
-        return actions;
+    public ActionList allowableActions(Actor otherActor, Location location) {
+        return new ActionList( new AttackAction(otherActor, location.toString(), this) );
     }
-
-
-    // keep track of focus action turn
-    /**
-     * Inform a carried Item of the passage of time.
-     *
-     * This method is called once per turn, if the Item is being carried.
-     *
-     * @param currentLocation The location of the actor carrying this Item.
-     * @param actor The actor carrying this Item.
-     */
-    public void tick(Location currentLocation, Actor actor) {
-
-        // skill active and deduct skill turn every turn
-        if (getSkillStatus()) {
-            int newTurn = getSkillTurn() - 1;
-            setSkillTurn(newTurn);
-            new Display().println("Skill Turn Left: " + (newTurn+1));
-
-            // after 6 turns, reset to ori state
-            if (newTurn < 0) {
-
-                // reset weapon status after 5 turns
-                new Display().println("No more skill turns left.");
-                resetWeapon();
-
-            }
-        }
-    }
-
 }

@@ -3,7 +3,7 @@ package game.items;
 
 // import engine and game packages
 import edu.monash.fit2099.engine.items.Item;
-import game.utils.Status;
+import game.utils.Ability;
 
 /**
  * An OldKey class that represents a key for the player to unlock the gate
@@ -24,7 +24,7 @@ public class OldKey extends Item {
         super("Old Key", '-', true);
 
         // add status of key
-        this.addCapability(Status.UNLOCK_GATE);
+        this.addCapability(Ability.UNLOCK_GATE);
 
     }
 

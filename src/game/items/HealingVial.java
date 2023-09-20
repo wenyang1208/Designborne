@@ -8,22 +8,22 @@ import edu.monash.fit2099.engine.items.Item;
 import game.actions.ConsumeAction;
 
 /**
- * class representing refreshing flask
+ * class representing healing vial
  */
-public class RefreshingFlask extends Item implements Consumable{
+public class HealingVial extends Item implements Consumable{
 
 
     /**
      * Constructor
-     * It has the ability to increase stamina point after consumption
+     * It has the ability to increase health point after consumption
      */
-    public RefreshingFlask() {
-        super("Refreshing flask", 'u', true);
+    public HealingVial() {
+        super("Healing vial", 'a', true);
     }
 
 
     /**
-     * A refreshing flask item can have a special skill that can increase the current actor's stamina points.
+     * A healing item can have a special skill that can increase the current actor's hit points.
      * @param owner the actor that owns the item
      * @return an unmodifiable list of Actions
      */
@@ -35,9 +35,9 @@ public class RefreshingFlask extends Item implements Consumable{
 
     @Override
     public String consume(Actor actor) {
-        int value = (int)(0.2 * actor.getAttributeMaximum(BaseActorAttributes.STAMINA));
-        actor.modifyAttribute(BaseActorAttributes.STAMINA, ActorAttributeOperations.INCREASE, value);
+        int value = (int)(0.1 * actor.getAttributeMaximum(BaseActorAttributes.HEALTH));
+        actor.modifyAttribute(BaseActorAttributes.HEALTH, ActorAttributeOperations.INCREASE, value);
         actor.removeItemFromInventory(this);
-        return actor + " consumes " + this + ", and it restores the stamina by " + value + " points.";
+        return actor + " consumes " + this + ", and it restores the health by " + value + " points.";
     }
 }

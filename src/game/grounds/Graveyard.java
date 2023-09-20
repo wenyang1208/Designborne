@@ -4,7 +4,7 @@ package game.grounds;
 // import engine and game packages
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
-import game.npc.Enemy;
+import game.actors.Enemy;
 
 /**
  * A class that represents the graveyard in the different game maps

@@ -14,6 +14,7 @@ import edu.monash.fit2099.engine.positions.Location;
  */
 public class TravelAction extends MoveActorAction {
 
+
     /**
      * Name of the destination of the move
      */
@@ -34,6 +35,7 @@ public class TravelAction extends MoveActorAction {
 
     }
 
+
     /**
      * Returns a description of the destination that actor travelled to display in the menu.
      *
@@ -43,13 +45,7 @@ public class TravelAction extends MoveActorAction {
      */
     @Override
     public String menuDescription(Actor actor) {
-
-        String ret = "";
-
-        ret = actor + " travels to " + travelDestinationName;
-
-        return ret;
-
+        return actor + " travels to " + travelDestinationName;
     }
 
 
