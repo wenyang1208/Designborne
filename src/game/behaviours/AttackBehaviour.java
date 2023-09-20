@@ -1,48 +1,74 @@
+// declare package
 package game.behaviours;
 
+// import engine and game packages
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.actors.Behaviour;
-import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
-import edu.monash.fit2099.engine.positions.Location;
-import game.utils.Status;
 import game.actions.AttackAction;
 
-import java.util.ArrayList;
-import java.util.Random;
-
 /**
- * A class representing the behaviour of attacking
+ * A AttackBehaviour class that represents the attack behaviour of the NPCs
+ *
+ * Created by:
+ * @author Koe Rui En
+ *
  */
 public class AttackBehaviour implements Behaviour {
 
+    // targeted actor
+    /**
+     * The target actor
+     */
+    private Actor targetActor;
 
-    private final Random random = new Random();
+    // direction of the targeted actor
+    /**
+     * The direction of incoming attack.
+     */
+    private String direction;
 
+
+    // constructor
+    /**
+     * Constructor with intrinsic weapon as default
+     *
+     * @param target the target actor to be attacked
+     * @param direction the direction where the attack should be performed (only used for display purposes)
+     *
+     */
+    public AttackBehaviour(Actor target, String direction) {
+
+        // initialise attack behaviour
+        this.targetActor = target;
+        this.direction = direction;
+
+    }
 
     /**
-     * Returns an AttackAction to attack an actor that is one block away from it, if possible.
-     * If no attack is possible, returns null.
+     * Returns a AttackAction to attack the target actor when surrounding them or one block way
+     * If no movement is possible, returns null.
      *
      * @param actor the Actor enacting the behaviour
-     * @param map the map that actor is currently on
-     * @return an Action, or null if no MoveAction is possible
+     * @param map   the map that actor is currently on
+     *
+     * @return an AttackAction, or null if no AttackAction is possible
      */
     @Override
     public Action getAction(Actor actor, GameMap map) {
-        ArrayList<Action> actions = new ArrayList<>();
-        for (Exit exit : map.locationOf(actor).getExits()){
-            Location destination = exit.getDestination();
-            // If there is an actor around, and this actor is player, then add the Attack Action to this player to 'actions'
-            if (destination.containsAnActor() && destination.getActor().hasCapability(Status.HOSTILE_TO_ENEMY)){
-                actions.add( new AttackAction(destination.getActor(), exit.getName()) );
-            }
+
+        // check the current game map contains actor that has this behaviour or target actor
+        if (!map.contains(targetActor) || !map.contains(actor)){
+            return  null;
         }
-        // randomly choose one action
-        if (!actions.isEmpty()){
-            return actions.get(random.nextInt(actions.size()));
-        }
-        return null;
+
+
+        // create attack action, intrinsic weapon as default
+        return new AttackAction(targetActor, direction);
+
+
     }
+
 }
+

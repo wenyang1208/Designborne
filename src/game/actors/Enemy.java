@@ -8,6 +8,7 @@ import edu.monash.fit2099.engine.actors.Behaviour;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
+import game.behaviours.WanderBehaviour;
 import game.utils.Status;
 import game.actions.AttackAction;
 
@@ -34,6 +35,7 @@ public abstract class Enemy extends Actor {
     public Enemy(String name, char displayChar, int hitPoints) {
         super(name, displayChar, hitPoints);
         this.addCapability(Status.HOSTILE_TO_PLAYER);
+        this.behaviours.put(999, new WanderBehaviour());
     }
 
 
@@ -43,22 +45,31 @@ public abstract class Enemy extends Actor {
 
 
     /**
-     * Select the valid action with the highest priority
-     * @param actions    collection of possible Actions for this Actor
-     * @param lastAction The Action this Actor took last turn. Can do interesting things in conjunction with Action.getNextAction()
-     * @param map        the map containing the Actor
-     * @param display    the I/O object to which messages may be written
-     * @return the Action to be performed
+     * A getter to get the map of behaviours of enemies
      */
-    @Override
-    public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
-        for (Behaviour behaviour : behaviours.values()) {
-            Action action = behaviour.getAction(this, map);
-            if(action != null)
-                return action;
-        }
-        return new DoNothingAction();
+    public Map<Integer, Behaviour> getBehaviours() {
+
+        return behaviours;
     }
+
+
+//    /**
+//     * Select the valid action with the highest priority
+//     * @param actions    collection of possible Actions for this Actor
+//     * @param lastAction The Action this Actor took last turn. Can do interesting things in conjunction with Action.getNextAction()
+//     * @param map        the map containing the Actor
+//     * @param display    the I/O object to which messages may be written
+//     * @return the Action to be performed
+//     */
+//    @Override
+//    public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
+//        for (Behaviour behaviour : behaviours.values()) {
+//            Action action = behaviour.getAction(this, map);
+//            if(action != null)
+//                return action;
+//        }
+//        return new DoNothingAction();
+//    }
 
 
     /**
