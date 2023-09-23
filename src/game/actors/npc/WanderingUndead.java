@@ -1,5 +1,7 @@
+// declare package
 package game.actors.npc;
 
+// import game and engine packages
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actions.DoNothingAction;
@@ -20,7 +22,13 @@ import java.util.ArrayList;
 
 
 /**
- * class representing the enemy Wandering Undead
+ * A class that represent WanderingUndead enemy in the Abandoned Village
+ *
+ * Created by:
+ * @author Koe Rui En
+ *
+ * Modified by:
+ * @author Yang Yang Dan
  */
 public class WanderingUndead extends Enemy {
 
@@ -92,6 +100,7 @@ public class WanderingUndead extends Enemy {
             if(action != null)
                 return action;
         }
+
         return new DoNothingAction();
     }
 
@@ -108,23 +117,42 @@ public class WanderingUndead extends Enemy {
 
     }
 
-
+    /**
+     * Collect items that created by an enemy once it is defeated
+     *
+     * @return a list of item that created by the defeated enemy
+     */
     @Override
     public ArrayList<Item> getDroppedItems() {
+
         ArrayList<Item> droppedItems = new ArrayList<>();
-        if ( Math.random() <= 0.25 ){
-            droppedItems.add( new OldKey() );
+
+        if (Math.random() <= 0.25){
+
+            droppedItems.add(new OldKey());
+
         }
-        if ( Math.random() <= 0.2 ){
-            droppedItems.add( new HealingVial() );
+
+        if (Math.random() <= 0.2){
+
+            droppedItems.add(new HealingVial());
+
         }
+
         return droppedItems;
+
     }
 
-
+    /**
+     * Spawn the WanderingUndead instance
+     *
+     * @return a new spawned WanderingUndead instance
+     */
     @Override
     public Enemy spawnMethod() {
+
         return new WanderingUndead();
+
     }
 
 

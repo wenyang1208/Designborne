@@ -1,5 +1,7 @@
+// declare package
 package game.actors.npc;
 
+// import game and engine packages
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.actors.Behaviour;
@@ -14,7 +16,14 @@ import java.util.Map;
 import java.util.TreeMap;
 
 /**
- * class representing enemy
+ * An abstract class that represents all the enemies in the entities
+ *
+ * Created by:
+ * @author Koe Rui En
+ *
+ * Modified by:
+ * @author Yang Yang Dan
+ *
  */
 public abstract class Enemy extends Actor {
 
@@ -24,15 +33,19 @@ public abstract class Enemy extends Actor {
 
 
     /**
-     * The constructor of the Enemy class.
+     * Constructor for the Enemy class
+     *
      * @param name        the name of the Enemy
      * @param displayChar the character that will represent the Enemy in the display
      * @param hitPoints   the Enemy's starting hit points
+     *
      */
     public Enemy(String name, char displayChar, int hitPoints) {
+
         super(name, displayChar, hitPoints);
-        this.addCapability(Status.HOSTILE_TO_PLAYER);
+//        this.addCapability(Status.HOSTILE_TO_PLAYER);
         this.behaviours.put(999, new WanderBehaviour());
+
     }
 
 
@@ -70,24 +83,34 @@ public abstract class Enemy extends Actor {
 
 
     /**
-     * Returns a new collection of the Actions that the otherActor can do to Hollow Soldier
+     * The enemy can be attacked by any actor that has the HOSTILE_TO_ENEMY capability
+     *
      * @param otherActor the Actor that might be performing attack
      * @param direction  String representing the direction of the other Actor
      * @param map        current GameMap
-     * @return A collection of Actions.
+     *
+     * @return list of attack actions
      */
     @Override
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
-        ActionList actions = new ActionList();
-        if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)){
-            actions.add(new AttackAction(this, direction));
-        }
-        return actions;
-    }
 
+        // declare list of actions
+        ActionList actions = new ActionList();
+
+        // default weapon (intrinsic)
+        if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)){
+
+            actions.add(new AttackAction(this, direction));
+
+        }
+
+        return actions;
+
+    }
 
     @Override
     public String unconscious(Actor actor, GameMap map) {
+
         for (Item item : getDroppedItems()){
             map.locationOf(this).addItem(item);
         }
@@ -103,7 +126,11 @@ public abstract class Enemy extends Actor {
     public abstract Enemy spawnMethod();
 
 
+    /**
+     * Collect items that created by an enemy once it is defeated
+     *
+     * @return a list of item that created by the defeated enemy
+     */
     public abstract ArrayList<Item> getDroppedItems();
-
 
 }

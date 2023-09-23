@@ -20,7 +20,14 @@ import java.util.ArrayList;
 
 
 /**
- * class representing the enemy Hollow Soldier
+ * A class that represent HollowSoldier enemy in the Burial Ground
+ *
+ * Created by:
+ * @author Koe Rui En
+ *
+ * Modified by:
+ * @author Yang Yang Dan
+ *
  */
 public class HollowSoldier extends Enemy {
 
@@ -94,6 +101,7 @@ public class HollowSoldier extends Enemy {
             if (action != null)
                 return action;
         }
+
         return new DoNothingAction();
     }
 
@@ -110,23 +118,42 @@ public class HollowSoldier extends Enemy {
 
     }
 
-
+    /**
+     * Collect items that created by an enemy once it is defeated
+     *
+     * @return a list of item that created by the defeated enemy
+     */
     @Override
     public ArrayList<Item> getDroppedItems() {
+
         ArrayList<Item> droppedItems = new ArrayList<>();
-        if ( Math.random() <= 0.2 ){
-            droppedItems.add( new HealingVial() );
+
+        if (Math.random() <= 0.2){
+
+            droppedItems.add(new HealingVial());
+
         }
-        if ( Math.random() <= 0.3 ){
-            droppedItems.add( new RefreshingFlask() );
+
+        if (Math.random() <= 0.3) {
+
+            droppedItems.add(new RefreshingFlask());
+
         }
+
         return droppedItems;
     }
 
 
+    /**
+     * Spawn the HollowSoldier instance
+     *
+     * @return a new spawned HollowSoldier instance
+     */
     @Override
     public Enemy spawnMethod() {
+
         return new HollowSoldier();
+
     }
 
 
