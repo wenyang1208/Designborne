@@ -5,8 +5,10 @@ package game.utils;
  * Example #1: if the player is sleeping, you can attack a Status.SLEEP to the player class
  * Created by:
  * @author Riordan D. Alfredo
+ *
  * Modified by:
  * @author Koe Rui En
+ * @author Yang Yang Dan
  */
 public enum Status {
 

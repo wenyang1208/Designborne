@@ -23,10 +23,9 @@ public class OldKey extends Item {
 
         super("Old Key", '-', true);
 
-        // add status of key
+        // add ability of key
         this.addCapability(Ability.UNLOCK_GATE);
 
     }
-
 
 }
