@@ -9,26 +9,46 @@ import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.utils.Status;
 
 /**
- * class representing an action that activate weapon's skill
+ * A FocusAction class that represents the special skill of Broadsword weapon
+ *
+ * Created by:
+ * @author Koe Rui En
+ *
+ * Modified by:
+ * @author Yang Dan
+ *
  */
-public class ActivateSkillAction extends Action {
-
+public class FocusAction extends Action {
 
     /* Attributes */
+    /**
+     * Weapon that have special skill, Focus
+     */
     private WeaponItem weapon;
+    /**
+     * Damage multiplier of weapon to be increased
+     */
     private float damageMultiplierIncrease;
+    /**
+     * Hit rate of weapon to be activated
+     */
     private int activatedHitRate;
+    /**
+     * Stamina rate needed to be reduced when Focus action is activated
+     */
     private float reducedStaminaRate;
 
 
     /**
-     * Constructor of this ActivateSkillAction
+     * Constructor of FocusAction class
+     *
      * @param weapon weapon that is to be activated
      * @param damageMultiplierIncrease Amount of increase in weapon's damage multiplier after activation
      * @param activatedHitRate New hit rate after activation
      * @param reducedStaminaRate Stamina required to activate the skill
+     *
      */
-    public ActivateSkillAction(WeaponItem weapon, float damageMultiplierIncrease, int activatedHitRate, float reducedStaminaRate){
+    public FocusAction(WeaponItem weapon, float damageMultiplierIncrease, int activatedHitRate, float reducedStaminaRate){
         this.weapon = weapon;
         this.damageMultiplierIncrease = damageMultiplierIncrease;
         this.activatedHitRate = activatedHitRate;
@@ -37,9 +57,11 @@ public class ActivateSkillAction extends Action {
 
 
     /**
-     * Perform activation action
+     * Perform focus action
+     *
      * @param actor The actor performing the action.
      * @param map The map the actor is on.
+     *
      * @return a description of what happened (the result of the action being performed) that can be displayed to the user.
      */
     @Override
@@ -61,7 +83,9 @@ public class ActivateSkillAction extends Action {
 
     /**
      * Describe what action will be performed if this Action is chosen in the menu.
+     *
      * @param actor The actor performing the action.
+     *
      * @return the action description to be displayed on the menu
      */
     @Override

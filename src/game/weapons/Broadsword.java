@@ -4,13 +4,21 @@ import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
-import game.actions.ActivateSkillAction;
+import game.actions.FocusAction;
 import game.actions.AttackAction;
 import game.utils.Ability;
 import game.utils.Status;
 
-/**
- * Broadsword class representing the weapon broad sword
+
+ /**
+ * Class representing the Broadsword weapon that can be used to attack the enemy.
+ *
+ * Created by:
+ * @author Koe Rui En
+  *
+  * Modified by:
+  * @author Yang Dan
+ *
  */
 public class Broadsword extends WeaponItem {
 
@@ -97,7 +105,7 @@ public class Broadsword extends WeaponItem {
      */
     @Override
     public ActionList allowableActions(Actor owner) {
-        return new ActionList( new ActivateSkillAction(this, INCREASED_DAMAGE_MULTIPLIER, ACTIVATED_HIT_RATE, REDUCED_STAMINA_RATE) );
+        return new ActionList( new FocusAction(this, INCREASED_DAMAGE_MULTIPLIER, ACTIVATED_HIT_RATE, REDUCED_STAMINA_RATE) );
     }
 
     /**

@@ -5,6 +5,7 @@ package game.utils;
  * Example #1: if the player is capable jumping over walls, you can attach Ability.WALL_JUMP to the player class
  * Modified by:
  * @author Koe Rui En
+ * @author Yang Dan
  */
 public enum Ability {
 
