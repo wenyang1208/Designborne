@@ -22,7 +22,7 @@ public abstract class Spawner extends Ground {
     /**
      * enemy to be spawned
      */
-    private Enemy enemy;
+    private Enemy spawnedEnemy;
 
     // spawn percentage
     /**
@@ -32,16 +32,17 @@ public abstract class Spawner extends Ground {
 
 
     /**
-     * Parameterised constructor of the abstract Spawner class
+     * Constructor of the abstract Spawner class
      *
      * @param displayChar character to display for this type of terrain
-     * @param actor actor to be spawned in certain chance of time
+     * @param enemy enemy to be spawned in certain chance of time
+     *
      */
-    public Spawner(char displayChar, Enemy actor, double iniSpawnPercentage) {
+    public Spawner(char displayChar, Enemy enemy, double iniSpawnPercentage) {
 
         super(displayChar);
 
-        enemy = actor;
+        spawnedEnemy = enemy;
 
         spawnPercentage = iniSpawnPercentage;
 
@@ -62,7 +63,7 @@ public abstract class Spawner extends Ground {
         if (Math.random() <= spawnPercentage && !location.containsAnActor()) {
 
             // add spawned enemies to the location
-            location.addActor(enemy.spawnMethod());
+            location.addActor(spawnedEnemy.spawnMethod());
 
         }
 
