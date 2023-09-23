@@ -2,6 +2,7 @@ package game.grounds;
 
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Ground;
+import game.utils.Ability;
 import game.utils.Status;
 
 /**
@@ -18,14 +19,29 @@ public class Floor extends Ground {
 
 
     /**
-     * If actor is Enemy, it can't step on floor
+     * Override the method to implement impassable terrain, or terrain that is only passable if conditions are met.
+     * To check the actor can pass the terrain or not.
      *
      * @param actor the Actor to check
-     * @return true if actor is not Enemy
+     * @return boolean value to indicate actor can enter the terrain or not
      */
+    // Enemy (Wandering Undead and Hollow Soldier) cannot enter a floor,
+    // represented by the display character “_”
+    // player can run back to safety if their health is low.
     @Override
     public boolean canActorEnter(Actor actor) {
-        return !actor.hasCapability(Status.HOSTILE_TO_PLAYER);
-    }
 
+        // check ability of actor
+
+        // if player, can enter
+        if (actor.hasCapability(Ability.ENTER_FLOOR)) {
+
+            return true;
+
+        } else {
+
+            return false;
+        }
+
+    }
 }

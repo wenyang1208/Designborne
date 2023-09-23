@@ -11,6 +11,7 @@ public enum Ability {
 
     SKILL,
     UNLOCK_GATE,
+    ENTER_FLOOR,
 
 
 }
