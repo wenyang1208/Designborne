@@ -1,4 +1,4 @@
-package game.actors;
+package game.actors.npc;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
@@ -12,21 +12,20 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.behaviours.AttackBehaviour;
-import game.behaviours.WanderBehaviour;
 import game.items.HealingVial;
-import game.items.RefreshingFlask;
+import game.items.OldKey;
 import game.utils.Status;
 
 import java.util.ArrayList;
 
 
 /**
- * class representing the enemy Hollow Soldier
+ * class representing the enemy Wandering Undead
  */
-public class HollowSoldier extends Enemy {
+public class WanderingUndead extends Enemy {
 
 
-    // hollow soldier has its own damage and hit rate
+    // wandering undead has its own damage and hit rate
 
     // damage
     /**
@@ -34,20 +33,17 @@ public class HollowSoldier extends Enemy {
      */
     private final int damage;
 
-
     /**
-     * Constructor for the HollowSoldier class
+     * Constructor for the WanderingUndead class
      *
      */
-    // constructor
-    public HollowSoldier() {
+    public WanderingUndead() {
 
-        // hollow soldier
-        // 200 HP, 50 damage, 50 accuracy
-        super("Hollow Soldier", '&', 200);
+        super("Wandering Undead", 't', 100);
 
-        // can attack the player with its limbs, dealing 50 damage with 50% accuracy.
-        this.damage = 50;
+        // can attack the player with its limbs, dealing 30 damage with 50% accuracy
+        this.damage = 30;
+
     }
 
     /**
@@ -57,6 +53,7 @@ public class HollowSoldier extends Enemy {
      * @param lastAction The Action this Actor took last turn. Can do interesting things in conjunction with Action.getNextAction()
      * @param map        the map containing the Actor
      * @param display    the I/O object to which messages may be written
+     *
      * @return the valid action that can be performed in that iteration or null if no valid action is found
      */
     @Override
@@ -66,21 +63,21 @@ public class HollowSoldier extends Enemy {
         Location actor = map.locationOf(this);
 
         // attack player is nearby (within the surrounding of the enemy or one block away from the enemy)
-        for (Exit exit : actor.getExits()) {
+        for (Exit exit: actor.getExits()) {
 
             // get location of exit
             Location destination = exit.getDestination();
 
             // check location of exit contains target actor
-            if (destination.containsAnActor()) {
+            if (destination.containsAnActor()){
 
                 // get the target actor
                 Actor targetActor = destination.getActor();
 
                 // check status of target actor
-                // if player, hostile to enemy
+                // if player, hostile to enemy status
                 // then can attack
-                if (targetActor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
+                if (targetActor.hasCapability(Status.HOSTILE_TO_ENEMY)){
 
                     getBehaviours().put(0, new AttackBehaviour(targetActor, exit.getName()));
 
@@ -92,22 +89,22 @@ public class HollowSoldier extends Enemy {
 
         for (Behaviour behaviour : getBehaviours().values()) {
             Action action = behaviour.getAction(this, map);
-            if (action != null)
+            if(action != null)
                 return action;
         }
         return new DoNothingAction();
     }
 
     /**
-     * Creates and returns an intrinsic weapon for Hollow Soldier with different damage.
+     * Creates and returns an intrinsic weapon for Wandering Undead with different damage.
      *
-     * @return a freshly-instantiated IntrinsicWeapon for HollowSoldier
+     * @return a freshly-instantiated IntrinsicWeapon for Wandering Undead
      */
     @Override
     public IntrinsicWeapon getIntrinsicWeapon() {
 
-        // create new intrinsic weapon for hollow soldier
-        return new IntrinsicWeapon(damage, "smacks");
+        // create new intrinsic weapon for wandering undead
+        return new IntrinsicWeapon(damage, "whacks");
 
     }
 
@@ -115,11 +112,11 @@ public class HollowSoldier extends Enemy {
     @Override
     public ArrayList<Item> getDroppedItems() {
         ArrayList<Item> droppedItems = new ArrayList<>();
+        if ( Math.random() <= 0.25 ){
+            droppedItems.add( new OldKey() );
+        }
         if ( Math.random() <= 0.2 ){
             droppedItems.add( new HealingVial() );
-        }
-        if ( Math.random() <= 0.3 ){
-            droppedItems.add( new RefreshingFlask() );
         }
         return droppedItems;
     }
@@ -127,7 +124,7 @@ public class HollowSoldier extends Enemy {
 
     @Override
     public Enemy spawnMethod() {
-        return new HollowSoldier();
+        return new WanderingUndead();
     }
 
 
