@@ -19,7 +19,7 @@ import game.utils.Status;
  * @author Koe Rui En
   *
   * Modified by:
-  * @author Yang Dan
+  * @author Yang Yang Dan
  *
  */
 public class Broadsword extends WeaponItem {

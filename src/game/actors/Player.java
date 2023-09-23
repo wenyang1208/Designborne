@@ -23,7 +23,7 @@ import game.actions.AttackAction;
  *
  * Modified by:
  * @author Koe Rui En
- * @author Yang Dan
+ * @author Yang Yang Dan
  *
  */
 public class Player extends Actor {
