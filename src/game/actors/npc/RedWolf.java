@@ -90,11 +90,11 @@ public class RedWolf extends Enemy{
                 // follows the player, till either the player is unconscious or the enemy is unconscious
                 if (targetActor.hasCapability(Status.HOSTILE_TO_ENEMY)){
 
+                    getBehaviours().put(0, new AttackBehaviour(targetActor, exit.getName()));
+
                     if (targetActor.isConscious() || this.isConscious()) {
                         getBehaviours().put(1, new FollowBehaviour(targetActor));
                     }
-
-                    getBehaviours().put(0, new AttackBehaviour(targetActor, exit.getName()));
 
                 }
 

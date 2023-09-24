@@ -141,7 +141,7 @@ public class Application {
 
 //        gameMap.at(24,4).addItem(new OldKey());
 
-        // Create enemies in different game map
+        // Create enemies in different game maps
 
         // create Wandering Undead in Abandoned Village Map
         abandonedVillage.at(28,4).addActor(new WanderingUndead());
@@ -149,15 +149,17 @@ public class Application {
         // create hollow soldier in Burial Ground Map
         burialGround.at(28,6).addActor(new HollowSoldier());
 
-        // create hollow soldier in Burial Ground Map
-        ancientWoods.at(3,8).addActor(new ForestKeeper());
-        ancientWoods.at(3,9).addActor(new RedWolf());
+        // create red wolf and forest keeper in Ancient Wood Map
+        ancientWoods.at(28,8).addActor(new ForestKeeper());
+        ancientWoods.at(29,9).addActor(new RedWolf());
 
         // create broadsword weapon to add in the building (ground)
         Broadsword broadsword = new Broadsword();
         abandonedVillage.at(20,5).addItem(broadsword);
 
-        // Set new ground (Graveyard and void in Abandoned Village Map)
+        // Set new ground at different game maps
+
+        // set new ground (Graveyard and void in Abandoned Village Map)
 
         // graveyard (create wandering undead)
         // save attribute of wandering undead
@@ -168,16 +170,14 @@ public class Application {
         abandonedVillage.at(33,10).setGround(new Void());
         abandonedVillage.at(30, 8).setGround(new Void());
 
-        // Set new ground
-
-        // Set new ground (Graveyard in Burial Ground Map)
+        // set new ground (Graveyard in Burial Ground Map)
 
         // graveyard (create hollow soldier)
         // save attribute of hollow soldier
         // spawn 10% chance at each turn
         burialGround.at(30, 11).setGround(new Graveyard(new HollowSoldier(), 0.10));
 
-        // Set new ground (Hut and Bush in Ancient Woods Map)
+        // set new ground (Hut and Bush in Ancient Woods Map)
 
         // hut (create forest keeper)
         // save attribute of forest keeper

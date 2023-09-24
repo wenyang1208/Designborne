@@ -12,6 +12,7 @@ import game.utils.Status;
 import game.actions.AttackAction;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -29,7 +30,7 @@ public abstract class Enemy extends Actor {
 
 
     /* Attribute */
-    private Map<Integer, Behaviour> behaviours = new TreeMap<>();
+    private Map<Integer, Behaviour> behaviours = new HashMap<>();
 
 
     /**
