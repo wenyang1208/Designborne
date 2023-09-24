@@ -43,16 +43,25 @@ public class Void extends Ground {
      */
     @Override
     public void tick(Location location) {
+        String ret  = "";
 
+        // check current location contains actor or not
         if (location.containsAnActor()){
-            Actor actor = location.getActor();
-            actor.modifyAttribute(BaseActorAttributes.HEALTH, ActorAttributeOperations.UPDATE, 0);
-            new Display().println( actor + " has stepped into the void" );
-            new Display().println( actor.unconscious(location.map()) );
+
+            // get actor at this location
+            Actor target = location.getActor();
+
+            ret += target + " has stepped into the void" + "\n";
+
+            ret += target.unconscious(location.map());
+
+            // display what happened after this action has been executed
+            new Display().println(ret);
+
         }
 
     }
 
 
-    }
+}
 

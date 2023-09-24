@@ -16,7 +16,7 @@ import game.utils.Status;
  * @author Koe Rui En
  *
  * Modified by:
- * Yang Yang Dan
+ * @author Yang Yang Dan
  */
 public class UnlockAction extends Action {
 
@@ -53,7 +53,6 @@ public class UnlockAction extends Action {
 
         if (actor.hasCapability(Ability.UNLOCK_GATE)){ // the player can only unlock the gate when the player has key to the gate
             this.gate.removeCapability(Status.LOCKED); // unlock the gate
-
             return "Gate is now unlocked.";
         }
 

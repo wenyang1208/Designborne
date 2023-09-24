@@ -6,7 +6,6 @@ import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.actors.Behaviour;
 import edu.monash.fit2099.engine.displays.Display;
-import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
@@ -15,9 +14,6 @@ import game.behaviours.AttackBehaviour;
 import game.items.HealingVial;
 import game.items.RefreshingFlask;
 import game.utils.Status;
-
-import java.util.ArrayList;
-
 
 /**
  * A class that represent HollowSoldier enemy in the Burial Ground
@@ -119,29 +115,69 @@ public class HollowSoldier extends Enemy {
     }
 
     /**
-     * Collect items that created by an enemy once it is defeated
+     * Return a boolean value after randomly generating a value within the chance to drop an item
      *
-     * @return a list of item that created by the defeated enemy
+     * @param percentage the percentage of chance to drop an item
+     *
+     * @return a boolean value after randomly generating a value within the chance to drop an item
      */
     @Override
-    public ArrayList<Item> getDroppedItems() {
+    public boolean dropItemChance(double percentage) {
 
-        ArrayList<Item> droppedItems = new ArrayList<>();
+        return (Math.random() <= percentage);
 
-        if (Math.random() <= 0.2){
-
-            droppedItems.add(new HealingVial());
-
-        }
-
-        if (Math.random() <= 0.3) {
-
-            droppedItems.add(new RefreshingFlask());
-
-        }
-
-        return droppedItems;
     }
+
+    /**
+     * Drop an item on the ground
+     *
+     * @param map the map containing the Enemy
+     */
+    @Override
+    public void dropItem(GameMap map) {
+
+
+        // 20% chance to drop a healing vial
+        if (dropItemChance(0.20)) {
+
+            new HealingVial().getDropAction(this).execute(this,map);
+
+        }
+
+
+        // has a 30% chance to drop a refreshing flask
+        if (dropItemChance(0.30)){
+
+            new RefreshingFlask().getDropAction(this).execute(this,map);
+
+        }
+
+    }
+
+//    /**
+//     * Collect items that created by an enemy once it is defeated
+//     *
+//     * @return a list of item that created by the defeated enemy
+//     */
+//    @Override
+//    public ArrayList<Item> getDroppedItems() {
+//
+//        ArrayList<Item> droppedItems = new ArrayList<>();
+//
+//        if (Math.random() <= 0.2){
+//
+//            droppedItems.add(new HealingVial());
+//
+//        }
+//
+//        if (Math.random() <= 0.3) {
+//
+//            droppedItems.add(new RefreshingFlask());
+//
+//        }
+//
+//        return droppedItems;
+//    }
 
 
     /**

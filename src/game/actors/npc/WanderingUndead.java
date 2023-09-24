@@ -118,30 +118,71 @@ public class WanderingUndead extends Enemy {
     }
 
     /**
-     * Collect items that created by an enemy once it is defeated
+     * Return a boolean value after randomly generating a value within the chance to drop an item
      *
-     * @return a list of item that created by the defeated enemy
+     * @param percentage the percentage of chance to drop an item
+     *
+     * @return a boolean value after randomly generating a value within the chance to drop an item
      */
     @Override
-    public ArrayList<Item> getDroppedItems() {
+    public boolean dropItemChance(double percentage) {
 
-        ArrayList<Item> droppedItems = new ArrayList<>();
-
-        if (Math.random() <= 0.25){
-
-            droppedItems.add(new OldKey());
-
-        }
-
-        if (Math.random() <= 0.2){
-
-            droppedItems.add(new HealingVial());
-
-        }
-
-        return droppedItems;
+        return (Math.random() <= percentage);
 
     }
+
+    /**
+     * Drop an item on the ground
+     *
+     * @param map the map containing the Enemy
+     */
+    @Override
+    public void dropItem(GameMap map) {
+
+        // 25 % drop old key
+        if (dropItemChance(0.25)){
+
+            new OldKey().getDropAction(this).execute(this,map);
+
+        }
+
+        // 20% chance to drop a healing vial
+        if (dropItemChance(0.20)){
+
+            new HealingVial().getDropAction(this).execute(this,map);
+
+        }
+
+    }
+
+    // once defeated, also has a 20% chance to drop a healing vial.
+    // 25 % drop old key
+//    /**
+//     * Collect items that created by an enemy once it is defeated
+//     *
+//     * @return a list of item that created by the defeated enemy
+//     */
+//    @Override
+//    public ArrayList<Item> getDroppedItems() {
+//
+//        ArrayList<Item> droppedItems = new ArrayList<>();
+//
+//        if (Math.random() <= 0.25){
+//
+//            droppedItems.add(new OldKey());
+//
+//        }
+//
+//        if (Math.random() <= 0.2){
+//
+//            droppedItems.add(new HealingVial());
+//
+//        }
+//
+//        return droppedItems;
+//
+//    }
+
 
     /**
      * Spawn the WanderingUndead instance
@@ -154,6 +195,8 @@ public class WanderingUndead extends Enemy {
         return new WanderingUndead();
 
     }
+
+
 
 
 }

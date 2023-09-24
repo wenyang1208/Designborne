@@ -3,6 +3,7 @@ package game.grounds;
 
 // import engine and game packages
 import edu.monash.fit2099.engine.actions.ActionList;
+import edu.monash.fit2099.engine.actions.MoveActorAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
@@ -27,7 +28,7 @@ public class Gate extends Ground {
      * name of destination to be travelled
      */
     //  name of destination to be traveled
-    private String name;
+    private String destinationName;
 
     // location of gate to travel to
     /**
@@ -49,10 +50,10 @@ public class Gate extends Ground {
 
         super('=');
         this.addCapability(Status.LOCKED);
-        this.name = name;
+        this.destinationName = name;
         this.locationToMove = locationToMove;
-    }
 
+    }
 
     /**
      * All entities can step on the 'Gate' ground when it is unlocked.
@@ -67,7 +68,6 @@ public class Gate extends Ground {
         return !this.hasCapability(Status.LOCKED);
 
     }
-
 
     /**
      * Returns a collection of Actions that an actor can perform when the actor get closer to the gate
@@ -92,7 +92,8 @@ public class Gate extends Ground {
         else {
 
             if (actor.hasCapability(Ability.UNLOCK_GATE)){ // Only actor with the key can travel to the new map
-                actions.add(new TravelAction(locationToMove, location.toString(), name));
+                actions.add(new MoveActorAction(locationToMove, destinationName));
+//                actions.add(new TravelAction(locationToMove, location.toString(), destinationName));
             }
 
         }

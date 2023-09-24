@@ -63,25 +63,6 @@ public abstract class Enemy extends Actor {
     }
 
 
-//    /**
-//     * Select the valid action with the highest priority
-//     * @param actions    collection of possible Actions for this Actor
-//     * @param lastAction The Action this Actor took last turn. Can do interesting things in conjunction with Action.getNextAction()
-//     * @param map        the map containing the Actor
-//     * @param display    the I/O object to which messages may be written
-//     * @return the Action to be performed
-//     */
-//    @Override
-//    public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
-//        for (Behaviour behaviour : behaviours.values()) {
-//            Action action = behaviour.getAction(this, map);
-//            if(action != null)
-//                return action;
-//        }
-//        return new DoNothingAction();
-//    }
-
-
     /**
      * The enemy can be attacked by any actor that has the HOSTILE_TO_ENEMY capability
      *
@@ -108,15 +89,25 @@ public abstract class Enemy extends Actor {
 
     }
 
+//    @Override
+//    public String unconscious(Actor actor, GameMap map) {
+//
+//        for (Item item : getDroppedItems()){
+//            map.locationOf(this).addItem(item);
+//        }
+//        return super.unconscious(actor, map);
+//    }
+
     @Override
     public String unconscious(Actor actor, GameMap map) {
 
-        for (Item item : getDroppedItems()){
-            map.locationOf(this).addItem(item);
-        }
+        dropItem(map);
+
         return super.unconscious(actor, map);
+
     }
 
+    // abstract method
 
     /**
      * Spawn the instance of an enemy
@@ -125,12 +116,30 @@ public abstract class Enemy extends Actor {
      */
     public abstract Enemy spawnMethod();
 
+    /**
+     * Return a boolean value after randomly generating a value within the chance to drop an item
+     *
+     * @param percentage the percentage of chance to drop an item
+     *
+     * @return a boolean value after randomly generating a value within the chance to drop an item
+     */
+    public abstract boolean dropItemChance(double percentage);
+
+    /**
+     * Drop an item on the ground
+     *
+     * @param map the map containing the Enemy
+     *
+     */
+    public abstract void dropItem(GameMap map);
 
     /**
      * Collect items that created by an enemy once it is defeated
      *
      * @return a list of item that created by the defeated enemy
      */
-    public abstract ArrayList<Item> getDroppedItems();
+//    public abstract ArrayList<Item> getDroppedItems();
+
+
 
 }

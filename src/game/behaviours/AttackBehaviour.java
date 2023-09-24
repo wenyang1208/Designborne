@@ -17,7 +17,7 @@ import game.actions.AttackAction;
  */
 public class AttackBehaviour implements Behaviour {
 
-    // targeted actor
+    // target actor
     /**
      * The target actor
      */
@@ -62,7 +62,6 @@ public class AttackBehaviour implements Behaviour {
         if (!map.contains(targetActor) || !map.contains(actor)){
             return  null;
         }
-
 
         // create attack action, intrinsic weapon as default
         return new AttackAction(targetActor, direction);
