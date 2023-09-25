@@ -98,14 +98,6 @@ public abstract class Enemy extends Actor {
 
     }
 
-    // abstract method
-
-    /**
-     * Spawn the instance of an enemy
-     *
-     * @return a new spawned Enemy
-     */
-    public abstract Enemy spawnMethod();
 
     /**
      * Return a boolean value after randomly generating a value within the chance to drop an item
@@ -114,7 +106,20 @@ public abstract class Enemy extends Actor {
      *
      * @return a boolean value after randomly generating a value within the chance to drop an item
      */
-    public abstract boolean dropItemChance(double percentage);
+    public boolean dropItemChance(double percentage){
+        return (Math.random() <= percentage);
+    }
+
+
+
+    // abstract method
+
+    /**
+     * Spawn the instance of an enemy
+     *
+     * @return a new spawned Enemy
+     */
+    public abstract Enemy spawnMethod();
 
     /**
      * Drop an item on the ground
