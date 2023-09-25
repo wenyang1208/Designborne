@@ -105,11 +105,7 @@ public class Player extends Actor {
             return lastAction.getNextAction();
 
         // At each turn, the player's stamina will recover by 1% of their maximum stamina
-        if (this.getAttribute(BaseActorAttributes.STAMINA) <= this.getAttributeMaximum(BaseActorAttributes.STAMINA)){
-
-            modifyAttribute(BaseActorAttributes.STAMINA, ActorAttributeOperations.INCREASE,(int)(getAttributeMaximum(BaseActorAttributes.STAMINA)* 0.01));
-
-        }
+        modifyAttribute(BaseActorAttributes.STAMINA, ActorAttributeOperations.INCREASE,(int)(getAttributeMaximum(BaseActorAttributes.STAMINA)* 0.01));
 
         // Display player's health point and stamina at the beginning of the each game loop
         display.println("\n" + displayStatus());
