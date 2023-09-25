@@ -34,14 +34,7 @@ public class Floor extends Ground {
         // check ability of actor
 
         // if player, can enter
-        if (actor.hasCapability(Ability.ENTER_FLOOR)) {
-
-            return true;
-
-        } else {
-
-            return false;
-        }
+        return actor.hasCapability(Ability.ENTER_FLOOR);
 
     }
 }

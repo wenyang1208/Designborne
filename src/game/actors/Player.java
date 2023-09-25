@@ -10,10 +10,10 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
+import game.actions.AttackAction;
 import game.utils.Ability;
 import game.utils.FancyMessage;
 import game.utils.Status;
-import game.actions.AttackAction;
 
 /**
  * Class representing the Player.
@@ -82,7 +82,7 @@ public class Player extends Actor {
         ret += name + "\n";
         ret += String.format("HP: %d/%d\n", this.getAttribute(BaseActorAttributes.HEALTH), this.getAttributeMaximum(BaseActorAttributes.HEALTH));
         ret += String.format("Stamina: %d/%d\n", this.getAttribute(BaseActorAttributes.STAMINA), this.getAttributeMaximum(BaseActorAttributes.STAMINA));
-        ret += String.format("Wallet Balance: %d\n",this.getBalance());
+        ret += String.format("Runes: %d\n",this.getBalance());
 
         // return output
         return ret;
@@ -109,7 +109,6 @@ public class Player extends Actor {
 
         // Display player's health point and stamina at the beginning of the each game loop
         display.println("\n" + displayStatus());
-//        displayStatus(display);
 
         // return/print the console menu
         Menu menu = new Menu(actions);
@@ -128,24 +127,6 @@ public class Player extends Actor {
         return new IntrinsicWeapon(damage, "bonks", hitRate);
 
     }
-
-
-//    /**
-//     * Returns a new collection of the Actions that the otherActor can do to the current Player.
-//     * @param otherActor the Actor that might be performing attack
-//     * @param direction  String representing the direction of the other Actor
-//     * @param map        current GameMap
-//     * @return A collection of Actions.
-//     */
-//    @Override
-//    public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
-//
-//        ActionList actions = new ActionList();
-//        if(otherActor.hasCapability(Status.HOSTILE_TO_PLAYER)){
-//            actions.add(new AttackAction(this, direction)); // Player can be attacked by Enemy
-//        }
-//        return actions;
-//    }
 
 
     /**
