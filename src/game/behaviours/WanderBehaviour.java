@@ -38,7 +38,7 @@ public class WanderBehaviour implements Behaviour {
                 actions.add(exit.getDestination().getMoveAction(actor, "around", exit.getHotKey()));
             }
         }
-
+        // randomly choose one action
         if (!actions.isEmpty()) {
             return actions.get(random.nextInt(actions.size()));
         }
