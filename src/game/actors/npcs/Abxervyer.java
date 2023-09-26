@@ -4,6 +4,7 @@ package game.actors.npcs;
 // import engine and game packages
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.behaviours.FollowBehaviour;
 import game.grounds.Gate;
 import game.items.Rune;
@@ -58,6 +59,12 @@ public class Abxervyer extends Enemy{
 
     public void setDroppedGate(Gate droppedGate) {
         this.droppedGate = droppedGate;
+    }
+
+
+    @Override
+    public IntrinsicWeapon getIntrinsicWeapon() {
+        return new IntrinsicWeapon(damage, "hits", hitRate);
     }
 
 
