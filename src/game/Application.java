@@ -1,7 +1,5 @@
 package game;
 
-import game.items.Bloodberry;
-import game.items.Rune;
 import java.util.Arrays;
 import java.util.List;
 
@@ -13,6 +11,7 @@ import game.actors.Player;
 import game.actors.npc.*;
 import game.grounds.*;
 import game.grounds.Void;
+import game.items.HealingVial;
 import game.utils.FancyMessage;
 import game.weapons.Broadsword;
 
@@ -72,7 +71,7 @@ public class Application {
                 "+...+++..............................++++++++.....~~~.....~~",
                 "++...............#######..............++++.........~~.......",
                 "++...............#_____#...........................~~~......",
-                "+................#_____#............................~~......",
+                "+................#_____.............................~~......",
                 ".................###_###............~...............~~.....~",
                 "...............................~.+++~~..............~~....~~",
                 ".....................~........~~+++++...............~~~...~~",
@@ -133,10 +132,15 @@ public class Application {
         // Create player
         Player player = new Player("The Abstracted One", '@', 150, 200);
 
+        //testing trading
+//        player.addItemToInventory(new Broadsword());
+//        player.addItemToInventory(new HealingVial());
+//        player.addBalance(200);
+//        ancientWoods.at(25,5).addActor(new Traveller());
+
         // Add player to the game map
-        world.addPlayer(player, abandonedVillage.at(24, 5));
-//        world.addPlayer(player, ancientWoods.at(24,5));
-//        world.addPlayer(player, abxervyerBattleRoom.at(24,5));
+//        world.addPlayer(player, abandonedVillage.at(24, 5));
+        world.addPlayer(player, ancientWoods.at(24,5));
 
 
 //        gameMap.at(24,4).addItem(new OldKey());
@@ -153,10 +157,7 @@ public class Application {
         ancientWoods.at(28,8).addActor(new ForestKeeper());
         ancientWoods.at(29,9).addActor(new RedWolf());
 
-        // create abxervyer in Abxervyer Battle Room Map
-        abxervyerBattleRoom.at(9, 9).addActor(new Abxervyer());
-
-        // Create broadsword weapon to add in the building (ground)
+        // create broadsword weapon to add in the building (ground)
         Broadsword broadsword = new Broadsword();
         abandonedVillage.at(20,5).addItem(broadsword);
 
@@ -204,9 +205,9 @@ public class Application {
         // Add gate in new map, Ancient Wood
         ancientWoods.at(35,0).setGround(new Gate("Burial Ground", burialGround.at(35, 0)));
 
-//        // testing for rune
-        abandonedVillage.at(25,5).addItem(new Bloodberry());
-        abandonedVillage.at(25,3).addItem(new Bloodberry());
+        // Add the Traveller, Ancient Wood
+        ancientWoods.at(21,3).addActor(new Traveller());
+
         world.run();
     }
 }
