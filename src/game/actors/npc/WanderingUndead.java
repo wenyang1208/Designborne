@@ -54,55 +54,6 @@ public class WanderingUndead extends Enemy {
 
     }
 
-    /**
-     * At each turn, select a valid action to perform.
-     *
-     * @param actions    collection of possible Actions for this Actor
-     * @param lastAction The Action this Actor took last turn. Can do interesting things in conjunction with Action.getNextAction()
-     * @param map        the map containing the Actor
-     * @param display    the I/O object to which messages may be written
-     *
-     * @return the valid action that can be performed in that iteration or null if no valid action is found
-     */
-    @Override
-    public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
-
-        // get location of the actor to attack
-        Location actor = map.locationOf(this);
-
-        // attack player is nearby (within the surrounding of the enemy or one block away from the enemy)
-        for (Exit exit: actor.getExits()) {
-
-            // get location of exit
-            Location destination = exit.getDestination();
-
-            // check location of exit contains target actor
-            if (destination.containsAnActor()){
-
-                // get the target actor
-                Actor targetActor = destination.getActor();
-
-                // check status of target actor
-                // if player, hostile to enemy status
-                // then can attack
-                if (targetActor.hasCapability(Status.HOSTILE_TO_ENEMY)){
-
-                    getBehaviours().put(0, new AttackBehaviour(targetActor, exit.getName()));
-
-                }
-
-            }
-
-        }
-
-        for (Behaviour behaviour : getBehaviours().values()) {
-            Action action = behaviour.getAction(this, map);
-            if(action != null)
-                return action;
-        }
-
-        return new DoNothingAction();
-    }
 
     /**
      * Creates and returns an intrinsic weapon for Wandering Undead with different damage.
@@ -117,19 +68,19 @@ public class WanderingUndead extends Enemy {
 
     }
 
+
     /**
-     * Return a boolean value after randomly generating a value within the chance to drop an item
+     * Spawn the WanderingUndead instance
      *
-     * @param percentage the percentage of chance to drop an item
-     *
-     * @return a boolean value after randomly generating a value within the chance to drop an item
+     * @return a new spawned WanderingUndead instance
      */
     @Override
-    public boolean dropItemChance(double percentage) {
+    public Enemy spawnMethod() {
 
-        return (Math.random() <= percentage);
+        return new WanderingUndead();
 
     }
+
 
     /**
      * Drop an item on the ground
@@ -154,49 +105,5 @@ public class WanderingUndead extends Enemy {
         }
 
     }
-
-    // once defeated, also has a 20% chance to drop a healing vial.
-    // 25 % drop old key
-//    /**
-//     * Collect items that created by an enemy once it is defeated
-//     *
-//     * @return a list of item that created by the defeated enemy
-//     */
-//    @Override
-//    public ArrayList<Item> getDroppedItems() {
-//
-//        ArrayList<Item> droppedItems = new ArrayList<>();
-//
-//        if (Math.random() <= 0.25){
-//
-//            droppedItems.add(new OldKey());
-//
-//        }
-//
-//        if (Math.random() <= 0.2){
-//
-//            droppedItems.add(new HealingVial());
-//
-//        }
-//
-//        return droppedItems;
-//
-//    }
-
-
-    /**
-     * Spawn the WanderingUndead instance
-     *
-     * @return a new spawned WanderingUndead instance
-     */
-    @Override
-    public Enemy spawnMethod() {
-
-        return new WanderingUndead();
-
-    }
-
-
-
 
 }

@@ -56,60 +56,6 @@ public class RedWolf extends Enemy{
 
     }
 
-    /**
-     * At each turn, select a valid action to perform.
-     *
-     * @param actions    collection of possible Actions for this Actor
-     * @param lastAction The Action this Actor took last turn. Can do interesting things in conjunction with Action.getNextAction()
-     * @param map        the map containing the Actor
-     * @param display    the I/O object to which messages may be written
-     *
-     * @return the valid action that can be performed in that iteration or null if no valid action is found
-     */
-    @Override
-    public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
-
-        // get location of the actor to attack
-        Location actor = map.locationOf(this);
-
-        // attack player is nearby (within the surrounding of the enemy or one block away from the enemy)
-        for (Exit exit: actor.getExits()) {
-
-            // get location of exit
-            Location destination = exit.getDestination();
-
-            // check location of exit contains target actor
-            if (destination.containsAnActor()){
-
-                // get the target actor
-                Actor targetActor = destination.getActor();
-
-                // check status of target actor
-                // if player, hostile to enemy status
-                // attack behaviour has the highest priority
-                // follows the player, till either the player is unconscious or the enemy is unconscious
-                if (targetActor.hasCapability(Status.HOSTILE_TO_ENEMY)){
-
-                    getBehaviours().put(0, new AttackBehaviour(targetActor, exit.getName()));
-
-                    if (targetActor.isConscious() || this.isConscious()) {
-                        getBehaviours().put(1, new FollowBehaviour(targetActor));
-                    }
-
-                }
-
-            }
-
-        }
-
-        for (Behaviour behaviour : getBehaviours().values()) {
-            Action action = behaviour.getAction(this, map);
-            if(action != null)
-                return action;
-        }
-
-        return new DoNothingAction();
-    }
 
     /**
      * Creates and returns an intrinsic weapon for Red Wolf with different damage.
@@ -124,19 +70,19 @@ public class RedWolf extends Enemy{
 
     }
 
+
     /**
-     * Return a boolean value after randomly generating a value within the chance to drop an item
+     * Spawn the RedWolf instance
      *
-     * @param percentage the percentage of chance to drop an item
-     *
-     * @return a boolean value after randomly generating a value within the chance to drop an item
+     * @return a new spawned RedWolf instance
      */
     @Override
-    public boolean dropItemChance(double percentage) {
+    public Enemy spawnMethod() {
 
-        return (Math.random() <= percentage);
+        return new RedWolf();
 
     }
+
 
     // 10% chance to drop a healing vial once defeated
     /**
@@ -153,18 +99,6 @@ public class RedWolf extends Enemy{
             new HealingVial().getDropAction(this).execute(this,map);
 
         }
-
-    }
-
-    /**
-     * Spawn the RedWolf instance
-     *
-     * @return a new spawned RedWolf instance
-     */
-    @Override
-    public Enemy spawnMethod() {
-
-        return new RedWolf();
 
     }
 

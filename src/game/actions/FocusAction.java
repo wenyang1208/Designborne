@@ -69,7 +69,7 @@ public class FocusAction extends Action {
 
         // The player can't activate skill when there is not enough stamina value
         if (actor.getAttribute(BaseActorAttributes.STAMINA) < (int)(reducedStaminaRate * actor.getAttributeMaximum(BaseActorAttributes.STAMINA)) ){
-            return actor + "can't activate " + this.weapon.toString() + "'s skill because of insufficient stamina.";
+            return actor + "can't activate " + this.weapon + "'s skill because of insufficient stamina.";
         }
         // Indicate that the weapon is successfully
         this.weapon.addCapability(Status.JUST_ACTIVATED);
@@ -90,6 +90,6 @@ public class FocusAction extends Action {
      */
     @Override
     public String menuDescription(Actor actor) {
-        return actor + " activates the skill of " + this.weapon.toString();
+        return actor + " activates the skill of " + this.weapon;
     }
 }
