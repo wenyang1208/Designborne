@@ -84,7 +84,7 @@ public class ForestKeeper extends Enemy{
                 // get the target actor
                 Actor targetActor = destination.getActor();
 
-                getBehaviours().put(1, new FollowBehaviour(targetActor));
+//                getBehaviours().put(1, new FollowBehaviour(targetActor));
 
                 // check status of target actor
                 // if player, hostile to enemy status
