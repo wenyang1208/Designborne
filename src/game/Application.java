@@ -1,5 +1,6 @@
 package game;
 
+import game.items.Bloodberry;
 import game.items.Rune;
 import java.util.Arrays;
 import java.util.List;
@@ -204,8 +205,8 @@ public class Application {
         ancientWoods.at(35,0).setGround(new Gate("Burial Ground", burialGround.at(35, 0)));
 
 //        // testing for rune
-        abandonedVillage.at(25,5).addItem(new Rune(12));
-        abandonedVillage.at(25,3).addItem(new Rune(12));
+        abandonedVillage.at(25,5).addItem(new Bloodberry());
+        abandonedVillage.at(25,3).addItem(new Bloodberry());
         world.run();
     }
 }
