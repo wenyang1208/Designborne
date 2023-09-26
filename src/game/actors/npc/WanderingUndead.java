@@ -16,6 +16,7 @@ import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.behaviours.AttackBehaviour;
 import game.items.HealingVial;
 import game.items.OldKey;
+import game.items.Rune;
 import game.utils.Status;
 
 import java.util.ArrayList;
@@ -47,7 +48,7 @@ public class WanderingUndead extends Enemy {
      */
     public WanderingUndead() {
 
-        super("Wandering Undead", 't', 100);
+        super("Wandering Undead", 't', 100,new Rune(50));
 
         // can attack the player with its limbs, dealing 30 damage with 50% accuracy
         this.damage = 30;
@@ -89,6 +90,9 @@ public class WanderingUndead extends Enemy {
      */
     @Override
     public void dropItem(GameMap map) {
+
+        // 100% drop runes
+        this.getRunes().getDropAction(this).execute(this,map);
 
         // 25 % drop old key
         if (dropItemChance(0.25)){

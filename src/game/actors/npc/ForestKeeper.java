@@ -15,6 +15,7 @@ import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.behaviours.AttackBehaviour;
 import game.behaviours.FollowBehaviour;
 import game.items.HealingVial;
+import game.items.Rune;
 import game.utils.Status;
 
 /**
@@ -42,17 +43,20 @@ public class ForestKeeper extends Enemy{
     private final int hitRate;
 
     /**
-     * Constructor for the WanderingUndead class
+     * Constructor for the ForestKeeper class
      *
      */
     public ForestKeeper() {
 
         // displayed "8", 125 hp
-        super("Forest Keeper", '8', 125);
+        super("Forest Keeper", '8', 125,new Rune(50));
 
         // can attack the player with its limbs, dealing 25 damage with 75% accuracy
         this.damage = 25;
         this.hitRate = 75;
+
+        // can follow the player
+        this.addBehaviour(1, new FollowBehaviour());
 
     }
 
@@ -70,19 +74,19 @@ public class ForestKeeper extends Enemy{
 
     }
 
-
     /**
-     * Spawn the ForestKeeper instance
+     * Return a boolean value after randomly generating a value within the chance to drop an item
      *
-     * @return a new spawned ForestKeeper instance
+     * @param percentage the percentage of chance to drop an item
+     *
+     * @return a boolean value after randomly generating a value within the chance to drop an item
      */
     @Override
-    public Enemy spawnMethod() {
+    public boolean dropItemChance(double percentage) {
 
-        return new ForestKeeper();
+        return (Math.random() <= percentage);
 
     }
-
 
     // 20% chance to drop a healing vial once defeated
     /**
@@ -93,12 +97,27 @@ public class ForestKeeper extends Enemy{
     @Override
     public void dropItem(GameMap map) {
 
+        // 100% drop runes
+        this.getRunes().getDropAction(this).execute(this,map);
+
         // 20% chance to drop a healing vial
         if (dropItemChance(0.20)){
 
             new HealingVial().getDropAction(this).execute(this,map);
 
         }
+
+    }
+
+    /**
+     * Spawn the ForestKeeper instance
+     *
+     * @return a new spawned ForestKeeper instance
+     */
+    @Override
+    public Enemy spawnMethod() {
+
+        return new ForestKeeper();
 
     }
 

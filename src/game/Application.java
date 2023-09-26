@@ -8,10 +8,12 @@ import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
 import game.actors.Player;
-import game.actors.npc.*;
+import game.actors.npc.ForestKeeper;
+import game.actors.npc.RedWolf;
 import game.grounds.*;
 import game.grounds.Void;
-import game.items.HealingVial;
+import game.actors.npc.HollowSoldier;
+import game.actors.npc.WanderingUndead;
 import game.utils.FancyMessage;
 import game.weapons.Broadsword;
 
@@ -136,15 +138,6 @@ public class Application {
 //        world.addPlayer(player, abandonedVillage.at(24, 5));
         world.addPlayer(player, ancientWoods.at(24,5));
 
-        // try to add balance to player for testing
-        player.addBalance(200);
-
-        // try to add Traveller for testing
-        ancientWoods.at(24,6).addActor(new Traveller());
-
-        // try to add item to player
-        player.addItemToInventory(new Broadsword());
-        player.addItemToInventory(new HealingVial());
 
 //        gameMap.at(24,4).addItem(new OldKey());
 

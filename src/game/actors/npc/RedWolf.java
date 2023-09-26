@@ -15,6 +15,7 @@ import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.behaviours.AttackBehaviour;
 import game.behaviours.FollowBehaviour;
 import game.items.HealingVial;
+import game.items.Rune;
 import game.utils.Status;
 
 
@@ -48,11 +49,12 @@ public class RedWolf extends Enemy{
     public RedWolf() {
 
         // displayed "r", 25 hp
-        super("Red Wolf", 'r', 25);
+        super("Red Wolf", 'r', 25,new Rune(25));
 
         // can attack the player by biting them, dealing 15 damage with 80% accuracy.
         this.damage = 15;
         this.hitRate = 80;
+        this.addBehaviour(1, new FollowBehaviour());
 
     }
 
@@ -92,6 +94,9 @@ public class RedWolf extends Enemy{
      */
     @Override
     public void dropItem(GameMap map) {
+
+        // 100% drop runes
+        this.getRunes().getDropAction(this).execute(this,map);
 
         // 10% chance to drop a healing vial
         if (dropItemChance(0.10)){
