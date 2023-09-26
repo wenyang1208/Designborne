@@ -134,8 +134,8 @@ public class Application {
         // Add player to the game map
 //        world.addPlayer(player, abandonedVillage.at(24, 5));
         world.addPlayer(player, ancientWoods.at(24,5));
-        player.addBalance(200);
-        ancientWoods.at(24,6).addActor(new Traveller());
+//        player.addBalance(200);
+//        ancientWoods.at(24,6).addActor(new Traveller());
 
 
 //        gameMap.at(24,4).addItem(new OldKey());
