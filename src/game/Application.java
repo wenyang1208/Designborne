@@ -209,6 +209,7 @@ public class Application {
         // Add the Traveller, Ancient Wood
         ancientWoods.at(21,3).addActor(new Traveller());
         ancientWoods.at(22, 3).addItem(new Bloodberry());
+        ancientWoods.at(24, 6).addItem(new Broadsword());
         world.run();
     }
 }

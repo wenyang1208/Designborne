@@ -27,6 +27,8 @@ import java.util.TreeMap;
  * Modified by:
  * @author Yang Yang Dan
  *
+ * Modified by:
+ * @author Chua Wen Yang
  */
 public abstract class Enemy extends Actor {
 
@@ -115,6 +117,12 @@ public abstract class Enemy extends Actor {
         return (Math.random() <= percentage);
     }
 
+    /**
+     * Retrieves the Rune associated with this Enemy.
+     *
+     * @return The Rune object associated with this Enemy.
+     */
+    public Rune getRunes(){return this.runes;}
 
     // abstract method
 
@@ -133,6 +141,5 @@ public abstract class Enemy extends Actor {
      */
     public abstract void dropItem(GameMap map);
 
-    public Rune getRunes(){return this.runes;}
 
 }
