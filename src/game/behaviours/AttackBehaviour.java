@@ -17,6 +17,9 @@ import game.utils.Status;
  * Created by:
  * @author Koe Rui En
  *
+ * Modified by:
+ * @author Yang Yang Dan
+ *
  */
 public class AttackBehaviour implements Behaviour {
 
