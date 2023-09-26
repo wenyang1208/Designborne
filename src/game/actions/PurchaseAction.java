@@ -11,8 +11,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * A class that represent PurchaseAction to
+ * Created by:
+ * @author Chai Jun Lun
+ *
+ */
+
 public class PurchaseAction extends Action {
 
+    // A map used to associate purchase options with hotkeys
     private Map<Character, PurchaseItem> HotkeyPurchasedItemMap;
     /**
      * The Actor that is traveller
@@ -33,23 +41,26 @@ public class PurchaseAction extends Action {
     public String execute(Actor actor, GameMap map) {
         PurchaseItem purchaseItem;
         purchaseItem = showMenu(this.traveller.getMenu());
+        //quit menu
         if (purchaseItem == null){
             return "You have quit the menu.";
         }
+        // purchase successfully
         if (purchaseItem.getCurrentPrice() <= actor.getBalance()) {
             actor.deductBalance((int) purchaseItem.getCurrentPrice());
             actor.addItemToInventory(purchaseItem.getItem());
             return ("The purchase of " + purchaseItem.getItem() + " is successful. Your balance now is: " + actor.getBalance());
-
+        // purchase is fail
         } else {
             return (actor + "'s balance is not enough to buy " + purchaseItem.getItem() + "Your balance now is: " + actor.getBalance()) ;
         }
     }
 
+    // Method to display the purchase menu
     public PurchaseItem showMenu(List<PurchaseItem> menu) {
         char choice;
+        // to let it in the while loop when the choice is invalid
         PurchaseItem selectedItem = null;
-
         do {
             new Display().println("#########################################");
             char hotkey = 'a';
@@ -74,8 +85,6 @@ public class PurchaseAction extends Action {
 
         return selectedItem;
     }
-
-
 
 
     @Override

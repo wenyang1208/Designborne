@@ -137,7 +137,6 @@ public class Application {
 //        player.addBalance(200);
 //        ancientWoods.at(24,6).addActor(new Traveller());
 
-
 //        gameMap.at(24,4).addItem(new OldKey());
 
         // Create enemies in different game maps

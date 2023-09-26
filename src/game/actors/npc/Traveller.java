@@ -18,11 +18,7 @@ import java.util.List;
 
 /**
  * A class that represent Traveller in the Forest
- *
  * Created by:
- * @author Koe Rui En
- *
- * Modified by:
  * @author Chai Jun Lun
  *
  */
@@ -34,7 +30,7 @@ public class Traveller extends Actor {
      * Constructor for the Traveller class
      *
      */
-    // constructor
+
     public Traveller() {
         super("IsolatedTraveller", 'ඞ', 200);
         menu.add(new PurchaseItem(new HealingVial(),100,0.25,1.5));
@@ -42,14 +38,7 @@ public class Traveller extends Actor {
         menu.add(new PurchaseItem(new Broadsword(),250,0.05,0));
     }
 
-    public void printMenu() {
-        for (int i =0; i <menu.size(); i++){
-             new Display().println("Item("+ (i+1) +")");
-             new Display().println(menu.get(i).toString());
-        }
-    }
-
-
+    // Getter for the purchase menu
     public List<PurchaseItem> getMenu() {
         return menu;
     }
@@ -69,6 +58,7 @@ public class Traveller extends Actor {
     @Override
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actions = new ActionList();
+        // Add a PurchaseAction if the otherActor is hostile to Enemy(which is player)
         if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)){
             actions.add(new PurchaseAction(this));
         }
