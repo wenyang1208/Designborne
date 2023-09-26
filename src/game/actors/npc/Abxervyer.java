@@ -25,7 +25,7 @@ public class Abxervyer extends Enemy{
     private final int hitRate;
 
     /**
-     * Constructor for the ForestKeeper class
+     * Constructor for the Abxervyer class
      *
      */
     public Abxervyer() {
