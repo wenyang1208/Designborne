@@ -21,7 +21,7 @@ public class Rune extends Item implements Consumable{
    * @param value The value of the Rune, which represents the amount it increases the actor's balance when consumed.
    */
   public Rune(int value) {
-    super("Runes", '$', true);
+    super(value + " Runes", '$', true);
     this.value = value;
   }
 
@@ -46,7 +46,7 @@ public class Rune extends Item implements Consumable{
   public String consume(Actor owner) {
     owner.addBalance(this.value);
     owner.removeItemFromInventory(this);
-    return  owner + " consumes " + this;
+    return owner + "consumes " + this + ", and it increases the wallet balance by " + this.value + ".";
   }
 
 }
