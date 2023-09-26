@@ -17,8 +17,5 @@ public enum Status {
     FULLY_ACTIVATED,
     HOSTILE_TO_PLAYER,
     LOCKED,
-    FOREST_WATCHER,
-
-
 
 }

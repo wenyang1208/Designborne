@@ -3,12 +3,11 @@ package game.grounds;
 
 //import engine packages
 import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.actors.attributes.ActorAttributeOperations;
-import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
+
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
-import game.utils.Status;
+import game.utils.Ability;
 
 // bottomless pits within the village.
 // This bottomless pit is also known as the Void
@@ -55,7 +54,7 @@ public class Void extends Ground {
             ret += target + " has stepped into the void" + "\n";
 
             // check target is boss or not
-            if (!target.hasCapability(Status.FOREST_WATCHER)){
+            if (!target.hasCapability(Ability.STEP_ON_VOID)){
 
                 ret += target.unconscious(location.map());
 

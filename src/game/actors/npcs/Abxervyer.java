@@ -41,7 +41,7 @@ public class Abxervyer extends Enemy{
         this.addBehaviour(1, new FollowBehaviour());
 
         // boss will not get hurt if they walk around in the Void
-        this.addCapability(Status.FOREST_WATCHER);
+        this.addCapability(Ability.STEP_ON_VOID);
 
         // has ability to control weather
         this.addCapability(Ability.SUNNY);

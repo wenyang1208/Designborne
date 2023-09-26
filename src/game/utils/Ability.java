@@ -13,6 +13,7 @@ public enum Ability {
     SKILL,
     UNLOCK_GATE,
     ENTER_FLOOR,
+    STEP_ON_VOID,
     SUNNY,
     RAINY,
 
