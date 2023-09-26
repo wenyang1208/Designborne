@@ -4,6 +4,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.actors.npc.Traveller;
+import game.items.Bloodberry;
 import game.items.HealingVial;
 import game.items.RunesItem;
 import game.items.RefreshingFlask;
@@ -32,7 +33,7 @@ public class SellAction extends TradingAction {
         menu.add(new RunesItem(new HealingVial(),35,0.1,2));
         menu.add(new RunesItem(new RefreshingFlask(),25,0.5,0));
         menu.add(new RunesItem(new Broadsword(), 100,0,1));
-//        menu.add(new PricingItem(new Bloodberries(),10,0,1));
+        menu.add(new RunesItem(new Bloodberry(),10,0,1));
     }
 
     /**
