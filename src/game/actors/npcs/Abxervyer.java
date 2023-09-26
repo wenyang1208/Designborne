@@ -49,15 +49,6 @@ public class Abxervyer extends Enemy{
 
     }
 
-    /**
-     * Spawn the instance of an enemy
-     *
-     * @return a new spawned Enemy
-     */
-    @Override
-    public Enemy spawnMethod() {
-        return null;
-    }
 
     /**
      * Drop an item on the ground

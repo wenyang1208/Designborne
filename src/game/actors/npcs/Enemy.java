@@ -127,13 +127,6 @@ public abstract class Enemy extends Actor {
     // abstract method
 
     /**
-     * Spawn the instance of an enemy
-     *
-     * @return a new spawned Enemy
-     */
-    public abstract Enemy spawnMethod();
-
-    /**
      * Drop an item on the ground
      *
      * @param map the map containing the Enemy

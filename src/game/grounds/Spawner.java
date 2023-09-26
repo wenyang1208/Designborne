@@ -6,6 +6,7 @@ package game.grounds;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 import game.actors.npcs.Enemy;
+import game.actors.npcs.Spawnable;
 
 /**
  * An abstract class to spawn different enemies in the different game maps
@@ -22,7 +23,7 @@ public abstract class Spawner extends Ground {
     /**
      * enemy to be spawned
      */
-    private Enemy spawnedEnemy;
+    private Spawnable spawnedEnemy;
 
     // spawn percentage
     /**
@@ -38,7 +39,7 @@ public abstract class Spawner extends Ground {
      * @param enemy enemy to be spawned in certain chance of time
      *
      */
-    public Spawner(char displayChar, Enemy enemy, double iniSpawnPercentage) {
+    public Spawner(char displayChar, Spawnable enemy, double iniSpawnPercentage) {
 
         super(displayChar);
 

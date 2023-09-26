@@ -16,7 +16,7 @@ import game.items.Rune;
  * @author Yang Yang Dan
  *
  */
-public class HollowSoldier extends Enemy {
+public class HollowSoldier extends Enemy implements Spawnable{
 
 
     // hollow soldier has its own damage and hit rate

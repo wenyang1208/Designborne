@@ -16,7 +16,7 @@ import game.items.Rune;
  * @author Koe Rui En
  *
  */
-public class RedWolf extends Enemy{
+public class RedWolf extends Enemy implements Spawnable{
 
     // forest keeper has its own damage and hit rate
 

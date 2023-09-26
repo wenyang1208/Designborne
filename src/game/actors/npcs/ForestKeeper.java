@@ -15,7 +15,7 @@ import game.items.Rune;
  * @author Koe Rui En
  *
  */
-public class ForestKeeper extends Enemy{
+public class ForestKeeper extends Enemy implements Spawnable{
 
 
     // forest keeper has its own damage and hit rate

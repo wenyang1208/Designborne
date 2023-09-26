@@ -2,7 +2,7 @@
 package game.grounds;
 
 // import engine and game packages
-import game.actors.npcs.Enemy;
+import game.actors.npcs.Spawnable;
 
 /**
  * A class that represents the graveyard in the different game maps (Abandoned Village and Burial Ground Maps)
@@ -20,7 +20,7 @@ public class Graveyard extends Spawner{
      * @param enemy enemy to be spawned in certain chance of time
      * @param iniSpawnPercentage percentage to spawn an enemy
      */
-    public Graveyard(Enemy enemy, double iniSpawnPercentage) {
+    public Graveyard(Spawnable enemy, double iniSpawnPercentage) {
 
         // initialise instance of graveyard
         // The graveyard is displayed as “n”.
