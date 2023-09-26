@@ -74,19 +74,6 @@ public class ForestKeeper extends Enemy{
 
     }
 
-    /**
-     * Return a boolean value after randomly generating a value within the chance to drop an item
-     *
-     * @param percentage the percentage of chance to drop an item
-     *
-     * @return a boolean value after randomly generating a value within the chance to drop an item
-     */
-    @Override
-    public boolean dropItemChance(double percentage) {
-
-        return (Math.random() <= percentage);
-
-    }
 
     // 20% chance to drop a healing vial once defeated
     /**
