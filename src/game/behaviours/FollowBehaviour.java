@@ -69,6 +69,8 @@ public class FollowBehaviour implements Behaviour {
 
                     targetActor = destination.getActor();
 
+                    break;
+
                 }
 
             }
