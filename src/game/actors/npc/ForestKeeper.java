@@ -15,6 +15,7 @@ import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.behaviours.AttackBehaviour;
 import game.behaviours.FollowBehaviour;
 import game.items.HealingVial;
+import game.items.Rune;
 import game.utils.Status;
 
 /**
@@ -48,7 +49,7 @@ public class ForestKeeper extends Enemy{
     public ForestKeeper() {
 
         // displayed "8", 125 hp
-        super("Forest Keeper", '8', 125);
+        super("Forest Keeper", '8', 125,new Rune(50));
 
         // can attack the player with its limbs, dealing 25 damage with 75% accuracy
         this.damage = 25;
@@ -95,6 +96,9 @@ public class ForestKeeper extends Enemy{
      */
     @Override
     public void dropItem(GameMap map) {
+
+        // 100% drop runes
+        this.getRunes().getDropAction(this).execute(this,map);
 
         // 20% chance to drop a healing vial
         if (dropItemChance(0.20)){

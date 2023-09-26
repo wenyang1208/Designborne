@@ -64,6 +64,9 @@ public class Player extends Actor {
         this.damage = 15;
         this.hitRate = 80;
 
+        // initialise the wallet balance
+        this.addBalance(0);
+
     }
 
 
@@ -176,5 +179,7 @@ public class Player extends Actor {
         return super.unconscious(map);
 
     }
+
+
 
 }
