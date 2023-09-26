@@ -41,7 +41,7 @@ public class Puddle extends Ground implements Consumable {
     @Override
     public ActionList allowableActions(Actor actor, Location location, String direction){
         // The player only consume water puddle when standing on it, direction is not exit.getName()
-        if (Objects.equals(direction, ""))
+        if (location.containsAnActor())
             return new ActionList(new ConsumeAction(this));
         return new ActionList();
     }
@@ -55,7 +55,7 @@ public class Puddle extends Ground implements Consumable {
     @Override
     public String consume(Actor owner) {
         int increaseValue = (int)(increasePercentage * owner.getAttributeMaximum(BaseActorAttributes.STAMINA));
-        owner.modifyAttribute(BaseActorAttributes.HEALTH, ActorAttributeOperations.INCREASE,1);
+        owner.heal(1);
         owner.modifyAttribute(BaseActorAttributes.STAMINA, ActorAttributeOperations.INCREASE,increaseValue);
         return owner + " consumes water puddle , and it restores the stamina by " + increaseValue + " points and the health by 1 point.";
     }
