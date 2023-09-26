@@ -10,7 +10,7 @@ import game.actions.PurchaseAction;
 import game.actions.SellAction;
 import game.items.HealingVial;
 import game.items.RefreshingFlask;
-import game.items.PricingItem;
+import game.items.RunesItem;
 import game.utils.Status;
 import game.weapons.Broadsword;
 
@@ -25,7 +25,7 @@ import java.util.List;
  */
 public class Traveller extends Actor {
 
-    public static List<PricingItem> menu = new ArrayList<PricingItem>();
+    public static List<RunesItem> menu = new ArrayList<RunesItem>();
 
     /**
      * Constructor for the Traveller class
@@ -35,13 +35,13 @@ public class Traveller extends Actor {
     public Traveller() {
         super("IsolatedTraveller", 'ඞ', 200);
         // add the items to the traveller to be purchased by actor
-        menu.add(new PricingItem(new HealingVial(),100,0.25,1.5));
-        menu.add(new PricingItem(new RefreshingFlask(),75,0.1,0.8));
-        menu.add(new PricingItem(new Broadsword(),250,0.05,0));
+        menu.add(new RunesItem(new HealingVial(),100,0.25,1.5));
+        menu.add(new RunesItem(new RefreshingFlask(),75,0.1,0.8));
+        menu.add(new RunesItem(new Broadsword(),250,0.05,0));
     }
 
     // Getter for the purchase menu
-    public List<PricingItem> getMenu() {
+    public List<RunesItem> getMenu() {
         return menu;
     }
 

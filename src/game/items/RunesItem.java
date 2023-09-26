@@ -7,7 +7,7 @@ import edu.monash.fit2099.engine.items.Item;
  *
  * Created by: Chai Jun Lun
  */
-public class PricingItem {
+public class RunesItem {
     private Item item;
     private double originalPrice;
     private double currentPrice; // The current price of the item
@@ -22,7 +22,7 @@ public class PricingItem {
      * @param discountChance The chance of the item being modified with a discount.
      * @param floatingRate   The rate by which the price can float up if discounted.
      */
-    public PricingItem(Item item, double originalPrice, double discountChance, double floatingRate){
+    public RunesItem(Item item, double originalPrice, double discountChance, double floatingRate){
         this.item = item;
         this.originalPrice = originalPrice;
         this.currentPrice = originalPrice;
@@ -67,6 +67,6 @@ public class PricingItem {
     @Override
     public String toString() {
         this.setCurrentPrice(); // Ensure the current price is up to date
-        return "Item : " + item + ", Price : " + getCurrentPrice() + ", originalPrice : " + originalPrice;
+        return "Item : " + item + ", Runes : " + getCurrentPrice() + ", originalRunes : " + originalPrice;
     }
 }

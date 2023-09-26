@@ -2,7 +2,7 @@ package game.actions;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.displays.Display;
-import game.items.PricingItem;
+import game.items.RunesItem;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,7 +15,7 @@ import java.util.Map;
  */
 public abstract class TradingAction extends Action {
     // A map used to associate purchase options with hotkeys
-    private Map<Character, PricingItem> HotkeyPurchasedItemMap = new HashMap<>();;
+    private Map<Character, RunesItem> HotkeyPurchasedItemMap = new HashMap<>();;
 
     /**
      * Method to display the menu and choose the pricing item to be purchased or sold.
@@ -23,17 +23,17 @@ public abstract class TradingAction extends Action {
      * @param menu The list of PricingItem objects representing the available items.
      * @return The selected PricingItem or null if the menu is quit.
      */
-    public PricingItem showMenu(List<PricingItem> menu) {
+    public RunesItem showMenu(List<RunesItem> menu) {
         char choice;
 
         // Initialize selectedItem to null to ensure it enters the while loop
-        PricingItem selectedItem = null;
+        RunesItem selectedItem = null;
         do {
             new Display().println("#########################################");
             char hotkey = 'a';
-            for (PricingItem pricingItem : menu) {
-                HotkeyPurchasedItemMap.put(hotkey, pricingItem);
-                new Display().println(hotkey + ". " + pricingItem);
+            for (RunesItem runesItem : menu) {
+                HotkeyPurchasedItemMap.put(hotkey, runesItem);
+                new Display().println(hotkey + ". " + runesItem);
                 hotkey++;
             }
             new Display().println("To quit the Menu, please input 'z' ");

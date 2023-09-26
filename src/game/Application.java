@@ -8,12 +8,10 @@ import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
 import game.actors.Player;
-import game.actors.npc.ForestKeeper;
-import game.actors.npc.RedWolf;
+import game.actors.npc.*;
 import game.grounds.*;
 import game.grounds.Void;
-import game.actors.npc.HollowSoldier;
-import game.actors.npc.WanderingUndead;
+import game.items.HealingVial;
 import game.utils.FancyMessage;
 import game.weapons.Broadsword;
 
@@ -73,7 +71,7 @@ public class Application {
                 "+...+++..............................++++++++.....~~~.....~~",
                 "++...............#######..............++++.........~~.......",
                 "++...............#_____#...........................~~~......",
-                "+................#_____#............................~~......",
+                "+................#_____.............................~~......",
                 ".................###_###............~...............~~.....~",
                 "...............................~.+++~~..............~~....~~",
                 ".....................~........~~+++++...............~~~...~~",
@@ -133,6 +131,12 @@ public class Application {
 
         // Create player
         Player player = new Player("The Abstracted One", '@', 150, 200);
+
+        //testing trading
+//        player.addItemToInventory(new Broadsword());
+//        player.addItemToInventory(new HealingVial());
+//        player.addBalance(200);
+//        ancientWoods.at(25,5).addActor(new Traveller());
 
         // Add player to the game map
 //        world.addPlayer(player, abandonedVillage.at(24, 5));
@@ -201,6 +205,8 @@ public class Application {
         // Add gate in new map, Ancient Wood
         ancientWoods.at(35,0).setGround(new Gate("Burial Ground", burialGround.at(35, 0)));
 
+        // Add the Traveller, Ancient Wood
+        ancientWoods.at(21,3).addActor(new Traveller());
         world.run();
     }
 }

@@ -1,12 +1,9 @@
 package game.actions;
 
-import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.actors.npc.Traveller;
-import game.items.PricingItem;
-import java.util.Map;
+import game.items.RunesItem;
 
 /**
  * Represents a PurchaseAction that allows an actor to purchase items from a Traveller.
@@ -32,22 +29,22 @@ public class PurchaseAction extends TradingAction{
 
     @Override
     public String execute(Actor actor, GameMap map) {
-        PricingItem pricingItem;
-        pricingItem = showMenu(this.traveller.getMenu());
+        RunesItem runesItem;
+        runesItem = showMenu(this.traveller.getMenu());
 
         //quit menu
-        if (pricingItem == null){
+        if (runesItem == null){
             return "You have quit the menu.";
         }
         // purchase successfully
-        if (pricingItem.getCurrentPrice() <= actor.getBalance()) {
-            actor.deductBalance((int) pricingItem.getCurrentPrice());
-            actor.addItemToInventory(pricingItem.getItem());
-            return ("The purchase of " + pricingItem.getItem() + " is successful. Your balance now is: " + actor.getBalance());
+        if (runesItem.getCurrentPrice() <= actor.getBalance()) {
+            actor.deductBalance((int) runesItem.getCurrentPrice());
+            actor.addItemToInventory(runesItem.getItem());
+            return ("The purchase of " + runesItem.getItem() + " is successful. Your balance now is: " + actor.getBalance());
 
             // Purchase failed due to insufficient balance
         } else {
-            return (actor + "'s balance is not enough to buy " + pricingItem.getItem() + ". Your balance now is: " + actor.getBalance()) ;
+            return (actor + "'s balance is not enough to buy " + runesItem.getItem() + ". Your balance now is: " + actor.getBalance()) ;
         }
     }
 
