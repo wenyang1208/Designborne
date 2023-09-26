@@ -3,7 +3,7 @@ package game.actions;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
-import game.actors.npc.Traveller;
+import game.actors.npcs.Traveller;
 import game.items.Bloodberry;
 import game.items.HealingVial;
 import game.items.RunesItem;

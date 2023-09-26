@@ -9,10 +9,9 @@ import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
 import game.actors.Player;
-import game.actors.npc.*;
+import game.actors.npcs.*;
 import game.grounds.*;
 import game.grounds.Void;
-import game.items.HealingVial;
 import game.utils.FancyMessage;
 import game.weapons.Broadsword;
 

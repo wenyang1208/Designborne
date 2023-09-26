@@ -1,25 +1,12 @@
 // declare package
-package game.actors.npc;
+package game.actors.npcs;
 
 // import game and engine packages
-import edu.monash.fit2099.engine.actions.Action;
-import edu.monash.fit2099.engine.actions.ActionList;
-import edu.monash.fit2099.engine.actions.DoNothingAction;
-import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.actors.Behaviour;
-import edu.monash.fit2099.engine.displays.Display;
-import edu.monash.fit2099.engine.items.Item;
-import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
-import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
-import game.behaviours.AttackBehaviour;
 import game.items.HealingVial;
 import game.items.OldKey;
 import game.items.Rune;
-import game.utils.Status;
-
-import java.util.ArrayList;
 
 
 /**

@@ -1,5 +1,5 @@
 // declare package
-package game.actors.npc;
+package game.actors.npcs;
 
 // import engine and game packages
 import edu.monash.fit2099.engine.positions.GameMap;

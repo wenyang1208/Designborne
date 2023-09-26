@@ -2,7 +2,7 @@
 package game.grounds;
 
 // import game package
-import game.actors.npc.Enemy;
+import game.actors.npcs.Enemy;
 
 /**
  * A class that represents the hut in the Ancient Woods map

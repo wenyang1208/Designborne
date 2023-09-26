@@ -2,7 +2,7 @@
 package game.grounds;
 
 // import engine and game packages
-import game.actors.npc.Enemy;
+import game.actors.npcs.Enemy;
 
 /**
  * A class that represents the graveyard in the different game maps (Abandoned Village and Burial Ground Maps)
