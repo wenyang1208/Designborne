@@ -207,6 +207,7 @@ public class Application {
 
         // Add the Traveller, Ancient Wood
         ancientWoods.at(21,3).addActor(new Traveller());
+
         world.run();
     }
 }
