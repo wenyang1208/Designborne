@@ -4,6 +4,7 @@ package game.actors.npcs;
 // import engine and game packages
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.behaviours.FollowBehaviour;
+import game.grounds.Gate;
 import game.items.Rune;
 import game.utils.Ability;
 import game.utils.Status;
@@ -24,6 +25,9 @@ public class Abxervyer extends Enemy{
      */
     private final int hitRate;
 
+
+    private Gate droppedGate;
+
     /**
      * Constructor for the Abxervyer class
      *
@@ -31,7 +35,7 @@ public class Abxervyer extends Enemy{
     public Abxervyer() {
 
         // displayed "Y", 2000 hp
-        super("Abxervyer", 'Y', 2000,new Rune(5000));
+        super("Abxervyer", 'Y', 2000, new Rune(5000));
 
         // attack the player with its limbs, dealing 80 damage with 25% accuracy
         this.damage = 80;
@@ -50,6 +54,11 @@ public class Abxervyer extends Enemy{
     }
 
 
+    public void setDroppedGate(Gate droppedGate) {
+        this.droppedGate = droppedGate;
+    }
+
+
     /**
      * Drop an item on the ground
      *
@@ -57,6 +66,7 @@ public class Abxervyer extends Enemy{
      */
     @Override
     public void dropItem(GameMap map) {
-
+        this.getRunes().getDropAction(this).execute(this,map);
+        map.locationOf(this).setGround( this.droppedGate);
     }
 }
