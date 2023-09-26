@@ -57,7 +57,7 @@ public class Puddle extends Ground implements Consumable {
         int increaseValue = (int)(increasePercentage * owner.getAttributeMaximum(BaseActorAttributes.STAMINA));
         owner.modifyAttribute(BaseActorAttributes.HEALTH, ActorAttributeOperations.INCREASE,1);
         owner.modifyAttribute(BaseActorAttributes.STAMINA, ActorAttributeOperations.INCREASE,increaseValue);
-        return owner + " consumes water puddle , and it restores the stamina by " + increaseValue + " points and the health by 1 point.";
+        return owner + " consumes " + this + ", and it restores the stamina by " + increaseValue + " points and the health by 1 point.";
     }
 
     /**
