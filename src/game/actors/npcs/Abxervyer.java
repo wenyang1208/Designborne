@@ -2,11 +2,13 @@
 package game.actors.npcs;
 
 // import engine and game packages
+import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.behaviours.FollowBehaviour;
 import game.grounds.Gate;
 import game.items.Rune;
 import game.utils.Ability;
+import game.utils.FancyMessage;
 import game.utils.Status;
 
 public class Abxervyer extends Enemy{
@@ -68,5 +70,13 @@ public class Abxervyer extends Enemy{
     public void dropItem(GameMap map) {
         this.getRunes().getDropAction(this).execute(this,map);
         map.locationOf(this).setGround( this.droppedGate);
+        for (String line : FancyMessage.BOSS_DEFEATED.split("\n")) {
+            new Display().println(line);
+            try {
+                Thread.sleep(200);
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
+        }
     }
 }
