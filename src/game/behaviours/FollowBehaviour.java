@@ -69,14 +69,13 @@ public class FollowBehaviour implements Behaviour {
 
                     targetActor = destination.getActor();
 
+                    break;
+
                 }
 
             }
 
-        }
-
-        // got target actor
-        if (targetActor != null) {
+        } else { // got target actor
 
             // check the current game map contains actor that has this behaviour or target actor
             if (!map.contains(targetActor) || !map.contains(actor)) {
@@ -89,6 +88,9 @@ public class FollowBehaviour implements Behaviour {
 
             // compute distance between 2 locations of two actors
             int currentDistance = distance(here, there);
+
+            if ( isTargetAround(here, there, currentDistance) )
+                return null;
 
             // follow player is nearby (within the surrounding of the enemy)
             for (Exit exit : here.getExits()) {
@@ -128,6 +130,13 @@ public class FollowBehaviour implements Behaviour {
 
         return Math.abs(a.x() - b.x()) + Math.abs(a.y() - b.y());
 
+    }
+
+
+    private boolean isTargetAround(Location a, Location b, int distance){
+        boolean b1 = (a.x() == b.x() || a.y() == b.y())  &&  distance == 1;
+        boolean b2 = (a.x() != b.x() || a.y() != b.y())  &&  distance == 2;
+        return b1 || b2;
     }
 
 }
