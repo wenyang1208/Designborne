@@ -44,8 +44,8 @@ public abstract class Enemy extends Actor {
         super(name, displayChar, hitPoints);
         this.addCapability(Status.HOSTILE_TO_PLAYER);
         // All enemies can wander and attack
-        addBehaviour( 999, new WanderBehaviour() );
-        addBehaviour( 500, new AttackBehaviour() );
+        addBehaviour(999, new WanderBehaviour());
+        addBehaviour(0, new AttackBehaviour());
     }
 
 

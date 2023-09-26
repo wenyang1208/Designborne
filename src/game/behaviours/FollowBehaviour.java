@@ -9,6 +9,7 @@ import edu.monash.fit2099.engine.actors.Behaviour;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
+import game.utils.Status;
 
 /**
  * A FollowBehaviour class that represents the follow behaviour of the enemies in the Ancient Woods.
@@ -31,12 +32,11 @@ public class FollowBehaviour implements Behaviour {
     /**
      * Constructor of the FollowBehaviour class
      *
-     * @param target the target actor to be followed
      */
-    public FollowBehaviour(Actor target) {
+    public FollowBehaviour() {
 
         // initialise follow behaviour
-        this.targetActor = target;
+        this.targetActor = null;
 
     }
 
@@ -52,40 +52,68 @@ public class FollowBehaviour implements Behaviour {
     @Override
     public Action getAction(Actor actor, GameMap map) {
 
-        // check the current game map contains actor that has this behaviour or target actor
-        if (!map.contains(targetActor) || !map.contains(actor)){
-            return null;
+        // get location of actor(enemies) that has this behaviour
+        Location here = map.locationOf(actor);
+
+        // get target actor when it is null
+        if (targetActor == null) {
+
+            // get all exit of actor
+            for (Exit exit: here.getExits()) {
+
+                // get location of exit
+                Location destination = exit.getDestination();
+
+                // check location contains target actor
+                if (destination.containsAnActor() && destination.getActor().hasCapability(Status.HOSTILE_TO_ENEMY)){
+
+                    targetActor = destination.getActor();
+
+                }
+
+            }
+
         }
 
-        // get location of actor that has this behaviour and the target actor
-        Location here = map.locationOf(actor);
-        Location there = map.locationOf(targetActor);
+        // got target actor
+        if (targetActor != null) {
 
-        // compute distance between 2 locations of two actors
-        int currentDistance = distance(here, there);
+            // check the current game map contains actor that has this behaviour or target actor
+            if (!map.contains(targetActor) || !map.contains(actor)) {
 
-        // follow player is nearby (within the surrounding of the enemy)
-        for (Exit exit: here.getExits()) {
+                return null;
 
-            // get location of exit
-            Location destination = exit.getDestination();
+            }
 
-            // check this location that actor(enemies) can enter or not
-            if (destination.canActorEnter(actor)) {
+            Location there = map.locationOf(targetActor);
 
-                // compute new distance between 2 locations of two actors
-                int newDistance = distance(destination, there);
+            // compute distance between 2 locations of two actors
+            int currentDistance = distance(here, there);
 
-                // new distance between enemies and target actor < current distance
-                if (newDistance < currentDistance) {
+            // follow player is nearby (within the surrounding of the enemy)
+            for (Exit exit : here.getExits()) {
 
-                    return new MoveActorAction(destination, exit.getName());
+                // get location of exit containing player
+                Location destination = exit.getDestination();
 
+                // check this location that actor(enemies) can enter or not
+                if (destination.canActorEnter(actor)) {
+
+                    // compute new distance between 2 locations of two actors
+                    int newDistance = distance(destination, there);
+
+                    // new distance between enemies and target actor < current distance
+                    if (newDistance < currentDistance) {
+
+                        return new MoveActorAction(destination, exit.getName());
+
+                    }
                 }
             }
         }
 
-        return null;
+            return null;
+
     }
 
     /**

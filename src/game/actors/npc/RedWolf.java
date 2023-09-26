@@ -53,6 +53,7 @@ public class RedWolf extends Enemy{
         // can attack the player by biting them, dealing 15 damage with 80% accuracy.
         this.damage = 15;
         this.hitRate = 80;
+        this.addBehaviour(1, new FollowBehaviour());
 
     }
 
