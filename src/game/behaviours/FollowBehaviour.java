@@ -134,8 +134,9 @@ public class FollowBehaviour implements Behaviour {
 
 
     private boolean isTargetAround(Location a, Location b, int distance){
+        // If the player is in the same row or column as the enemy, the player is "around" only if distance is 1.
         boolean b1 = (a.x() == b.x() || a.y() == b.y())  &&  distance == 1;
-        boolean b2 = (a.x() != b.x() || a.y() != b.y())  &&  distance == 2;
+        boolean b2 = (a.x() != b.x() && a.y() != b.y())  &&  distance == 2;
         return b1 || b2;
     }
 
