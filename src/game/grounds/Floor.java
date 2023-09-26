@@ -7,9 +7,12 @@ import game.utils.Status;
 
 /**
  * A class that represents the floor inside a building.
+ *
  * Created by:
  * @author Riordan D. Alfredo
+ *
  * Modified by:
+ * @author Koe Rui En
  *
  */
 public class Floor extends Ground {
@@ -25,7 +28,7 @@ public class Floor extends Ground {
      * @param actor the Actor to check
      * @return boolean value to indicate actor can enter the terrain or not
      */
-    // Enemy (Wandering Undead and Hollow Soldier) cannot enter a floor,
+    // Enemy  cannot enter a floor,
     // represented by the display character “_”
     // player can run back to safety if their health is low.
     @Override
