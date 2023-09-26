@@ -1,5 +1,6 @@
 package game;
 
+import game.items.Rune;
 import java.util.Arrays;
 import java.util.List;
 
@@ -132,8 +133,8 @@ public class Application {
         Player player = new Player("The Abstracted One", '@', 150, 200);
 
         // Add player to the game map
-//        world.addPlayer(player, abandonedVillage.at(24, 5));
-        world.addPlayer(player, ancientWoods.at(24,5));
+        world.addPlayer(player, abandonedVillage.at(24, 5));
+//        world.addPlayer(player, ancientWoods.at(24,5));
 //        world.addPlayer(player, abxervyerBattleRoom.at(24,5));
 
 
@@ -202,6 +203,8 @@ public class Application {
         // Add gate in new map, Ancient Wood
         ancientWoods.at(35,0).setGround(new Gate("Burial Ground", burialGround.at(35, 0)));
 
+//        // testing for rune
+//        ancientWoods.at(25,5).addItem(new Rune());
         world.run();
     }
 }

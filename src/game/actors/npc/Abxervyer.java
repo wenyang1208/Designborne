@@ -4,6 +4,7 @@ package game.actors.npc;
 // import engine and game packages
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.behaviours.FollowBehaviour;
+import game.items.Rune;
 import game.utils.Ability;
 import game.utils.Status;
 
@@ -30,7 +31,7 @@ public class Abxervyer extends Enemy{
     public Abxervyer() {
 
         // displayed "Y", 2000 hp
-        super("Abxervyer", 'Y', 2000);
+        super("Abxervyer", 'Y', 2000,new Rune(5000));
 
         // attack the player with its limbs, dealing 80 damage with 25% accuracy
         this.damage = 80;

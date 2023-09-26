@@ -11,6 +11,7 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.behaviours.AttackBehaviour;
 import game.behaviours.WanderBehaviour;
+import game.items.Rune;
 import game.utils.Status;
 import game.actions.AttackAction;
 
@@ -33,16 +34,20 @@ public abstract class Enemy extends Actor {
     /* Attribute */
     private Map<Integer, Behaviour> behaviours = new TreeMap<>(); // TreeMap is used so that behaviours are stored in order
 
+    private Rune runes;
 
     /**
      * The constructor of the Enemy class.
+     *
      * @param name        the name of the Enemy
      * @param displayChar the character that will represent the Enemy in the display
      * @param hitPoints   the Enemy's starting hit points
      */
-    public Enemy(String name, char displayChar, int hitPoints) {
+    public Enemy(String name, char displayChar, int hitPoints, Rune runes) {
+
         super(name, displayChar, hitPoints);
         this.addCapability(Status.HOSTILE_TO_PLAYER);
+        this.runes = runes;
         // All enemies can wander and attack
         addBehaviour(999, new WanderBehaviour());
         addBehaviour(0, new AttackBehaviour());
@@ -127,5 +132,7 @@ public abstract class Enemy extends Actor {
      *
      */
     public abstract void dropItem(GameMap map);
+
+    public Rune getRunes(){return this.runes;}
 
 }

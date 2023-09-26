@@ -13,6 +13,7 @@ import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.behaviours.AttackBehaviour;
 import game.items.HealingVial;
 import game.items.RefreshingFlask;
+import game.items.Rune;
 import game.utils.Status;
 
 /**
@@ -46,7 +47,7 @@ public class HollowSoldier extends Enemy {
 
         // hollow soldier
         // 200 HP, 50 damage, 50 accuracy
-        super("Hollow Soldier", '&', 200);
+        super("Hollow Soldier", '&', 200, new Rune(100));
 
         // can attack the player with its limbs, dealing 50 damage with 50% accuracy.
         this.damage = 50;
@@ -88,6 +89,8 @@ public class HollowSoldier extends Enemy {
     @Override
     public void dropItem(GameMap map) {
 
+        // 100% drop runes
+        this.getRunes().getDropAction(this).execute(this,map);
 
         // 20% chance to drop a healing vial
         if (dropItemChance(0.20)) {
