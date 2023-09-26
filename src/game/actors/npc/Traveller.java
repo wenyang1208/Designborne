@@ -7,9 +7,10 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.actions.PurchaseAction;
+import game.actions.SellAction;
 import game.items.HealingVial;
 import game.items.RefreshingFlask;
-import game.items.PurchaseItem;
+import game.items.PricingItem;
 import game.utils.Status;
 import game.weapons.Broadsword;
 
@@ -24,7 +25,7 @@ import java.util.List;
  */
 public class Traveller extends Actor {
 
-    public static List<PurchaseItem> menu = new ArrayList<PurchaseItem>();
+    public static List<PricingItem> menu = new ArrayList<PricingItem>();
 
     /**
      * Constructor for the Traveller class
@@ -33,13 +34,14 @@ public class Traveller extends Actor {
 
     public Traveller() {
         super("IsolatedTraveller", 'ඞ', 200);
-        menu.add(new PurchaseItem(new HealingVial(),100,0.25,1.5));
-        menu.add(new PurchaseItem(new RefreshingFlask(),75,0.1,0.8));
-        menu.add(new PurchaseItem(new Broadsword(),250,0.05,0));
+        // add the items to the traveller to be purchased by actor
+        menu.add(new PricingItem(new HealingVial(),100,0.25,1.5));
+        menu.add(new PricingItem(new RefreshingFlask(),75,0.1,0.8));
+        menu.add(new PricingItem(new Broadsword(),250,0.05,0));
     }
 
     // Getter for the purchase menu
-    public List<PurchaseItem> getMenu() {
+    public List<PricingItem> getMenu() {
         return menu;
     }
 
@@ -61,6 +63,7 @@ public class Traveller extends Actor {
         // Add a PurchaseAction if the otherActor is hostile to Enemy(which is player)
         if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)){
             actions.add(new PurchaseAction(this));
+            actions.add(new SellAction(this));
         }
         return actions;
     }

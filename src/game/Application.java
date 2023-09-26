@@ -11,6 +11,7 @@ import game.actors.Player;
 import game.actors.npc.*;
 import game.grounds.*;
 import game.grounds.Void;
+import game.items.HealingVial;
 import game.utils.FancyMessage;
 import game.weapons.Broadsword;
 
@@ -134,8 +135,16 @@ public class Application {
         // Add player to the game map
 //        world.addPlayer(player, abandonedVillage.at(24, 5));
         world.addPlayer(player, ancientWoods.at(24,5));
-//        player.addBalance(200);
-//        ancientWoods.at(24,6).addActor(new Traveller());
+
+        // try to add balance to player for testing
+        player.addBalance(200);
+
+        // try to add Traveller for testing
+        ancientWoods.at(24,6).addActor(new Traveller());
+
+        // try to add item to player
+        player.addItemToInventory(new Broadsword());
+        player.addItemToInventory(new HealingVial());
 
 //        gameMap.at(24,4).addItem(new OldKey());
 
