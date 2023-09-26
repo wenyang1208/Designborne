@@ -204,7 +204,8 @@ public class Application {
         ancientWoods.at(35,0).setGround(new Gate("Burial Ground", burialGround.at(35, 0)));
 
 //        // testing for rune
-//        ancientWoods.at(25,5).addItem(new Rune());
+        abandonedVillage.at(25,5).addItem(new Rune(12));
+        abandonedVillage.at(25,3).addItem(new Rune(12));
         world.run();
     }
 }

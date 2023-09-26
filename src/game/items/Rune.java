@@ -20,6 +20,7 @@ public class Rune extends Item implements Consumable{
   @Override
   public String consume(Actor owner) {
     owner.addBalance(this.value);
+    owner.removeItemFromInventory(this);
     return  owner + " consumes " + this;
   }
 
