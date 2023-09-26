@@ -42,7 +42,7 @@ public class ForestKeeper extends Enemy{
     private final int hitRate;
 
     /**
-     * Constructor for the WanderingUndead class
+     * Constructor for the ForestKeeper class
      *
      */
     public ForestKeeper() {
@@ -53,6 +53,8 @@ public class ForestKeeper extends Enemy{
         // can attack the player with its limbs, dealing 25 damage with 75% accuracy
         this.damage = 25;
         this.hitRate = 75;
+
+        // can follow the player
         this.addBehaviour(1, new FollowBehaviour());
 
     }

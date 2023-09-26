@@ -8,12 +8,9 @@ import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
 import game.actors.Player;
-import game.actors.npc.ForestKeeper;
-import game.actors.npc.RedWolf;
+import game.actors.npc.*;
 import game.grounds.*;
 import game.grounds.Void;
-import game.actors.npc.HollowSoldier;
-import game.actors.npc.WanderingUndead;
 import game.utils.FancyMessage;
 import game.weapons.Broadsword;
 
@@ -137,6 +134,7 @@ public class Application {
         // Add player to the game map
 //        world.addPlayer(player, abandonedVillage.at(24, 5));
         world.addPlayer(player, ancientWoods.at(24,5));
+//        world.addPlayer(player, abxervyerBattleRoom.at(24,5));
 
 
 //        gameMap.at(24,4).addItem(new OldKey());
@@ -153,7 +151,10 @@ public class Application {
         ancientWoods.at(28,8).addActor(new ForestKeeper());
         ancientWoods.at(29,9).addActor(new RedWolf());
 
-        // create broadsword weapon to add in the building (ground)
+        // create abxervyer in Abxervyer Battle Room Map
+        abxervyerBattleRoom.at(9, 9).addActor(new Abxervyer());
+
+        // Create broadsword weapon to add in the building (ground)
         Broadsword broadsword = new Broadsword();
         abandonedVillage.at(20,5).addItem(broadsword);
 
