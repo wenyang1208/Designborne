@@ -2,13 +2,9 @@ package game.actions;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
-import game.actors.npcs.Traveller;
 import game.items.*;
-import game.weapons.Broadsword;
 
-import java.util.*;
 
 /**
  * Represents the SellAction class that allows an actor to sell items to a Traveller.

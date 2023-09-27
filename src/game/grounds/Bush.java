@@ -2,7 +2,7 @@
 package game.grounds;
 
 // import game package
-import game.actors.npcs.Enemy;
+import game.actors.npcs.Spawnable;
 
 /**
  * A class that represents the bushes in the Ancient Woods map
@@ -20,7 +20,7 @@ public class Bush extends Spawner{
      * @param enemy enemy to be spawned in certain chance of time
      * @param iniSpawnPercentage percentage to spawn an enemy
      */
-    public Bush (Enemy enemy, double iniSpawnPercentage) {
+    public Bush (Spawnable enemy, double iniSpawnPercentage) {
 
         // initialise instance of bush
         // The hut is displayed as "m".
