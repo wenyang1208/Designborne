@@ -18,7 +18,7 @@ import game.actions.ConsumeAction;
  * @author Yang Yang Dan
  *
  */
-public class HealingVial extends Item implements Consumable{
+public class HealingVial extends Item implements Consumable, Sellable{
 
     // healing percentage
     /**
@@ -68,4 +68,25 @@ public class HealingVial extends Item implements Consumable{
         return owner + " consumes " + this + ", and it restores the health by " + value + " points.";
 
     }
+
+
+    @Override
+    public int getSellingPrice() {
+        return 35;
+    }
+
+
+    @Override
+    public String sell(Actor actor, Actor trader) {
+        int price = getSellingPrice();
+        String string = "";
+        if (Math.random() < 0.1) {
+            price = price * 2;
+            string = trader + " pays 2x the original price. ";
+        }
+        actor.removeItemFromInventory( this );
+        actor.addBalance( price );
+        return string + actor + " successfully sold " + this + " for " + price + " runes to " + trader + ".";
+    }
+
 }
