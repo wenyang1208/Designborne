@@ -15,6 +15,7 @@ import game.grounds.Void;
 import game.items.OldKey;
 import game.utils.FancyMessage;
 import game.weapons.Broadsword;
+import game.weapons.GiantHammer;
 
 /**
  * The main class to start the game.
@@ -138,7 +139,7 @@ public class Application {
         ancientWoods.at(57, 10).addItem( new Bloodberry() );
         ancientWoods.at(55, 2).addItem( new Bloodberry() );
         ancientWoods.at(8, 11).addItem( new Bloodberry() );
-//        ancientWoods.at(19, 3).addActor( new IsolatedTraveller() );
+        ancientWoods.at(19, 3).addActor( new Traveller() );
 
         // Configure abxervyerBattleRoom
         abxervyerBattleRoom.at(32, 0).setGround( hut );
@@ -148,7 +149,7 @@ public class Application {
         abxervyerBattleRoom.at(25, 19).setGround( bush );
         abxervyerBattleRoom.at(22, 16).setGround( bush );
         abxervyerBattleRoom.at(16, 0).setGround( bush );
-//        abxervyerBattleRoom.at(39, 12).addItem( new GiantHammer() );
+        abxervyerBattleRoom.at(39, 12).addItem( new GiantHammer() );
         Abxervyer abxervyer = new Abxervyer();
         abxervyer.setDroppedGate( new Gate("Ancient Woods", ancientWoods.at(0, 5)) );
 //        abxervyer.addMap(ancientWoods);
