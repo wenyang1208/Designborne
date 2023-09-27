@@ -63,7 +63,6 @@ public class Traveller extends Actor {
         // Add a PurchaseAction if the otherActor is hostile to Enemy(which is player)
         if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)){
             actions.add(new PurchaseAction(this));
-            actions.add(new SellAction(this));
         }
         return actions;
     }
