@@ -36,5 +36,5 @@ public class FancyMessage {
                     "  MM000bg. 6W'   `Wb 8I   `C 8I   `A       MM  8I   `O     ,AP    MM ,M'   Yb  MM ,M'   Yb 8)   MM  MM  ,M'   Yb ,AP    MM  \n" +
                     "  MM    `Y 8M     M8 `YMMMa. `YMMMa.       MM  `YMMMa.     8MI    MM 8M++++++  MM 8M======  ,pm9MM  MM  8M====== 8MI    MM  \n" +
                     "  MM    ,9 YA.   ,A9 L.   I8 L.   I8       MM  L.   I8     `Mb    MM YM.    ,  MM YM.    , 8M   MM  MM  YM.    , `Mb    MM  \n" +
-                    ".JMMmmmd9   `Ybmd9'  M9mmmP' M9mmmP'     .JMML.M9mmmP'      `Wbmd\"MML.`Mbmmd'.JMML.`Mbmmd' `Moo9^Yo.`Mbmo`Mbmmd'  `WbmdEMML.\n";
+                    ".JMMmmmd9   `Ybmd9'  M9mmmP' M9mmmP'     .JMML.M9mmmP'      `Wbmd\"MML.`Mbmmd'.JMML.`Mbmmd' `Moo9^Yo.`Mbmo`Mbmmd'  `WbmdEMML.\n\n";
 }

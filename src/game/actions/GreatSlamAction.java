@@ -34,23 +34,17 @@ public class GreatSlamAction extends Action {
             return actor + "can't activate " + this.weapon + "'s skill because of insufficient stamina.";
         }
         String string = "";
+        string += new AttackAction(enemy, "", this.weapon).execute(actor, map) + "\n";
         this.weapon.updateDamageMultiplier(0.5f);
-        string += new AttackAction(actor, "", this.weapon).execute(actor, map);
         for (Exit exit : map.locationOf(actor).getExits()){
             Location location = exit.getDestination();
             if (location.containsAnActor() && location.getActor().hasCapability(Status.HOSTILE_TO_PLAYER)){
                 Actor enemy = location.getActor();
-                if (enemy == this.enemy){
-                    this.weapon.updateDamageMultiplier(1.0f);
-                    string += new AttackAction(enemy, "", this.weapon).execute(actor, map);
-                } else {
-                    this.weapon.updateDamageMultiplier(0.5f);
-                    string += new AttackAction(enemy, "", this.weapon).execute(actor, map);
-                }
-                string += "\n";
+                string += new AttackAction(enemy, "", this.weapon).execute(actor, map) + "\n";
             }
         }
-
+        string += new AttackAction(actor, "", this.weapon).execute(actor, map) + "\n";
+        this.weapon.updateDamageMultiplier(1.0f);
         actor.modifyAttribute(BaseActorAttributes.STAMINA, ActorAttributeOperations.DECREASE, (int)(reducedStaminaRate * actor.getAttributeMaximum(BaseActorAttributes.STAMINA)));
         return string;
     }
