@@ -12,6 +12,7 @@ import game.actors.Player;
 import game.actors.npcs.*;
 import game.grounds.*;
 import game.grounds.Void;
+import game.items.OldKey;
 import game.utils.FancyMessage;
 import game.weapons.Broadsword;
 
@@ -34,20 +35,22 @@ public class Application {
         FancyGroundFactory groundFactory = new FancyGroundFactory(new Dirt(),
                 new Wall(), new Floor(), new Puddle(), new Void());
 
+
+
         List<String> abandonedVillageMap = Arrays.asList(
                 "...........................................................",
                 "...#######.................................................",
-                "...#__.....................................................",
-                "...#..___#.................................................",
-                "...###.###................#######..........................",
-                "..........................#_____#..........................",
-                "........~~................#_____#..........................",
-                ".........~~~..............###_###..........................",
-                "...~~~~~~~~................................................",
-                "....~~~~~.................................###..##..........",
-                "~~~~~~~...................................#___..#..........",
-                "~~~~~~....................................#..___#..........",
-                "~~~~~~~~~.................................#######..........");
+                "...#__......................................++++...........",
+                "...#..___#..................................+++++++........",
+                "...###.###................#######.............+++..........",
+                "..........................#_____#...............+++........",
+                "........~~................#_____#................+.........",
+                ".........~~~..............###_###...............++.........",
+                "...~~~~~~~~....+++.........................................",
+                "....~~~~~........+++++++..................###..##...++++...",
+                "~~~~~~~..............+++..................#___..#...++.....",
+                "~~~~~~.................++.................#..___#....+++...",
+                "~~~~~~~~~.................................#######.......++.");
 
         List<String> burialGroundMap = Arrays.asList(
                 "...........+++++++........~~~~~~++....~~",
@@ -71,7 +74,7 @@ public class Application {
                 "+...+++..............................++++++++.....~~~.....~~",
                 "++...............#######..............++++.........~~.......",
                 "++...............#_____#...........................~~~......",
-                "+................#_____.............................~~......",
+                "+................#_____#............................~~......",
                 ".................###_###............~...............~~.....~",
                 "...............................~.+++~~..............~~....~~",
                 ".....................~........~~+++++...............~~~...~~",
@@ -103,21 +106,57 @@ public class Application {
                 "..........~~+++++......................~",
                 ".........~~~~++++..................~~..~");
 
-        // Abandoned Village Game Map
+
+        // Create GameMap objects
         GameMap abandonedVillage = new GameMap(groundFactory, abandonedVillageMap);
-        world.addGameMap(abandonedVillage);
-
-        // Burial Ground Map
         GameMap burialGround = new GameMap(groundFactory, burialGroundMap);
-        world.addGameMap(burialGround);
-
-        // Ancient Wood Map
         GameMap ancientWoods = new GameMap(groundFactory, ancientWoodsMap);
-        world.addGameMap(ancientWoods);
-
-        //Abxervyer Battle Room Map
         GameMap abxervyerBattleRoom = new GameMap(groundFactory, abxervyerBattleRoomMap);
+
+        // Add maps to the world
+        world.addGameMap(abandonedVillage);
+        world.addGameMap(burialGround);
+        world.addGameMap(ancientWoods);
         world.addGameMap(abxervyerBattleRoom);
+
+        // Configure abandonedVillage
+        Graveyard graveyard1 = new Graveyard( new WanderingUndead(), 0.25f );
+        abandonedVillage.at(50, 1).setGround( graveyard1 );
+        abandonedVillage.at(35, 10).setGround( graveyard1 );
+        abandonedVillage.at(27, 6).addItem(new Broadsword());
+
+        // Configure burialGround
+        Graveyard graveyard2 = new Graveyard( new HollowSoldier(), 0.10f );
+        burialGround.at(2, 14).setGround( graveyard2 );
+        burialGround.at(38, 11).setGround( graveyard2 );
+
+        // Configure ancientWoods
+        Hut hut = new Hut( new ForestKeeper(), 0.15f );
+        Bush bush = new Bush( new RedWolf(), 0.30f );
+        ancientWoods.at(43, 7).setGround( hut );
+        ancientWoods.at(43, 9).setGround( bush );
+        ancientWoods.at(57, 10).addItem( new Bloodberry() );
+        ancientWoods.at(55, 2).addItem( new Bloodberry() );
+        ancientWoods.at(8, 11).addItem( new Bloodberry() );
+//        ancientWoods.at(19, 3).addActor( new IsolatedTraveller() );
+
+        // Configure abxervyerBattleRoom
+        abxervyerBattleRoom.at(32, 0).setGround( hut );
+        abxervyerBattleRoom.at(34, 0).setGround( hut );
+        abxervyerBattleRoom.at(2, 11).setGround( hut );
+        abxervyerBattleRoom.at(2, 19).setGround( hut );
+        abxervyerBattleRoom.at(25, 19).setGround( bush );
+        abxervyerBattleRoom.at(22, 16).setGround( bush );
+        abxervyerBattleRoom.at(16, 0).setGround( bush );
+//        abxervyerBattleRoom.at(39, 12).addItem( new GiantHammer() );
+        Abxervyer abxervyer = new Abxervyer();
+        abxervyer.setDroppedGate( new Gate("Ancient Woods", ancientWoods.at(0, 5)) );
+//        abxervyer.addMap(ancientWoods);
+//        abxervyer.addMap(abxervyerBattleRoom);
+        abxervyerBattleRoom.at(12, 9).addActor( abxervyer );
+
+
+
 
         for (String line : FancyMessage.TITLE.split("\n")) {
             new Display().println(line);
@@ -129,86 +168,37 @@ public class Application {
         }
 
 
-        // Create player
-        Player player = new Player("The Abstracted One", '@', 150, 200);
-
-        //testing trading
-//        player.addItemToInventory(new Broadsword());
-//        player.addItemToInventory(new HealingVial());
-//        player.addBalance(200);
-//        ancientWoods.at(25,5).addActor(new Traveller());
-
-        // Add player to the game map
-//        world.addPlayer(player, abandonedVillage.at(24, 5));
-        world.addPlayer(player, ancientWoods.at(24,5));
 
 
-//        gameMap.at(24,4).addItem(new OldKey());
+        // creat a gate to burial ground map, and put it in the abandoned village map
+        abandonedVillage.at(30,0).setGround( new Gate("Burial Ground", burialGround.at(21, 6)) );
 
-        // Create enemies in different game maps
+        // creat a gate to abandoned village map, and put it in the burial ground map
+        burialGround.at(23,0).setGround( new Gate("Abandoned Village", abandonedVillage.at(0, 5)) );
 
-        // create Wandering Undead in Abandoned Village Map
-        abandonedVillage.at(28,4).addActor(new WanderingUndead());
+        // creat a gate to ancient woods map, and put it in the burial ground map
+        burialGround.at(0, 10).setGround( new Gate("Ancient Woods", ancientWoods.at(21, 3)) );
 
-        // create hollow soldier in Burial Ground Map
-        burialGround.at(28,6).addActor(new HollowSoldier());
+        // create a gate to burial ground map, and put it in the ancient woods map
+        ancientWoods.at(30, 0).setGround( new Gate("Burial Ground", burialGround.at(6, 0)) );
 
-        // create red wolf and forest keeper in Ancient Wood Map
-        ancientWoods.at(28,8).addActor(new ForestKeeper());
-        ancientWoods.at(29,9).addActor(new RedWolf());
+        // create a gate to abxervyer battle room map, and put it in the ancient woods map
+        ancientWoods.at(0, 6).setGround( new Gate("Abxervyer, the Forest Watcher", abxervyerBattleRoom.at(39, 13)) );
 
-        // create broadsword weapon to add in the building (ground)
-        Broadsword broadsword = new Broadsword();
-        abandonedVillage.at(20,5).addItem(broadsword);
 
-        // Set new ground at different game maps
 
-        // set new ground (Graveyard and void in Abandoned Village Map)
 
-        // graveyard (create wandering undead)
-        // save attribute of wandering undead
-        // spawn 25% chance at each turn
-        abandonedVillage.at(30, 11).setGround(new Graveyard(new WanderingUndead(), 0.25));
+        // player will be in the abandoned village map initially
+        Player player = new Player("The Abstracted One", '@', 15000, 20000);
+        player.addItemToInventory(new OldKey());
+        player.addBalance(10000);
+//        world.addPlayer(player, abandonedVillage.at(29, 5));
+//        world.addPlayer(player, ancientWoods.at(21, 3));
+        world.addPlayer(player, abxervyerBattleRoom.at(39, 13));
 
-        // void
-        abandonedVillage.at(33,10).setGround(new Void());
-        abandonedVillage.at(30, 8).setGround(new Void());
 
-        // set new ground (Graveyard in Burial Ground Map)
 
-        // graveyard (create hollow soldier)
-        // save attribute of hollow soldier
-        // spawn 10% chance at each turn
-        burialGround.at(30, 11).setGround(new Graveyard(new HollowSoldier(), 0.10));
 
-        // set new ground (Hut and Bush in Ancient Woods Map)
-
-        // hut (create forest keeper)
-        // save attribute of forest keeper
-        // spawn 15% chance at each turn
-        ancientWoods.at(30, 11).setGround(new Hut(new ForestKeeper(), 0.15));
-
-        // bush (create red wolf)
-        // save attribute of red wolf
-        // spawn 30% chance at each turn
-        ancientWoods.at(35, 11).setGround(new Bush(new RedWolf(), 0.30));
-
-        // Travel Gate to specific Map
-
-        // Add gate in Abandoned Village Map
-        abandonedVillage.at(35,0).setGround(new Gate("Burial Ground", burialGround.at(35,0)));
-
-        // Add gate in new map, Burial Ground
-        burialGround.at(35, 0).setGround(new Gate("Abandoned Village", abandonedVillage.at(35,0)));
-        burialGround.at(35, 0).setGround(new Gate("Ancient Woods", ancientWoods.at(35,0)));
-
-        // Add gate in new map, Ancient Wood
-        ancientWoods.at(35,0).setGround(new Gate("Burial Ground", burialGround.at(35, 0)));
-
-        // Add the Traveller, Ancient Wood
-        ancientWoods.at(21,3).addActor(new Traveller());
-        ancientWoods.at(22, 3).addItem(new Bloodberry());
-        ancientWoods.at(24, 6).addItem(new Broadsword());
         world.run();
     }
 }
