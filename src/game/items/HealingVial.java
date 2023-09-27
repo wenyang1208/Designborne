@@ -6,7 +6,10 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.actors.attributes.ActorAttributeOperations;
 import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.items.Item;
+import edu.monash.fit2099.engine.positions.Location;
 import game.actions.ConsumeAction;
+import game.actions.SellAction;
+import game.utils.Status;
 
 /**
  * A class that represents the HealingVial item for the player to increase their health.
@@ -67,6 +70,14 @@ public class HealingVial extends Item implements Consumable, Sellable{
 
         return owner + " consumes " + this + ", and it restores the health by " + value + " points.";
 
+    }
+
+
+    @Override
+    public ActionList allowableActions(Actor otherActor, Location location) {
+        if (otherActor.hasCapability(Status.TRADER))
+            return new ActionList( new SellAction(this, this.toString(), otherActor) );
+        return new ActionList();
     }
 
 
