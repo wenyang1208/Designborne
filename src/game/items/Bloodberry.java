@@ -14,8 +14,11 @@ import game.actions.ConsumeAction;
  *
  * Created by:
  * @author Chua Wen Yang
+ *
+ * Modified by
+ * @author yangdan
  */
-public class Bloodberry extends Item implements Consumable{
+public class Bloodberry extends Item implements Consumable, Sellable{
 
   /**
    * Constructor for the Bloodberry class.
@@ -50,4 +53,20 @@ public class Bloodberry extends Item implements Consumable{
     owner.removeItemFromInventory(this);
     return owner + " consumes " + this + ", and it increases the maximum health by " + 5 + " points.";
   }
+
+
+  @Override
+  public int getSellingPrice() {
+    return 10;
+  }
+
+
+  @Override
+  public String sell(Actor actor, Actor trader) {
+    actor.removeItemFromInventory( this );
+    int price = getSellingPrice();
+    actor.addBalance( price );
+    return actor + " successfully sold " + this + " for " + price + " runes to " + trader;
+  }
+
 }
