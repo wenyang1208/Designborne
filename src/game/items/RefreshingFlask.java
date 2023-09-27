@@ -19,7 +19,7 @@ import game.actions.ConsumeAction;
  * @author Yang Yang Dan
  *
  */
-public class RefreshingFlask extends Item implements Consumable{
+public class RefreshingFlask extends Item implements Consumable, Sellable{
 
     // healing percentage
     /**
@@ -70,5 +70,24 @@ public class RefreshingFlask extends Item implements Consumable{
 
         return owner + " consumes " + this + ", and it restores the stamina by " + value + " points.";
 
+    }
+
+
+    @Override
+    public int getSellingPrice() {
+        return 25;
+    }
+
+
+    @Override
+    public String sell(Actor actor, Actor trader) {
+        boolean applySpecial = Math.random() < 0.5;
+        int price = getSellingPrice();
+        actor.removeItemFromInventory( this );
+        if (! applySpecial) {
+            actor.addBalance( price );
+            return actor + " successfully sold " + this + " for " + price + " runes to " + trader + ".";
+        }
+        return trader + " takes " + this + " without paying " + actor;
     }
 }
