@@ -112,7 +112,7 @@ public class HealingVial extends Item implements Consumable, Sellable{
     public String sell(Actor actor, Actor trader) {
         int price = getSellingPrice();
         String string = "";
-        if (Math.random() < 0.1) {
+        if (Math.random() <= 0.1) {
             price = price * 2;
             string = trader + " pays 2x the original price. ";
         }

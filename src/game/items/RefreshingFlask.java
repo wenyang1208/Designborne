@@ -92,7 +92,7 @@ public class RefreshingFlask extends Item implements Consumable, Sellable{
 
     @Override
     public String sell(Actor actor, Actor trader) {
-        boolean applySpecial = Math.random() < 0.5;
+        boolean applySpecial = Math.random() <= 0.5;
         int price = getSellingPrice();
         actor.removeItemFromInventory( this );
         if (! applySpecial) {
