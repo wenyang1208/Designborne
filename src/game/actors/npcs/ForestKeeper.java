@@ -14,6 +14,9 @@ import game.items.Rune;
  * Created by:
  * @author Koe Rui En
  *
+ * Modified by:
+ * @author Yangdan
+ *
  */
 public class ForestKeeper extends Enemy implements Spawnable{
 
@@ -39,7 +42,7 @@ public class ForestKeeper extends Enemy implements Spawnable{
     public ForestKeeper() {
 
         // displayed "8", 125 hp
-        super("Forest Keeper", '8', 125,new Rune(50));
+        super("Forest Keeper", '8', 125, new Rune(50));
 
         // can attack the player with its limbs, dealing 25 damage with 75% accuracy
         this.damage = 25;

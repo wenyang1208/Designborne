@@ -12,8 +12,10 @@ import game.items.Consumable;
 /**
  * A class that represents puddle
  *
- * Modified by:
+ * Created by:
  * @author Chua Wen Yang
+ *
+ * Modified by:
  * @author Yang Dan
  */
 public class Puddle extends Ground implements Consumable {

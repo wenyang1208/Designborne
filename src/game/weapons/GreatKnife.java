@@ -68,7 +68,7 @@ public class GreatKnife extends WeaponItem implements Sellable {
     /**
      * Get the selling price of the Great Knife
      *
-     * Great Knife can be sold at 250 runes
+     * Great Knife can be sold at 175 runes
      *
      * @return an integer value representing the selling price of Great Knife
      */
@@ -90,7 +90,7 @@ public class GreatKnife extends WeaponItem implements Sellable {
     public String sell(Actor actor, Actor trader) {
         int price = getSellingPrice();
         actor.removeItemFromInventory( this ); // remove this item from the player's inventory
-        if (Math.random() < 0.1){ // there is 10% chance to take at most 175 runes from the player
+        if (Math.random() <= 0.1){ // there is 10% chance to take at most 175 runes from the player
             actor.deductBalance( Math.min(actor.getBalance(), price) );
             return trader + " takes the runes from " + actor + ".";
         }

@@ -42,7 +42,7 @@ public class RedWolf extends Enemy implements Spawnable{
     public RedWolf() {
 
         // displayed "r", 25 hp
-        super("Red Wolf", 'r', 25,new Rune(25));
+        super("Red Wolf", 'r', 25, new Rune(25));
 
         // can attack the player by biting them, dealing 15 damage with 80% accuracy.
         this.damage = 15;

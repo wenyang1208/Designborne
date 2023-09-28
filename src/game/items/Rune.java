@@ -13,7 +13,10 @@ import game.actions.ConsumeAction;
  * @author Chua Wen Yang
  */
 public class Rune extends Item implements Consumable{
+
+
   private int value;
+
 
   /**
    * Constructor for the Rune class.
@@ -25,6 +28,7 @@ public class Rune extends Item implements Consumable{
     this.value = value;
   }
 
+
   /**
    * Retrieves the list of allowable actions for the owner actor when interacting with this Rune item.
    *
@@ -35,6 +39,7 @@ public class Rune extends Item implements Consumable{
   public ActionList allowableActions(Actor owner) {
     return new ActionList( new ConsumeAction(this) );
   }
+
 
   /**
    * Consumes the Rune, increasing the actor's balance by the specified value and removing it from the actor's inventory.
@@ -48,5 +53,6 @@ public class Rune extends Item implements Consumable{
     owner.removeItemFromInventory(this);
     return owner + "consumes " + this + ", and it increases the wallet balance by " + this.value + ".";
   }
+
 
 }
