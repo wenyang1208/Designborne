@@ -18,7 +18,7 @@ import game.utils.Status;
  * @author Koe Rui En
  *
  * Modified by:
- * @author Yang Yang Dan
+ * @author Yang Dan
  *
  */
 public class HealingVial extends Item implements Consumable, Sellable{
@@ -72,7 +72,16 @@ public class HealingVial extends Item implements Consumable, Sellable{
 
     }
 
-
+    /**
+     * List of allowable actions that Healing Vial allows its owner do to other actor
+     *
+     * The player will sell item to the other actor if the other actor has the capability of Status.TRADER
+     *
+     * @param otherActor the other actor
+     * @param location the location of the other actor
+     *
+     * @return an unmodifiable list of Actions
+     */
     @Override
     public ActionList allowableActions(Actor otherActor, Location location) {
         if (otherActor.hasCapability(Status.TRADER))
@@ -80,13 +89,25 @@ public class HealingVial extends Item implements Consumable, Sellable{
         return new ActionList();
     }
 
-
+    /**
+     * Get the selling price of the Healing Vial
+     *
+     * @return an integer value representing the selling price of Healing Vial
+     */
     @Override
     public int getSellingPrice() {
         return 35;
     }
 
 
+    /**
+     * Sell the Healing Vial to the trader
+     *
+     * @param actor Actor who sells Healing Vial at the sale stage
+     * @param trader Actor who takes Healing Vial at the sale stage
+     *
+     * @return a string showing the result of selling Healing Vial
+     */
     @Override
     public String sell(Actor actor, Actor trader) {
         int price = getSellingPrice();

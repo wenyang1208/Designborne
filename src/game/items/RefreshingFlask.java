@@ -19,7 +19,7 @@ import game.utils.Status;
  * @author Koe Rui En
  *
  * Modified by:
- * @author Yang Yang Dan
+ * @author Yang Dan
  *
  */
 public class RefreshingFlask extends Item implements Consumable, Sellable{
@@ -59,9 +59,9 @@ public class RefreshingFlask extends Item implements Consumable, Sellable{
     }
 
     /**
-     * A consume method to allow owner consume the item
+     * A consume method to allow owner consume the Refreshing flask
      *
-     * @param owner the owner of a consumed item
+     * @param owner the owner of a consumed item which is Refreshing flask
      */
     @Override
     public String consume(Actor owner) {

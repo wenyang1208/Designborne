@@ -21,11 +21,14 @@ public class GiantHammer extends WeaponItem implements Sellable {
 
 
     /* Default constants for the stamina used to activate the skill of giant hammer */
+    /**
+     * Default constants for the stamina used to activate the skill of giant hammer
+     */
     private static final float REDUCED_STAMINA_RATE = 0.05f;
 
-
     /**
-     * Constructor of Giant Hammer
+     * Constructor of Giant Hammer class
+     *
      */
     public GiantHammer() {
         super("Giant Hammer", 'P', 160, "slams", 90);
@@ -35,11 +38,14 @@ public class GiantHammer extends WeaponItem implements Sellable {
 
     /**
      * Player can "use" this weapon to otherActor that is around
+     *
      * For example, player can attack otherActor with this weapon
      * For example, player can apply skilled attack to otherActor with this weapon
      * For example, player can sell this weapon to the otherActor if it is TRADER
+     *
      * @param otherActor the other actor
      * @param location the location of the other actor
+     *
      * @return actions a list of Actions that the player can perform to otherActor with this weapon
      */
     @Override
@@ -58,19 +64,23 @@ public class GiantHammer extends WeaponItem implements Sellable {
 
 
     /**
+     * Get the selling price of the Giant Hammer
+     *
      * Giant hammer can be sold at 250 runes
-     * @return an integer value of 250
+     *
+     * @return an integer value representing the selling price of  Giant Hammer
      */
     @Override
     public int getSellingPrice() {
         return 250;
     }
 
-
     /**
      * Sell giant hammer to the trader.
+     *
      * @param actor Actor who sells items at the sale stage
      * @param trader Actor who takes items at the sale stage
+     *
      * @return a sting showing the result of selling this item
      */
     @Override

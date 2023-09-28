@@ -50,7 +50,6 @@ public class ForestKeeper extends Enemy implements Spawnable{
 
     }
 
-
     /**
      * Creates and returns an intrinsic weapon for Forest Keeper with different damage.
      *
@@ -64,8 +63,8 @@ public class ForestKeeper extends Enemy implements Spawnable{
 
     }
 
-
     // 20% chance to drop a healing vial once defeated
+    // 100% chance to drop runes once defeated
     /**
      * Drop an item on the ground
      *

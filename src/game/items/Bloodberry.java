@@ -19,7 +19,7 @@ import game.utils.Status;
  * @author Chua Wen Yang
  *
  * Modified by
- * @author yangdan
+ * @author Yang Dan
  */
 public class Bloodberry extends Item implements Consumable, Sellable{
 
@@ -35,6 +35,7 @@ public class Bloodberry extends Item implements Consumable, Sellable{
    * Retrieves the list of allowable actions for the owner actor when interacting with this Bloodberry item.
    *
    * @param owner The actor interacting with the Bloodberry.
+   *
    * @return An ActionList containing the ConsumeAction for consuming this Bloodberry.
    */
   @Override
@@ -57,7 +58,16 @@ public class Bloodberry extends Item implements Consumable, Sellable{
     return owner + " consumes " + this + ", and it increases the maximum health by " + 5 + " points.";
   }
 
-
+  /**
+   * List of allowable actions that Bloodberry allows its owner do to other actor
+   *
+   * The player will sell item to the other actor if the other actor has the capability of Status.TRADER
+   *
+   * @param otherActor the other actor
+   * @param location the location of the other actor
+   *
+   * @return an unmodifiable list of Actions
+   */
   @Override
   public ActionList allowableActions(Actor otherActor, Location location) {
     if (otherActor.hasCapability(Status.TRADER))
@@ -65,13 +75,24 @@ public class Bloodberry extends Item implements Consumable, Sellable{
     return new ActionList();
   }
 
-
+  /**
+   * Get the selling price of the Bloodberry
+   *
+   * @return an integer value representing the selling price of Bloodberry
+   */
   @Override
   public int getSellingPrice() {
     return 10;
   }
 
-
+  /**
+   * Sell the Bloodberry to the trader
+   *
+   * @param actor Actor who sells Bloodberry at the sale stage
+   * @param trader Actor who takes Bloodberry at the sale stage
+   *
+   * @return a string showing the result of selling Bloodberry
+   */
   @Override
   public String sell(Actor actor, Actor trader) {
     actor.removeItemFromInventory( this );

@@ -17,6 +17,9 @@ import game.utils.Ability;
  * Created by:
  * @author Koe Rui En
  *
+ * Modified by:
+ * @author Yang Dan
+ *
  */
 public class Void extends Ground {
 

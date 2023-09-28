@@ -19,6 +19,9 @@ import game.utils.Status;
  * Created by:
  * @author Koe Rui En
  *
+ * Modified by:
+ * @author Yang Dan
+ *
  */
 public class FollowBehaviour implements Behaviour {
 
@@ -84,12 +87,14 @@ public class FollowBehaviour implements Behaviour {
 
             }
 
+            // get the location of the target actor
             Location there = map.locationOf(targetActor);
 
             // compute distance between 2 locations of two actors
             int currentDistance = distance(here, there);
 
-            if ( isTargetAround(here, there, currentDistance) )
+            // check target actor is around the enemy
+            if (isTargetAround(here, there, currentDistance))
                 return null;
 
             // follow player is nearby (within the surrounding of the enemy)
@@ -132,7 +137,15 @@ public class FollowBehaviour implements Behaviour {
 
     }
 
-
+    /**
+     * Check the target is within the surrounding of the enemy
+     *
+     * @param a the first location
+     * @param b the first location
+     * @param distance the Manhattan distance between two locations (target actor and enemy)
+     *
+     * @return a boolean value to indicate the player is around the actor(enemy) or not
+     */
     private boolean isTargetAround(Location a, Location b, int distance){
         // If the player is in the same row or column as the enemy, the player is "around" only if distance is 1.
         boolean b1 = (a.x() == b.x() || a.y() == b.y())  &&  distance == 1;

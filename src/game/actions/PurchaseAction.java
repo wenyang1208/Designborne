@@ -6,10 +6,10 @@ import game.actors.npcs.Traveller;
 import game.items.RunesItem;
 
 /**
- * Represents a PurchaseAction that allows an actor to purchase items from a Traveller.
+ * A class represents a PurchaseAction that allows an actor to purchase items from a Traveller.
  *
- * Constructor:
- * @param traveller The Traveller actor from whom items can be purchased.
+ * Created by:
+ * @author Chai Jun Lun
  */
 public class PurchaseAction extends TradingAction{
 
@@ -19,7 +19,7 @@ public class PurchaseAction extends TradingAction{
     private Traveller traveller;
 
     /**
-     * Constructor.
+     * Constructor of PurchaseAction class.
      *
      * @param traveller the traveller
      */
@@ -27,6 +27,14 @@ public class PurchaseAction extends TradingAction{
         this.traveller = traveller;
     }
 
+    /**
+     * Perform the purchase action.
+     *
+     * @param actor The actor performing the action.
+     * @param map The map the actor is on.
+     *
+     * @return string description of what happened (the result of the action being performed) that can be displayed to the user.
+     */
     @Override
     public String execute(Actor actor, GameMap map) {
         RunesItem runesItem;
@@ -48,6 +56,13 @@ public class PurchaseAction extends TradingAction{
         }
     }
 
+    /**
+     * Describe what action will be performed in the menu.
+     *
+     * @param actor The actor performing the action.
+     *
+     * @return the action description to be displayed on the menu
+     */
     @Override
     public String menuDescription(Actor actor) {
         return actor + " purchase item from " + traveller;

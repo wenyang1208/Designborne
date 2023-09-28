@@ -26,8 +26,6 @@ import java.util.TreeMap;
  *
  * Modified by:
  * @author Yang Yang Dan
- *
- * Modified by:
  * @author Chua Wen Yang
  */
 public abstract class Enemy extends Actor {
@@ -127,7 +125,7 @@ public abstract class Enemy extends Actor {
     // abstract method
 
     /**
-     * Drop an item on the ground
+     * Drop items on the ground once the enemy is defeated
      *
      * @param map the map containing the Enemy
      *

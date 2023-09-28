@@ -8,7 +8,7 @@ package game.utils;
  *
  * Modified by:
  * @author Koe Rui En
- * @author Yang Yang Dan
+ * @author Yang Dan
  */
 public enum Status {
 

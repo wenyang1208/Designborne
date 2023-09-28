@@ -11,7 +11,8 @@ import java.util.Map;
  * Represents an abstract class, TradingAction, which is the base class for PurchaseAction and SellAction.
  * This class provides common functionality for buying and selling actions.
  *
- * Created by: Chai Jun Lun
+ * Created by:
+ * @author Chai Jun Lun
  */
 public abstract class TradingAction extends Action {
     // A map used to associate purchase options with hotkeys

@@ -16,10 +16,9 @@ import game.items.Rune;
  * @author Koe Rui En
  *
  * Modified by:
- * @author Yang Yang Dan
+ * @author Yang Dan
  */
 public class WanderingUndead extends Enemy implements Spawnable{
-
 
     // wandering undead has its own damage and hit rate
 

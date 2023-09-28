@@ -10,11 +10,19 @@ import game.grounds.Gate;
 import game.items.Rune;
 import game.utils.Ability;
 import game.utils.FancyMessage;
-import game.utils.Status;
 
+/**
+ * A class that represent Abxervyer enemy in the Abxervyer Battle Room.
+ *
+ * Created by:
+ * @author Koe Rui En
+ *
+ * Modified by:
+ * @author Yang Dan
+ */
 public class Abxervyer extends Enemy{
 
-    // forest keeper has its own damage and hit rate
+    // Abxervyer has its own damage and hit rate
 
     // damage
     /**
@@ -28,7 +36,9 @@ public class Abxervyer extends Enemy{
      */
     private final int hitRate;
 
-
+    /**
+     * the dropped gate once Abxervyer is defeated
+     */
     private Gate droppedGate;
 
     /**
@@ -57,26 +67,44 @@ public class Abxervyer extends Enemy{
     }
 
 
+    /**
+     * Initialise the gate to be dropped by Abxervyer once defeated.
+     *
+     * @param droppedGate the dropped gate once Abxervyer is defeated
+     *
+     */
     public void setDroppedGate(Gate droppedGate) {
+
         this.droppedGate = droppedGate;
+
     }
-
-
-    @Override
-    public IntrinsicWeapon getIntrinsicWeapon() {
-        return new IntrinsicWeapon(damage, "hits", hitRate);
-    }
-
 
     /**
-     * Drop an item on the ground
+     * Creates and returns an intrinsic weapon for Abxervyer with different damage.
+     *
+     * @return a freshly-instantiated IntrinsicWeapon for Abxervyer
+     */
+    @Override
+    public IntrinsicWeapon getIntrinsicWeapon() {
+
+        return new IntrinsicWeapon(damage, "hits", hitRate);
+
+    }
+
+    /**
+     * Drop items on the ground once Abxervyer is defeated
      *
      * @param map the map containing the Enemy
      */
     @Override
     public void dropItem(GameMap map) {
+        // 100% chance to drop runes once defeated
         this.getRunes().getDropAction(this).execute(this,map);
+
+        //  boss last stood turns into a Gate once defeated
         map.locationOf(this).setGround( this.droppedGate);
+
+        // print a message when the boss is defeated
         for (String line : FancyMessage.BOSS_DEFEATED.split("\n")) {
             new Display().println(line);
             try {

@@ -5,13 +5,13 @@ package game.items;
 import edu.monash.fit2099.engine.actors.Actor;
 
 /**
- * A Consumable interface
+ * A Consumable interface to consume something
  *
  * Created by:
- * @author Yang Yang Dan
+ * @author Koe Rui En
  *
  * Modified by:
- * @author Koe Rui En
+ * @author Yang Dan
  */
 public interface Consumable {
 

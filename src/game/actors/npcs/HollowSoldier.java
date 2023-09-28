@@ -13,7 +13,7 @@ import game.items.Rune;
  * @author Koe Rui En
  *
  * Modified by:
- * @author Yang Yang Dan
+ * @author Yang Dan
  *
  */
 public class HollowSoldier extends Enemy implements Spawnable{
@@ -88,7 +88,6 @@ public class HollowSoldier extends Enemy implements Spawnable{
             new HealingVial().getDropAction(this).execute(this,map);
 
         }
-
 
         // has a 30% chance to drop a refreshing flask
         if (dropItemChance(0.30)){

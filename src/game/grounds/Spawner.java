@@ -48,7 +48,6 @@ public abstract class Spawner extends Ground {
 
     }
 
-
     /**
      * Spawner abstract class can also experience the joy of time.
      * A chance to spawn different enemies at every turn of game
@@ -57,7 +56,6 @@ public abstract class Spawner extends Ground {
      */
     @Override
     public void tick(Location location) {
-
 
         // check location contains enemies and chance to spawn at certain percentage at every turn of game
         if (Math.random() <= spawnPercentage && !location.containsAnActor()) {

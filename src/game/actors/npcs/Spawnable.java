@@ -1,7 +1,10 @@
 package game.actors.npcs;
 
 /**
- * @author yangdan
+ * A Spawnable interface to spawn enemy
+ *
+ * Created by:
+ * @author Yang Dan
  */
 public interface Spawnable {
 

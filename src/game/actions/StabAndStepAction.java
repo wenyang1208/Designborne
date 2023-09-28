@@ -13,10 +13,11 @@ import edu.monash.fit2099.engine.weapons.WeaponItem;
 /**
  * A class represents the action to perform Great Knife's special skill.
  *
- * @author yangdan
+ * Created by:
+ * @author Yang Dan
+ *
  */
 public class StabAndStepAction extends Action {
-
 
     /**
      * Actor to be attacked
@@ -31,9 +32,9 @@ public class StabAndStepAction extends Action {
      */
     private WeaponItem weapon;
 
-
     /**
-     * Constructor of this action
+     * Constructor of StabAndStepAction class.
+     *
      * @param enemy Actor to be attacked
      * @param reducedStaminaRate Stamina rate needed to be reduced when perform this sepcial attack
      * @param weapon Weapon that having this stab and step skill
@@ -47,8 +48,10 @@ public class StabAndStepAction extends Action {
 
     /**
      * Perform this stab and step action
+     *
      * @param actor The actor performing the action.
      * @param map The map the actor is on.
+     *
      * @return string description of what happened (the result of the action being performed) that can be displayed to the user.
      */
     @Override

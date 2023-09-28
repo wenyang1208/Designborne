@@ -1,5 +1,7 @@
+// declare package
 package game.actors;
 
+// import game and engine packages
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
@@ -23,7 +25,7 @@ import game.utils.Status;
  *
  * Modified by:
  * @author Koe Rui En
- * @author Yang Yang Dan
+ * @author Yang Dan
  *
  */
 public class Player extends Actor {
@@ -92,13 +94,14 @@ public class Player extends Actor {
 
     }
 
-
     /**
      * Select and return an action to perform at each turn
+     *
      * @param actions    collection of possible Actions for this Actor
      * @param lastAction The Action this Actor took last turn. Can do interesting things in conjunction with Action.getNextAction()
      * @param map        the map containing the Player
      * @param display    the I/O object to which messages may be written
+     *
      * @return the Action to be performed
      */
     @Override
@@ -110,14 +113,13 @@ public class Player extends Actor {
         // At each turn, the player's stamina will recover by 1% of their maximum stamina
         modifyAttribute(BaseActorAttributes.STAMINA, ActorAttributeOperations.INCREASE,(int)(getAttributeMaximum(BaseActorAttributes.STAMINA)* 0.01));
 
-        // Display player's health point and stamina at the beginning of the each game loop
+        // Display player's health point and stamina at the beginning of each game loop
         display.println("\n" + displayStatus());
 
         // return/print the console menu
         Menu menu = new Menu(actions);
         return menu.showMenu(this, display);
     }
-
 
     /**
      * Create an intrinsic weapon for the Player
@@ -155,7 +157,6 @@ public class Player extends Actor {
         return super.unconscious(actor, map);
 
     }
-
 
     /**
      * Method that can be executed when the Player is unconscious due to natural causes or accident

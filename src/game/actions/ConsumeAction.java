@@ -14,15 +14,14 @@ import game.items.Consumable;
  * @author Koe Rui En
  *
  * Modified by:
- * @author Yang Yang Dan
+ * @author Yang Dan
  */
 public class ConsumeAction extends Action {
 
     /**
-     * An consumable item to be consumed
+     * A consumable item to be consumed
      */
     private final Consumable consumableItem;
-
 
     /**
      * Constructor of the ConsumeAction class
@@ -32,7 +31,6 @@ public class ConsumeAction extends Action {
     public ConsumeAction(Consumable consumableItem){
         this.consumableItem = consumableItem;
     }
-
 
     /**
      * Perform consume action
@@ -49,7 +47,6 @@ public class ConsumeAction extends Action {
 
     }
 
-
     /**
      * Describe what action will be performed if this Action is chosen in the menu.
      *
@@ -59,6 +56,8 @@ public class ConsumeAction extends Action {
      */
     @Override
     public String menuDescription(Actor actor) {
+
         return actor + " consumes " + consumableItem;
+
     }
 }

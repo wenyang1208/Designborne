@@ -15,6 +15,9 @@ import game.items.Rune;
  * Created by:
  * @author Koe Rui En
  *
+ * Modified by:
+ * @author Yang Dan
+ *
  */
 public class RedWolf extends Enemy implements Spawnable{
 

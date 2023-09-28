@@ -14,6 +14,7 @@ import game.items.Consumable;
  *
  * Modified by:
  * @author Chua Wen Yang
+ * @author Yang Dan
  */
 public class Puddle extends Ground implements Consumable {
     private final float increasePercentage;
@@ -66,6 +67,8 @@ public class Puddle extends Ground implements Consumable {
      */
     @Override
     public String toString(){
+
         return "water puddle";
+
     }
 }

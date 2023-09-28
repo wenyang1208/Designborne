@@ -11,12 +11,12 @@ import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.utils.Status;
 
 /**
- * A class represents the action to perform Giant Hammer's special skill.
+ * A GreatSlamAction class represents the action to perform Giant Hammer's special skill.
  *
- * @author yangdan
+ * Created by:
+ * @author Yang Dan
  */
 public class GreatSlamAction extends Action {
-
 
     /**
      * Actor to be attacked
@@ -33,7 +33,8 @@ public class GreatSlamAction extends Action {
 
 
     /**
-     * Constructor of this action
+     * Constructor of GreatSlamAction class
+     *
      * @param enemy Actor to be attacked
      * @param reducedStaminaRate Stamina rate needed to be reduced when perform this sepcial attack
      * @param weapon Weapon that having this great slam skill
@@ -47,8 +48,10 @@ public class GreatSlamAction extends Action {
 
     /**
      * Perform this great slam action
+     *
      * @param actor The actor performing the action.
      * @param map The map the actor is on.
+     *
      * @return string description of what happened (the result of the action being performed) that can be displayed to the user.
      */
     @Override

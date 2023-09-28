@@ -18,11 +18,10 @@ import game.utils.Status;
  * @author Koe Rui En
  *
  * Modified by:
- * @author Yang Yang Dan
+ * @author Yang Dan
  *
  */
 public class AttackBehaviour implements Behaviour {
-
 
     /**
      * Returns an AttackAction to attack an actor that is one block away from it, if possible.

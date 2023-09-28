@@ -14,18 +14,23 @@ import game.utils.Status;
 /**
  * Class representing the great knife weapon that is sold by Traveller
  *
- * @author yangdan
+ * Created by:
+ * @author Yang Dan
  */
 
 public class GreatKnife extends WeaponItem implements Sellable {
 
 
     /* Default constants for the stamina used to activate the skill of great knife */
+    /**
+     * Default constants for the stamina used to activate the skill of grear knife
+     */
     private static final float REDUCED_STAMINA_RATE = 0.25f;
 
 
     /**
-     * Constructor of Great Knife
+     * Constructor of Great Knife class
+     *
      */
     public GreatKnife() {
         super("Great Knife", '>', 75, "stabs", 70);
@@ -35,11 +40,14 @@ public class GreatKnife extends WeaponItem implements Sellable {
 
     /**
      * Player can "use" this weapon to otherActor that is around
+     *
      * For example, player can attack otherActor with this weapon
      * For example, player can apply skilled attack to otherActor with this weapon
      * For example, player can sell this weapon to the otherActor if it is TRADER
+     *
      * @param otherActor the other actor
      * @param location the location of the other actor
+     *
      * @return actions a list of Actions that the player can perform to otherActor with this weapon
      */
     @Override
@@ -58,8 +66,11 @@ public class GreatKnife extends WeaponItem implements Sellable {
     }
 
     /**
-     * Great knife can be sold at 175 runes
-     * @return an integer value of 175
+     * Get the selling price of the Great Knife
+     *
+     * Great Knife can be sold at 250 runes
+     *
+     * @return an integer value representing the selling price of Great Knife
      */
     @Override
     public int getSellingPrice() {
@@ -69,8 +80,10 @@ public class GreatKnife extends WeaponItem implements Sellable {
 
     /**
      * Sell great knife to the trader and there is a 10% chance of the traveller taking the runes from the player instead.
+     *
      * @param actor Actor who sells items at the sale stage
      * @param trader Actor who takes items at the sale stage
+     *
      * @return a sting showing the result of selling this item
      */
     @Override

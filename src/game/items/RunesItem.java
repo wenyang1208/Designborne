@@ -5,7 +5,8 @@ import edu.monash.fit2099.engine.items.Item;
 /**
  * Represents a PricingItem class that provides pricing information for items available for purchase or sale.
  *
- * Created by: Chai Jun Lun
+ * Created by:
+ * @author Chai Jun Lun
  */
 public class RunesItem {
     private Item item;

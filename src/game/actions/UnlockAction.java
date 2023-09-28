@@ -16,7 +16,7 @@ import game.utils.Status;
  * @author Koe Rui En
  *
  * Modified by:
- * @author Yang Yang Dan
+ * @author Yang Dan
  */
 public class UnlockAction extends Action {
 
@@ -69,7 +69,9 @@ public class UnlockAction extends Action {
      */
     @Override
     public String menuDescription(Actor actor) {
+
         return actor + " unlocks Gate";
+
     }
 
 }

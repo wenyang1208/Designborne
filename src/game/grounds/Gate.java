@@ -18,7 +18,7 @@ import game.actions.UnlockAction;
  * @author Koe Rui En
  *
  * Modified by:
- * @author Yang Yang Dan
+ * @author Yang Dan
  *
  */
 public class Gate extends Ground {
