@@ -1,60 +1,56 @@
 package game.actions;
 
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
-import game.actors.npcs.Traveller;
-import game.items.RunesItem;
+
+import java.util.function.Function;
 
 /**
- * A class represents a PurchaseAction that allows an actor to purchase items from a Traveller.
+ * A class represents a PurchaseAction that allows an actor to purchase items from a trader.
  *
  * Created by:
  * @author Chai Jun Lun
+ *
+ * Modified by:
+ * @author Yangdan
  */
 public class PurchaseAction extends TradingAction{
 
-    /**
-     * The Actor that is traveller
-     */
-    private Traveller traveller;
 
     /**
-     * Constructor of PurchaseAction class.
-     *
-     * @param traveller the traveller
+     * Item to be purchased from the trader
      */
-    public PurchaseAction(Traveller traveller) {
-        this.traveller = traveller;
+    private Item item;
+
+    /**
+     * Function containing the algorithm of purchasing this item from the trader
+     */
+    private Function<Actor, String> function;
+
+
+    /**
+     * Constructor of the PurchaseAction
+     * @param item Item to be purchased from the trader
+     * @param function Function containing the algorithm of purchasing this item from the trader
+     */
+    public PurchaseAction(Item item, Function<Actor, String> function){
+        this.item = item;
+        this.function = function;
     }
 
+
     /**
-     * Perform the purchase action.
-     *
+     * When the player purchases this item from the trader, apply the corresponding algorithm
      * @param actor The actor performing the action.
      * @param map The map the actor is on.
-     *
-     * @return string description of what happened (the result of the action being performed) that can be displayed to the user.
+     * @return description of what happened (the result of the action being performed) that can be displayed to the user.
      */
     @Override
     public String execute(Actor actor, GameMap map) {
-        RunesItem runesItem;
-        runesItem = showMenu(this.traveller.getMenu());
-
-        //quit menu
-        if (runesItem == null){
-            return "You have quit the menu.";
-        }
-        // purchase successfully
-        if (runesItem.getCurrentPrice() <= actor.getBalance()) {
-            actor.deductBalance((int) runesItem.getCurrentPrice());
-            actor.addItemToInventory(runesItem.getItem());
-            return ("The purchase of " + runesItem.getItem() + " is successful. Your balance now is: " + actor.getBalance());
-
-            // Purchase failed due to insufficient balance
-        } else {
-            return (actor + "'s balance is not enough to buy " + runesItem.getItem() + ". Your balance now is: " + actor.getBalance()) ;
-        }
+        return function.apply(actor);
     }
+
 
     /**
      * Describe what action will be performed in the menu.
@@ -65,6 +61,6 @@ public class PurchaseAction extends TradingAction{
      */
     @Override
     public String menuDescription(Actor actor) {
-        return actor + " purchase item from " + traveller;
+        return actor + " buys " + this.item + ".";
     }
 }
