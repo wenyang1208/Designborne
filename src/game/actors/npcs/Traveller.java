@@ -1,20 +1,10 @@
 package game.actors.npcs;
 
-import edu.monash.fit2099.engine.actions.Action;
-import edu.monash.fit2099.engine.actions.ActionList;
-import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.displays.Display;
-import edu.monash.fit2099.engine.positions.GameMap;
-import game.actions.PurchaseAction;
 import game.items.HealingVial;
 import game.items.RefreshingFlask;
-import game.items.RunesItem;
-import game.utils.Status;
 import game.weapons.Broadsword;
-
-import java.util.ArrayList;
-import java.util.List;
+import game.weapons.GreatKnife;
 
 /**
  * A class that represent Traveller in the Forest
@@ -22,69 +12,82 @@ import java.util.List;
  * Created by:
  * @author Chai Jun Lun
  *
+ * Modified by:
+ * @author Yangdan
+ *
  */
-public class Traveller extends Actor {
+public class Traveller extends Trader {
 
-    /**
-     * A menu list that containing a collection of RunesItem
-     */
-    public static List<RunesItem> menu = new ArrayList<RunesItem>();
-
-    /**
-     * Constructor for the Traveller class
-     *
-     */
     public Traveller() {
-        super("IsolatedTraveller", 'ඞ', 200);
-        // add the items to the traveller to be purchased by actor
-        menu.add(new RunesItem(new HealingVial(),100,0.25,1.5));
-        menu.add(new RunesItem(new RefreshingFlask(),75,0.1,0.8));
-        menu.add(new RunesItem(new Broadsword(),250,0.05,0));
-    }
-
-    // Getter for the purchase menu
-    /**
-     * A getter to get menu list that containing a collection of RunesItem
-     *
-     * @return a menu list that containing a collection of RunesItem
-     */
-    public List<RunesItem> getMenu() {
-
-        return menu;
+        super("Isolated Traveller", 'ඞ', 100);
+        this.configure();
 
     }
 
-    /**
-     * Select and return an action to perform on the current turn.
-     *
-     * @param actions    collection of possible Actions for this Actor
-     * @param lastAction The Action this Actor took last turn. Can do interesting things in conjunction with Action.getNextAction()
-     * @param map        the map containing the Actor
-     * @param display    the I/O object to which messages may be written
-     *
-     * @return the Action to be performed
-     */
+
     @Override
-    public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
-        return new DoNothingAction();
+    public void configure() {
+        this.addPair( new HealingVial(), this::purchaseHealingVial );
+        this.addPair( new RefreshingFlask(), this::purchaseRefreshingFlask );
+        this.addPair( new Broadsword(), this::purchaseBroadsword );
+        this.addPair( new GreatKnife(), this::purchaseGreatKnife );
     }
 
-    /**
-     * Returns a new collection of the Actions that the otherActor can do to Traveller
-     *
-     * @param otherActor the Actor that might buy /sell inventory
-     * @param direction  String representing the direction of the other Actor
-     * @param map        current GameMap
-     *
-     * @return A collection of Actions.
-     */
-    @Override
-    public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
-        ActionList actions = new ActionList();
-        // Add a PurchaseAction if the otherActor is hostile to Enemy(which is player)
-        if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)){
-            actions.add(new PurchaseAction(this));
+
+    public String purchaseHealingVial(Actor actor){
+        int price = 100;
+        String string = "";
+        if (Math.random() <= 0.25) {
+            price = (int) (price * 1.5);
+            string = this + " asks to pay 50% more. ";
         }
-        return actions;
+        if (actor.getBalance() < price)
+            return string + "Balance is less than what the " + this + " asks for, the purchase fails.";
+        actor.deductBalance( price );
+        actor.addItemToInventory( new HealingVial() );
+        return string + actor + " successfully purchased Healing Vial for " + price + " runes.";
+    }
+
+
+    public String purchaseRefreshingFlask(Actor actor){
+        int price = 75;
+        String string = "";
+        if (Math.random() <= 0.1) {
+            price = (int) (price * 0.8);
+            string = this + " gives a 20% discount. ";
+        }
+        if (actor.getBalance() < price)
+            return string + "Balance is less than what the " + this + " asks for, the purchase fails.";
+        actor.deductBalance( price );
+        actor.addItemToInventory( new RefreshingFlask() );
+        return string + actor + " successfully purchased Refreshing Flask for " + price + " runes.";
+    }
+
+
+    public String purchaseBroadsword(Actor actor){
+        int price = 250;
+        if (actor.getBalance() < price)
+            return "Balance is less than what the " + this + " asks for, the purchase fails.";
+        actor.deductBalance( price );
+        if (!(Math.random() <= 0.05)) {
+            actor.addItemToInventory( new Broadsword());
+            return actor + " successfully purchased Broadsword for " + price + " runes.";
+        }
+        return this + " takes " + price + " runes without giving the broadsword.";
+    }
+
+
+    public String purchaseGreatKnife(Actor actor){
+        int price = 300;
+        String string = "";
+        if (Math.random() <= 0.05){
+            price = price * 3;
+            string = this + " asks to pay 3x the original price of the weapon. ";
+        }
+        if (actor.getBalance() < price)
+            return string + "Balance is less than what the " + this + " asks for, the purchase fails.";
+        actor.deductBalance( price );
+        actor.addItemToInventory( new GreatKnife());
+        return string + actor + " successfully purchased Great Knife for " + price + " runes.";
     }
 }
