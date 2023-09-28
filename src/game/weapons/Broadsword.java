@@ -8,6 +8,8 @@ import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.actions.FocusAction;
 import game.actions.AttackAction;
+import game.actions.SellAction;
+import game.items.Sellable;
 import game.utils.Ability;
 import game.utils.Status;
 
@@ -22,7 +24,7 @@ import game.utils.Status;
   * @author Yang Dan
  *
  */
-public class Broadsword extends WeaponItem {
+public class Broadsword extends WeaponItem implements Sellable {
 
     /* Default constants for the Broadsword object */
      /**
@@ -156,6 +158,27 @@ public class Broadsword extends WeaponItem {
      */
     @Override
     public ActionList allowableActions(Actor otherActor, Location location) {
-        return new ActionList( new AttackAction(otherActor, location.toString(), this) );
+        ActionList actions = new ActionList();
+        if (otherActor.hasCapability(Status.HOSTILE_TO_PLAYER))
+            actions.add( new AttackAction(otherActor, location.toString(), this) );
+        if (otherActor.hasCapability(Status.TRADER))
+            actions.add( new SellAction(this, this.toString(), otherActor) );
+        return actions;
     }
-}
+
+
+     @Override
+     public int getSellingPrice() {
+         return 100;
+     }
+
+
+     @Override
+     public String sell(Actor actor, Actor trader) {
+         actor.removeItemFromInventory( this );
+         int price = getSellingPrice();
+         actor.addBalance( price );
+         return actor + " successfully sold " + this + " for " + price + " runes to " + trader;
+     }
+
+ }
