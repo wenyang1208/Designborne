@@ -41,6 +41,7 @@ public class WeatherManager {
 
      }
 
+     // how to call specific tick method of that two grounds, hut and bushes??
      map.tick();
 
      result += "The red wolves are becoming less active\n";

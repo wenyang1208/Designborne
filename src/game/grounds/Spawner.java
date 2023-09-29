@@ -44,7 +44,22 @@ public abstract class Spawner extends Ground {
 
         spawnedEnemy = enemy;
 
-        spawnPercentage = iniSpawnPercentage;
+        setSpawnPercentage(iniSpawnPercentage);
+
+    }
+
+    public void setSpawnPercentage(double newSpawnPercentage) {
+
+        if (spawnPercentage >= 0){
+
+            spawnPercentage = newSpawnPercentage;
+
+        }
+    }
+
+    public double getSpawnPercentage() {
+
+        return spawnPercentage;
 
     }
 

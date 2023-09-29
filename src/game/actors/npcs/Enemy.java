@@ -11,7 +11,10 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.behaviours.AttackBehaviour;
 import game.behaviours.WanderBehaviour;
+import game.controllers.WeatherManager;
+import game.grounds.Hut;
 import game.items.Rune;
+import game.utils.Ability;
 import game.utils.Status;
 import game.actions.AttackAction;
 
@@ -54,17 +57,28 @@ public abstract class Enemy extends Actor {
     }
 
 
+    /**
+     * A method to add new behaviour of an enemy
+     *
+     * @param i key to be added as an integer
+     * @param behaviour behaviour of an enemy as values to be added
+     */
     public void addBehaviour(Integer i, Behaviour behaviour){
         this.behaviours.put(i, behaviour);
     }
 
+    public Map<Integer, Behaviour> getBehaviours() {
+        return behaviours;
+    }
 
     /**
      * Select the valid action with the highest priority
+     *
      * @param actions    collection of possible Actions for this Actor
      * @param lastAction The Action this Actor took last turn. Can do interesting things in conjunction with Action.getNextAction()
      * @param map        the map containing the Actor
      * @param display    the I/O object to which messages may be written
+     *
      * @return the Action to be performed
      */
     @Override
@@ -76,7 +90,6 @@ public abstract class Enemy extends Actor {
         }
         return new DoNothingAction();
     }
-
 
     /**
      * Returns a new collection of the Actions that the otherActor can do to Hollow Soldier
