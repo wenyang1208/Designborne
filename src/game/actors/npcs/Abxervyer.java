@@ -2,11 +2,17 @@
 package game.actors.npcs;
 
 // import engine and game packages
+import edu.monash.fit2099.engine.actions.Action;
+import edu.monash.fit2099.engine.actions.ActionList;
+import edu.monash.fit2099.engine.actions.DoNothingAction;
+import edu.monash.fit2099.engine.actors.Behaviour;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.behaviours.FollowBehaviour;
+import game.controllers.WeatherManager;
 import game.grounds.Gate;
+import game.grounds.Hut;
 import game.items.Rune;
 import game.utils.Ability;
 import game.utils.FancyMessage;
@@ -64,6 +70,32 @@ public class Abxervyer extends Enemy{
         this.addCapability(Ability.SUNNY);
         this.addCapability(Ability.RAINY);
 
+    }
+
+    /**
+     * Select the valid action with the highest priority
+     *
+     * @param actions    collection of possible Actions for this Actor
+     * @param lastAction The Action this Actor took last turn. Can do interesting things in conjunction with Action.getNextAction()
+     * @param map        the map containing the Actor
+     * @param display    the I/O object to which messages may be written
+     *
+     * @return the Action to be performed
+     */
+    @Override
+    public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
+
+        if (this.hasCapability(Ability.SUNNY)){
+
+            WeatherManager.sunnyWeatherAffect(new Hut(new ForestKeeper(), 0.15), new RedWolf(), map);
+        }
+
+        for (Behaviour behaviour : getBehaviours().values()) {
+            Action action = behaviour.getAction(this, map);
+            if(action != null)
+                return action;
+        }
+        return new DoNothingAction();
     }
 
 
