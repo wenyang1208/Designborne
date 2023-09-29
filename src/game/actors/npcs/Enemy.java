@@ -67,6 +67,7 @@ public abstract class Enemy extends Actor {
         this.behaviours.put(i, behaviour);
     }
 
+    // get behaviours
     public Map<Integer, Behaviour> getBehaviours() {
         return behaviours;
     }

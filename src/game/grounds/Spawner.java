@@ -48,6 +48,7 @@ public abstract class Spawner extends Ground {
 
     }
 
+    // set spawn percentage
     public void setSpawnPercentage(double newSpawnPercentage) {
 
         if (spawnPercentage >= 0){
