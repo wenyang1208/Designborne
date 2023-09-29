@@ -3,6 +3,7 @@ package game.grounds;
 
 // import game package
 import game.actors.npcs.Spawnable;
+import game.utils.Ability;
 
 /**
  * A class that represents the hut in the Ancient Woods map
@@ -25,6 +26,8 @@ public class Hut extends Spawner{
         // initialise instance of hut
         // The hut is displayed as "h".
         super('h', enemy, iniSpawnPercentage);
+
+        this.addCapability(Ability.SUNNY);
 
     }
 

@@ -7,6 +7,7 @@ import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.behaviours.FollowBehaviour;
 import game.items.HealingVial;
 import game.items.Rune;
+import game.utils.Ability;
 
 
 /**
@@ -48,6 +49,8 @@ public class RedWolf extends Enemy implements Spawnable{
         this.damage = 15;
         this.hitRate = 80;
         this.addBehaviour(1, new FollowBehaviour());
+
+        this.addCapability(Ability.SUNNY);
 
     }
 
