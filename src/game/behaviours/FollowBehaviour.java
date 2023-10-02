@@ -112,7 +112,7 @@ public class FollowBehaviour implements Behaviour {
                     // new distance between enemies and target actor < current distance
                     if (newDistance < currentDistance) {
 
-                        return new MoveActorAction(destination, exit.getName());
+                        return new MoveActorAction(destination, exit.getName() + " to FOLLOW " + targetActor);
 
                     }
                 }
