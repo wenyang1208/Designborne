@@ -53,7 +53,7 @@ public abstract class Enemy extends Actor {
         this.runes = runes;
         // All enemies can wander and attack
         addBehaviour(999, new WanderBehaviour());
-        addBehaviour(0, new AttackBehaviour());
+        addBehaviour(500, new AttackBehaviour());
     }
 
 
