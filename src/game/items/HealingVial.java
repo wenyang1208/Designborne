@@ -85,7 +85,7 @@ public class HealingVial extends Item implements Consumable, Sellable{
     @Override
     public ActionList allowableActions(Actor otherActor, Location location) {
         if (otherActor.hasCapability(Status.TRADER))
-            return new ActionList( new SellAction(this, this.toString(), otherActor) );
+            return new ActionList( new SellAction(this, this.toString()) );
         return new ActionList();
     }
 
@@ -104,21 +104,20 @@ public class HealingVial extends Item implements Consumable, Sellable{
      * Sell the Healing Vial to the trader
      *
      * @param actor Actor who sells Healing Vial at the sale stage
-     * @param trader Actor who takes Healing Vial at the sale stage
      *
      * @return a string showing the result of selling Healing Vial
      */
     @Override
-    public String sell(Actor actor, Actor trader) {
+    public String soldBy(Actor actor) {
         int price = getSellingPrice();
         String string = "";
         if (Math.random() <= 0.1) {
             price = price * 2;
-            string = trader + " pays 2x the original price. ";
+            string = "Traveller pays 2x the original price. ";
         }
         actor.removeItemFromInventory( this );
         actor.addBalance( price );
-        return string + actor + " successfully sold " + this + " for " + price + " runes to " + trader + ".";
+        return string + actor + " successfully sold " + this + " for " + price + " runes to Traveller.";
     }
 
 }

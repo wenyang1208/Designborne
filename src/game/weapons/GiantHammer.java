@@ -79,16 +79,15 @@ public class GiantHammer extends WeaponItem implements Sellable {
      * Sell giant hammer to the trader.
      *
      * @param actor Actor who sells items at the sale stage
-     * @param trader Actor who takes items at the sale stage
      *
      * @return a sting showing the result of selling this item
      */
     @Override
-    public String sell(Actor actor, Actor trader) {
+    public String soldBy(Actor actor) {
         int price = getSellingPrice();
         actor.removeItemFromInventory( this ); // remove this item from the player's inventory
         actor.addBalance( price ); // add balance
-        return actor + " successfully sold " + this + " for " + price + " runes to " + trader + ".";
+        return actor + " successfully sold " + this + " for " + price + " runes to Traveller.";
     }
 
 }

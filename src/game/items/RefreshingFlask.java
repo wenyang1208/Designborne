@@ -79,7 +79,7 @@ public class RefreshingFlask extends Item implements Consumable, Sellable{
     @Override
     public ActionList allowableActions(Actor otherActor, Location location) {
         if (otherActor.hasCapability(Status.TRADER))
-            return new ActionList( new SellAction(this, this.toString(), otherActor) );
+            return new ActionList( new SellAction(this, this.toString()) );
         return new ActionList();
     }
 
@@ -91,14 +91,14 @@ public class RefreshingFlask extends Item implements Consumable, Sellable{
 
 
     @Override
-    public String sell(Actor actor, Actor trader) {
+    public String soldBy(Actor actor) {
         boolean applySpecial = Math.random() <= 0.5;
         int price = getSellingPrice();
         actor.removeItemFromInventory( this );
         if (! applySpecial) {
             actor.addBalance( price );
-            return actor + " successfully sold " + this + " for " + price + " runes to " + trader + ".";
+            return actor + " successfully sold " + this + " for " + price + " runes to Traveller.";
         }
-        return trader + " takes " + this + " without paying " + actor;
+        return "Traveller takes " + this + " without paying " + actor;
     }
 }

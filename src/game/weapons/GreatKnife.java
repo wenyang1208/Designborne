@@ -82,20 +82,19 @@ public class GreatKnife extends WeaponItem implements Sellable {
      * Sell great knife to the trader and there is a 10% chance of the traveller taking the runes from the player instead.
      *
      * @param actor Actor who sells items at the sale stage
-     * @param trader Actor who takes items at the sale stage
      *
      * @return a sting showing the result of selling this item
      */
     @Override
-    public String sell(Actor actor, Actor trader) {
+    public String soldBy(Actor actor) {
         int price = getSellingPrice();
         actor.removeItemFromInventory( this ); // remove this item from the player's inventory
         if (Math.random() < 0.1){ // there is 10% chance to take at most 175 runes from the player
             actor.deductBalance( Math.min(actor.getBalance(), price) );
-            return trader + " takes the runes from " + actor + ".";
+            return "Traveller takes the runes from " + actor + ".";
         }
         actor.addBalance( price ); // successfully sold it, so add balance
-        return actor + " successfully sold " + this + " for " + price + " runes to " + trader + ".";
+        return actor + " successfully sold " + this + " for " + price + " runes to Traveller.";
     }
 
 }

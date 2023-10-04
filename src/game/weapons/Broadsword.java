@@ -163,7 +163,7 @@ public class Broadsword extends WeaponItem implements Sellable{
          if (otherActor.hasCapability(Status.HOSTILE_TO_PLAYER))
              actions.add( new AttackAction(otherActor, location.toString(), this) );
          if (otherActor.hasCapability(Status.TRADER))
-             actions.add( new SellAction(this, this.toString(), otherActor) );
+             actions.add( new SellAction(this, this.toString()) );
          return actions;
      }
 
@@ -175,10 +175,10 @@ public class Broadsword extends WeaponItem implements Sellable{
 
 
      @Override
-     public String sell(Actor actor, Actor trader) {
+     public String soldBy(Actor actor) {
          actor.removeItemFromInventory( this );
          int price = getSellingPrice();
          actor.addBalance( price );
-         return actor + " successfully sold " + this + " for " + price + " runes to " + trader;
+         return actor + " successfully sold " + this + " for " + price + " runes to Traveller.";
      }
 }

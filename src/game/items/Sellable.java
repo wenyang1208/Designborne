@@ -23,10 +23,9 @@ public interface Sellable {
      * Sell the item to the trader
      *
      * @param actor Actor who sells items at the sale stage
-     * @param trader Actor who takes items at the sale stage
      *
      * @return a string showing the result of selling item
      */
-    String sell(Actor actor, Actor trader);
+    String soldBy(Actor actor);
 
 }
