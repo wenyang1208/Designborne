@@ -9,6 +9,7 @@ import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Location;
 import game.actions.ConsumeAction;
+import game.actions.PurchaseAction;
 import game.actions.SellAction;
 import game.utils.Status;
 
@@ -22,7 +23,7 @@ import game.utils.Status;
  * @author Yang Dan
  *
  */
-public class RefreshingFlask extends Item implements Consumable, Sellable{
+public class RefreshingFlask extends Item implements Consumable, Sellable, Purchasable{
 
     // healing percentage
     /**
@@ -78,9 +79,10 @@ public class RefreshingFlask extends Item implements Consumable, Sellable{
 
     @Override
     public ActionList allowableActions(Actor otherActor, Location location) {
+        ActionList actions = new ActionList();
         if (otherActor.hasCapability(Status.TRADER))
-            return new ActionList( new SellAction(this, this.toString()) );
-        return new ActionList();
+            actions.add( new SellAction(this, this.toString()) );
+        return actions;
     }
 
 
@@ -92,13 +94,39 @@ public class RefreshingFlask extends Item implements Consumable, Sellable{
 
     @Override
     public String soldBy(Actor actor) {
-        boolean applySpecial = Math.random() <= 0.5;
         int price = getSellingPrice();
         actor.removeItemFromInventory( this );
-        if (! applySpecial) {
-            actor.addBalance( price );
-            return actor + " successfully sold " + this + " for " + price + " runes to Traveller.";
+        if (Math.random() <= 0.5) {
+            return "Traveller takes " + this + " without paying " + actor;
         }
-        return "Traveller takes " + this + " without paying " + actor;
+        actor.addBalance( price );
+        return actor + " successfully sold " + this + " for " + price + " runes to Traveller.";
+    }
+
+
+    @Override
+    public String getPurchasableName() {
+        return this.toString();
+    }
+
+    @Override
+    public int getPurchasingPrice() {
+        return 75;
+    }
+
+
+    @Override
+    public String purchasedBy(Actor actor) {
+        int price = getPurchasingPrice();
+        String string = "";
+        if (Math.random() <= 0.1) {
+            price = (int) (price * 0.8);
+            string = "Travellers gives a 20% discount. ";
+        }
+        if (actor.getBalance() < price)
+            return string + "Balance is less than what the Traveller asks for, the purchase fails.";
+        actor.deductBalance( price );
+        actor.addItemToInventory( new RefreshingFlask() );
+        return string + actor + " successfully purchased Refreshing Flask for " + price + " runes.";
     }
 }

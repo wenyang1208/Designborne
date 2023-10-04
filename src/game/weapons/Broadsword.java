@@ -6,9 +6,8 @@ import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
-import game.actions.FocusAction;
-import game.actions.AttackAction;
-import game.actions.SellAction;
+import game.actions.*;
+import game.items.Purchasable;
 import game.utils.Ability;
 import game.utils.Status;
 import game.actions.SellAction;
@@ -25,7 +24,7 @@ import game.items.Sellable;
   * @author Yang Dan
  *
  */
-public class Broadsword extends WeaponItem implements Sellable{
+public class Broadsword extends WeaponItem implements Sellable, Purchasable {
 
     /* Default constants for the Broadsword object */
      /**
@@ -163,8 +162,14 @@ public class Broadsword extends WeaponItem implements Sellable{
          if (otherActor.hasCapability(Status.HOSTILE_TO_PLAYER))
              actions.add( new AttackAction(otherActor, location.toString(), this) );
          if (otherActor.hasCapability(Status.TRADER))
-             actions.add( new SellAction(this, this.toString()) );
+             actions.add(new SellAction(this, this.toString()));
          return actions;
+     }
+
+
+     @Override
+     public String getPurchasableName() {
+         return this.toString();
      }
 
 
@@ -176,9 +181,29 @@ public class Broadsword extends WeaponItem implements Sellable{
 
      @Override
      public String soldBy(Actor actor) {
-         actor.removeItemFromInventory( this );
          int price = getSellingPrice();
+         actor.removeItemFromInventory( this );
          actor.addBalance( price );
          return actor + " successfully sold " + this + " for " + price + " runes to Traveller.";
      }
-}
+
+
+     @Override
+     public int getPurchasingPrice() {
+         return 250;
+     }
+
+
+     @Override
+     public String purchasedBy(Actor actor) {
+         int price = getPurchasingPrice();
+         if (actor.getBalance() < price)
+             return "Balance is less than what the Traveller asks for, the purchase fails.";
+         actor.deductBalance( price );
+         if (Math.random() <= 0.05) {
+             return "Traveller takes " + price + " runes without giving the broadsword.";
+         }
+         actor.addItemToInventory( new Broadsword());
+         return actor + " successfully purchased Broadsword for " + price + " runes.";
+     }
+ }

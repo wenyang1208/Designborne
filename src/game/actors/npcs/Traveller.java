@@ -1,10 +1,20 @@
 package game.actors.npcs;
 
+import edu.monash.fit2099.engine.actions.Action;
+import edu.monash.fit2099.engine.actions.ActionList;
+import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.displays.Display;
+import edu.monash.fit2099.engine.positions.GameMap;
+import game.actions.PurchaseAction;
 import game.items.HealingVial;
+import game.items.Purchasable;
 import game.items.RefreshingFlask;
+import game.utils.Status;
 import game.weapons.Broadsword;
 import game.weapons.GreatKnife;
+
+import java.util.ArrayList;
 
 /**
  * A class that represent Traveller in the Forest
@@ -13,10 +23,14 @@ import game.weapons.GreatKnife;
  * @author Chai Jun Lun
  *
  * Modified by:
- * @author Yangdan
+ * @author Yang dan
  *
  */
-public class Traveller extends Trader {
+public class Traveller extends Actor{
+
+
+    private ArrayList<Purchasable> purchasables = new ArrayList<>();
+
 
     /**
      * Constructor of the Traveller class
@@ -24,103 +38,33 @@ public class Traveller extends Trader {
      */
     public Traveller() {
         super("Isolated Traveller", 'ඞ', 100);
-        this.configure();
-
+        this.addCapability(Status.TRADER);
+        configure();
     }
 
-    /**
-     * Override the method to add items and its corresponding functions into the hashmap of the trader.
-     */
+
+    private void configure(){
+        this.purchasables.add( new HealingVial() );
+        this.purchasables.add( new RefreshingFlask() );
+        this.purchasables.add( new Broadsword() );
+        this.purchasables.add( new GreatKnife() );
+    }
+
+
     @Override
-    public void configure() {
-        this.addPair( new HealingVial(), this::purchaseHealingVial );
-        this.addPair( new RefreshingFlask(), this::purchaseRefreshingFlask );
-        this.addPair( new Broadsword(), this::purchaseBroadsword );
-        this.addPair( new GreatKnife(), this::purchaseGreatKnife );
+    public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
+        return new DoNothingAction();
     }
 
 
-    /**
-     * A method to sell the Healing Vial to the actor(player) with specific algorithm
-     *
-     * @param actor the Actor who buys the Healing Vial
-     *
-     * @return the description after purchasing the Healing Vial
-     */
-    public String purchaseHealingVial(Actor actor){
-        int price = 100;
-        String string = "";
-        if (Math.random() <= 0.25) {
-            price = (int) (price * 1.5);
-            string = this + " asks to pay 50% more. ";
+    @Override
+    public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
+        ActionList actions  = new ActionList();
+        if (otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)){
+            for (Purchasable purchasable : this.purchasables){
+                actions.add( new PurchaseAction(purchasable, purchasable.getPurchasableName()));
+            }
         }
-        if (actor.getBalance() < price)
-            return string + "Balance is less than what the " + this + " asks for, the purchase fails.";
-        actor.deductBalance( price );
-        actor.addItemToInventory( new HealingVial() );
-        return string + actor + " successfully purchased Healing Vial for " + price + " runes.";
+        return actions;
     }
-
-
-    /**
-     * A method to sell the Refreshing Flask to the actor(player) with specific algorithm
-     *
-     * @param actor the Actor who buys the Refreshing Flask
-     *
-     * @return the description after purchasing the Refreshing Flask
-     */
-    public String purchaseRefreshingFlask(Actor actor){
-        int price = 75;
-        String string = "";
-        if (Math.random() <= 0.1) {
-            price = (int) (price * 0.8);
-            string = this + " gives a 20% discount. ";
-        }
-        if (actor.getBalance() < price)
-            return string + "Balance is less than what the " + this + " asks for, the purchase fails.";
-        actor.deductBalance( price );
-        actor.addItemToInventory( new RefreshingFlask() );
-        return string + actor + " successfully purchased Refreshing Flask for " + price + " runes.";
-    }
-
-    /**
-     * A method to sell the Broadsword to the actor(player) with specific algorithm
-     *
-     * @param actor the Actor who buys the Broadsword
-     *
-     * @return the description after purchasing the Broadsword
-     */
-    public String purchaseBroadsword(Actor actor){
-        int price = 250;
-        if (actor.getBalance() < price)
-            return "Balance is less than what the " + this + " asks for, the purchase fails.";
-        actor.deductBalance( price );
-        if (!(Math.random() <= 0.05)) {
-            actor.addItemToInventory( new Broadsword());
-            return actor + " successfully purchased Broadsword for " + price + " runes.";
-        }
-        return this + " takes " + price + " runes without giving the broadsword.";
-    }
-
-    /**
-     * A method to sell the Great Knife to the actor(player) with specific algorithm
-     *
-     * @param actor the Actor who buys the Great Knife
-     *
-     * @return the description after purchasing the Great Knife
-     */
-    public String purchaseGreatKnife(Actor actor){
-        int price = 300;
-        String string = "";
-        if (Math.random() <= 0.05){
-            price = price * 3;
-            string = this + " asks to pay 3x the original price of the weapon. ";
-        }
-        if (actor.getBalance() < price)
-            return string + "Balance is less than what the " + this + " asks for, the purchase fails.";
-        actor.deductBalance( price );
-        actor.addItemToInventory( new GreatKnife());
-        return string + actor + " successfully purchased Great Knife for " + price + " runes.";
-    }
-
 }

@@ -21,7 +21,7 @@ import game.utils.Status;
  * @author Yang Dan
  *
  */
-public class HealingVial extends Item implements Consumable, Sellable{
+public class HealingVial extends Item implements Consumable, Sellable, Purchasable{
 
     // healing percentage
     /**
@@ -84,9 +84,10 @@ public class HealingVial extends Item implements Consumable, Sellable{
      */
     @Override
     public ActionList allowableActions(Actor otherActor, Location location) {
+        ActionList actions = new ActionList();
         if (otherActor.hasCapability(Status.TRADER))
-            return new ActionList( new SellAction(this, this.toString()) );
-        return new ActionList();
+            actions.add( new SellAction(this, this.toString()) );
+        return actions;
     }
 
     /**
@@ -120,4 +121,31 @@ public class HealingVial extends Item implements Consumable, Sellable{
         return string + actor + " successfully sold " + this + " for " + price + " runes to Traveller.";
     }
 
+
+    @Override
+    public String getPurchasableName() {
+        return this.toString();
+    }
+
+
+    @Override
+    public int getPurchasingPrice() {
+        return 100;
+    }
+
+
+    @Override
+    public String purchasedBy(Actor actor) {
+        int price = getSellingPrice();
+        String string = "";
+        if (Math.random() <= 0.25) {
+            price = (int) (price * 1.5);
+            string = "Traveller asks to pay 50% more. ";
+        }
+        if (actor.getBalance() < price)
+            return string + "Balance is less than what the Traveller asks for, the purchase fails.";
+        actor.deductBalance( price );
+        actor.addItemToInventory( new HealingVial() );
+        return string + actor + " successfully purchased Healing Vial for " + price + " runes.";
+    }
 }

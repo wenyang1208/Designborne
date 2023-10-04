@@ -1,10 +1,9 @@
 package game.actions;
 
+import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
-
-import java.util.function.Function;
+import game.items.Purchasable;
 
 /**
  * A class represents a PurchaseAction that allows an actor to purchase items from a trader.
@@ -15,43 +14,42 @@ import java.util.function.Function;
  * Modified by:
  * @author Yang Dan
  */
-public class PurchaseAction extends TradingAction{
+public class PurchaseAction extends Action {
 
     /**
-     * Item to be purchased from the trader
+     * An item to be purchased
      */
-    private Item item;
+    private final Purchasable item;
 
     /**
-     * Function containing the algorithm of purchasing this item from the trader
+     * name of the purchased item
      */
-    private Function<Actor, String> function;
+    private final String name;
+
 
     /**
-     * Constructor of the PurchaseAction class
+     * Constructor of PurchaseAction class.
      *
-     * @param item Item to be purchased from the trader
-     * @param function Function containing the algorithm of purchasing this item from the trader
+     * @param item an item to be purchased
+     * @param name name of the purchased item
      */
-    public PurchaseAction(Item item, Function<Actor, String> function){
+    public PurchaseAction(Purchasable item, String name ){
         this.item = item;
-        this.function = function;
+        this.name = name;
     }
 
 
     /**
-     * Perform the Purchase Action
-     *
-     * When the player purchases this item from the trader, apply the corresponding algorithm
+     * Perform the purchase action.
      *
      * @param actor The actor performing the action.
      * @param map The map the actor is on.
      *
-     * @return description of what happened (the result of the action being performed) that can be displayed to the user.
+     * @return string description of what happened (the result of the action being performed) that can be displayed to the user.
      */
     @Override
     public String execute(Actor actor, GameMap map) {
-        return function.apply(actor);
+        return this.item.purchasedBy(actor);
     }
 
 
@@ -64,6 +62,8 @@ public class PurchaseAction extends TradingAction{
      */
     @Override
     public String menuDescription(Actor actor) {
-        return actor + " buys " + this.item + ".";
+        return actor + " buys " + this.name + ".";
     }
+
+
 }
