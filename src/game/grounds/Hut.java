@@ -4,6 +4,8 @@ package game.grounds;
 // import game package
 import game.actors.npcs.Spawnable;
 import game.utils.Ability;
+import game.weather.AffectedByWeather;
+import game.weather.WeatherManager;
 
 /**
  * A class that represents the hut in the Ancient Woods map
@@ -13,7 +15,7 @@ import game.utils.Ability;
  *
  */
 // empty huts in Ancient Woods
-public class Hut extends Spawner{
+public class Hut extends Spawner implements AffectedByWeather {
 
     /**
      * Constructor of the Hut class
@@ -27,8 +29,44 @@ public class Hut extends Spawner{
         // The hut is displayed as "h".
         super('h', enemy, iniSpawnPercentage);
 
-        this.addCapability(Ability.SUNNY);
+        // register to weather manager
+        WeatherManager.getWeatherInstance().registerWeather(this);
 
     }
 
+    @Override
+    public String affectedBySunny() {
+
+        // declare output
+        String result = "";
+
+        // at 2 times the original spawning rate (i.e. 30% instead of 15%)
+        setSpawnPercentage(getSpawnPercentage() * 2);
+
+        result = this + " is becoming more active.";
+
+        // return result
+        return result;
+    }
+
+    @Override
+    public String affectedByRainy() {
+
+        // declare output
+        String result = "";
+
+        // 1.5 times the original spawning rate (i.e. 45% instead of 30%)
+        setSpawnPercentage(getSpawnPercentage() * 1.5);
+
+        result = this + " is becoming less active.";
+
+        // return result
+        return result;
+    }
+
+    @Override
+    public String toString() {
+
+        return "Hut";
+    }
 }
