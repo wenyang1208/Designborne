@@ -71,7 +71,7 @@ public class Bloodberry extends Item implements Consumable, Sellable{
   @Override
   public ActionList allowableActions(Actor otherActor, Location location) {
     if (otherActor.hasCapability(Status.TRADER))
-      return new ActionList( new SellAction(this, this.toString(), otherActor) );
+      return new ActionList( new SellAction(this, this.toString()) );
     return new ActionList();
   }
 
@@ -89,16 +89,15 @@ public class Bloodberry extends Item implements Consumable, Sellable{
    * Sell the Bloodberry to the trader
    *
    * @param actor Actor who sells Bloodberry at the sale stage
-   * @param trader Actor who takes Bloodberry at the sale stage
    *
    * @return a string showing the result of selling Bloodberry
    */
   @Override
-  public String sell(Actor actor, Actor trader) {
+  public String soldBy(Actor actor) {
     actor.removeItemFromInventory( this );
     int price = getSellingPrice();
     actor.addBalance( price );
-    return actor + " successfully sold " + this + " for " + price + " runes to " + trader;
+    return actor + " successfully sold " + this + " for " + price + " runes to Traveller.";
   }
 
 }

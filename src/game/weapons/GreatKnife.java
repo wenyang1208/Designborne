@@ -5,8 +5,10 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.actions.AttackAction;
+import game.actions.PurchaseAction;
 import game.actions.SellAction;
 import game.actions.StabAndStepAction;
+import game.items.Purchasable;
 import game.items.Sellable;
 import game.utils.Ability;
 import game.utils.Status;
@@ -18,7 +20,7 @@ import game.utils.Status;
  * @author Yang Dan
  */
 
-public class GreatKnife extends WeaponItem implements Sellable {
+public class GreatKnife extends WeaponItem implements Sellable, Purchasable {
 
 
     /* Default constants for the stamina used to activate the skill of great knife */
@@ -59,8 +61,10 @@ public class GreatKnife extends WeaponItem implements Sellable {
             actions.add(new StabAndStepAction(otherActor, REDUCED_STAMINA_RATE, this));
         }
         // When otherActor is trader, player can sell this item
-        if (otherActor.hasCapability(Status.TRADER))
-            actions.add( new SellAction(this, this.toString(), otherActor) );
+        if (otherActor.hasCapability(Status.TRADER)) {
+            actions.add(new SellAction(this, this.toString()));
+            actions.add(new PurchaseAction(this, this.toString()));
+        }
         return actions;
 
     }
@@ -82,20 +86,46 @@ public class GreatKnife extends WeaponItem implements Sellable {
      * Sell great knife to the trader and there is a 10% chance of the traveller taking the runes from the player instead.
      *
      * @param actor Actor who sells items at the sale stage
-     * @param trader Actor who takes items at the sale stage
      *
      * @return a sting showing the result of selling this item
      */
     @Override
-    public String sell(Actor actor, Actor trader) {
+    public String soldBy(Actor actor) {
         int price = getSellingPrice();
         actor.removeItemFromInventory( this ); // remove this item from the player's inventory
-        if (Math.random() < 0.1){ // there is 10% chance to take at most 175 runes from the player
+        if (Math.random() <= 0.1){ // there is 10% chance to take at most 175 runes from the player
             actor.deductBalance( Math.min(actor.getBalance(), price) );
-            return trader + " takes the runes from " + actor + ".";
+            return "Traveller takes the runes from " + actor + ".";
         }
         actor.addBalance( price ); // successfully sold it, so add balance
-        return actor + " successfully sold " + this + " for " + price + " runes to " + trader + ".";
+        return actor + " successfully sold " + this + " for " + price + " runes to Traveller.";
     }
 
+
+    @Override
+    public String getPurchasableName() {
+        return this.toString();
+    }
+
+
+    @Override
+    public int getPurchasingPrice() {
+        return 300;
+    }
+
+
+    @Override
+    public String purchasedBy(Actor actor) {
+        int price = getPurchasingPrice();
+        String string = "";
+        if (Math.random() <= 0.05){
+            price = price * 3;
+            string = "Traveller asks to pay 3x the original price of the weapon. ";
+        }
+        if (actor.getBalance() < price)
+            return string + "Balance is less than what the Traveller asks for, the purchase fails.";
+        actor.deductBalance( price );
+        actor.addItemToInventory( new GreatKnife());
+        return string + actor + " successfully purchased Great Knife for " + price + " runes.";
+    }
 }

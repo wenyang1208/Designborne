@@ -3,6 +3,8 @@ package game.grounds;
 
 // import game package
 import game.actors.npcs.Spawnable;
+import game.weather.AffectedByWeather;
+import game.weather.WeatherManager;
 
 /**
  * A class that represents the bushes in the Ancient Woods map
@@ -12,7 +14,7 @@ import game.actors.npcs.Spawnable;
  *
  */
 // player attempts to run away to hide in nearby bushes
-public class Bush extends Spawner{
+public class Bush extends Spawner implements AffectedByWeather {
 
     /**
      * Constructor of the Bush class
@@ -26,6 +28,45 @@ public class Bush extends Spawner{
         // The hut is displayed as "m".
         super('m', enemy, iniSpawnPercentage);
 
+        // register to weather manager
+        WeatherManager.getWeatherInstance().registerWeather(this);
+
+    }
+
+    @Override
+    public String affectedBySunny() {
+
+        // declare output
+        String result = "";
+
+        // Bushes’ spawning rate returns to normal
+        setSpawnPercentage(getIniSpawnPercentage());
+
+        result = this + " is becoming more less active.";
+
+        // return result
+        return result;
+    }
+
+    @Override
+    public String affectedByRainy() {
+
+        // declare output
+        String result = "";
+
+        // 1.5 times the original spawning rate (i.e. 45% instead of 30%)
+        setSpawnPercentage(getSpawnPercentage() * 1.5);
+
+        result = this + " is becoming more active.";
+
+        // return result
+        return result;
+    }
+
+    @Override
+    public String toString() {
+
+        return "Bush";
     }
 
 }

@@ -7,6 +7,8 @@ import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.behaviours.FollowBehaviour;
 import game.items.HealingVial;
 import game.items.Rune;
+import game.weather.AffectedByWeather;
+import game.weather.WeatherManager;
 
 /**
  * A class that represent ForestKeeper enemy in the Ancient Woods
@@ -15,7 +17,7 @@ import game.items.Rune;
  * @author Koe Rui En
  *
  */
-public class ForestKeeper extends Enemy implements Spawnable{
+public class ForestKeeper extends Enemy implements Spawnable, AffectedByWeather {
 
 
     // forest keeper has its own damage and hit rate
@@ -47,6 +49,9 @@ public class ForestKeeper extends Enemy implements Spawnable{
 
         // can follow the player
         this.addBehaviour(1, new FollowBehaviour());
+
+        // register to weather manager
+        WeatherManager.getWeatherInstance().registerWeather(this);
 
     }
 
@@ -97,4 +102,17 @@ public class ForestKeeper extends Enemy implements Spawnable{
 
     }
 
+
+    @Override
+    public String affectedBySunny() {
+        return this + " does not feel anything";
+    }
+
+
+    @Override
+    public String affectedByRainy() {
+        // healed by 10 points
+        this.heal(10);
+        return this + " feels rejuvenated.";
+    }
 }

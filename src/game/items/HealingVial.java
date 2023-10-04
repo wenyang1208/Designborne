@@ -21,7 +21,7 @@ import game.utils.Status;
  * @author Yang Dan
  *
  */
-public class HealingVial extends Item implements Consumable, Sellable{
+public class HealingVial extends Item implements Consumable, Sellable, Purchasable{
 
     // healing percentage
     /**
@@ -84,9 +84,10 @@ public class HealingVial extends Item implements Consumable, Sellable{
      */
     @Override
     public ActionList allowableActions(Actor otherActor, Location location) {
+        ActionList actions = new ActionList();
         if (otherActor.hasCapability(Status.TRADER))
-            return new ActionList( new SellAction(this, this.toString(), otherActor) );
-        return new ActionList();
+            actions.add( new SellAction(this, this.toString()) );
+        return actions;
     }
 
     /**
@@ -104,21 +105,47 @@ public class HealingVial extends Item implements Consumable, Sellable{
      * Sell the Healing Vial to the trader
      *
      * @param actor Actor who sells Healing Vial at the sale stage
-     * @param trader Actor who takes Healing Vial at the sale stage
      *
      * @return a string showing the result of selling Healing Vial
      */
     @Override
-    public String sell(Actor actor, Actor trader) {
+    public String soldBy(Actor actor) {
         int price = getSellingPrice();
         String string = "";
         if (Math.random() <= 0.1) {
             price = price * 2;
-            string = trader + " pays 2x the original price. ";
+            string = "Traveller pays 2x the original price. ";
         }
         actor.removeItemFromInventory( this );
         actor.addBalance( price );
-        return string + actor + " successfully sold " + this + " for " + price + " runes to " + trader + ".";
+        return string + actor + " successfully sold " + this + " for " + price + " runes to Traveller.";
     }
 
+
+    @Override
+    public String getPurchasableName() {
+        return this.toString();
+    }
+
+
+    @Override
+    public int getPurchasingPrice() {
+        return 100;
+    }
+
+
+    @Override
+    public String purchasedBy(Actor actor) {
+        int price = getSellingPrice();
+        String string = "";
+        if (Math.random() <= 0.25) {
+            price = (int) (price * 1.5);
+            string = "Traveller asks to pay 50% more. ";
+        }
+        if (actor.getBalance() < price)
+            return string + "Balance is less than what the Traveller asks for, the purchase fails.";
+        actor.deductBalance( price );
+        actor.addItemToInventory( new HealingVial() );
+        return string + actor + " successfully purchased Healing Vial for " + price + " runes.";
+    }
 }

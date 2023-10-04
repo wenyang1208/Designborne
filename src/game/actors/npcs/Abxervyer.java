@@ -4,15 +4,13 @@ package game.actors.npcs;
 // import engine and game packages
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
-import edu.monash.fit2099.engine.actions.DoNothingAction;
-import edu.monash.fit2099.engine.actors.Behaviour;
+import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.behaviours.FollowBehaviour;
-import game.controllers.WeatherManager;
+import game.weather.WeatherManager;
 import game.grounds.Gate;
-import game.grounds.Hut;
 import game.items.Rune;
 import game.utils.Ability;
 import game.utils.FancyMessage;
@@ -26,7 +24,7 @@ import game.utils.FancyMessage;
  * Modified by:
  * @author Yang Dan
  */
-public class Abxervyer extends Enemy{
+public class Abxervyer extends Enemy {
 
     // Abxervyer has its own damage and hit rate
 
@@ -47,14 +45,14 @@ public class Abxervyer extends Enemy{
      */
     private Gate droppedGate;
 
+
     /**
      * Constructor for the Abxervyer class
-     *
      */
     public Abxervyer() {
 
         // displayed "Y", 2000 hp
-        super("Abxervyer", 'Y', 2000, new Rune(5000));
+        super("Abxervyer", 'Y', 1, new Rune(5000));
 
         // attack the player with its limbs, dealing 80 damage with 25% accuracy
         this.damage = 80;
@@ -66,10 +64,6 @@ public class Abxervyer extends Enemy{
         // boss will not get hurt if they walk around in the Void
         this.addCapability(Ability.STEP_ON_VOID);
 
-        // has ability to control weather
-        this.addCapability(Ability.SUNNY);
-        this.addCapability(Ability.RAINY);
-
     }
 
     /**
@@ -79,23 +73,19 @@ public class Abxervyer extends Enemy{
      * @param lastAction The Action this Actor took last turn. Can do interesting things in conjunction with Action.getNextAction()
      * @param map        the map containing the Actor
      * @param display    the I/O object to which messages may be written
-     *
      * @return the Action to be performed
      */
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
 
-        if (this.hasCapability(Ability.SUNNY)){
+        // get weather manager instance
+        WeatherManager weatherManager = WeatherManager.getWeatherInstance();
 
-            WeatherManager.sunnyWeatherAffect(new Hut(new ForestKeeper(), 0.15), new RedWolf(), map);
-        }
+        // run weather manager
 
-        for (Behaviour behaviour : getBehaviours().values()) {
-            Action action = behaviour.getAction(this, map);
-            if(action != null)
-                return action;
-        }
-        return new DoNothingAction();
+        weatherManager.run(display);
+
+        return super.playTurn(actions, lastAction, map, display);
     }
 
 
@@ -103,7 +93,6 @@ public class Abxervyer extends Enemy{
      * Initialise the gate to be dropped by Abxervyer once defeated.
      *
      * @param droppedGate the dropped gate once Abxervyer is defeated
-     *
      */
     public void setDroppedGate(Gate droppedGate) {
 
@@ -130,11 +119,17 @@ public class Abxervyer extends Enemy{
      */
     @Override
     public void dropItem(GameMap map) {
-        // 100% chance to drop runes once defeated
-        this.getRunes().getDropAction(this).execute(this,map);
 
-        //  boss last stood turns into a Gate once defeated
-        map.locationOf(this).setGround( this.droppedGate);
+        // 100% chance to drop runes once defeated
+        this.getRunes().getDropAction(this).execute(this, map);
+
+        // boss last stood turns into a Gate once defeated
+        map.locationOf(this).setGround(this.droppedGate);
+
+    }
+
+    @Override
+    public String unconscious(Actor actor, GameMap map) {
 
         // print a message when the boss is defeated
         for (String line : FancyMessage.BOSS_DEFEATED.split("\n")) {
@@ -144,6 +139,11 @@ public class Abxervyer extends Enemy{
             } catch (Exception exception) {
                 exception.printStackTrace();
             }
+
         }
+
+        return super.unconscious(actor, map);
+
     }
+
 }
