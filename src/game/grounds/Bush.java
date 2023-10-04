@@ -12,6 +12,9 @@ import game.weather.WeatherManager;
  * Created by:
  * @author Koe Rui En
  *
+ * Modified by:
+ * @author Chai Jun Lun
+ *
  */
 // player attempts to run away to hide in nearby bushes
 public class Bush extends Spawner implements AffectedByWeather {
@@ -33,6 +36,11 @@ public class Bush extends Spawner implements AffectedByWeather {
 
     }
 
+    /**
+     * Effect on Bush when the weather is sunny
+     *
+     * @return a String description after affected by the sunny weather
+     */
     @Override
     public String affectedBySunny() {
 
@@ -48,6 +56,11 @@ public class Bush extends Spawner implements AffectedByWeather {
         return result;
     }
 
+    /**
+     * Effect on Bush when the weather is rainy
+     *
+     * @return a String description after affected by the rainy weather
+     */
     @Override
     public String affectedByRainy() {
 
@@ -63,6 +76,11 @@ public class Bush extends Spawner implements AffectedByWeather {
         return result;
     }
 
+    /**
+     * Override toString() from Object class
+     *
+     * @return a String description of the Hut
+     */
     @Override
     public String toString() {
 

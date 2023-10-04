@@ -3,7 +3,6 @@ package game.grounds;
 
 // import game package
 import game.actors.npcs.Spawnable;
-import game.utils.Ability;
 import game.weather.AffectedByWeather;
 import game.weather.WeatherManager;
 
@@ -12,6 +11,9 @@ import game.weather.WeatherManager;
  *
  * Created by:
  * @author Koe Rui En
+ *
+ * Modified by:
+ * @author Chai Jun Lun
  *
  */
 // empty huts in Ancient Woods
@@ -34,6 +36,11 @@ public class Hut extends Spawner implements AffectedByWeather {
 
     }
 
+    /**
+     * Effect on Hut when the weather is sunny
+     *
+     * @return a String description after affected by the sunny weather
+     */
     @Override
     public String affectedBySunny() {
 
@@ -49,6 +56,11 @@ public class Hut extends Spawner implements AffectedByWeather {
         return result;
     }
 
+    /**
+     * Effect on Hut when the weather is rainy
+     *
+     * @return a String description after affected by the rainy weather
+     */
     @Override
     public String affectedByRainy() {
 
@@ -64,9 +76,16 @@ public class Hut extends Spawner implements AffectedByWeather {
         return result;
     }
 
+
+    /**
+     * Override toString() from Object class
+     *
+     * @return a String description of the Hut
+     */
     @Override
     public String toString() {
 
         return "Hut";
+
     }
 }

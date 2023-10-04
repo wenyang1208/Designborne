@@ -2,7 +2,6 @@
 package game.grounds;
 
 // import engine and game packages
-
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 import game.actors.npcs.Spawnable;
@@ -12,6 +11,9 @@ import game.actors.npcs.Spawnable;
  *
  * Created by:
  * @author Koe Rui En
+ *
+ * Modified by:
+ * @author Chua Wen Yang
  *
  */
 public abstract class Spawner extends Ground {
@@ -41,6 +43,7 @@ public abstract class Spawner extends Ground {
      *
      * @param displayChar character to display for this type of terrain
      * @param enemy enemy to be spawned in certain chance of time
+     * @param iniSpawnPercentage the percentage to spawn an enemy
      *
      */
     public Spawner(char displayChar, Spawnable enemy, double iniSpawnPercentage) {
@@ -56,6 +59,13 @@ public abstract class Spawner extends Ground {
     }
 
     // set spawn percentage
+    /**
+     * A setter to set the spawn percentage to spawn an enemy
+     *
+     * @param newSpawnPercentage the new spawn percentage to spawn an enemy
+     *
+     * @return a double that representing the spawn percentage to spawn an enemy
+     */
     public void setSpawnPercentage(double newSpawnPercentage) {
 
         if (spawnPercentage >= 0){
@@ -65,12 +75,22 @@ public abstract class Spawner extends Ground {
         }
     }
 
+    /**
+     * A getter to get the spawn percentage to spawn an enemy
+     *
+     * @return a double that representing the spawn percentage to spawn an enemy
+     */
     public double getSpawnPercentage() {
 
         return spawnPercentage;
 
     }
 
+    /**
+     * A getter to get the initial spawn percentage to spawn an enemy
+     *
+     * @return a double that representing the initial spawn percentage to spawn an enemy
+     */
     public double getIniSpawnPercentage (){
 
         return iniSpawnPercentage;

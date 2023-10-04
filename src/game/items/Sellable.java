@@ -3,7 +3,7 @@ package game.items;
 import edu.monash.fit2099.engine.actors.Actor;
 
 /**
- * A interface representing items that can be sold to traders
+ * An interface representing items that can be sold to traders
  *
  * Created:
  * @author Yang Dan

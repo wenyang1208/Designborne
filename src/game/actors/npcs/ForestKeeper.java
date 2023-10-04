@@ -16,9 +16,11 @@ import game.weather.WeatherManager;
  * Created by:
  * @author Koe Rui En
  *
+ * Modified by:
+ * @author Yang Dan
+ *
  */
 public class ForestKeeper extends Enemy implements Spawnable, AffectedByWeather {
-
 
     // forest keeper has its own damage and hit rate
 
@@ -102,13 +104,21 @@ public class ForestKeeper extends Enemy implements Spawnable, AffectedByWeather 
 
     }
 
-
+    /**
+     * Effect on Forest Keeper when the weather is sunny
+     *
+     * @return a String description after affected by the sunny weather
+     */
     @Override
     public String affectedBySunny() {
         return this + " does not feel anything";
     }
 
-
+    /**
+     * Effect on Forest Keeper when the weather is rainy
+     *
+     * @return a String description after affected by the rainy weather
+     */
     @Override
     public String affectedByRainy() {
         // healed by 10 points

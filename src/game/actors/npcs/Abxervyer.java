@@ -82,7 +82,6 @@ public class Abxervyer extends Enemy {
         WeatherManager weatherManager = WeatherManager.getWeatherInstance();
 
         // run weather manager
-
         weatherManager.run(display);
 
         return super.playTurn(actions, lastAction, map, display);

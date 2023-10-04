@@ -2,13 +2,11 @@
 package game.actors.npcs;
 
 // import engine and game packages
-import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.behaviours.FollowBehaviour;
 import game.items.HealingVial;
 import game.items.Rune;
-import game.utils.Ability;
 import game.weather.AffectedByWeather;
 import game.weather.WeatherManager;
 
@@ -106,14 +104,19 @@ public class RedWolf extends Enemy implements Spawnable, AffectedByWeather {
 
     }
 
-
+    /**
+     * Effect on Red Wolf when the weather is sunny
+     *
+     * @return a String description after affected by the sunny weather
+     */
     @Override
     public String affectedBySunny() {
 
         // declare output
         String result = "";
 
-        //  deals 3 times the original damage when attacking the player
+        // deals 3 times the original damage when attacking the player
+        // (i.e. 45% instead of 30%)
         this.updateDamageMultiplier(3.0f);
 
         result = this + " is becoming more aggressive.";
@@ -122,6 +125,11 @@ public class RedWolf extends Enemy implements Spawnable, AffectedByWeather {
         return result;
     }
 
+    /**
+     * Effect on Red Wolf when the weather is rainy
+     *
+     * @return a String description after affected by the rainy weather
+     */
     @Override
     public String affectedByRainy() {
 
