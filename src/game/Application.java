@@ -25,7 +25,7 @@ import game.weapons.GiantHammer;
  *
  * Modified by:
  * @author Koe Rui En
- * @author Yang Yang Dan
+ * @author Yang Dan
  */
 public class Application {
 
@@ -157,8 +157,6 @@ public class Application {
         abxervyerBattleRoom.at(12, 9).addActor( abxervyer );
 
 
-
-
         for (String line : FancyMessage.TITLE.split("\n")) {
             new Display().println(line);
             try {
@@ -169,15 +167,13 @@ public class Application {
         }
 
 
-
-
-        // creat a gate to burial ground map, and put it in the abandoned village map
+        // create a gate to burial ground map, and put it in the abandoned village map
         abandonedVillage.at(30,0).setGround( new Gate("Burial Ground", burialGround.at(21, 6)) );
 
-        // creat a gate to abandoned village map, and put it in the burial ground map
+        // create a gate to abandoned village map, and put it in the burial ground map
         burialGround.at(23,0).setGround( new Gate("Abandoned Village", abandonedVillage.at(0, 5)) );
 
-        // creat a gate to ancient woods map, and put it in the burial ground map
+        // create a gate to ancient woods map, and put it in the burial ground map
         burialGround.at(0, 10).setGround( new Gate("Ancient Woods", ancientWoods.at(21, 3)) );
 
         // create a gate to burial ground map, and put it in the ancient woods map
@@ -187,17 +183,13 @@ public class Application {
         ancientWoods.at(0, 6).setGround( new Gate("Abxervyer, the Forest Watcher", abxervyerBattleRoom.at(39, 13)) );
 
 
-
-
         // player will be in the abandoned village map initially
         Player player = new Player("The Abstracted One", '@', 15000, 20000);
         player.addItemToInventory(new OldKey());
         player.addBalance(10000);
 //        world.addPlayer(player, abandonedVillage.at(29, 5));
 //        world.addPlayer(player, ancientWoods.at(21, 3));
-        world.addPlayer(player, abxervyerBattleRoom.at(39, 13));
-
-
+        world.addPlayer(player, abxervyerBattleRoom.at(12, 10));
 
 
         world.run();
