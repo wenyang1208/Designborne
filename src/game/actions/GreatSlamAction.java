@@ -64,21 +64,21 @@ public class GreatSlamAction extends Action {
 
         String string = "";
 
+        // Get the location of the main target, it can be used to get enemy's surrounding
+        Location enemyLocation = map.locationOf(enemy);
+
         // First, attack the main enemy, dealing 100% of the weapon damage
         string += new AttackAction(enemy, "", this.weapon).execute(actor, map) + "\n";
 
         // Set the damage multiplier of this weapon to 0.5 so that it attacks the rest with only 50% damage
         this.weapon.updateDamageMultiplier(0.5f);
-        for (Exit exit : map.locationOf(actor).getExits()){
+        for (Exit exit : enemyLocation.getExits()){
             Location location = exit.getDestination();
-            if (location.containsAnActor() && location.getActor().hasCapability(Status.HOSTILE_TO_PLAYER)){
+            if (location.containsAnActor()){
                 Actor enemy = location.getActor();
                 string += new AttackAction(enemy, "", this.weapon).execute(actor, map) + "\n";
             }
         }
-        // Player will also be affected by this special effect with 50% damage of this weapon
-        string += new AttackAction(actor, "", this.weapon).execute(actor, map) + "\n";
-
         // Set the damage multiplier back to normal
         this.weapon.updateDamageMultiplier(1.0f);
         // Reduce stamina
