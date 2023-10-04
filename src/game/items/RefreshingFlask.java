@@ -81,7 +81,7 @@ public class RefreshingFlask extends Item implements Consumable, Sellable, Purch
     public ActionList allowableActions(Actor otherActor, Location location) {
         ActionList actions = new ActionList();
         if (otherActor.hasCapability(Status.TRADER))
-            actions.add( new SellAction(this, this.toString()) );
+            actions.add( new SellAction(this) );
         return actions;
     }
 
@@ -103,11 +103,6 @@ public class RefreshingFlask extends Item implements Consumable, Sellable, Purch
         return actor + " successfully sold " + this + " for " + price + " runes to Traveller.";
     }
 
-
-    @Override
-    public String getPurchasableName() {
-        return this.toString();
-    }
 
     @Override
     public int getPurchasingPrice() {

@@ -61,10 +61,8 @@ public class GreatKnife extends WeaponItem implements Sellable, Purchasable {
             actions.add(new StabAndStepAction(otherActor, REDUCED_STAMINA_RATE, this));
         }
         // When otherActor is trader, player can sell this item
-        if (otherActor.hasCapability(Status.TRADER)) {
-            actions.add(new SellAction(this, this.toString()));
-            actions.add(new PurchaseAction(this, this.toString()));
-        }
+        if (otherActor.hasCapability(Status.TRADER))
+            actions.add(new SellAction(this));
         return actions;
 
     }
@@ -99,12 +97,6 @@ public class GreatKnife extends WeaponItem implements Sellable, Purchasable {
         }
         actor.addBalance( price ); // successfully sold it, so add balance
         return actor + " successfully sold " + this + " for " + price + " runes to Traveller.";
-    }
-
-
-    @Override
-    public String getPurchasableName() {
-        return this.toString();
     }
 
 

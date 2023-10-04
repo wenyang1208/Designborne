@@ -32,11 +32,10 @@ public class SellAction extends Action {
      * Constructor of SellAction class.
      *
      * @param item an item to be sold
-     * @param name name of the sold item
      */
-    public SellAction(Sellable item, String name ){
+    public SellAction(Sellable item){
         this.item = item;
-        this.name = name;
+        this.name = item.toString();
     }
 
 
