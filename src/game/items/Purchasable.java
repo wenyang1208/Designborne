@@ -6,14 +6,6 @@ public interface Purchasable {
 
 
     /**
-     * Get the name of the purchasable item
-     * @return a string represents the name of the purchasable
-     */
-    String getPurchasableName();
-
-
-
-    /**
      * Get the selling price of the purchasable item
      *
      * @return an integer value representing the purchasable price

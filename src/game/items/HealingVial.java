@@ -123,12 +123,6 @@ public class HealingVial extends Item implements Consumable, Sellable, Purchasab
 
 
     @Override
-    public String getPurchasableName() {
-        return this.toString();
-    }
-
-
-    @Override
     public int getPurchasingPrice() {
         return 100;
     }

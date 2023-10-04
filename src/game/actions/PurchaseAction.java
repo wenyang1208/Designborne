@@ -31,11 +31,10 @@ public class PurchaseAction extends Action {
      * Constructor of PurchaseAction class.
      *
      * @param item an item to be purchased
-     * @param name name of the purchased item
      */
-    public PurchaseAction(Purchasable item, String name ){
+    public PurchaseAction(Purchasable item){
         this.item = item;
-        this.name = name;
+        this.name = item.toString();
     }
 
 

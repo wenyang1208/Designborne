@@ -105,11 +105,6 @@ public class RefreshingFlask extends Item implements Consumable, Sellable, Purch
 
 
     @Override
-    public String getPurchasableName() {
-        return this.toString();
-    }
-
-    @Override
     public int getPurchasingPrice() {
         return 75;
     }

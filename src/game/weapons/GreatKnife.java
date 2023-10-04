@@ -101,12 +101,6 @@ public class GreatKnife extends WeaponItem implements Sellable, Purchasable {
 
 
     @Override
-    public String getPurchasableName() {
-        return this.toString();
-    }
-
-
-    @Override
     public int getPurchasingPrice() {
         return 300;
     }

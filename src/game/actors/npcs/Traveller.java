@@ -62,7 +62,7 @@ public class Traveller extends Actor{
         ActionList actions  = new ActionList();
         if (otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)){
             for (Purchasable purchasable : this.purchasables){
-                actions.add( new PurchaseAction(purchasable, purchasable.getPurchasableName()));
+                actions.add( new PurchaseAction(purchasable));
             }
         }
         return actions;

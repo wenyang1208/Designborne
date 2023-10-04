@@ -168,12 +168,6 @@ public class Broadsword extends WeaponItem implements Sellable, Purchasable {
 
 
      @Override
-     public String getPurchasableName() {
-         return this.toString();
-     }
-
-
-     @Override
      public int getSellingPrice() {
          return 100;
      }
