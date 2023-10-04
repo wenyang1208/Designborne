@@ -55,8 +55,8 @@ public class Hut extends Spawner implements AffectedByWeather {
         // declare output
         String result = "";
 
-        // 1.5 times the original spawning rate (i.e. 45% instead of 30%)
-        setSpawnPercentage(getSpawnPercentage() * 1.5);
+        // Huts’ spawning rate returns to normal
+        setSpawnPercentage(getIniSpawnPercentage());
 
         result = this + " is becoming less active.";
 
