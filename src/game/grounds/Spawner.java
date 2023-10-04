@@ -30,6 +30,11 @@ public abstract class Spawner extends Ground {
      */
     private double spawnPercentage;
 
+    // initial spawn percentage
+    /**
+     * initial percentage to spawn an enemy
+     */
+    private double iniSpawnPercentage;
 
     /**
      * Constructor of the abstract Spawner class
@@ -45,6 +50,8 @@ public abstract class Spawner extends Ground {
         spawnedEnemy = enemy;
 
         setSpawnPercentage(iniSpawnPercentage);
+
+        this.iniSpawnPercentage = iniSpawnPercentage;
 
     }
 
@@ -62,6 +69,11 @@ public abstract class Spawner extends Ground {
 
         return spawnPercentage;
 
+    }
+
+    public double getIniSpawnPercentage (){
+
+        return iniSpawnPercentage;
     }
 
     /**

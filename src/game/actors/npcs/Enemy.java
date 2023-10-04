@@ -11,10 +11,7 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.behaviours.AttackBehaviour;
 import game.behaviours.WanderBehaviour;
-import game.controllers.WeatherManager;
-import game.grounds.Hut;
 import game.items.Rune;
-import game.utils.Ability;
 import game.utils.Status;
 import game.actions.AttackAction;
 
