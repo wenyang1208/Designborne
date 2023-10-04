@@ -1,13 +1,7 @@
 package game.weather;
 
-
-import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.capabilities.CapabilitySet;
 import edu.monash.fit2099.engine.displays.Display;
-import edu.monash.fit2099.engine.positions.GameMap;
-import game.actors.npcs.Enemy;
-import game.grounds.Spawner;
-import game.utils.Ability;
+
 
 import java.util.ArrayList;
 
