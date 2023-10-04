@@ -2,12 +2,15 @@
 package game.actors.npcs;
 
 // import engine and game packages
+import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.behaviours.FollowBehaviour;
 import game.items.HealingVial;
 import game.items.Rune;
 import game.utils.Ability;
+import game.weather.AffectedByWeather;
+import game.weather.WeatherManager;
 
 
 /**
@@ -20,7 +23,7 @@ import game.utils.Ability;
  * @author Yang Dan
  *
  */
-public class RedWolf extends Enemy implements Spawnable{
+public class RedWolf extends Enemy implements Spawnable, AffectedByWeather {
 
     // forest keeper has its own damage and hit rate
 
@@ -50,10 +53,10 @@ public class RedWolf extends Enemy implements Spawnable{
         this.hitRate = 80;
         this.addBehaviour(1, new FollowBehaviour());
 
-        this.addCapability(Ability.SUNNY);
+        // register to weather manager
+        WeatherManager.getWeatherInstance().registerWeather(this);
 
     }
-
 
     /**
      * Creates and returns an intrinsic weapon for Red Wolf with different damage.
@@ -100,6 +103,37 @@ public class RedWolf extends Enemy implements Spawnable{
             new HealingVial().getDropAction(this).execute(this,map);
 
         }
+
+    }
+
+
+    @Override
+    public String affectedBySunny() {
+
+        // declare output
+        String result = "";
+
+        //  deals 3 times the original damage when attacking the player
+        this.updateDamageMultiplier(3.0f);
+
+        result = this + " is becoming more aggressive.";
+
+        // return result
+        return result;
+    }
+
+    @Override
+    public String affectedByRainy() {
+
+        String result = "";
+
+        // reset back to ori state
+        this.updateDamageMultiplier(1.0f);
+
+        result = this + " is becoming less aggressive.";
+
+        // return result
+        return result;
 
     }
 
