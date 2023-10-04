@@ -1,5 +1,6 @@
 package game.actions;
 
+import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
@@ -15,7 +16,7 @@ import java.util.function.Function;
  * Modified by:
  * @author Yang Dan
  */
-public class PurchaseAction extends TradingAction{
+public class PurchaseAction extends Action {
 
     /**
      * Item to be purchased from the trader
