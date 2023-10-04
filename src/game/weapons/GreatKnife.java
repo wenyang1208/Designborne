@@ -62,7 +62,7 @@ public class GreatKnife extends WeaponItem implements Sellable, Purchasable {
         }
         // When otherActor is trader, player can sell this item
         if (otherActor.hasCapability(Status.TRADER))
-            actions.add(new SellAction(this, this.toString()));
+            actions.add(new SellAction(this));
         return actions;
 
     }

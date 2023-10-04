@@ -162,7 +162,7 @@ public class Broadsword extends WeaponItem implements Sellable, Purchasable {
          if (otherActor.hasCapability(Status.HOSTILE_TO_PLAYER))
              actions.add( new AttackAction(otherActor, location.toString(), this) );
          if (otherActor.hasCapability(Status.TRADER))
-             actions.add(new SellAction(this, this.toString()));
+             actions.add(new SellAction(this));
          return actions;
      }
 

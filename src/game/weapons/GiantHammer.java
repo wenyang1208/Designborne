@@ -58,7 +58,7 @@ public class GiantHammer extends WeaponItem implements Sellable {
         }
         // When otherActor is trader, player can sell this item
         if (otherActor.hasCapability(Status.TRADER))
-            actions.add( new SellAction(this, this.toString()) );
+            actions.add( new SellAction(this) );
         return actions;
     }
 
