@@ -2,6 +2,7 @@
 package game.actors.npcs;
 
 // import engine and game packages
+import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.behaviours.FollowBehaviour;
@@ -103,6 +104,41 @@ public class ForestKeeper extends Enemy implements Spawnable, AffectedByWeather 
         return new ForestKeeper();
 
     }
+
+    /**
+     * Method that can be executed when the actor is unconscious due to the action of another actor
+     *
+     * @param actor the perpetrator
+     * @param map where the actor fell unconscious
+     *
+     * @return a string describing what happened when the actor is unconscious
+     */
+    @Override
+    public String unconscious(Actor actor, GameMap map) {
+
+        dropItem(map);
+
+        WeatherManager.getWeatherInstance().unregisterWeather(this);
+
+        return super.unconscious(actor, map);
+
+    }
+
+    /**
+     * Method that can be executed when the Red Wolf is unconscious due to natural causes or accident
+     *
+     * @param map where the actor fell unconscious
+     *
+     * @return a string describing what happened when the Red Wolf is unconscious
+     */
+    public String unconscious(GameMap map) {
+
+        WeatherManager.getWeatherInstance().unregisterWeather(this);
+
+        return super.unconscious(map);
+
+    }
+
 
     /**
      * Effect on Forest Keeper when the weather is sunny

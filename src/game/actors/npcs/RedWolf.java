@@ -2,6 +2,7 @@
 package game.actors.npcs;
 
 // import engine and game packages
+import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.behaviours.FollowBehaviour;
@@ -36,6 +37,10 @@ public class RedWolf extends Enemy implements Spawnable, AffectedByWeather {
      * hit rate to other actor
      */
     private final int hitRate;
+    /**
+     * damage multiplier
+     */
+    private float damageMultiplier;
 
     /**
      * Constructor for the RedWolf class
@@ -63,6 +68,8 @@ public class RedWolf extends Enemy implements Spawnable, AffectedByWeather {
      */
     @Override
     public IntrinsicWeapon getIntrinsicWeapon() {
+
+        int damage = Math.round(this.damage * damageMultiplier);
 
         // create new intrinsic weapon for Red Wolf
         return new IntrinsicWeapon(damage, "bites", hitRate);
@@ -105,6 +112,40 @@ public class RedWolf extends Enemy implements Spawnable, AffectedByWeather {
     }
 
     /**
+     * Method that can be executed when the actor is unconscious due to the action of another actor
+     *
+     * @param actor the perpetrator
+     * @param map where the actor fell unconscious
+     *
+     * @return a string describing what happened when the actor is unconscious
+     */
+    @Override
+    public String unconscious(Actor actor, GameMap map) {
+
+        dropItem(map);
+
+        WeatherManager.getWeatherInstance().unregisterWeather(this);
+
+        return super.unconscious(actor, map);
+
+    }
+
+    /**
+     * Method that can be executed when the Red Wolf is unconscious due to natural causes or accident
+     *
+     * @param map where the actor fell unconscious
+     *
+     * @return a string describing what happened when the Red Wolf is unconscious
+     */
+    public String unconscious(GameMap map) {
+
+        WeatherManager.getWeatherInstance().unregisterWeather(this);
+
+        return super.unconscious(map);
+
+    }
+
+    /**
      * Effect on Red Wolf when the weather is sunny
      *
      * @return a String description after affected by the sunny weather
@@ -117,7 +158,7 @@ public class RedWolf extends Enemy implements Spawnable, AffectedByWeather {
 
         // deals 3 times the original damage when attacking the player
         // (i.e. 45% instead of 30%)
-        this.updateDamageMultiplier(3.0f);
+        this.damageMultiplier = 3.0f;
 
         result = this + " is becoming more aggressive.";
 
@@ -136,7 +177,7 @@ public class RedWolf extends Enemy implements Spawnable, AffectedByWeather {
         String result = "";
 
         // reset back to ori state
-        this.updateDamageMultiplier(1.0f);
+        this.damageMultiplier = 1.0f;
 
         result = this + " is becoming less aggressive.";
 

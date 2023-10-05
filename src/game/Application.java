@@ -152,10 +152,8 @@ public class Application {
         abxervyerBattleRoom.at(39, 12).addItem( new GiantHammer() );
         Abxervyer abxervyer = new Abxervyer();
         abxervyer.setDroppedGate( new Gate("Ancient Woods", ancientWoods.at(0, 5)) );
-//        abxervyer.addMap(ancientWoods);
-//        abxervyer.addMap(abxervyerBattleRoom);
-        abxervyerBattleRoom.at(12, 9).addActor( abxervyer );
 
+        abxervyerBattleRoom.at(12, 9).addActor( abxervyer );
 
         for (String line : FancyMessage.TITLE.split("\n")) {
             new Display().println(line);
@@ -183,13 +181,16 @@ public class Application {
         ancientWoods.at(0, 6).setGround( new Gate("Abxervyer, the Forest Watcher", abxervyerBattleRoom.at(39, 13)) );
 
 
-        // player will be in the abandoned village map initially
+        // player
+        // 150 hit points (the health attribute) and 200 stamina
         Player player = new Player("The Abstracted One", '@', 15000, 20000);
         player.addItemToInventory(new OldKey());
         player.addBalance(10000);
+
+        // add player to the world
 //        world.addPlayer(player, abandonedVillage.at(29, 5));
-//        world.addPlayer(player, ancientWoods.at(21, 3));
-        world.addPlayer(player, abxervyerBattleRoom.at(12, 10));
+        world.addPlayer(player, ancientWoods.at(21, 3));
+//        world.addPlayer(player, abxervyerBattleRoom.at(14, 10));
 
 
         world.run();
