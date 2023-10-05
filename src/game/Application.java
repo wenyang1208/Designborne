@@ -188,8 +188,8 @@ public class Application {
         player.addItemToInventory(new OldKey());
         player.addBalance(10000);
 //        world.addPlayer(player, abandonedVillage.at(29, 5));
-//        world.addPlayer(player, ancientWoods.at(21, 3));
-        world.addPlayer(player, abxervyerBattleRoom.at(12, 10));
+        world.addPlayer(player, ancientWoods.at(21, 3));
+//        world.addPlayer(player, abxervyerBattleRoom.at(12, 10));
 
 
         world.run();
