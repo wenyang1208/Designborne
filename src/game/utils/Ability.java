@@ -14,8 +14,5 @@ public enum Ability {
     UNLOCK_GATE,
     ENTER_FLOOR,
     STEP_ON_VOID,
-    SUNNY,
-    RAINY,
-
 
 }
