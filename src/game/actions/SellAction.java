@@ -23,19 +23,12 @@ public class SellAction extends Action {
     private final Sellable item;
 
     /**
-     * name of the sold item
-     */
-    private final String name;
-
-
-    /**
      * Constructor of SellAction class.
      *
      * @param item an item to be sold
      */
     public SellAction(Sellable item){
         this.item = item;
-        this.name = item.toString();
     }
 
 
@@ -49,7 +42,8 @@ public class SellAction extends Action {
      */
     @Override
     public String execute(Actor actor, GameMap map) {
-        return this.item.soldBy(actor);
+
+        return item.soldBy(actor);
     }
 
 
@@ -62,7 +56,9 @@ public class SellAction extends Action {
      */
     @Override
     public String menuDescription(Actor actor) {
-        return actor + " sells " + this.name + ".";
+
+        return actor + " sells " + item + ".";
+
     }
 
 

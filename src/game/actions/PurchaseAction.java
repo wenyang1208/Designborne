@@ -22,19 +22,12 @@ public class PurchaseAction extends Action {
     private final Purchasable item;
 
     /**
-     * name of the purchased item
-     */
-    private final String name;
-
-
-    /**
      * Constructor of PurchaseAction class.
      *
      * @param item an item to be purchased
      */
     public PurchaseAction(Purchasable item){
         this.item = item;
-        this.name = item.toString();
     }
 
 
@@ -48,7 +41,9 @@ public class PurchaseAction extends Action {
      */
     @Override
     public String execute(Actor actor, GameMap map) {
-        return this.item.purchasedBy(actor);
+
+        return item.purchasedBy(actor);
+
     }
 
 
@@ -61,7 +56,9 @@ public class PurchaseAction extends Action {
      */
     @Override
     public String menuDescription(Actor actor) {
-        return actor + " buys " + this.name + ".";
+
+        return actor + " buys " + item + ".";
+
     }
 
 
