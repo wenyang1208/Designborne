@@ -130,7 +130,7 @@ public class HealingVial extends Item implements Consumable, Sellable, Purchasab
 
     @Override
     public String purchasedBy(Actor actor) {
-        int price = getSellingPrice();
+        int price = getPurchasingPrice();
         String string = "";
         if (Math.random() <= 0.25) {
             price = (int) (price * 1.5);
