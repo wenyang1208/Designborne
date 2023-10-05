@@ -17,18 +17,21 @@ import game.weapons.GreatKnife;
 import java.util.ArrayList;
 
 /**
- * A class that represent Traveller in the Forest
+ * A class that represent Isolated Traveller in the Forest
  *
  * Created by:
  * @author Chai Jun Lun
  *
  * Modified by:
- * @author Yang dan
+ * @author Yang Dan
  *
  */
 public class Traveller extends Actor{
 
 
+    /**
+     * a list of purchasable items
+     */
     private ArrayList<Purchasable> purchasables = new ArrayList<>();
 
 
@@ -43,6 +46,9 @@ public class Traveller extends Actor{
     }
 
 
+    /**
+     * a method to add items to be carried and sold to other actor
+     */
     private void configure(){
         this.purchasables.add( new HealingVial() );
         this.purchasables.add( new RefreshingFlask() );
@@ -51,12 +57,31 @@ public class Traveller extends Actor{
     }
 
 
+    /**
+     * Select the valid action with the highest priority
+     *
+     * @param actions    collection of possible Actions for this Actor
+     * @param lastAction The Action this Actor took last turn. Can do interesting things in conjunction with Action.getNextAction()
+     * @param map        the map containing the Actor
+     * @param display    the I/O object to which messages may be written
+     *
+     * @return the Action to be performed
+     */
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
         return new DoNothingAction();
     }
 
 
+    /**
+     * Returns a new collection of the Actions that the otherActor can do to Traveller
+     *
+     * @param otherActor the Actor that might be performing attack
+     * @param direction  String representing the direction of the other Actor
+     * @param map        current GameMap
+     *
+     * @return A collection of Actions.
+     */
     @Override
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actions  = new ActionList();

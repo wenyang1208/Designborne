@@ -32,8 +32,14 @@ public abstract class Enemy extends Actor {
 
 
     /* Attribute */
+    /**
+     * a map of behaviours of an enemy
+     */
     private Map<Integer, Behaviour> behaviours = new TreeMap<>(); // TreeMap is used so that behaviours are stored in order
 
+    /**
+     * runes, the currency used in the world of “Designborne”
+     */
     private Rune runes;
 
     /**
@@ -65,6 +71,12 @@ public abstract class Enemy extends Actor {
     }
 
     // get behaviours
+    /**
+     * A method to get a map of behaviours of an enemy
+     *
+     * @return a map of behaviours of an enemy
+     *
+     */
     public Map<Integer, Behaviour> getBehaviours() {
         return behaviours;
     }
@@ -90,10 +102,12 @@ public abstract class Enemy extends Actor {
     }
 
     /**
-     * Returns a new collection of the Actions that the otherActor can do to Hollow Soldier
+     * Returns a new collection of the Actions that the otherActor can do to enemies
+     *
      * @param otherActor the Actor that might be performing attack
      * @param direction  String representing the direction of the other Actor
      * @param map        current GameMap
+     *
      * @return A collection of Actions.
      */
     @Override
@@ -105,6 +119,14 @@ public abstract class Enemy extends Actor {
         return actions;
     }
 
+    /**
+     * Method that can be executed when the actor is unconscious due to the action of another actor
+     *
+     * @param actor the perpetrator
+     * @param map where the actor fell unconscious
+     *
+     * @return a string describing what happened when the actor is unconscious
+     */
     @Override
     public String unconscious(Actor actor, GameMap map) {
 

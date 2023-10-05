@@ -38,7 +38,7 @@ public class RedWolf extends Enemy implements Spawnable, AffectedByWeather {
     private final int hitRate;
 
     /**
-     * Constructor for the WanderingUndead class
+     * Constructor for the RedWolf class
      *
      */
     public RedWolf() {

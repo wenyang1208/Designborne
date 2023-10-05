@@ -13,6 +13,10 @@ import game.actions.ConsumeAction;
  * @author Chua Wen Yang
  */
 public class Rune extends Item implements Consumable{
+
+  /**
+   * value of rune
+   */
   private int value;
 
   /**
