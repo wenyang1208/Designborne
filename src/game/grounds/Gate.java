@@ -7,6 +7,7 @@ import edu.monash.fit2099.engine.actions.MoveActorAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
+import game.actions.TravelAction;
 import game.utils.Ability;
 import game.utils.Status;
 import game.actions.UnlockAction;
@@ -91,7 +92,7 @@ public class Gate extends Ground {
         else {
 
             if (actor.hasCapability(Ability.UNLOCK_GATE) && ! this.locationToMove.containsAnActor()){ // Only actor with the key can travel to the new map
-                actions.add(new MoveActorAction(locationToMove, destinationName));
+                actions.add(new TravelAction(locationToMove, location.toString(), destinationName));
             }
 
         }
