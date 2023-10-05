@@ -52,7 +52,7 @@ public class Abxervyer extends Enemy {
     public Abxervyer() {
 
         // displayed "Y", 2000 hp
-        super("Abxervyer", 'Y', 1, new Rune(5000));
+        super("Abxervyer", 'Y', 2000, new Rune(5000));
 
         // attack the player with its limbs, dealing 80 damage with 25% accuracy
         this.damage = 80;
