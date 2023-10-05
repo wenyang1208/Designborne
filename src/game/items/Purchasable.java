@@ -16,9 +16,9 @@ import edu.monash.fit2099.engine.actors.Actor;
 public interface Purchasable {
 
     /**
-     * Get the selling price of the purchasable item
+     * Get the purchasing price of the purchasable item
      *
-     * @return an integer value representing the purchasable price
+     * @return an integer value representing the purchasable item's price
      */
     int getPurchasingPrice();
 
@@ -27,7 +27,7 @@ public interface Purchasable {
      *
      * @param actor Actor who purchase an item at the sale stage
      *
-     * @return a string showing the result of purchasing item
+     * @return a string showing the result after purchasing the item
      */
     String purchasedBy(Actor actor);
 

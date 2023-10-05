@@ -32,6 +32,16 @@ public class RefreshingFlask extends Item implements Consumable, Sellable, Purch
     private final float healingPercentage;
 
     /**
+     * selling price of Refreshing Flask
+     */
+    private static final int soldPrice = 25;
+
+    /**
+     * purchasing price of Refreshing Flask
+     */
+    private static final int purchasedPrice = 75;
+
+    /**
      * Constructor for the RefreshingFlask class
      *
      * It has the ability to increase stamina point after consumption
@@ -76,7 +86,16 @@ public class RefreshingFlask extends Item implements Consumable, Sellable, Purch
 
     }
 
-
+    /**
+     * List of allowable actions that Refreshing Flask allows its owner do to other actor
+     *
+     * The player will sell Refreshing Flask to the other actor if the other actor has the capability of Status.TRADER
+     *
+     * @param otherActor the other actor
+     * @param location the location of the other actor
+     *
+     * @return an unmodifiable list of Actions
+     */
     @Override
     public ActionList allowableActions(Actor otherActor, Location location) {
         ActionList actions = new ActionList();
@@ -85,13 +104,29 @@ public class RefreshingFlask extends Item implements Consumable, Sellable, Purch
         return actions;
     }
 
-
+    /**
+     * Get the selling price of the Refreshing Flask
+     *
+     * Refreshing Flask can be sold at 25 runes
+     *
+     * @return an integer value representing the selling price of Refreshing Flask
+     */
     @Override
     public int getSellingPrice() {
-        return 25;
+
+        return soldPrice;
+
     }
 
-
+    /**
+     * Sell Refreshing Flask to the trader
+     *
+     * There is a 50% chance of the traveller taking the Refreshing Flask from the player without paying the player
+     *
+     * @param actor Actor who sells Refreshing Flask at the sale stage
+     *
+     * @return a sting showing the result after selling Refreshing Flask
+     */
     @Override
     public String soldBy(Actor actor) {
         int price = getSellingPrice();
@@ -103,13 +138,27 @@ public class RefreshingFlask extends Item implements Consumable, Sellable, Purch
         return actor + " successfully sold " + this + " for " + price + " runes to Traveller.";
     }
 
-
+    /**
+     * Get the purchasing price of Refreshing Flask
+     *
+     * Refreshing Flask can be purchased at 75 runes
+     *
+     * @return an integer value representing the purchasable Refreshing Flask's price
+     */
     @Override
     public int getPurchasingPrice() {
-        return 75;
+
+        return purchasedPrice;
+
     }
 
-
+    /**
+     * Purchase Refreshing Flask from the trader
+     *
+     * @param actor Actor who purchase Refreshing Flask at the sale stage
+     *
+     * @return a string showing the result of after purchasing Refreshing Flask
+     */
     @Override
     public String purchasedBy(Actor actor) {
         int price = getPurchasingPrice();

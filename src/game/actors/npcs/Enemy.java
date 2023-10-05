@@ -75,7 +75,6 @@ public abstract class Enemy extends Actor {
      * A method to get a map of behaviours of an enemy
      *
      * @return a map of behaviours of an enemy
-     *
      */
     public Map<Integer, Behaviour> getBehaviours() {
         return behaviours;

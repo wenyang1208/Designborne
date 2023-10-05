@@ -52,7 +52,7 @@ public class Abxervyer extends Enemy {
     public Abxervyer() {
 
         // displayed "Y", 2000 hp
-        super("Abxervyer", 'Y', 2000, new Rune(5000));
+        super("Abxervyer, The Forest Watcher", 'Y', 2000, new Rune(5000));
 
         // attack the player with its limbs, dealing 80 damage with 25% accuracy
         this.damage = 80;
@@ -127,6 +127,14 @@ public class Abxervyer extends Enemy {
 
     }
 
+    /**
+     * Method that can be executed when the Abxervyer is unconscious due to the action of another actor
+     *
+     * @param actor the perpetrator
+     * @param map where the player fell unconscious
+     *
+     * @return a string describing what happened when the Abxervyer is unconscious
+     */
     @Override
     public String unconscious(Actor actor, GameMap map) {
 

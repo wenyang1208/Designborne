@@ -60,6 +60,16 @@ public class Broadsword extends WeaponItem implements Sellable, Purchasable {
       */
     private int remainingFocusTurn;
 
+     /**
+      * selling price of Broadsword
+      */
+     private static final int soldPrice = 100;
+
+     /**
+      * purchasing price of Broadsword
+      */
+     private static final int purchasedPrice = 250;
+
     /**
      * Constructor of the Broadsword class
      *
@@ -81,7 +91,6 @@ public class Broadsword extends WeaponItem implements Sellable, Purchasable {
         this.remainingFocusTurn = FOCUS_DURATION;
 
     }
-
 
     /**
      * Inform Broadsword on the ground of the passage of time.
@@ -166,13 +175,27 @@ public class Broadsword extends WeaponItem implements Sellable, Purchasable {
          return actions;
      }
 
-
+     /**
+      * Get the selling price of the Broadsword
+      *
+      * Broadsword can be sold at 100 runes
+      *
+      * @return an integer value representing the selling price of Broadsword
+      */
      @Override
      public int getSellingPrice() {
-         return 100;
+
+         return soldPrice;
+
      }
 
-
+     /**
+      * Sell Broadsword to the trader
+      *
+      * @param actor Actor who sells Broadsword at the sale stage
+      *
+      * @return a sting showing the result of after selling Broadsword
+      */
      @Override
      public String soldBy(Actor actor) {
          int price = getSellingPrice();
@@ -181,13 +204,27 @@ public class Broadsword extends WeaponItem implements Sellable, Purchasable {
          return actor + " successfully sold " + this + " for " + price + " runes to Traveller.";
      }
 
-
+     /**
+      * Get the purchasing price of the Broadsword
+      *
+      * Broadsword can be purchased at 250 runes
+      *
+      * @return an integer value representing the purchasable Broadsword's price
+      */
      @Override
      public int getPurchasingPrice() {
-         return 250;
+
+         return purchasedPrice;
+
      }
 
-
+     /**
+      * Purchase Broadsword from the trader
+      *
+      * @param actor Actor who purchase Broadsword at the sale stage
+      *
+      * @return a string showing the result of after purchasing Broadsword
+      */
      @Override
      public String purchasedBy(Actor actor) {
          int price = getPurchasingPrice();

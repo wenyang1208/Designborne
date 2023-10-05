@@ -30,7 +30,7 @@ public class Traveller extends Actor{
 
 
     /**
-     * a list of purchasable items
+     * A list of Purchasable items
      */
     private ArrayList<Purchasable> purchasables = new ArrayList<>();
 
@@ -47,7 +47,7 @@ public class Traveller extends Actor{
 
 
     /**
-     * a method to add items to be carried and sold to other actor
+     * A method to add items to be carried and sold to other actor into a list of Purchasable items
      */
     private void configure(){
         this.purchasables.add( new HealingVial() );

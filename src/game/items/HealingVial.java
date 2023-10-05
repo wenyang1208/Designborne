@@ -30,6 +30,16 @@ public class HealingVial extends Item implements Consumable, Sellable, Purchasab
     private final float healingPercentage;
 
     /**
+     * selling price of Healing Vial
+     */
+    private static final int soldPrice = 35;
+
+    /**
+     * purchasing price of Healing Vial
+     */
+    private static final int purchasedPrice = 100;
+
+    /**
      * Constructor of HealingVial class
      *
      * It has the ability to increase health point after consumption
@@ -75,7 +85,7 @@ public class HealingVial extends Item implements Consumable, Sellable, Purchasab
     /**
      * List of allowable actions that Healing Vial allows its owner do to other actor
      *
-     * The player will sell item to the other actor if the other actor has the capability of Status.TRADER
+     * The player will sell Healing Vial to the other actor if the other actor has the capability of Status.TRADER
      *
      * @param otherActor the other actor
      * @param location the location of the other actor
@@ -93,13 +103,16 @@ public class HealingVial extends Item implements Consumable, Sellable, Purchasab
     /**
      * Get the selling price of the Healing Vial
      *
+     * Healing Vial can be sold at 35 runes
+     *
      * @return an integer value representing the selling price of Healing Vial
      */
     @Override
     public int getSellingPrice() {
-        return 35;
-    }
 
+        return soldPrice;
+
+    }
 
     /**
      * Sell the Healing Vial to the trader
@@ -122,12 +135,27 @@ public class HealingVial extends Item implements Consumable, Sellable, Purchasab
     }
 
 
+    /**
+     * Get the purchasing price of Healing Vial
+     *
+     * Healing Vial can be purchased at 100 runes
+     *
+     * @return an integer value representing the purchasable Healing Vial's price
+     */
     @Override
     public int getPurchasingPrice() {
-        return 100;
+
+        return purchasedPrice;
+
     }
 
-
+    /**
+     * Purchase Healing Vial from the trader
+     *
+     * @param actor Actor who purchase Healing Vial at the sale stage
+     *
+     * @return a string showing the result of after purchasing Healing Vial
+     */
     @Override
     public String purchasedBy(Actor actor) {
         int price = getPurchasingPrice();

@@ -20,11 +20,11 @@ public interface Sellable {
 
 
     /**
-     * Sell the item to the trader
+     * Sell an item to the trader
      *
      * @param actor Actor who sells items at the sale stage
      *
-     * @return a string showing the result of selling item
+     * @return a string showing the result after selling the item
      */
     String soldBy(Actor actor);
 

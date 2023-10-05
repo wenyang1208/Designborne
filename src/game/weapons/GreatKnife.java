@@ -14,7 +14,7 @@ import game.utils.Ability;
 import game.utils.Status;
 
 /**
- * Class representing the great knife weapon that is sold by Traveller
+ * Class representing the Great Knife weapon that is sold by Traveller
  *
  * Created by:
  * @author Yang Dan
@@ -25,9 +25,19 @@ public class GreatKnife extends WeaponItem implements Sellable, Purchasable {
 
     /* Default constants for the stamina used to activate the skill of great knife */
     /**
-     * Default constants for the stamina used to activate the skill of grear knife
+     * default constants for the stamina used to activate the skill of grear knife
      */
     private static final float REDUCED_STAMINA_RATE = 0.25f;
+
+    /**
+     * selling price of Great Knife
+     */
+    private static final int soldPrice = 175;
+
+    /**
+     * purchasing price of Great Knife
+     */
+    private static final int purchasedPrice = 300;
 
 
     /**
@@ -70,20 +80,22 @@ public class GreatKnife extends WeaponItem implements Sellable, Purchasable {
     /**
      * Get the selling price of the Great Knife
      *
-     * Great Knife can be sold at 250 runes
+     * Great Knife can be sold at 175 runes
      *
      * @return an integer value representing the selling price of Great Knife
      */
     @Override
     public int getSellingPrice() {
-        return 175;
+
+        return soldPrice;
     }
 
-
     /**
-     * Sell great knife to the trader and there is a 10% chance of the traveller taking the runes from the player instead.
+     * Sell Great Knife to the trader
      *
-     * @param actor Actor who sells items at the sale stage
+     * There is a 10% chance of the traveller taking the runes from the player instead.
+     *
+     * @param actor Actor who sells Great Knife at the sale stage
      *
      * @return a sting showing the result of selling this item
      */
@@ -99,13 +111,27 @@ public class GreatKnife extends WeaponItem implements Sellable, Purchasable {
         return actor + " successfully sold " + this + " for " + price + " runes to Traveller.";
     }
 
-
+    /**
+     * Get the purchasing price of the Great Knife
+     *
+     * Great Knife can be purchased at 300 runes
+     *
+     * @return an integer value representing the purchasable Great Knife's price
+     */
     @Override
     public int getPurchasingPrice() {
-        return 300;
+
+        return purchasedPrice;
+
     }
 
-
+    /**
+     * Purchase Great Knife from the trader
+     *
+     * @param actor Actor who purchase Great Knife at the sale stage
+     *
+     * @return a string showing the result of after purchasing Great Knife
+     */
     @Override
     public String purchasedBy(Actor actor) {
         int price = getPurchasingPrice();

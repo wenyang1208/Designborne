@@ -12,9 +12,10 @@ import game.utils.Ability;
 import game.utils.Status;
 
 /**
- * class representing the giant hammer weapon that can only be picked from the room at the end of the forest
+ * A class representing the Giant Hammer weapon that can only be picked from the room at the end of the forest
  *
- * @author yangdan
+ * Created by:
+ * @author Yang Dan
  */
 
 public class GiantHammer extends WeaponItem implements Sellable {
@@ -22,9 +23,14 @@ public class GiantHammer extends WeaponItem implements Sellable {
 
     /* Default constants for the stamina used to activate the skill of giant hammer */
     /**
-     * Default constants for the stamina used to activate the skill of giant hammer
+     * default constants for the stamina used to activate the skill of giant hammer
      */
     private static final float REDUCED_STAMINA_RATE = 0.05f;
+
+    /**
+     * selling price of Giant Hammer
+     */
+    private static final int soldPrice = 250;
 
     /**
      * Constructor of Giant Hammer class
@@ -68,19 +74,21 @@ public class GiantHammer extends WeaponItem implements Sellable {
      *
      * Giant hammer can be sold at 250 runes
      *
-     * @return an integer value representing the selling price of  Giant Hammer
+     * @return an integer value representing the selling price of Giant Hammer
      */
     @Override
     public int getSellingPrice() {
-        return 250;
+
+        return soldPrice;
+
     }
 
     /**
-     * Sell giant hammer to the trader.
+     * Sell Giant Hammer to the trader
      *
-     * @param actor Actor who sells items at the sale stage
+     * @param actor Actor who sells Giant Hammer at the sale stage
      *
-     * @return a sting showing the result of selling this item
+     * @return a sting showing the result of after selling Giant Hammer
      */
     @Override
     public String soldBy(Actor actor) {

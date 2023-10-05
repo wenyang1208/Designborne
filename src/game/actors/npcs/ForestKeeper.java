@@ -123,11 +123,11 @@ public class ForestKeeper extends Enemy implements Spawnable, AffectedByWeather 
     }
 
     /**
-     * Method that can be executed when the Red Wolf is unconscious due to natural causes or accident
+     * Method that can be executed when the Forest Keeper is unconscious due to natural causes or accident
      *
      * @param map where the actor fell unconscious
      *
-     * @return a string describing what happened when the Red Wolf is unconscious
+     * @return a string describing what happened when the Forest Keeper is unconscious
      */
     public String unconscious(GameMap map) {
 
