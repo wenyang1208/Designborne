@@ -122,8 +122,6 @@ public class RedWolf extends Enemy implements Spawnable, AffectedByWeather {
     @Override
     public String unconscious(Actor actor, GameMap map) {
 
-        dropItem(map);
-
         WeatherManager.getWeatherInstance().unregisterWeather(this);
 
         return super.unconscious(actor, map);
