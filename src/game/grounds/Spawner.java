@@ -63,8 +63,6 @@ public abstract class Spawner extends Ground {
      * A setter to set the spawn percentage to spawn an enemy
      *
      * @param newSpawnPercentage the new spawn percentage to spawn an enemy
-     *
-     * @return a double that representing the spawn percentage to spawn an enemy
      */
     public void setSpawnPercentage(double newSpawnPercentage) {
 
