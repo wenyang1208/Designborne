@@ -24,12 +24,22 @@ import game.utils.Status;
 public class Bloodberry extends Item implements Consumable, Sellable{
 
   /**
+   * selling price of Bloodberry
+   */
+  private static final int soldPrice = 10;
+
+
+  /**
    * Constructor for the Bloodberry class.
    * Creates a Bloodberry item with the name "Bloodberry", represented by '*', and makes it stackable.
    */
   public Bloodberry() {
+
     super("Bloodberry", '*', true);
+
   }
+
+
 
   /**
    * Retrieves the list of allowable actions for the owner actor when interacting with this Bloodberry item.
@@ -82,7 +92,9 @@ public class Bloodberry extends Item implements Consumable, Sellable{
    */
   @Override
   public int getSellingPrice() {
-    return 10;
+
+    return soldPrice;
+
   }
 
   /**

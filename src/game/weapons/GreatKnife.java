@@ -102,12 +102,16 @@ public class GreatKnife extends WeaponItem implements Sellable, Purchasable {
     @Override
     public String soldBy(Actor actor) {
         int price = getSellingPrice();
+
         actor.removeItemFromInventory( this ); // remove this item from the player's inventory
+
         if (Math.random() <= 0.1){ // there is 10% chance to take at most 175 runes from the player
             actor.deductBalance( Math.min(actor.getBalance(), price) );
             return "Traveller takes the runes from " + actor + ".";
         }
+
         actor.addBalance( price ); // successfully sold it, so add balance
+
         return actor + " successfully sold " + this + " for " + price + " runes to Traveller.";
     }
 
@@ -135,15 +139,20 @@ public class GreatKnife extends WeaponItem implements Sellable, Purchasable {
     @Override
     public String purchasedBy(Actor actor) {
         int price = getPurchasingPrice();
+
         String string = "";
+
         if (Math.random() <= 0.05){
             price = price * 3;
             string = "Traveller asks to pay 3x the original price of the weapon. ";
         }
+
         if (actor.getBalance() < price)
             return string + "Balance is less than what the Traveller asks for, the purchase fails.";
+
         actor.deductBalance( price );
-        actor.addItemToInventory( new GreatKnife());
-        return string + actor + " successfully purchased Great Knife for " + price + " runes.";
+        actor.addItemToInventory(new GreatKnife());
+
+        return string + actor + " successfully purchased " + this + " for " + price + " runes.";
     }
 }

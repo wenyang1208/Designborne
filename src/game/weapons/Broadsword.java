@@ -77,7 +77,7 @@ public class Broadsword extends WeaponItem implements Sellable, Purchasable {
      * remainingFocusTurn will be set to 5 when it is created
      */
     public Broadsword() {
-        super("BroadSword", '1', 110, "slashes", DEFAULT_HIT_RATE);
+        super("Broadsword", '1', 110, "slashes", DEFAULT_HIT_RATE);
         this.remainingFocusTurn = FOCUS_DURATION;
         this.addCapability(Ability.SKILL);
     }
@@ -228,13 +228,19 @@ public class Broadsword extends WeaponItem implements Sellable, Purchasable {
      @Override
      public String purchasedBy(Actor actor) {
          int price = getPurchasingPrice();
-         if (actor.getBalance() < price)
+
+         if (actor.getBalance() < price) {
              return "Balance is less than what the Traveller asks for, the purchase fails.";
-         actor.deductBalance( price );
-         if (Math.random() <= 0.05) {
-             return "Traveller takes " + price + " runes without giving the broadsword.";
          }
-         actor.addItemToInventory( new Broadsword());
-         return actor + " successfully purchased Broadsword for " + price + " runes.";
+
+         actor.deductBalance(price);
+
+         if (Math.random() <= 0.05) {
+             return "Traveller takes " + price + " runes without giving the " + this + ".";
+         }
+
+         actor.addItemToInventory(new Broadsword());
+
+         return actor + " successfully purchased " + this + " for " + price + " runes.";
      }
  }

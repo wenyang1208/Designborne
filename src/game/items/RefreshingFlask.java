@@ -130,11 +130,15 @@ public class RefreshingFlask extends Item implements Consumable, Sellable, Purch
     @Override
     public String soldBy(Actor actor) {
         int price = getSellingPrice();
+
         actor.removeItemFromInventory( this );
+
         if (Math.random() <= 0.5) {
             return "Traveller takes " + this + " without paying " + actor;
         }
+
         actor.addBalance( price );
+
         return actor + " successfully sold " + this + " for " + price + " runes to Traveller.";
     }
 
@@ -162,15 +166,21 @@ public class RefreshingFlask extends Item implements Consumable, Sellable, Purch
     @Override
     public String purchasedBy(Actor actor) {
         int price = getPurchasingPrice();
+
         String string = "";
+
         if (Math.random() <= 0.1) {
             price = (int) (price * 0.8);
-            string = "Travellers gives a 20% discount. ";
+            string = "Travellers gives a 20% discount.";
         }
-        if (actor.getBalance() < price)
+
+        if (actor.getBalance() < price) {
             return string + "Balance is less than what the Traveller asks for, the purchase fails.";
-        actor.deductBalance( price );
-        actor.addItemToInventory( new RefreshingFlask() );
-        return string + actor + " successfully purchased Refreshing Flask for " + price + " runes.";
+        }
+
+        actor.deductBalance(price);
+        actor.addItemToInventory(new RefreshingFlask());
+
+        return string + actor + " successfully purchased " + this + " for " + price + " runes.";
     }
 }

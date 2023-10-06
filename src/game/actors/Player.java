@@ -67,7 +67,7 @@ public class Player extends Actor {
         this.hitRate = 80;
 
         // initialise the wallet balance
-        this.addBalance(0);
+        this.addBalance(5000);
 
     }
 

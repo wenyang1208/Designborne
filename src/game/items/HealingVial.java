@@ -124,13 +124,17 @@ public class HealingVial extends Item implements Consumable, Sellable, Purchasab
     @Override
     public String soldBy(Actor actor) {
         int price = getSellingPrice();
+
         String string = "";
+
         if (Math.random() <= 0.1) {
             price = price * 2;
             string = "Traveller pays 2x the original price. ";
         }
+
         actor.removeItemFromInventory( this );
         actor.addBalance( price );
+
         return string + actor + " successfully sold " + this + " for " + price + " runes to Traveller.";
     }
 
@@ -159,15 +163,20 @@ public class HealingVial extends Item implements Consumable, Sellable, Purchasab
     @Override
     public String purchasedBy(Actor actor) {
         int price = getPurchasingPrice();
+
         String string = "";
+
         if (Math.random() <= 0.25) {
             price = (int) (price * 1.5);
-            string = "Traveller asks to pay 50% more. ";
+            string = "Traveller asks to pay 50% more.";
         }
+
         if (actor.getBalance() < price)
             return string + "Balance is less than what the Traveller asks for, the purchase fails.";
-        actor.deductBalance( price );
+
+        actor.deductBalance(price);
         actor.addItemToInventory( new HealingVial() );
-        return string + actor + " successfully purchased Healing Vial for " + price + " runes.";
+
+        return string + actor + " successfully purchased " + this + " for " + price + " runes.";
     }
 }
