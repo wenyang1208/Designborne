@@ -37,10 +37,11 @@ public class RedWolf extends Enemy implements Spawnable, AffectedByWeather {
      * hit rate to other actor
      */
     private final int hitRate;
+
     /**
-     * damage multiplier
+     * default damage multiplier
      */
-    private float damageMultiplier;
+    private float damageMultiplier = 1.0f;
 
     /**
      * Constructor for the RedWolf class

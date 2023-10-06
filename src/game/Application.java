@@ -147,6 +147,9 @@ public class Application {
         //create red wolf and forest keeper
         ancientWoods.at(40,10).addActor(new RedWolf());
         ancientWoods.at(35,10).addActor(new ForestKeeper());
+        // create bloodberry
+        ancientWoods.at(21, 4).addItem(new Bloodberry());
+
 
         // Configure abxervyerBattleRoom
         abxervyerBattleRoom.at(32, 0).setGround(hut);
@@ -166,33 +169,45 @@ public class Application {
         // Create gate to travel to another map
 
         // create a gate to burial ground map, and put it in the abandoned village map
-        abandonedVillage.at(30,0).setGround(new Gate("Burial Ground", burialGround.at(21, 6)) );
+        abandonedVillage.at(30,0).setGround(new Gate("Burial Ground", burialGround.at(23, 0)) );
 
         // create a gate to abandoned village map, and put it in the burial ground map
-        burialGround.at(23,0).setGround(new Gate("Abandoned Village", abandonedVillage.at(0, 5)) );
+        burialGround.at(23,0).setGround(new Gate("Abandoned Village", abandonedVillage.at(30, 0)) );
 
         // create a gate to ancient woods map, and put it in the burial ground map
-        burialGround.at(0, 10).setGround(new Gate("Ancient Woods", ancientWoods.at(21, 3)) );
+        burialGround.at(0, 10).setGround(new Gate("Ancient Woods", ancientWoods.at(30, 0)));
 
         // create a gate to burial ground map, and put it in the ancient woods map
-        ancientWoods.at(30, 0).setGround(new Gate("Burial Ground", burialGround.at(6, 0)) );
+        ancientWoods.at(30, 0).setGround(new Gate("Burial Ground", burialGround.at(0, 10)));
 
         // create a gate to abxervyer battle room map, and put it in the abxervyer battle map
-        ancientWoods.at(0, 6).setGround(new Gate("Abxervyer, the Forest Watcher", abxervyerBattleRoom.at(39, 13)) );
+        ancientWoods.at(0, 6).setGround(new Gate("Abxervyer Battle Room", abxervyerBattleRoom.at(39, 13)) );
 
         // Set Player
         // 150 hit points (the health attribute) and 200 stamina
         Player player = new Player("The Abstracted One", '@', 15000, 20000);
+
+        // Add player to the map
+//        world.addPlayer(player, abandonedVillage.at(29, 5));
+//        world.addPlayer(player, burialGround.at(0,10));
+        world.addPlayer(player, ancientWoods.at(30, 3));
+//        world.addPlayer(player, abxervyerBattleRoom.at(14, 10));
+
         // test
+
+        // inventory
         player.addItemToInventory(new OldKey());
 //        player.addBalance(10000);
 //        player.addItemToInventory(new Bloodberry());
 //        player.addItemToInventory(new GiantHammer());
 
-        // Add player to the map
-//        world.addPlayer(player, abandonedVillage.at(29, 5));
-        world.addPlayer(player, ancientWoods.at(21, 3));
-//        world.addPlayer(player, abxervyerBattleRoom.at(14, 10));
+        // travel
+//        world.addPlayer(player, ancientWoods.at(0, 6));
+
+        // attack enemy
+//        abxervyerBattleRoom.at(14, 11).addActor(new ForestKeeper());
+//        abxervyerBattleRoom.at(15, 12).addActor(new RedWolf());
+//        ancientWoods.at(21,4).addActor(new RedWolf());
 
 
         for (String line : FancyMessage.TITLE.split("\n")) {
