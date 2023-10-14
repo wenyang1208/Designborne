@@ -12,6 +12,9 @@ import game.utils.Ability;
 import game.utils.Status;
 import game.actions.UnlockAction;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * A class that represents the gate on the map
  *
@@ -35,6 +38,11 @@ public class Gate extends Ground {
      * location of gate to travel to
      */
     private Location locationToMove;
+    // map that stores multiple destinations to travel to
+    /**
+     * a map of collection of destinations to travel to
+     */
+    private Map<Location, String> mapLocation = new HashMap<>();
 
 
     /**
@@ -52,6 +60,8 @@ public class Gate extends Ground {
         this.addCapability(Status.LOCKED);
         this.destinationName = name;
         this.locationToMove = locationToMove;
+        // default destination to travel
+        addLocation(locationToMove, destinationName);
 
     }
 
@@ -91,8 +101,12 @@ public class Gate extends Ground {
 
         else {
 
-            if (actor.hasCapability(Ability.UNLOCK_GATE) && ! this.locationToMove.containsAnActor()){ // Only actor with the key can travel to the new map
-                actions.add(new TravelAction(locationToMove, location.toString(), destinationName));
+            if (actor.hasCapability(Ability.UNLOCK_GATE) && ! this.locationToMove.containsAnActor()) { // Only actor with the key can travel to the new map
+
+                // loop through map of locations to travel
+                for (Map.Entry<Location, String> gameLocation : mapLocation.entrySet()) {
+                    actions.add(new TravelAction(gameLocation.getKey(), location.toString(), gameLocation.getValue()));
+                }
             }
 
         }
@@ -100,6 +114,18 @@ public class Gate extends Ground {
         // return output
         return actions;
 
+    }
+
+    // add new location to travel to into map of destinations' collection
+    /**
+     * Add destinations to the map that stores multiple destinations to be travelled
+     *
+     * @param location location of gate to travel to
+     * @param destinationName name of destination to be travelled
+     */
+    public void addLocation(Location location, String destinationName) {
+
+        this.mapLocation.put(location, destinationName);
     }
 
 }
