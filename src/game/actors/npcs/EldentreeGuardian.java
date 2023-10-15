@@ -49,8 +49,6 @@ public class EldentreeGuardian extends Enemy implements Spawnable{
         // they can walk around in the Void with no consequences.
         this.addCapability(Ability.STEP_ON_VOID);
 
-        // register to reset manager
-
     }
 
     /**
