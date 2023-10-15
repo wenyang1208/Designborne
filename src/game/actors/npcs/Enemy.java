@@ -8,6 +8,7 @@ import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.actors.Behaviour;
 import edu.monash.fit2099.engine.displays.Display;
+import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.behaviours.AttackBehaviour;
 import game.behaviours.WanderBehaviour;
@@ -25,7 +26,7 @@ import java.util.TreeMap;
  * @author Koe Rui En
  *
  * Modified by:
- * @author Yang Yang Dan
+ * @author Yang Dan
  * @author Chua Wen Yang
  */
 public abstract class Enemy extends Actor {
@@ -54,6 +55,7 @@ public abstract class Enemy extends Actor {
         super(name, displayChar, hitPoints);
         this.addCapability(Status.HOSTILE_TO_PLAYER);
         this.runes = runes;
+
         // All enemies can wander and attack
         addBehaviour(999, new WanderBehaviour());
         addBehaviour(500, new AttackBehaviour());
@@ -67,7 +69,19 @@ public abstract class Enemy extends Actor {
      * @param behaviour behaviour of an enemy as values to be added
      */
     public void addBehaviour(Integer i, Behaviour behaviour){
+
         this.behaviours.put(i, behaviour);
+
+    }
+
+    /**
+     * A method to remove the existing behaviour of an enemy
+     *
+     * @param i key to be added as an integer
+     */
+    public void removeBehaviour(Integer i){
+
+        this.behaviours.remove(i);
     }
 
     // get behaviours
@@ -135,7 +149,6 @@ public abstract class Enemy extends Actor {
 
     }
 
-
     /**
      * Return a boolean value after randomly generating a value within the chance to drop an item
      *
@@ -162,7 +175,12 @@ public abstract class Enemy extends Actor {
      * @param map the map containing the Enemy
      *
      */
-    public abstract void dropItem(GameMap map);
+    public void dropItem(GameMap map) {
+
+        // every enemy will 100% drop runes
+        this.getRunes().getDropAction(this).execute(this,map);
+
+    }
 
 
 }
