@@ -52,7 +52,7 @@ public class Abxervyer extends Enemy {
     public Abxervyer() {
 
         // displayed "Y", 2000 hp
-        super("Abxervyer, The Forest Watcher", 'Y', 2000, new Rune(5000));
+        super("Abxervyer, The Forest Watcher", 'Y', 1, new Rune(5000));
 
         // attack the player with its limbs, dealing 80 damage with 25% accuracy
         this.damage = 80;
@@ -114,13 +114,14 @@ public class Abxervyer extends Enemy {
     /**
      * Drop items on the ground once Abxervyer is defeated
      *
-     * @param map the map containing the Enemy
+     * @param map the map containing the Abxervyer
      */
     @Override
     public void dropItem(GameMap map) {
 
         // 100% chance to drop runes once defeated
-        this.getRunes().getDropAction(this).execute(this, map);
+//        this.getRunes().getDropAction(this).execute(this, map);
+        super.dropItem(map);
 
         // boss last stood turns into a Gate once defeated
         map.locationOf(this).setGround(this.droppedGate);

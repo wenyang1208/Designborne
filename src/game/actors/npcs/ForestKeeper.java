@@ -74,15 +74,16 @@ public class ForestKeeper extends Enemy implements Spawnable, AffectedByWeather 
     // 20% chance to drop a healing vial once defeated
     // 100% chance to drop runes once defeated
     /**
-     * Drop an item on the ground
+     * Drop items on the ground once the Forest Keeper is defeated
      *
-     * @param map the map containing the Enemy
+     * @param map the map containing the Forest Keeper
      */
     @Override
     public void dropItem(GameMap map) {
 
-        // 100% drop runes
-        this.getRunes().getDropAction(this).execute(this,map);
+        // 100% drop runes once defeated
+//        this.getRunes().getDropAction(this).execute(this,map);
+        super.dropItem(map);
 
         // 20% chance to drop a healing vial
         if (dropItemChance(0.20)){

@@ -70,15 +70,16 @@ public class WanderingUndead extends Enemy implements Spawnable{
 
 
     /**
-     * Drop an item on the ground
+     * Drop items on the ground once the Wandering Undead is defeated
      *
-     * @param map the map containing the Enemy
+     * @param map the map containing the Wandering Undead
      */
     @Override
     public void dropItem(GameMap map) {
 
-        // 100% drop runes
-        this.getRunes().getDropAction(this).execute(this,map);
+        // 100% drop runes once defeated
+//        this.getRunes().getDropAction(this).execute(this,map);
+        super.dropItem(map);
 
         // 25 % drop old key
         if (dropItemChance(0.25)){

@@ -93,15 +93,16 @@ public class RedWolf extends Enemy implements Spawnable, AffectedByWeather {
 
     // 10% chance to drop a healing vial once defeated
     /**
-     * Drop an item on the ground
+     * Drop items on the ground once the Red Wolf is defeated
      *
-     * @param map the map containing the Enemy
+     * @param map the map containing the Red Wolf
      */
     @Override
     public void dropItem(GameMap map) {
 
-        // 100% drop runes
-        this.getRunes().getDropAction(this).execute(this,map);
+        // 100% drop runes once defeated
+//        this.getRunes().getDropAction(this).execute(this,map);
+        super.dropItem(map);
 
         // 10% chance to drop a healing vial
         if (dropItemChance(0.10)){

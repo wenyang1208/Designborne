@@ -72,15 +72,16 @@ public class HollowSoldier extends Enemy implements Spawnable{
 
 
     /**
-     * Drop an item on the ground
+     * Drop items on the ground once the Hollow Soldier is defeated
      *
-     * @param map the map containing the Enemy
+     * @param map the map containing the Hollow Soldier
      */
     @Override
     public void dropItem(GameMap map) {
 
-        // 100% drop runes
-        this.getRunes().getDropAction(this).execute(this,map);
+        // 100% drop runes once defeated
+//        this.getRunes().getDropAction(this).execute(this,map);
+        super.dropItem(map);
 
         // 20% chance to drop a healing vial
         if (dropItemChance(0.20)) {
