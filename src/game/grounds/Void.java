@@ -54,12 +54,20 @@ public class Void extends Ground {
             // get actor at this location
             Actor target = location.getActor();
 
-            ret += target + " has stepped into the void" + "\n";
+//            ret += target + " has stepped into the void" + "\n";
 
-            // check target is boss or not
+            // check target has ability to step on void
             if (!target.hasCapability(Ability.STEP_ON_VOID)){
 
+                ret += target + " has stepped into the void" + "\n";
                 ret += target.unconscious(location.map());
+
+            }
+
+            // target can step on void since it is immune
+            else {
+
+                ret += target + " has stepped into the void, but void does not hurt it\n";
 
             }
 
