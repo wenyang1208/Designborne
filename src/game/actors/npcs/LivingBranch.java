@@ -1,0 +1,106 @@
+//declare package
+package game.actors.npcs;
+
+// import engine and game packages
+import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
+import game.items.Bloodberry;
+import game.items.Rune;
+import game.utils.Ability;
+
+
+/**
+ * A class that represent Living Branch enemy in the Overgrown Sanctuary
+ *
+ * Created by:
+ * @author Koe Rui En
+ *
+ */
+public class LivingBranch extends Enemy implements Spawnable{
+
+
+    // damage
+    /**
+     * damage to health
+     */
+    private final int damage;
+
+    // hit rate/accuracy
+    /**
+     * hit rate to other actor
+     */
+    private final int hitRate;
+
+    /**
+     * The constructor of the LivingBranch class.
+     *
+     */
+    public LivingBranch() {
+
+        // represented by “?”, 75 hitpoints
+        // drop 500 runes when defeated.
+        super("Living Branch", '?', 75, new Rune(500));
+
+        // can attack the player with their limbs, dealing 250 damage with 90% accuracy
+        this.damage = 250;
+        this.hitRate = 90;
+
+        // this enemy cannot wander and follow
+        // 999 -> Wander Behaviour
+        this.removeBehaviour(999);
+
+        // they can walk around in the Void with no consequences.
+        this.addCapability(Ability.STEP_ON_VOID);
+
+        // register to reset manager
+
+    }
+
+    /**
+     * Creates and returns an intrinsic weapon for Living Branch with different damage.
+     *
+     * @return a freshly-instantiated IntrinsicWeapon for Living Branch
+     */
+    @Override
+    public IntrinsicWeapon getIntrinsicWeapon() {
+
+        // create new intrinsic weapon for Living Branch
+        return new IntrinsicWeapon(damage, "pokes", hitRate);
+
+    }
+
+    /**
+     * Spawn the LivingBranch instance
+     *
+     * @return a new spawned LivingBranch instance
+     */
+    @Override
+    public Enemy spawnMethod() {
+
+        return new EldentreeGuardian();
+
+    }
+
+
+    // 50% chance of dropping a Bloodberry.
+    /**
+     * Drop items on the ground once the Living Branch is defeated
+     *
+     * @param map the map containing the Living Branch
+     */
+    @Override
+    public void dropItem(GameMap map) {
+
+//        // 100% drop runes once defeated
+//        this.getRunes().getDropAction(this).execute(this,map);
+        super.dropItem(map);
+
+        // 50% chance of dropping a Bloodberry.
+        if (dropItemChance(0.50)) {
+
+            new Bloodberry().getDropAction(this).execute(this, map);
+
+        }
+
+    }
+}
