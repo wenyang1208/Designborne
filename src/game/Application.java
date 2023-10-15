@@ -107,18 +107,37 @@ public class Application {
                 "..........~~+++++......................~",
                 ".........~~~~++++..................~~..~");
 
+        List<String> overgrownSanctuaryMap = Arrays.asList(
+                "++++.....++++........++++~~~~~.......~~~..........",
+                "++++......++.........++++~~~~.........~...........",
+                "+++..................+++++~~.......+++............",
+                "....................++++++......++++++............",
+                "...................++++........++++++~~...........",
+                "...................+++.........+++..~~~...........",
+                "..................+++..........++...~~~...........",
+                "~~~...........................~~~..~~~~...........",
+                "~~~~............+++..........~~~~~~~~~~...........",
+                "~~~~............+++.........~~~~~~~~~~~~..........",
+                "++~..............+++.......+~~........~~..........",
+                "+++..............+++......+++..........~~.........",
+                "+++..............+++......+++..........~~.........",
+                "~~~..............+++......+++..........~~~........",
+                "~~~~.............+++......+++..........~~~........"
+        );
 
         // Create GameMap
         GameMap abandonedVillage = new GameMap(groundFactory, abandonedVillageMap);
         GameMap burialGround = new GameMap(groundFactory, burialGroundMap);
         GameMap ancientWoods = new GameMap(groundFactory, ancientWoodsMap);
         GameMap abxervyerBattleRoom = new GameMap(groundFactory, abxervyerBattleRoomMap);
+        GameMap overgrownSanctuary = new GameMap(groundFactory, overgrownSanctuaryMap);
 
         // Add maps to the world
         world.addGameMap(abandonedVillage);
         world.addGameMap(burialGround);
         world.addGameMap(ancientWoods);
         world.addGameMap(abxervyerBattleRoom);
+        world.addGameMap(overgrownSanctuary);
 
         // Configure abandonedVillage
         Graveyard graveyard1 = new Graveyard( new WanderingUndead(), 0.25f );
@@ -140,16 +159,16 @@ public class Application {
         Bush bush = new Bush(new RedWolf(), 0.30f );
         ancientWoods.at(43, 7).setGround(hut);
         ancientWoods.at(43, 9).setGround(bush);
+        // create bloodberry
+        ancientWoods.at(21, 4).addItem(new Bloodberry());
         ancientWoods.at(57, 10).addItem(new Bloodberry());
         ancientWoods.at(55, 2).addItem(new Bloodberry());
         ancientWoods.at(8, 11).addItem(new Bloodberry());
+        // add traveller
         ancientWoods.at(19, 3).addActor(new Traveller());
         //create red wolf and forest keeper
         ancientWoods.at(40,10).addActor(new RedWolf());
         ancientWoods.at(35,10).addActor(new ForestKeeper());
-        // create bloodberry
-        ancientWoods.at(21, 4).addItem(new Bloodberry());
-
 
         // Configure abxervyerBattleRoom
         abxervyerBattleRoom.at(32, 0).setGround(hut);
@@ -162,9 +181,25 @@ public class Application {
         abxervyerBattleRoom.at(39, 12).addItem(new GiantHammer());
         Abxervyer abxervyer = new Abxervyer();
         // set gate for boss so it can save it
-        abxervyer.setDroppedGate(new Gate("Ancient Woods", ancientWoods.at(0, 5)));
+        Gate bossGate = new Gate("Ancient Woods", ancientWoods.at(0, 5));
+        abxervyer.setDroppedGate(bossGate);
+        // travel to another map, Overgrown Sanctuary
+        bossGate.addLocation(overgrownSanctuary.at(0, 6), "Overgrown Sanctuary");
         // create abxervyer, the forest keeper
-        abxervyerBattleRoom.at(12, 9).addActor( abxervyer );
+        abxervyerBattleRoom.at(12, 9).addActor(abxervyer);
+
+        // Configure overgrownSanctuary
+        // hut 20% chance spawn Eldentree Guardian at each turn.
+        Hut hut2 = new Hut(new EldentreeGuardian(), 0.20f);
+        // bush spawn “Living Branch with a 90% chance at each turn
+        Bush bush2 = new Bush(new LivingBranch(), 0.90f);
+        overgrownSanctuary.at(43, 7).setGround(hut2);
+        overgrownSanctuary.at(43, 9).setGround(bush2);
+        // create Eldentree Guardian and Living Branch
+        overgrownSanctuary.at(20,10).addActor(new EldentreeGuardian());
+        overgrownSanctuary.at(25,10).addActor(new LivingBranch());
+        overgrownSanctuary.at(25,10).setGround(new Void());
+
 
         // Create gate to travel to another map
 
@@ -180,8 +215,11 @@ public class Application {
         // create a gate to burial ground map, and put it in the ancient woods map
         ancientWoods.at(30, 0).setGround(new Gate("Burial Ground", burialGround.at(0, 10)));
 
-        // create a gate to abxervyer battle room map, and put it in the abxervyer battle map
-        ancientWoods.at(0, 6).setGround(new Gate("Abxervyer Battle Room", abxervyerBattleRoom.at(39, 13)) );
+        // create a gate to abxervyer battle room map, and put it in the ancient woods map
+        ancientWoods.at(0, 6).setGround(new Gate("Abxervyer Battle Room", abxervyerBattleRoom.at(39, 13)));
+
+        // create a gate to abxervyer battle room map, and put it in the overgrown sanctuary map
+        overgrownSanctuary.at(0,6).setGround(new Gate("Abxervyer Battle Room",abxervyerBattleRoom.at(39, 13)));
 
         // Set Player
         // 150 hit points (the health attribute) and 200 stamina
@@ -190,10 +228,12 @@ public class Application {
         // Add player to the map
 //        world.addPlayer(player, abandonedVillage.at(29, 5));
 //        world.addPlayer(player, burialGround.at(0,10));
-        world.addPlayer(player, ancientWoods.at(30, 3));
-//        world.addPlayer(player, abxervyerBattleRoom.at(14, 10));
+//        world.addPlayer(player, ancientWoods.at(30, 3));
+//        world.addPlayer(player, abxervyerBattleRoom.at(12, 10));
+        world.addPlayer(player, overgrownSanctuary.at(12, 10));
 
-        // test
+
+        // Testing
 
         // inventory
         player.addItemToInventory(new OldKey());
@@ -208,6 +248,9 @@ public class Application {
 //        abxervyerBattleRoom.at(14, 11).addActor(new ForestKeeper());
 //        abxervyerBattleRoom.at(15, 12).addActor(new RedWolf());
 //        ancientWoods.at(21,4).addActor(new RedWolf());
+        overgrownSanctuary.at(12,11).addActor(new EldentreeGuardian());
+        overgrownSanctuary.at(12,12).addActor(new LivingBranch());
+
 
 
         for (String line : FancyMessage.TITLE.split("\n")) {
