@@ -37,7 +37,7 @@ public class WeatherManager {
   private ArrayList<AffectedByWeather> weatherArrayList;
 
   /**
-   * constant turns of weather to be changed
+   * initial state of weather
    */
   // initial weather
   private Weather weather = Weather.SUNNY;
