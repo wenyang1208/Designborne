@@ -22,7 +22,7 @@ public class Monologue {
     /**
      * Name of the speaker
      */
-    private String speaker;
+    private Speaker speaker;
 
     /**
      * Constructor of the Monologue class
@@ -32,7 +32,7 @@ public class Monologue {
      * @param speaker name of the speaker
      *
      */
-    public Monologue(boolean condition, String text, String speaker){
+    public Monologue(boolean condition, String text, Speaker speaker){
         this.condition = condition;
         this.text = text;
         this.speaker = speaker;
