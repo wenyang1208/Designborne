@@ -10,6 +10,7 @@ package game.utils;
  * @author Koe Rui En
  * @author Yang Dan
  * @author Chua Wen Yang
+ * @author Chai Jun Lun
  */
 public enum Status {
 
@@ -22,6 +23,6 @@ public enum Status {
     TRADER,
     UPGRADE_PERSON,
     UPGRADED,
-    COMPLETE
+    COMPLETE,
 
 }

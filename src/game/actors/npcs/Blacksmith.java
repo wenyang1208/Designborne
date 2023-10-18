@@ -20,6 +20,8 @@ import java.util.ArrayList;
  * Created by:
  * @author Chua Wen Yang
  *
+ * Modified by:
+ * @author Yang Dan
  */
 public class Blacksmith extends Actor implements Speaker {
 
@@ -51,6 +53,13 @@ public class Blacksmith extends Actor implements Speaker {
     return new DoNothingAction();
   }
 
+  /**
+   * Generates a collection of monologues for an Actor based on their capabilities and the game context.
+   *
+   * @param actor The Actor for whom the monologues are being generated.
+   *
+   * @return An ArrayList of Monologue objects containing dialogues tailored to the Actor's capabilities and the game context.
+   */
   @Override
   public ArrayList<Monologue> generateMonologues(Actor actor) {
     monologues.add( new Monologue(true, "I used to be an adventurer like you, but then …. Nevermind, let’s get back to smithing.", "BlackSmith") );
@@ -62,6 +71,15 @@ public class Blacksmith extends Actor implements Speaker {
     return monologues;
   }
 
+  /**
+   * Returns a new collection of the Actions that the otherActor can do to Traveller
+   *
+   * @param otherActor the Actor that might be performing attack
+   * @param direction  String representing the direction of the other Actor
+   * @param map        current GameMap
+   *
+   * @return A collection of Actions.
+   */
   @Override
   public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
     if (otherActor.hasCapability(Status.HOSTILE_TO_ENEMY) && otherActor.hasCapability(Status.COMPLETE)){

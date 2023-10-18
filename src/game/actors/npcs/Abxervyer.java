@@ -13,6 +13,7 @@ import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.behaviours.FollowBehaviour;
 import game.reset.ResetManager;
 import game.reset.Resettable;
+import game.utils.Status;
 import game.weather.WeatherManager;
 import game.grounds.Gate;
 import game.items.Rune;
@@ -27,6 +28,7 @@ import game.utils.FancyMessage;
  *
  * Modified by:
  * @author Yang Dan
+ * @author Chai Jun Lun
  */
 public class Abxervyer extends Enemy{
 
@@ -155,7 +157,8 @@ public class Abxervyer extends Enemy{
             }
 
         }
-
+        // To ensure actor has defeated the boss.
+        actor.addCapability(Ability.DEFEATED_ABXERVYER);
 //        // need to remove from reset manager after died?
 //        ResetManager.getInstanceReset().removeResettable(this);
 

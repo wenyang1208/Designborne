@@ -7,6 +7,7 @@ package game.utils;
  * Modified by:
  * @author Koe Rui En
  * @author Yang Yang Dan
+ * @author Chai Jun Lun
  */
 public enum Ability {
 
@@ -15,6 +16,7 @@ public enum Ability {
     ENTER_FLOOR,
     STEP_ON_VOID,
     DEFEATED_ABXERVYER,
-    STAB_AND_STEP
+    STAB_AND_STEP,
+    GREAT_SLAM
 
 }

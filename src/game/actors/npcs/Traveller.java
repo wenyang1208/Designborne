@@ -6,10 +6,14 @@ import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
+import game.actions.ListenAction;
 import game.actions.PurchaseAction;
 import game.items.HealingVial;
 import game.items.Purchasable;
 import game.items.RefreshingFlask;
+import game.monologues.Monologue;
+import game.monologues.Speaker;
+import game.utils.Ability;
 import game.utils.Status;
 import game.weapons.Broadsword;
 import game.weapons.GreatKnife;
@@ -24,11 +28,15 @@ import java.util.ArrayList;
  *
  * Modified by:
  * @author Yang Dan
+ * @author Chai Jun Lun
  *
  */
-public class Traveller extends Actor{
+public class Traveller extends Actor implements Speaker {
 
-
+    /**
+     * A list of monologues that can be spoken to the player
+     */
+    private final ArrayList<Monologue> monologues = new ArrayList<>();
     /**
      * A list of Purchasable items
      */
@@ -89,7 +97,29 @@ public class Traveller extends Actor{
             for (Purchasable purchasable : this.purchasables){
                 actions.add( new PurchaseAction(purchasable));
             }
+            actions.add(new ListenAction(this));
         }
         return actions;
+    }
+
+    /**
+     * Generates a collection of monologues for an Actor based on their capabilities and the game context.
+     *
+     * @param actor The Actor for whom the monologues are being generated.
+     *
+     * @return An ArrayList of Monologue objects containing dialogues tailored to the Actor's capabilities and the game context.
+     */
+    @Override
+    public ArrayList<Monologue> generateMonologues(Actor actor) {
+        monologues.add(new Monologue(true,"Of course, I will never give you up, valuable customer!","Traveller"));
+        monologues.add(new Monologue(true,"I promise I will never let you down with the quality of the items that I sell.","Traveller"));
+        monologues.add(new Monologue(true,"You can always find me here. I'm never gonna run around and desert you, dear customer!","Traveller"));
+        monologues.add(new Monologue(true,"I'm never gonna make you cry with unfair prices.","Traveller"));
+        monologues.add(new Monologue(true,"Trust is essential in this business. I promise I’m never gonna say goodbye to a valuable customer like you.","Traveller"));
+        monologues.add(new Monologue(true,"Don't worry, I’m never gonna tell a lie and hurt you.","Traveller"));
+        monologues.add(new Monologue(actor.hasCapability(Ability.GREAT_SLAM),"Ooh, that’s a fascinating weapon you got there. I will pay a good price for it. You wouldn't get this price from any other guy.","Traveller"));
+        monologues.add(new Monologue(!actor.hasCapability(Ability.DEFEATED_ABXERVYER) ,"You know the rules of this world, and so do I. Each area is ruled by a lord. Defeat the lord of this area, Abxervyer, and you may proceed to the next area.","Traveller"));
+        monologues.add(new Monologue(actor.hasCapability(Ability.DEFEATED_ABXERVYER) & actor.hasCapability(Ability.GREAT_SLAM),"Congratulations on defeating the lord of this area. I noticed you still hold on to that hammer. Why don’t you sell it to me? We've known each other for so long. I can tell you probably don’t need that weapon any longer.","Traveller"));
+        return monologues;
     }
 }
