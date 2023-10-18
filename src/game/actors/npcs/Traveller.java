@@ -111,15 +111,15 @@ public class Traveller extends Actor implements Speaker {
      */
     @Override
     public ArrayList<Monologue> generateMonologues(Actor actor) {
-        monologues.add(new Monologue(true,"Of course, I will never give you up, valuable customer!","Traveller"));
-        monologues.add(new Monologue(true,"I promise I will never let you down with the quality of the items that I sell.","Traveller"));
-        monologues.add(new Monologue(true,"You can always find me here. I'm never gonna run around and desert you, dear customer!","Traveller"));
-        monologues.add(new Monologue(true,"I'm never gonna make you cry with unfair prices.","Traveller"));
-        monologues.add(new Monologue(true,"Trust is essential in this business. I promise I’m never gonna say goodbye to a valuable customer like you.","Traveller"));
-        monologues.add(new Monologue(true,"Don't worry, I’m never gonna tell a lie and hurt you.","Traveller"));
-        monologues.add(new Monologue(actor.hasCapability(Ability.GREAT_SLAM),"Ooh, that’s a fascinating weapon you got there. I will pay a good price for it. You wouldn't get this price from any other guy.","Traveller"));
-        monologues.add(new Monologue(!actor.hasCapability(Ability.DEFEATED_ABXERVYER) ,"You know the rules of this world, and so do I. Each area is ruled by a lord. Defeat the lord of this area, Abxervyer, and you may proceed to the next area.","Traveller"));
-        monologues.add(new Monologue(actor.hasCapability(Ability.DEFEATED_ABXERVYER) & actor.hasCapability(Ability.GREAT_SLAM),"Congratulations on defeating the lord of this area. I noticed you still hold on to that hammer. Why don’t you sell it to me? We've known each other for so long. I can tell you probably don’t need that weapon any longer.","Traveller"));
+        monologues.add( new Monologue(true, "Of course, I will never give you up, valuable customer!", this) );
+        monologues.add( new Monologue(true, "I promise I will never let you down with the quality of the items that I sell.", this) );
+        monologues.add( new Monologue(true, "You can always find me here. I'm never gonna run around and desert you, dear customer!", this) );
+        monologues.add( new Monologue(true, "I'm never gonna make you cry with unfair prices.", this) );
+        monologues.add( new Monologue(true, "Trust is essential in this business. I promise I’m never gonna say goodbye to a valuable customer like you.", this) );
+        monologues.add( new Monologue(true, "Don't worry, I’m never gonna tell a lie and hurt you.", this) );
+        monologues.add( new Monologue(!actor.hasCapability(Ability.DEFEATED_ABXERVYER), "You know the rules of this world, and so do I. Each area is ruled by a lord. Defeat the lord of this area, Abxervyer, and you may proceed to the next area.", this) );
+        monologues.add( new Monologue(actor.hasCapability(Ability.GREAT_SLAM), "Ooh, that’s a fascinating weapon you got there. I will pay a good price for it. You wouldn't get this price from any other guy.", this) );
+        monologues.add( new Monologue(actor.hasCapability(Ability.DEFEATED_ABXERVYER) && actor.hasCapability(Ability.GREAT_SLAM), "Congratulations on defeating the lord of this area. I noticed you still hold on to that hammer. Why don’t you sell it to me? We've known each other for so long. I can tell you probably don’t need that weapon any longer.", this) );
         return monologues;
     }
 }
