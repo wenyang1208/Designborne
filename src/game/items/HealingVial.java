@@ -9,6 +9,7 @@ import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Location;
 import game.actions.ConsumeAction;
 import game.actions.SellAction;
+import game.actions.UpgradeAction;
 import game.utils.Status;
 
 /**
@@ -19,15 +20,15 @@ import game.utils.Status;
  *
  * Modified by:
  * @author Yang Dan
- *
+ * @author Chua Wen Yang
  */
-public class HealingVial extends Item implements Consumable, Sellable, Purchasable{
+public class HealingVial extends Item implements Consumable, Sellable, Purchasable, Upgradable {
 
     // healing percentage
     /**
      * A healing percentage to heal the holder/owner of HealingVial item
      */
-    private final float healingPercentage;
+    private float healingPercentage;
 
     /**
      * selling price of Healing Vial
@@ -97,6 +98,8 @@ public class HealingVial extends Item implements Consumable, Sellable, Purchasab
         ActionList actions = new ActionList();
         if (otherActor.hasCapability(Status.TRADER))
             actions.add( new SellAction(this) );
+        if (otherActor.hasCapability(Status.UPGRADE_PERSON) && !this.hasCapability(Status.UPGRADED))
+            actions.add(new UpgradeAction(this));
         return actions;
     }
 
@@ -178,5 +181,24 @@ public class HealingVial extends Item implements Consumable, Sellable, Purchasab
         actor.addItemToInventory( new HealingVial() );
 
         return string + actor + " successfully purchased " + this + " for " + price + " runes.";
+    }
+
+    /**
+     * Update Healing Vial from the blacksmith
+     *
+     * @param actor Actor who upgrades the Healing Vial
+     *
+     * @return a string showing the result of after upgrading Healing Vial
+     */
+    @Override
+    public String upgradedBy(Actor actor) {
+        int price = 250;
+        String string = "";
+        if (actor.getBalance() < price)
+            return string + "Balance is less than what the Blacksmith asks for, the upgrades fails.";
+        actor.deductBalance(price);
+        this.addCapability(Status.UPGRADED);
+        this.healingPercentage = 0.8f;
+        return "Healing Vial's effectiveness has been improved!";
     }
 }

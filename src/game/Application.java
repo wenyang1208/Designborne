@@ -1,6 +1,9 @@
 package game;
 
 import game.items.Bloodberry;
+import game.items.HealingVial;
+import game.items.RefreshingFlask;
+import game.weapons.GreatKnife;
 import java.util.Arrays;
 import java.util.List;
 
@@ -144,9 +147,9 @@ public class Application {
         abandonedVillage.at(50, 1).setGround(graveyard1);
         abandonedVillage.at(35, 10).setGround( graveyard1);
         abandonedVillage.at(27, 6).addItem(new Broadsword());
-        // create wandering undead
-        abandonedVillage.at(28,4).addActor(new WanderingUndead());
-
+        // add npc in abandonedVillage
+        abandonedVillage.at(28,2).addActor(new WanderingUndead());
+        abandonedVillage.at(31,5).addActor(new Blacksmith());
         // Configure burialGround
         Graveyard graveyard2 = new Graveyard(new HollowSoldier(), 0.10f );
         burialGround.at(2, 14).setGround(graveyard2);
@@ -165,7 +168,7 @@ public class Application {
         ancientWoods.at(55, 2).addItem(new Bloodberry());
         ancientWoods.at(8, 11).addItem(new Bloodberry());
         // add traveller
-        ancientWoods.at(19, 3).addActor(new Traveller());
+//        ancientWoods.at(19, 3).addActor(new Traveller());
         //create red wolf and forest keeper
         ancientWoods.at(40,10).addActor(new RedWolf());
         ancientWoods.at(35,10).addActor(new ForestKeeper());
@@ -231,15 +234,18 @@ public class Application {
 //        world.addPlayer(player, ancientWoods.at(30, 3));
 //        world.addPlayer(player, abxervyerBattleRoom.at(12, 10));
         world.addPlayer(player, overgrownSanctuary.at(12, 10));
-
-
+        overgrownSanctuary.at(12,13).addActor(new Blacksmith());
         // Testing
 
         // inventory
         player.addItemToInventory(new OldKey());
+        player.addItemToInventory(new Broadsword());
+        player.addItemToInventory(new GreatKnife());
+        player.addItemToInventory(new HealingVial());
+        player.addItemToInventory(new RefreshingFlask());
 //        player.addBalance(10000);
 //        player.addItemToInventory(new Bloodberry());
-//        player.addItemToInventory(new GiantHammer());
+        player.addItemToInventory(new GiantHammer());
 
         // travel
 //        world.addPlayer(player, ancientWoods.at(0, 6));

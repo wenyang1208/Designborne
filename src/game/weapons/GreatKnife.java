@@ -8,8 +8,10 @@ import game.actions.AttackAction;
 import game.actions.PurchaseAction;
 import game.actions.SellAction;
 import game.actions.StabAndStepAction;
+import game.actions.UpgradeAction;
 import game.items.Purchasable;
 import game.items.Sellable;
+import game.items.Upgradable;
 import game.utils.Ability;
 import game.utils.Status;
 
@@ -18,9 +20,12 @@ import game.utils.Status;
  *
  * Created by:
  * @author Yang Dan
+ *
+ * Modified by:
+ * @author Chua Wen Yang
  */
 
-public class GreatKnife extends WeaponItem implements Sellable, Purchasable {
+public class GreatKnife extends WeaponItem implements Sellable, Purchasable, Upgradable {
 
 
     /* Default constants for the stamina used to activate the skill of great knife */
@@ -73,6 +78,8 @@ public class GreatKnife extends WeaponItem implements Sellable, Purchasable {
         // When otherActor is trader, player can sell this item
         if (otherActor.hasCapability(Status.TRADER))
             actions.add(new SellAction(this));
+        if (otherActor.hasCapability(Status.UPGRADE_PERSON))
+            actions.add(new UpgradeAction(this));
         return actions;
 
     }
@@ -154,5 +161,23 @@ public class GreatKnife extends WeaponItem implements Sellable, Purchasable {
         actor.addItemToInventory(new GreatKnife());
 
         return string + actor + " successfully purchased " + this + " for " + price + " runes.";
+    }
+
+    /**
+     * Upgrade Great Knife from the blacksmith
+     *
+     * @param actor Actor who upgrades the Healing Vial
+     *
+     * @return a string showing the result of after upgrading Great Knife
+     */
+    @Override
+    public String upgradedBy(Actor actor) {
+        int price = 2000;
+        String string = "";
+        if (actor.getBalance() < price)
+            return string + "Balance is less than what the Blacksmith asks for, the upgrade fails.";
+        actor.deductBalance(price);
+        increaseHitRate((int) (super.chanceToHit() * 0.1));
+        return "Great Knife's effectiveness has been improved!";
     }
 }

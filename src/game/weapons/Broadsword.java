@@ -8,6 +8,7 @@ import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.actions.*;
 import game.items.Purchasable;
+import game.items.Upgradable;
 import game.utils.Ability;
 import game.utils.Status;
 import game.actions.SellAction;
@@ -22,9 +23,9 @@ import game.items.Sellable;
   *
   * Modified by:
   * @author Yang Dan
- *
+ * @author Chua Wen Yang
  */
-public class Broadsword extends WeaponItem implements Sellable, Purchasable {
+public class Broadsword extends WeaponItem implements Sellable, Purchasable, Upgradable {
 
     /* Default constants for the Broadsword object */
      /**
@@ -70,6 +71,11 @@ public class Broadsword extends WeaponItem implements Sellable, Purchasable {
       */
      private static final int purchasedPrice = 250;
 
+     /**
+      * damage increased after the upgrading process
+      */
+     private int increasedDamage;
+
     /**
      * Constructor of the Broadsword class
      *
@@ -80,6 +86,7 @@ public class Broadsword extends WeaponItem implements Sellable, Purchasable {
         super("Broadsword", '1', 110, "slashes", DEFAULT_HIT_RATE);
         this.remainingFocusTurn = FOCUS_DURATION;
         this.addCapability(Ability.SKILL);
+        this.increasedDamage = 0;
     }
 
 
@@ -172,6 +179,8 @@ public class Broadsword extends WeaponItem implements Sellable, Purchasable {
              actions.add( new AttackAction(otherActor, location.toString(), this) );
          if (otherActor.hasCapability(Status.TRADER))
              actions.add(new SellAction(this));
+         if (otherActor.hasCapability(Status.UPGRADE_PERSON))
+           actions.add(new UpgradeAction(this));
          return actions;
      }
 
@@ -243,4 +252,32 @@ public class Broadsword extends WeaponItem implements Sellable, Purchasable {
 
          return actor + " successfully purchased " + this + " for " + price + " runes.";
      }
+
+   /**
+    * Get the current damage of the broadsword
+    *
+    * @return the current damage of the broadsword
+    */
+   @Override
+   public int damage() {
+       return super.damage() + this.increasedDamage;
+   }
+
+   /**
+    * Upgrade Broadsword from the blacksmith
+    *
+    * @param actor Actor who upgrades the Healing Vial
+    *
+    * @return a string showing the result of after upgrading Broadsword
+    */
+   @Override
+   public String upgradedBy(Actor actor) {
+     int price = 1000;
+     String string = "";
+     if (actor.getBalance() < price)
+       return string + "Balance is less than what the Blacksmith asks for, the upgrades fails.";
+     actor.deductBalance(price);
+     this.increasedDamage = this.increasedDamage + 10;
+     return "Broadsword's effectiveness has been improved!";
+   }
  }
