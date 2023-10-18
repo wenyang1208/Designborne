@@ -1,7 +1,10 @@
 // declare package
 package game.reset;
 
+import edu.monash.fit2099.engine.positions.GameMap;
+
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A Reset Manager class that handles all entities that have to be reset
@@ -22,6 +25,7 @@ public class ResetManager {
      * a list of resettables
      */
     private ArrayList<Resettable> resettablesList;
+    private ArrayList<Resettable> tempResettablesList;
 
     /**
      * A factory method that ensures only one instance of the ResetManager class can be created
@@ -47,6 +51,7 @@ public class ResetManager {
     private ResetManager() {
 
         this.resettablesList = new ArrayList<>();
+        this.tempResettablesList = new ArrayList<>();
 
     }
 
@@ -55,9 +60,14 @@ public class ResetManager {
      *
      * @param resettable an actor or item that can be reset after player dies (trigger game reset) to be added
      */
-    public void registerResettable(Resettable resettable) {
+    public void registerResettable(Resettable resettable, boolean isAdd) {
 
-        resettablesList.add(resettable);
+        if (isAdd) {
+            resettablesList.add(resettable);
+        }
+        else{
+            tempResettablesList.add(resettable);
+        }
 
     }
 
@@ -72,6 +82,12 @@ public class ResetManager {
 
     }
 
+    // clear resettables list
+    public void clearResettable(){
+
+        resettablesList.clear();
+
+    }
 
     // run reset manager
     /**
@@ -80,17 +96,34 @@ public class ResetManager {
      */
     public void run() {
 
+        // declare copy of resettables
+        ArrayList<Resettable> resettablesCopyList = new ArrayList<>();
+
+        // copy list of resettables
         for (Resettable resettable : resettablesList) {
+
+            resettablesCopyList.add(resettable);
+
+        }
+
+        // class need to be reset after player dies
+        // loop through resettables list
+        for (Resettable resettable : resettablesCopyList) {
 
             resettable.reset();
 
         }
 
+        // copy list of resettables
+        for (Resettable resettable : tempResettablesList) {
+
+            resettablesList.add(resettable);
+
+        }
+
+        // clear the list with runes dropped
+        tempResettablesList.clear();
+
     }
-
-
-
-
-
 
 }
