@@ -62,5 +62,12 @@ public class Blacksmith extends Actor implements Speaker {
     return monologues;
   }
 
+  @Override
+  public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
+    if (otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)){
+      return new ActionList(new ListenAction(this));
+    }
+    return new ActionList();
+  }
 
 }
