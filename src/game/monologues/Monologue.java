@@ -1,14 +1,16 @@
 package game.monologues;
 
 /**
- * @author yangdan
+ * A Monologue Class representing a monologue text delivered by speaker
  *
- * Class representing a monologue
+ * Created by:
+ * @author Yang Dan
+ *
  */
 public class Monologue {
 
     /**
-     * Bool value to check if the speaker can actually deliver this monologue
+     * Boolean value to check if the speaker can actually deliver this monologue
      */
     private boolean condition;
 
@@ -23,7 +25,12 @@ public class Monologue {
     private String speaker;
 
     /**
-     * Constructor of the Monologue object
+     * Constructor of the Monologue class
+     *
+     * @param condition a boolean value to check if the speaker can actually deliver this monologue
+     * @param text content of the monologue
+     * @param speaker name of the speaker
+     *
      */
     public Monologue(boolean condition, String text, String speaker){
         this.condition = condition;
@@ -33,6 +40,7 @@ public class Monologue {
 
     /**
      * Getter for the attribute 'condition'
+     *
      * @return bool value to check if the speaker can actually deliver this monologue
      */
     public boolean getCondition(){
@@ -40,7 +48,10 @@ public class Monologue {
     }
 
     /**
+     * Override toString() method from Object class to print the monologue text
+     *
      * When the monologue object is printed, it follows the following format
+     *
      * @return a string with two information, speaker name and the content of the monologue
      */
     @Override

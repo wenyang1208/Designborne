@@ -13,10 +13,22 @@ import edu.monash.fit2099.engine.actions.Action;
  *
  */
 public class UpgradeAction extends Action {
+
+  /**
+   * Item to be upgraded
+   */
   private final Upgradable item;
 
+  /**
+   * Constructor of the UpgradeAction class
+   *
+   * @param item item to be upgraded
+   *
+   */
   public UpgradeAction(Upgradable item){
+
     this.item = item;
+
   }
 
   /**
@@ -29,7 +41,9 @@ public class UpgradeAction extends Action {
    */
   @Override
   public String execute(Actor actor, GameMap map) {
+
     return item.upgradedBy(actor);
+
   }
 
 

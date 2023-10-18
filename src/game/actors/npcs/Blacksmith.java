@@ -15,10 +15,13 @@ import game.utils.Status;
 import java.util.ArrayList;
 
 /**
- * A class that represents Blacksmith.
+ * A class that represents Blacksmith in Overgrown Sanctuary Map
  *
  * Created by:
  * @author Chua Wen Yang
+ *
+ * Modified by:
+ * @author Yang Dan
  *
  */
 public class Blacksmith extends Actor implements Speaker {
@@ -29,11 +32,14 @@ public class Blacksmith extends Actor implements Speaker {
   private final ArrayList<Monologue> monologues = new ArrayList<>();
 
   /**
-   * The constructor of the blacksmith class.
+   * Constructor the Blacksmith class
+   *
    */
   public Blacksmith() {
+
     super("Blacksmith", 'B', 100);
     this.addCapability(Status.UPGRADE_PERSON);
+
   }
 
   /**
@@ -51,6 +57,13 @@ public class Blacksmith extends Actor implements Speaker {
     return new DoNothingAction();
   }
 
+  /**
+   * Generates a list of monologues that can be dialogued with the listener
+   *
+   * @param actor the Listener (player)
+   *
+   * @return a list of monologues that can be dialogued with actor
+   */
   @Override
   public ArrayList<Monologue> generateMonologues(Actor actor) {
     monologues.add( new Monologue(true, "I used to be an adventurer like you, but then …. Nevermind, let’s get back to smithing.", "BlackSmith") );
@@ -62,6 +75,15 @@ public class Blacksmith extends Actor implements Speaker {
     return monologues;
   }
 
+  /**
+   * Returns a new collection of the Actions that the otherActor can do to the current Actor
+   *
+   * @param otherActor the Actor that might be performing attack
+   * @param direction  String representing the direction of the other Actor
+   * @param map        current GameMap
+   *
+   * @return A collection of Actions
+   */
   @Override
   public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
     if (otherActor.hasCapability(Status.HOSTILE_TO_ENEMY) && otherActor.hasCapability(Status.COMPLETE)){
