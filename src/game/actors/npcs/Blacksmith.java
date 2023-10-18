@@ -6,7 +6,13 @@ import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
+import game.actions.ListenAction;
+import game.monologues.Monologue;
+import game.monologues.Speaker;
+import game.utils.Ability;
 import game.utils.Status;
+
+import java.util.ArrayList;
 
 /**
  * A class that represents Blacksmith.
@@ -15,7 +21,13 @@ import game.utils.Status;
  * @author Chua Wen Yang
  *
  */
-public class Blacksmith extends Actor {
+public class Blacksmith extends Actor implements Speaker {
+
+  /**
+   * A list of monologues that can be spoken to the player
+   */
+  private final ArrayList<Monologue> monologues = new ArrayList<>();
+
   /**
    * The constructor of the blacksmith class.
    */
@@ -38,4 +50,17 @@ public class Blacksmith extends Actor {
   public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
     return new DoNothingAction();
   }
+
+  @Override
+  public ArrayList<Monologue> generateMonologues(Actor actor) {
+    monologues.add( new Monologue(true, "I used to be an adventurer like you, but then …. Nevermind, let’s get back to smithing.", "BlackSmith") );
+    monologues.add( new Monologue(true, "It’s dangerous to go alone. Take my creation with you on your adventure!", "BlackSmith") );
+    monologues.add( new Monologue(true, "Ah, it’s you. Let’s get back to make your weapons stronger.", "BlackSmith") );
+    monologues.add( new Monologue(actor.hasCapability(Ability.DEFEATED_ABXERVYER), "Somebody once told me that a sacred tree rules the land beyond the ancient woods until this day.", "BlackSmith") );
+    monologues.add( new Monologue(!actor.hasCapability(Ability.DEFEATED_ABXERVYER), "Beyond the burial ground, you’ll come across the ancient woods ruled by Abxervyer. Use my creation to slay them and proceed further!", "BlackSmith") );
+    monologues.add( new Monologue(actor.hasCapability(Ability.STAB_AND_STEP), "Hey now, that’s a weapon from a foreign land that I have not seen for so long. I can upgrade it for you if you wish.", "BlackSmith") );
+    return monologues;
+  }
+
+
 }
