@@ -3,10 +3,13 @@ package game.actors.npcs;
 
 // import engine and game packages
 import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.items.Bloodberry;
 import game.items.Rune;
 import game.utils.Ability;
+
+import java.util.Locale;
 
 
 /**
@@ -35,11 +38,11 @@ public class LivingBranch extends Enemy implements Spawnable{
      * The constructor of the LivingBranch class.
      *
      */
-    public LivingBranch() {
+    public LivingBranch(GameMap map) {
 
         // represented by “?”, 75 hitpoints
         // drop 500 runes when defeated.
-        super("Living Branch", '?', 75, new Rune(500));
+        super("Living Branch", '?', 75, new Rune(500), map);
 
         // can attack the player with their limbs, dealing 250 damage with 90% accuracy
         this.damage = 250;
@@ -74,9 +77,9 @@ public class LivingBranch extends Enemy implements Spawnable{
      * @return a new spawned LivingBranch instance
      */
     @Override
-    public Enemy spawnMethod() {
+    public Enemy spawnMethod(Location location) {
 
-        return new EldentreeGuardian();
+        return new LivingBranch(location.map());
 
     }
 

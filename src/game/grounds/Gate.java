@@ -5,9 +5,12 @@ package game.grounds;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actions.MoveActorAction;
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 import game.actions.TravelAction;
+import game.reset.ResetManager;
+import game.reset.Resettable;
 import game.utils.Ability;
 import game.utils.Status;
 import game.actions.UnlockAction;
@@ -25,7 +28,7 @@ import java.util.Map;
  * @author Yang Dan
  *
  */
-public class Gate extends Ground {
+public class Gate extends Ground implements Resettable {
 
     /**
      * name of destination to be travelled
@@ -44,7 +47,6 @@ public class Gate extends Ground {
      */
     private Map<Location, String> mapLocation = new HashMap<>();
 
-
     /**
      * Constructor of the Gate class
      *
@@ -60,8 +62,12 @@ public class Gate extends Ground {
         this.addCapability(Status.LOCKED);
         this.destinationName = name;
         this.locationToMove = locationToMove;
+
         // default destination to travel
         addLocation(locationToMove, destinationName);
+
+        // register to reset manager
+        ResetManager.getInstanceReset().registerResettable(this, true);
 
     }
 
@@ -126,6 +132,21 @@ public class Gate extends Ground {
     public void addLocation(Location location, String destinationName) {
 
         this.mapLocation.put(location, destinationName);
+
     }
 
+
+    /**
+     * Provides a way for any entities be it actors or items or grounds on the GameMap that have to be reset
+     * after player dies due to any causes
+     *
+     */
+    // player dies, unlocked gates will be locked again.
+    @Override
+    public void reset() {
+
+        // reset status of gate, locked back the gate
+        this.addCapability(Status.LOCKED);
+
+    }
 }

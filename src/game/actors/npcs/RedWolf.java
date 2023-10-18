@@ -4,6 +4,7 @@ package game.actors.npcs;
 // import engine and game packages
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.behaviours.FollowBehaviour;
 import game.items.HealingVial;
@@ -47,10 +48,10 @@ public class RedWolf extends Enemy implements Spawnable, AffectedByWeather {
      * Constructor for the RedWolf class
      *
      */
-    public RedWolf() {
+    public RedWolf(GameMap map) {
 
         // displayed "r", 25 hp
-        super("Red Wolf", 'r', 25,new Rune(25));
+        super("Red Wolf", 'r', 25,new Rune(25), map);
 
         // can attack the player by biting them, dealing 15 damage with 80% accuracy.
         this.damage = 15;
@@ -84,9 +85,9 @@ public class RedWolf extends Enemy implements Spawnable, AffectedByWeather {
      * @return a new spawned RedWolf instance
      */
     @Override
-    public Enemy spawnMethod() {
+    public Enemy spawnMethod(Location location) {
 
-        return new RedWolf();
+        return new RedWolf(location.map());
 
     }
 

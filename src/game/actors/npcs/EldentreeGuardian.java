@@ -3,6 +3,7 @@ package game.actors.npcs;
 
 // import engine and game packages
 import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.behaviours.FollowBehaviour;
 import game.items.HealingVial;
@@ -35,11 +36,11 @@ public class EldentreeGuardian extends Enemy implements Spawnable{
      * The constructor of the EldentreeGuardian class.
      *
      */
-    public EldentreeGuardian() {
+    public EldentreeGuardian(GameMap map) {
 
         // represented by “e”, 250 hitpoints
         // drop 250 runes when defeated.
-        super("Eldentree Guardian", 'e', 250, new Rune(250));
+        super("Eldentree Guardian", 'e', 250, new Rune(250), map);
 
         // can attack the player with their limbs, dealing 50 damage with 80% accuracy
         this.damage = 50;
@@ -70,9 +71,9 @@ public class EldentreeGuardian extends Enemy implements Spawnable{
      * @return a new spawned EldentreeGuardian instance
      */
     @Override
-    public Enemy spawnMethod() {
+    public Enemy spawnMethod(Location location) {
 
-        return new EldentreeGuardian();
+        return new EldentreeGuardian(location.map());
 
     }
 

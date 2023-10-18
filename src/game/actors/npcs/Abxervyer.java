@@ -5,10 +5,14 @@ package game.actors.npcs;
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.actors.attributes.ActorAttributeOperations;
+import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.behaviours.FollowBehaviour;
+import game.reset.ResetManager;
+import game.reset.Resettable;
 import game.weather.WeatherManager;
 import game.grounds.Gate;
 import game.items.Rune;
@@ -24,7 +28,7 @@ import game.utils.FancyMessage;
  * Modified by:
  * @author Yang Dan
  */
-public class Abxervyer extends Enemy {
+public class Abxervyer extends Enemy{
 
     // Abxervyer has its own damage and hit rate
 
@@ -49,10 +53,10 @@ public class Abxervyer extends Enemy {
     /**
      * Constructor for the Abxervyer class
      */
-    public Abxervyer() {
+    public Abxervyer(GameMap map) {
 
         // displayed "Y", 2000 hp
-        super("Abxervyer, The Forest Watcher", 'Y', 1, new Rune(5000));
+        super("Abxervyer, The Forest Watcher", 'Y', 1, new Rune(5000), map);
 
         // attack the player with its limbs, dealing 80 damage with 25% accuracy
         this.damage = 80;
@@ -64,6 +68,8 @@ public class Abxervyer extends Enemy {
         // boss will not get hurt if they walk around in the Void
         this.addCapability(Ability.STEP_ON_VOID);
 
+//        // register to reset manager
+//        ResetManager.getInstanceReset().registerResettable(this);
     }
 
     /**
@@ -150,8 +156,27 @@ public class Abxervyer extends Enemy {
 
         }
 
+//        // need to remove from reset manager after died?
+//        ResetManager.getInstanceReset().removeResettable(this);
+
         return super.unconscious(actor, map);
 
+    }
+
+    /**
+     * Provides a way for any entities be it actors or items or grounds on the GameMap that have to be reset
+     * after player dies due to any causes
+     *
+     */
+    @Override
+    public void reset() {
+
+        // health will be reset to full if they have not been defeated
+        int health = this.getAttributeMaximum(BaseActorAttributes.HEALTH);
+        modifyAttribute(BaseActorAttributes.HEALTH, ActorAttributeOperations.UPDATE, health);
+
+        // need to remove from reset manager after reset?
+//        ResetManager.getInstanceReset().removeResettable(this);
     }
 
 }

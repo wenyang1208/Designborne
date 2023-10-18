@@ -1,6 +1,7 @@
 package game.actors.npcs;
 
 import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.items.HealingVial;
 import game.items.RefreshingFlask;
@@ -33,11 +34,11 @@ public class HollowSoldier extends Enemy implements Spawnable{
      *
      */
     // constructor
-    public HollowSoldier() {
+    public HollowSoldier(GameMap map) {
 
         // hollow soldier
         // 200 HP, 50 damage, 50 accuracy
-        super("Hollow Soldier", '&', 200, new Rune(100));
+        super("Hollow Soldier", '&', 200, new Rune(100), map);
 
         // can attack the player with its limbs, dealing 50 damage with 50% accuracy.
         this.damage = 50;
@@ -64,9 +65,9 @@ public class HollowSoldier extends Enemy implements Spawnable{
      * @return a new spawned HollowSoldier instance
      */
     @Override
-    public Enemy spawnMethod() {
+    public Enemy spawnMethod(Location location) {
 
-        return new HollowSoldier();
+        return new HollowSoldier(location.map());
 
     }
 

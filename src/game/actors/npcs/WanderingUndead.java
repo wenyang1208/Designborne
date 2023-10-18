@@ -3,6 +3,7 @@ package game.actors.npcs;
 
 // import game and engine packages
 import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.items.HealingVial;
 import game.items.OldKey;
@@ -32,9 +33,9 @@ public class WanderingUndead extends Enemy implements Spawnable{
      * Constructor for the WanderingUndead class
      *
      */
-    public WanderingUndead() {
+    public WanderingUndead(GameMap map) {
 
-        super("Wandering Undead", 't', 100,new Rune(50));
+        super("Wandering Undead", 't', 100,new Rune(50), map);
 
         // can attack the player with its limbs, dealing 30 damage with 50% accuracy
         this.damage = 30;
@@ -62,9 +63,9 @@ public class WanderingUndead extends Enemy implements Spawnable{
      * @return a new spawned WanderingUndead instance
      */
     @Override
-    public Enemy spawnMethod() {
+    public Enemy spawnMethod(Location location) {
 
-        return new WanderingUndead();
+        return new WanderingUndead(location.map());
 
     }
 

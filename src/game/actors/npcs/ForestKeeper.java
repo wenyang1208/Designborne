@@ -4,6 +4,7 @@ package game.actors.npcs;
 // import engine and game packages
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.behaviours.FollowBehaviour;
 import game.items.HealingVial;
@@ -41,10 +42,10 @@ public class ForestKeeper extends Enemy implements Spawnable, AffectedByWeather 
      * Constructor for the ForestKeeper class
      *
      */
-    public ForestKeeper() {
+    public ForestKeeper(GameMap map) {
 
         // displayed "8", 125 hp
-        super("Forest Keeper", '8', 125,new Rune(50));
+        super("Forest Keeper", '8', 125,new Rune(50), map);
 
         // can attack the player with its limbs, dealing 25 damage with 75% accuracy
         this.damage = 25;
@@ -100,9 +101,9 @@ public class ForestKeeper extends Enemy implements Spawnable, AffectedByWeather 
      * @return a new spawned ForestKeeper instance
      */
     @Override
-    public Enemy spawnMethod() {
+    public Enemy spawnMethod(Location location) {
 
-        return new ForestKeeper();
+        return new ForestKeeper(location.map());
 
     }
 
