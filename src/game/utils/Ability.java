@@ -14,5 +14,7 @@ public enum Ability {
     UNLOCK_GATE,
     ENTER_FLOOR,
     STEP_ON_VOID,
+    DEFEATED_ABXERVYER,
+    STAB_AND_STEP
 
 }
