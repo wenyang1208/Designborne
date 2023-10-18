@@ -99,6 +99,12 @@ public class Rune extends Item implements Consumable, Resettable{
   }
 
   // remove runes from current location if the player didn't pick up
+  /**
+   * Inform an Item on the ground of the passage of time.
+   * This method is called once per turn, if the item rests upon the ground.
+   *
+   * @param currentLocation The location of the ground on which we lie.
+   */
   @Override
   public void tick(Location currentLocation) {
 

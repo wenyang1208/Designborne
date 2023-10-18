@@ -12,9 +12,11 @@ import java.util.Random;
 import java.util.stream.Collectors;
 
 /**
- * @author yangdan
+ * A ListenAction class representing an action to listen monologue delivered by the speaker
  *
- * A class representing an action to listen monologue
+ * Created by:
+ * @author Yang Dan
+ *
  */
 public class ListenAction extends Action {
 
@@ -24,7 +26,8 @@ public class ListenAction extends Action {
     private Speaker speaker;
 
     /**
-     * Constructor of the ListenAction object
+     * Constructor of the ListenAction class
+     *
      * @param speaker speaker to listen to
      */
     public ListenAction(Speaker speaker){
@@ -32,9 +35,13 @@ public class ListenAction extends Action {
     }
 
     /**
+     * Perform the listen action
+     *
      * Actor can listen monologue said by speaker
+     *
      * @param actor The actor performing the action.
      * @param map The map the actor is on.
+     *
      * @return a description of what happened (the result of the action being performed) that can be displayed to the user.
      */
     @Override
@@ -50,10 +57,11 @@ public class ListenAction extends Action {
         return filteredMonologues.get(index).toString();
     }
 
-
     /**
-     * Describe what action will be performed if this Action is chosen in the menu.
-     * @param actor The actor performing the action.
+     * Describe what action will be performed if this Action is chosen in the menu
+     *
+     * @param actor The actor performing the action
+     *
      * @return the action description to be displayed on the menu
      */
     @Override
