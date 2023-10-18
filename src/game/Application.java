@@ -140,23 +140,23 @@ public class Application {
         world.addGameMap(overgrownSanctuary);
 
         // Configure abandonedVillage
-        Graveyard graveyard1 = new Graveyard( new WanderingUndead(), 0.25f );
+        Graveyard graveyard1 = new Graveyard( new WanderingUndead(abandonedVillage), 0.25f );
         abandonedVillage.at(50, 1).setGround(graveyard1);
         abandonedVillage.at(35, 10).setGround( graveyard1);
         abandonedVillage.at(27, 6).addItem(new Broadsword());
         // create wandering undead
-        abandonedVillage.at(28,4).addActor(new WanderingUndead());
+        abandonedVillage.at(28,4).addActor(new WanderingUndead(abandonedVillage));
 
         // Configure burialGround
-        Graveyard graveyard2 = new Graveyard(new HollowSoldier(), 0.10f );
+        Graveyard graveyard2 = new Graveyard(new HollowSoldier(burialGround), 0.10f );
         burialGround.at(2, 14).setGround(graveyard2);
         burialGround.at(38, 11).setGround(graveyard2);
         // Create hollow soldier
-        burialGround.at(28,6).addActor(new HollowSoldier());
+        burialGround.at(28,6).addActor(new HollowSoldier(burialGround));
 
         // Configure ancientWoods
-        Hut hut = new Hut(new ForestKeeper(), 0.15f );
-        Bush bush = new Bush(new RedWolf(), 0.30f );
+        Hut hut = new Hut(new ForestKeeper(ancientWoods), 0.15f );
+        Bush bush = new Bush(new RedWolf(ancientWoods), 0.30f );
         ancientWoods.at(43, 7).setGround(hut);
         ancientWoods.at(43, 9).setGround(bush);
         // create bloodberry
@@ -167,8 +167,8 @@ public class Application {
         // add traveller
         ancientWoods.at(19, 3).addActor(new Traveller());
         //create red wolf and forest keeper
-        ancientWoods.at(40,10).addActor(new RedWolf());
-        ancientWoods.at(35,10).addActor(new ForestKeeper());
+        ancientWoods.at(40,10).addActor(new RedWolf(ancientWoods));
+        ancientWoods.at(35,10).addActor(new ForestKeeper(ancientWoods));
 
         // Configure abxervyerBattleRoom
         abxervyerBattleRoom.at(32, 0).setGround(hut);
@@ -179,7 +179,7 @@ public class Application {
         abxervyerBattleRoom.at(22, 16).setGround(bush);
         abxervyerBattleRoom.at(16, 0).setGround(bush);
         abxervyerBattleRoom.at(39, 12).addItem(new GiantHammer());
-        Abxervyer abxervyer = new Abxervyer();
+        Abxervyer abxervyer = new Abxervyer(abxervyerBattleRoom);
         // set gate for boss so it can save it
         Gate bossGate = new Gate("Ancient Woods", ancientWoods.at(0, 5));
         abxervyer.setDroppedGate(bossGate);
@@ -190,21 +190,23 @@ public class Application {
 
         // Configure overgrownSanctuary
         // hut 20% chance spawn Eldentree Guardian at each turn.
-        Hut hut2 = new Hut(new EldentreeGuardian(), 0.20f);
+        Hut hut2 = new Hut(new EldentreeGuardian(overgrownSanctuary), 0.20f);
         // bush spawn “Living Branch with a 90% chance at each turn
-        Bush bush2 = new Bush(new LivingBranch(), 0.90f);
+        Bush bush2 = new Bush(new LivingBranch(overgrownSanctuary), 0.90f);
         overgrownSanctuary.at(43, 7).setGround(hut2);
         overgrownSanctuary.at(43, 9).setGround(bush2);
         // create Eldentree Guardian and Living Branch
-        overgrownSanctuary.at(20,10).addActor(new EldentreeGuardian());
-        overgrownSanctuary.at(25,10).addActor(new LivingBranch());
+        overgrownSanctuary.at(20,10).addActor(new EldentreeGuardian(overgrownSanctuary));
+        overgrownSanctuary.at(25,10).addActor(new LivingBranch(overgrownSanctuary));
         overgrownSanctuary.at(25,10).setGround(new Void());
 
 
         // Create gate to travel to another map
 
         // create a gate to burial ground map, and put it in the abandoned village map
-        abandonedVillage.at(30,0).setGround(new Gate("Burial Ground", burialGround.at(23, 0)) );
+        Gate gate = new Gate("Burial Ground", burialGround.at(23, 0));
+        gate.addLocation(overgrownSanctuary.at(12, 10), "Overgrown Sanctuary");
+        abandonedVillage.at(30,0).setGround( gate);
 
         // create a gate to abandoned village map, and put it in the burial ground map
         burialGround.at(23,0).setGround(new Gate("Abandoned Village", abandonedVillage.at(30, 0)) );
@@ -222,8 +224,8 @@ public class Application {
         overgrownSanctuary.at(0,6).setGround(new Gate("Abxervyer Battle Room",abxervyerBattleRoom.at(39, 13)));
 
         // Set Player
-        // 150 hit points (the health attribute) and 200 stamina
-        Player player = new Player("The Abstracted One", '@', 15000, 20000);
+        // 150 hit points (the health attribute) and 200 stamina (29,5)
+        Player player = new Player("The Abstracted One", '@', 1, 20000, abandonedVillage.at(30, 0));
 
         // Add player to the map
 //        world.addPlayer(player, abandonedVillage.at(29, 5));
@@ -238,7 +240,7 @@ public class Application {
         // inventory
         player.addItemToInventory(new OldKey());
 //        player.addBalance(10000);
-//        player.addItemToInventory(new Bloodberry());
+        player.addItemToInventory(new Bloodberry());
 //        player.addItemToInventory(new GiantHammer());
 
         // travel
@@ -248,11 +250,13 @@ public class Application {
 //        abxervyerBattleRoom.at(14, 11).addActor(new ForestKeeper());
 //        abxervyerBattleRoom.at(15, 12).addActor(new RedWolf());
 //        ancientWoods.at(21,4).addActor(new RedWolf());
-        overgrownSanctuary.at(12,11).addActor(new EldentreeGuardian());
-        overgrownSanctuary.at(12,12).addActor(new LivingBranch());
+//        overgrownSanctuary.at(12,11).addActor(new EldentreeGuardian());
+//        overgrownSanctuary.at(12,12).addActor(new LivingBranch());
 
+        // reset after player died
+        overgrownSanctuary.at(12,12).addActor(new LivingBranch(overgrownSanctuary));
 
-
+        // Run game
         for (String line : FancyMessage.TITLE.split("\n")) {
             new Display().println(line);
             try {
