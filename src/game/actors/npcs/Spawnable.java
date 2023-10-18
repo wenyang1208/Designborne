@@ -1,5 +1,9 @@
 package game.actors.npcs;
 
+import edu.monash.fit2099.engine.positions.Location;
+
+import java.util.Locale;
+
 /**
  * A Spawnable interface to spawn enemy
  *
@@ -13,6 +17,6 @@ public interface Spawnable {
      *
      * @return a new spawned Enemy
      */
-    Enemy spawnMethod();
+    Enemy spawnMethod(Location location);
 
 }
