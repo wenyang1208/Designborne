@@ -11,6 +11,7 @@ import edu.monash.fit2099.engine.positions.Location;
 import game.actions.ConsumeAction;
 import game.actions.PurchaseAction;
 import game.actions.SellAction;
+import game.actions.UpgradeAction;
 import game.utils.Status;
 
 /**
@@ -21,15 +22,15 @@ import game.utils.Status;
  *
  * Modified by:
  * @author Yang Dan
- *
+ * @author Chua Wen Yang
  */
-public class RefreshingFlask extends Item implements Consumable, Sellable, Purchasable{
+public class RefreshingFlask extends Item implements Consumable, Sellable, Purchasable, Upgradable{
 
     // healing percentage
     /**
      * A healing percentage to heal the holder/owner of RefreshingFlask item
      */
-    private final float healingPercentage;
+    private float healingPercentage;
 
     /**
      * selling price of Refreshing Flask
@@ -101,6 +102,8 @@ public class RefreshingFlask extends Item implements Consumable, Sellable, Purch
         ActionList actions = new ActionList();
         if (otherActor.hasCapability(Status.TRADER))
             actions.add( new SellAction(this) );
+        if (otherActor.hasCapability(Status.UPGRADE_PERSON) && !this.hasCapability(Status.UPGRADED))
+            actions.add(new UpgradeAction(this));
         return actions;
     }
 
@@ -182,5 +185,24 @@ public class RefreshingFlask extends Item implements Consumable, Sellable, Purch
         actor.addItemToInventory(new RefreshingFlask());
 
         return string + actor + " successfully purchased " + this + " for " + price + " runes.";
+    }
+
+    /**
+     * Upgrade Refreshing Flask from the blacksmith
+     *
+     * @param actor Actor who upgrades the Refreshing Flask
+     *
+     * @return a string showing the result of after upgrading Refreshing Flask
+     */
+    @Override
+    public String upgradedBy(Actor actor) {
+        int price = 175;
+        String string = "";
+        if (actor.getBalance() < price)
+            return string + "Balance is less than what the Blacksmith asks for, the upgrades fails.";
+        actor.deductBalance(price);
+        this.addCapability(Status.UPGRADED);
+        this.healingPercentage = 1.0f;
+        return "Refreshing Flask's effectiveness has been improved!";
     }
 }

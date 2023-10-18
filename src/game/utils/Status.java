@@ -9,6 +9,7 @@ package game.utils;
  * Modified by:
  * @author Koe Rui En
  * @author Yang Dan
+ * @author Chua Wen Yang
  */
 public enum Status {
 
@@ -17,6 +18,9 @@ public enum Status {
     FULLY_ACTIVATED,
     HOSTILE_TO_PLAYER,
     LOCKED,
-    TRADER
+
+    TRADER,
+    UPGRADE_PERSON,
+    UPGRADED
 
 }
