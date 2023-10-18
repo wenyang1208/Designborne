@@ -14,11 +14,11 @@ import java.util.ArrayList;
 public interface Speaker {
 
     /**
-     * Generates a list of monologues that can be dialogued with the listener
+     * Generates a collection of monologues for an Actor based on their capabilities and the game context.
      *
-     * @param actor the listener (player)
+     * @param actor The Actor for whom the monologues are being generated.
      *
-     * @return a list of monologues that can be dialogued with actor
+     * @return An ArrayList of Monologue objects containing dialogues tailored to the Actor's capabilities and the game context.
      */
     ArrayList<Monologue> generateMonologues(Actor actor);
 
