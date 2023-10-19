@@ -12,10 +12,13 @@ import game.actors.Player;
 import game.actors.npcs.*;
 import game.grounds.*;
 import game.grounds.Void;
+import game.items.HealingVial;
 import game.items.OldKey;
+import game.items.RefreshingFlask;
 import game.utils.FancyMessage;
 import game.weapons.Broadsword;
 import game.weapons.GiantHammer;
+import game.weapons.GreatKnife;
 
 /**
  * The main class to start the game.
@@ -199,6 +202,8 @@ public class Application {
         overgrownSanctuary.at(20,10).addActor(new EldentreeGuardian(overgrownSanctuary));
         overgrownSanctuary.at(25,10).addActor(new LivingBranch(overgrownSanctuary));
         overgrownSanctuary.at(25,10).setGround(new Void());
+        // create Blacksmith
+        overgrownSanctuary.at(13, 10).addActor(new Blacksmith());
 
 
         // Create gate to travel to another map
@@ -241,7 +246,11 @@ public class Application {
         player.addItemToInventory(new OldKey());
 //        player.addBalance(10000);
         player.addItemToInventory(new Bloodberry());
-//        player.addItemToInventory(new GiantHammer());
+        player.addItemToInventory(new Broadsword());
+        player.addItemToInventory(new GreatKnife());
+        player.addItemToInventory(new HealingVial());
+        player.addItemToInventory(new RefreshingFlask());
+        player.addItemToInventory(new GiantHammer());
 
         // travel
 //        world.addPlayer(player, ancientWoods.at(0, 6));
@@ -254,7 +263,7 @@ public class Application {
 //        overgrownSanctuary.at(12,12).addActor(new LivingBranch());
 
         // reset after player died
-        overgrownSanctuary.at(12,12).addActor(new LivingBranch(overgrownSanctuary));
+//        overgrownSanctuary.at(12,12).addActor(new LivingBranch(overgrownSanctuary));
 
         // Run game
         for (String line : FancyMessage.TITLE.split("\n")) {

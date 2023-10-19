@@ -114,15 +114,15 @@ public class ResetManager {
 
         }
 
-        // copy list of resettables
-        for (Resettable resettable : tempResettablesList) {
-
-            resettablesList.add(resettable);
-
-        }
-
-        // clear the list with runes dropped
-        tempResettablesList.clear();
+//        // copy list of resettables
+//        for (Resettable resettable : tempResettablesList) {
+//
+//            resettablesList.add(resettable);
+//
+//        }
+//
+//        // clear the list with runes dropped
+//        tempResettablesList.clear();
 
     }
 

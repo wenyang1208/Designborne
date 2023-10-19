@@ -47,18 +47,18 @@ public class Rune extends Item implements Consumable, Resettable{
 
   }
 
-  // just for new runes created during reset
-  public Rune(int value, boolean isAdd){
-
-    super(value + " Runes", '$', true);
-    this.value = value;
-
-    // register to reset manager
-    ResetManager.getInstanceReset().registerResettable(this, isAdd);
-
-    // default value
-    this.reset = false;
-  }
+//  // just for new runes created during reset
+//  public Rune(int value, boolean isAdd){
+//
+//    super(value + " Runes", '$', true);
+//    this.value = value;
+//
+//    // register to reset manager
+//    ResetManager.getInstanceReset().registerResettable(this, isAdd);
+//
+//    // default value
+//    this.reset = false;
+//  }
 
   /**
    * Retrieves the list of allowable actions for the owner actor when interacting with this Rune item.
