@@ -4,6 +4,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.items.Upgradable;
 import edu.monash.fit2099.engine.actions.Action;
+import game.utils.Status;
 
 /**
  * An Upgrade class to upgrade the items of the player.
@@ -41,7 +42,7 @@ public class UpgradeAction extends Action {
    */
   @Override
   public String execute(Actor actor, GameMap map) {
-
+    actor.addCapability(Status.COMPLETE );
     return item.upgradedBy(actor);
 
   }
