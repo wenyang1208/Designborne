@@ -178,7 +178,7 @@ public class GreatKnife extends WeaponItem implements Sellable, Purchasable, Upg
         if (actor.getBalance() < price)
             return string + "Balance is less than what the Blacksmith asks for, the upgrade fails.";
         actor.deductBalance(price);
-        increaseHitRate((int) (super.chanceToHit() * 0.1));
+        increaseHitRate((int) (Math.round(super.chanceToHit() * 0.01)));
         return "Great Knife's effectiveness has been improved!";
     }
 }
