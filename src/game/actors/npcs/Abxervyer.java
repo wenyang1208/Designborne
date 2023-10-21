@@ -159,6 +159,7 @@ public class Abxervyer extends Enemy{
         }
         // To ensure actor has defeated the boss.
         actor.addCapability(Ability.DEFEATED_ABXERVYER);
+
 //        // need to remove from reset manager after died?
 //        ResetManager.getInstanceReset().removeResettable(this);
 

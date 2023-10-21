@@ -148,7 +148,9 @@ public class Application {
         abandonedVillage.at(35, 10).setGround( graveyard1);
         abandonedVillage.at(27, 6).addItem(new Broadsword());
         // create wandering undead
-        abandonedVillage.at(28,4).addActor(new WanderingUndead(abandonedVillage));
+        abandonedVillage.at(25,4).addActor(new WanderingUndead(abandonedVillage));
+        // create Blacksmith
+        abandonedVillage.at(30, 5).addActor(new Blacksmith());
 
         // Configure burialGround
         Graveyard graveyard2 = new Graveyard(new HollowSoldier(burialGround), 0.10f );
@@ -202,19 +204,15 @@ public class Application {
         overgrownSanctuary.at(20,10).addActor(new EldentreeGuardian(overgrownSanctuary));
         overgrownSanctuary.at(25,10).addActor(new LivingBranch(overgrownSanctuary));
         overgrownSanctuary.at(25,10).setGround(new Void());
-        // create Blacksmith
-        overgrownSanctuary.at(13, 10).addActor(new Blacksmith());
 
 
         // Create gate to travel to another map
 
         // create a gate to burial ground map, and put it in the abandoned village map
-        Gate gate = new Gate("Burial Ground", burialGround.at(23, 0));
-        gate.addLocation(overgrownSanctuary.at(12, 10), "Overgrown Sanctuary");
-        abandonedVillage.at(30,0).setGround( gate);
+        abandonedVillage.at(30,0).setGround(new Gate("Burial Ground", burialGround.at(23, 0)));
 
         // create a gate to abandoned village map, and put it in the burial ground map
-        burialGround.at(23,0).setGround(new Gate("Abandoned Village", abandonedVillage.at(30, 0)) );
+        burialGround.at(23,0).setGround(new Gate("Abandoned Village", abandonedVillage.at(30, 0)));
 
         // create a gate to ancient woods map, and put it in the burial ground map
         burialGround.at(0, 10).setGround(new Gate("Ancient Woods", ancientWoods.at(30, 0)));
@@ -230,14 +228,14 @@ public class Application {
 
         // Set Player
         // 150 hit points (the health attribute) and 200 stamina (29,5)
-        Player player = new Player("The Abstracted One", '@', 1, 20000, abandonedVillage.at(30, 0));
+        Player player = new Player("The Abstracted One", '@', 15000, 20000, abandonedVillage.at(29, 5));
 
         // Add player to the map
-//        world.addPlayer(player, abandonedVillage.at(29, 5));
+        world.addPlayer(player, abandonedVillage.at(29, 5));
 //        world.addPlayer(player, burialGround.at(0,10));
-//        world.addPlayer(player, ancientWoods.at(30, 3));
+//        world.addPlayer(player, ancientWoods.at(20, 3));
 //        world.addPlayer(player, abxervyerBattleRoom.at(12, 10));
-        world.addPlayer(player, overgrownSanctuary.at(12, 10));
+//        world.addPlayer(player, overgrownSanctuary.at(12, 10));
 
 
         // Testing
@@ -262,8 +260,17 @@ public class Application {
 //        overgrownSanctuary.at(12,11).addActor(new EldentreeGuardian());
 //        overgrownSanctuary.at(12,12).addActor(new LivingBranch());
 
+        // monologue
+
+        // traveller
+//        abxervyerBattleRoom.at(12, 5).addActor(new Traveller());
+        // blacksmith
+//        abxervyerBattleRoom.at(12, 13).addActor(new Blacksmith());
+
         // reset after player died
 //        overgrownSanctuary.at(12,12).addActor(new LivingBranch(overgrownSanctuary));
+//        Gate gate = new Gate("Burial Ground", burialGround.at(23, 0));
+//        gate.addLocation(overgrownSanctuary.at(12, 10), "Overgrown Sanctuary");
 
         // Run game
         for (String line : FancyMessage.TITLE.split("\n")) {
