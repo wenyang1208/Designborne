@@ -229,13 +229,13 @@ public class Application {
 
         // Set Player
         // 150 hit points (the health attribute) and 200 stamina (29,5)
-        Player player = new Player("The Abstracted One", '@', 1, 20000, abandonedVillage.at(29, 5));
+        Player player = new Player("The Abstracted One", '@', 1000, 2000, ancientWoods.at(1, 6));
 
         // Add player to the map
-        world.addPlayer(player, abandonedVillage.at(29, 5));
+//        world.addPlayer(player, abandonedVillage.at(29, 5));
 //        world.addPlayer(player, burialGround.at(0,10));
 //        world.addPlayer(player, ancientWoods.at(20, 3));
-//        world.addPlayer(player, abxervyerBattleRoom.at(12, 10));
+        world.addPlayer(player, abxervyerBattleRoom.at(12, 10));
 //        world.addPlayer(player, overgrownSanctuary.at(12, 10));
 
 

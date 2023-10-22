@@ -58,7 +58,7 @@ public class Abxervyer extends Enemy{
     public Abxervyer(GameMap map) {
 
         // displayed "Y", 2000 hp
-        super("Abxervyer, The Forest Watcher", 'Y', 1, new Rune(5000), map);
+        super("Abxervyer, The Forest Watcher", 'Y', 2000, new Rune(5000), map);
 
         // attack the player with its limbs, dealing 80 damage with 25% accuracy
         this.damage = 80;
