@@ -51,7 +51,6 @@ public class GreatKnife extends WeaponItem implements Sellable, Purchasable, Upg
      */
     public GreatKnife() {
         super("Great Knife", '>', 75, "stabs", 70);
-        this.addCapability(Ability.SKILL);
         this.addCapability(Ability.STAB_AND_STEP);
     }
 

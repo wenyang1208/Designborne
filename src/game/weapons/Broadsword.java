@@ -85,7 +85,7 @@ public class Broadsword extends WeaponItem implements Sellable, Purchasable, Upg
     public Broadsword() {
         super("Broadsword", '1', 110, "slashes", DEFAULT_HIT_RATE);
         this.remainingFocusTurn = FOCUS_DURATION;
-        this.addCapability(Ability.SKILL);
+        this.addCapability(Ability.FOCUS_SKILL);
         this.increasedDamage = 0;
     }
 

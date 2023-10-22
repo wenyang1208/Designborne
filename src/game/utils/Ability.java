@@ -11,7 +11,7 @@ package game.utils;
  */
 public enum Ability {
 
-    SKILL,
+    FOCUS_SKILL,
     UNLOCK_GATE,
     ENTER_FLOOR,
     STEP_ON_VOID,
