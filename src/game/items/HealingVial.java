@@ -192,6 +192,8 @@ public class HealingVial extends Item implements Consumable, Sellable, Purchasab
     /**
      * Get the upgrading price of Healing Vial
      *
+     * Healing Vial can be upgraded at 250 runes
+     *
      * @return an integer value representing the upgradable Healing Vial's price
      */
     @Override

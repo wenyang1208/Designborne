@@ -89,10 +89,12 @@ public class Broadsword extends WeaponItem implements Sellable, Purchasable, Upg
      * remainingFocusTurn will be set to 5 when it is created
      */
     public Broadsword() {
+
         super("Broadsword", '1', 110, "slashes", DEFAULT_HIT_RATE);
         this.remainingFocusTurn = FOCUS_DURATION;
         this.addCapability(Ability.FOCUS_SKILL);
         this.increasedDamage = 0;
+
     }
 
 
@@ -118,6 +120,7 @@ public class Broadsword extends WeaponItem implements Sellable, Purchasable, Upg
      */
     @Override
     public void tick(Location currentLocation) {
+
         if (this.hasCapability(Status.FULLY_ACTIVATED)){
             this.removeCapability(Status.FULLY_ACTIVATED);
             this.updateDamageMultiplier(DEFAULT_DAMAGE_MULTIPLIER);
@@ -125,7 +128,6 @@ public class Broadsword extends WeaponItem implements Sellable, Purchasable, Upg
             this.resetFocusTurn();
         }
     }
-
 
     /**
      * Inform a carried Item(Broadsword) of the passage of time.
@@ -167,7 +169,9 @@ public class Broadsword extends WeaponItem implements Sellable, Purchasable, Upg
      */
     @Override
     public ActionList allowableActions(Actor owner) {
+
         return new ActionList(new FocusAction(this, INCREASED_DAMAGE_MULTIPLIER, ACTIVATED_HIT_RATE, REDUCED_STAMINA_RATE));
+
     }
 
      /**
@@ -277,6 +281,8 @@ public class Broadsword extends WeaponItem implements Sellable, Purchasable, Upg
 
     /**
      * Get the upgrading price of Broadsword
+     *
+     * Broadsword can be upgraded at 1000 runes
      *
      * @return an integer value representing the upgradable Broadsword's price
      */

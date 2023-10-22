@@ -52,7 +52,7 @@ public class GreatKnife extends WeaponItem implements Sellable, Purchasable, Upg
 
 
     /**
-     * Constructor of Great Knife class
+     * Constructor of GreatKnife class
      *
      */
     public GreatKnife() {
@@ -62,7 +62,7 @@ public class GreatKnife extends WeaponItem implements Sellable, Purchasable, Upg
 
 
     /**
-     * Player can "use" this weapon to otherActor that is around
+     * Player can "use" Great Knife to otherActor that is around
      *
      * For example, player can attack otherActor with this weapon
      * For example, player can apply skilled attack to otherActor with this weapon
@@ -180,6 +180,8 @@ public class GreatKnife extends WeaponItem implements Sellable, Purchasable, Upg
     /**
      * Get the upgrading price of Great Knife
      *
+     * Great Knife can be upgraded at 2000 runes
+     *
      * @return an integer value representing the upgradable Great Knife's price
      */
     @Override
@@ -190,7 +192,7 @@ public class GreatKnife extends WeaponItem implements Sellable, Purchasable, Upg
     }
 
     /**
-     * Upgrade Great Knife from the blacksmith
+     * Upgrade Great Knife from the Blacksmith
      *
      * @param actor Actor who upgrades the Healing Vial
      *

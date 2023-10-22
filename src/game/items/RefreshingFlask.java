@@ -23,6 +23,7 @@ import game.utils.Status;
  * Modified by:
  * @author Yang Dan
  * @author Chua Wen Yang
+ * @author Koe Rui En
  */
 public class RefreshingFlask extends Item implements Consumable, Sellable, Purchasable, Upgradable{
 
@@ -193,7 +194,9 @@ public class RefreshingFlask extends Item implements Consumable, Sellable, Purch
     }
 
     /**
-     * Get the upgrading price of an item to be upgraded
+     * Get the upgrading price of Refreshing Flask
+     *
+     * Refreshing Flask can be upgraded at 175 runes
      *
      * @return an integer value representing the upgradable Refreshing Flask's price
      */
