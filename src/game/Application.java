@@ -198,6 +198,7 @@ public class Application {
         Hut hut2 = new Hut(new EldentreeGuardian(overgrownSanctuary), 0.20f);
         // bush spawn “Living Branch with a 90% chance at each turn
         Bush bush2 = new Bush(new LivingBranch(overgrownSanctuary), 0.90f);
+        overgrownSanctuary.at(43, 5).setGround(graveyard2);
         overgrownSanctuary.at(43, 7).setGround(hut2);
         overgrownSanctuary.at(43, 9).setGround(bush2);
         // create Eldentree Guardian and Living Branch
@@ -228,7 +229,7 @@ public class Application {
 
         // Set Player
         // 150 hit points (the health attribute) and 200 stamina (29,5)
-        Player player = new Player("The Abstracted One", '@', 15000, 20000, abandonedVillage.at(29, 5));
+        Player player = new Player("The Abstracted One", '@', 1, 20000, abandonedVillage.at(29, 5));
 
         // Add player to the map
         world.addPlayer(player, abandonedVillage.at(29, 5));
