@@ -14,6 +14,7 @@ import game.actors.npcs.Spawnable;
  *
  * Modified by:
  * @author Chua Wen Yang
+ * @author Koe Rui En
  *
  */
 public abstract class Spawner extends Ground {
@@ -38,7 +39,10 @@ public abstract class Spawner extends Ground {
      */
     private double iniSpawnPercentage;
 
-    private Location newLocation;
+    /**
+     * spawner location to spawn enemies
+     */
+    private Location spawnLocation;
 
     /**
      * Constructor of the abstract Spawner class
@@ -106,17 +110,16 @@ public abstract class Spawner extends Ground {
     public void tick(Location location) {
 
         // location enemies spawned
-        newLocation = location;
+        spawnLocation = location;
 
         // check location contains enemies and chance to spawn at certain percentage at every turn of game
         if (Math.random() <= spawnPercentage && !location.containsAnActor()) {
 
             // add spawned enemies to the location
-            location.addActor(spawnedEnemy.spawnMethod(newLocation));
+            location.addActor(spawnedEnemy.spawnMethod(spawnLocation));
 
         }
 
     }
-
 
 }

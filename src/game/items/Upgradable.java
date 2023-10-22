@@ -4,8 +4,11 @@ import edu.monash.fit2099.engine.actors.Actor;
 /**
  * An interface representing items that can be upgraded
  *
- * Created:
+ * Created by:
  * @author Chua Wen Yang
+ *
+ * Modified by:
+ * @author Koe Rui En
  */
 public interface Upgradable {
 

@@ -26,7 +26,10 @@ public class Rune extends Item implements Consumable, Resettable{
    */
   private int value;
 
-  // ???
+  // boolean value to indicate reset condition
+  /**
+   * Boolean value to indicate reset condition
+   */
   private boolean reset;
 
   /**
@@ -46,7 +49,6 @@ public class Rune extends Item implements Consumable, Resettable{
     this.reset = false;
 
   }
-
 
   /**
    * Retrieves the list of allowable actions for the owner actor when interacting with this Rune item

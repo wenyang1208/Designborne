@@ -5,7 +5,7 @@ package game.grounds;
 import game.actors.npcs.Spawnable;
 
 /**
- * A class that represents the graveyard in the different game maps (Abandoned Village and Burial Ground Maps)
+ * A class that represents the graveyard in the different game maps (Abandoned Village, Burial Ground and Overgrown Sanctuary Maps)
  *
  * Created by:
  * @author Koe Rui En
