@@ -176,7 +176,7 @@ public class GreatKnife extends WeaponItem implements Sellable, Purchasable, Upg
         int price = 2000;
         String string = "";
         if (actor.getBalance() < price)
-            return string + "Balance is less than what the Blacksmith asks for, the upgrade fails.";
+            return string + "The Great Knife requires 2000 runes to upgrade.";
         actor.deductBalance(price);
         increaseHitRate((int) (Math.round(super.chanceToHit() * 0.01)));
         return "Great Knife's effectiveness has been improved!";
