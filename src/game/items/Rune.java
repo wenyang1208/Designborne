@@ -40,30 +40,19 @@ public class Rune extends Item implements Consumable, Resettable{
     this.value = value;
 
     // register to reset manager
-    ResetManager.getInstanceReset().registerResettable(this, true);
+    ResetManager.getInstanceReset().registerResettable(this);
 
     // default value
     this.reset = false;
 
   }
 
-//  // just for new runes created during reset
-//  public Rune(int value, boolean isAdd){
-//
-//    super(value + " Runes", '$', true);
-//    this.value = value;
-//
-//    // register to reset manager
-//    ResetManager.getInstanceReset().registerResettable(this, isAdd);
-//
-//    // default value
-//    this.reset = false;
-//  }
 
   /**
-   * Retrieves the list of allowable actions for the owner actor when interacting with this Rune item.
+   * Retrieves the list of allowable actions for the owner actor when interacting with this Rune item
    *
-   * @param owner The actor interacting with the Rune.
+   * @param owner The actor interacting with the Rune
+   *
    * @return An ActionList containing the ConsumeAction for consuming this Rune.
    */
   @Override
@@ -72,10 +61,10 @@ public class Rune extends Item implements Consumable, Resettable{
   }
 
   /**
-   * Consumes the Rune, increasing the actor's balance by the specified value and removing it from the actor's inventory.
+   * Consumes the Rune, increasing the actor's balance by the specified value and removing it from the actor's inventory
    *
-   * @param owner The actor consuming the Rune.
-   * @return A message indicating that the actor has consumed the Rune.
+   * @param owner The actor consuming the Rune
+   * @return A message indicating that the actor has consumed the Rune
    */
   @Override
   public String consume(Actor owner) {
@@ -100,7 +89,8 @@ public class Rune extends Item implements Consumable, Resettable{
 
   // remove runes from current location if the player didn't pick up
   /**
-   * Inform an Item on the ground of the passage of time.
+   * Inform an Item on the ground of the passage of time
+   *
    * This method is called once per turn, if the item rests upon the ground.
    *
    * @param currentLocation The location of the ground on which we lie.

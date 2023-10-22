@@ -234,11 +234,11 @@ public class Application {
         Player player = new Player("The Abstracted One", '@', 1000, 2000, abandonedVillage.at(29, 5));
 
         // Add player to the map
-//        world.addPlayer(player, abandonedVillage.at(29, 5));
+        world.addPlayer(player, abandonedVillage.at(29, 5));
 //        world.addPlayer(player, burialGround.at(0,10));
 //        world.addPlayer(player, ancientWoods.at(20, 3));
 //        world.addPlayer(player, abxervyerBattleRoom.at(12, 10));
-        world.addPlayer(player, overgrownSanctuary.at(12, 10));
+//        world.addPlayer(player, overgrownSanctuary.at(12, 10));
 
 
         // Testing

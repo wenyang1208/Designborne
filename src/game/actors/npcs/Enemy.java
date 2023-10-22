@@ -67,7 +67,7 @@ public abstract class Enemy extends Actor implements Resettable{
         this.currMap = map;
 
         // register to reset manager
-        ResetManager.getInstanceReset().registerResettable(this, true);
+        ResetManager.getInstanceReset().registerResettable(this);
 
     }
 

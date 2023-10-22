@@ -93,7 +93,7 @@ public class Player extends Actor implements Resettable {
         this.resetManager = ResetManager.getInstanceReset();
 
         // register to reset manager
-        resetManager.registerResettable(this, true);
+        resetManager.registerResettable(this);
 
         // initialise respawned location
         this.respawnLocation = respawnLocation;
