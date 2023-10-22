@@ -275,7 +275,7 @@ public class Broadsword extends WeaponItem implements Sellable, Purchasable, Upg
      int price = 1000;
      String string = "";
      if (actor.getBalance() < price)
-       return string + "Balance is less than what the Blacksmith asks for, the upgrades fails.";
+       return string + "The Broadsword requires 1000 runes to upgrade.";
      actor.deductBalance(price);
      this.increasedDamage = this.increasedDamage + 10;
      return "Broadsword's effectiveness has been improved!";
