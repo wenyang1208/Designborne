@@ -199,7 +199,7 @@ public class RefreshingFlask extends Item implements Consumable, Sellable, Purch
         int price = 175;
         String string = "";
         if (actor.getBalance() < price)
-            return string + "Balance is less than what the Blacksmith asks for, the upgrades fails.";
+            return string + "The Refreshing Flask requires 175 runes to upgrade.";
         actor.deductBalance(price);
         this.addCapability(Status.UPGRADED);
         this.healingPercentage = 1.0f;
