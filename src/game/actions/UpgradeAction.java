@@ -7,7 +7,7 @@ import edu.monash.fit2099.engine.actions.Action;
 import game.utils.Status;
 
 /**
- * An Upgrade class to upgrade the items of the player.
+ * An UpgradeAction class to upgrade the items of the player
  *
  * Created by:
  * @author Chua Wen Yang
@@ -33,12 +33,12 @@ public class UpgradeAction extends Action {
   }
 
   /**
-   * Perform the upgrade action.
+   * Perform the upgrade action
    *
-   * @param actor The actor performing the action.
-   * @param map The map the actor is on.
+   * @param actor The actor performing the action
+   * @param map The map the actor is on
    *
-   * @return string description of what happened (the result of the action being performed) that can be displayed to the user.
+   * @return string description of what happened (the result of the action being performed) that can be displayed to the user
    */
   @Override
   public String execute(Actor actor, GameMap map) {
@@ -49,9 +49,9 @@ public class UpgradeAction extends Action {
 
 
   /**
-   * Describe what action will be performed in the menu.
+   * Describe what action will be performed if this Action is chosen in the menu
    *
-   * @param actor The actor performing the action.
+   * @param actor The actor performing the action
    *
    * @return the action description to be displayed on the menu
    */
