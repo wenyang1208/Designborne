@@ -39,10 +39,10 @@ public class ListenAction extends Action {
      *
      * Actor can listen monologue said by speaker
      *
-     * @param actor The actor performing the action.
-     * @param map The map the actor is on.
+     * @param actor The actor performing the action
+     * @param map The map the actor is on
      *
-     * @return a description of what happened (the result of the action being performed) that can be displayed to the user.
+     * @return a description of what happened (the result of the action being performed) that can be displayed to the user
      */
     @Override
     public String execute(Actor actor, GameMap map) {
