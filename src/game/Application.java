@@ -198,7 +198,9 @@ public class Application {
         Hut hut2 = new Hut(new EldentreeGuardian(overgrownSanctuary), 0.20f);
         // bush spawn “Living Branch with a 90% chance at each turn
         Bush bush2 = new Bush(new LivingBranch(overgrownSanctuary), 0.90f);
-        overgrownSanctuary.at(43, 5).setGround(graveyard2);
+        // graveyard spawn Hollow Soldier at overgrown sanctuary
+        Graveyard graveyard3 = new Graveyard(new HollowSoldier(overgrownSanctuary), 0.10f);
+        overgrownSanctuary.at(43, 5).setGround(graveyard3);
         overgrownSanctuary.at(43, 7).setGround(hut2);
         overgrownSanctuary.at(43, 9).setGround(bush2);
         // create Eldentree Guardian and Living Branch
@@ -232,11 +234,11 @@ public class Application {
         Player player = new Player("The Abstracted One", '@', 1000, 2000, abandonedVillage.at(29, 5));
 
         // Add player to the map
-        world.addPlayer(player, abandonedVillage.at(29, 5));
+//        world.addPlayer(player, abandonedVillage.at(29, 5));
 //        world.addPlayer(player, burialGround.at(0,10));
 //        world.addPlayer(player, ancientWoods.at(20, 3));
 //        world.addPlayer(player, abxervyerBattleRoom.at(12, 10));
-//        world.addPlayer(player, overgrownSanctuary.at(12, 10));
+        world.addPlayer(player, overgrownSanctuary.at(12, 10));
 
 
         // Testing
