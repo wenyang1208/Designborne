@@ -67,7 +67,7 @@ public class Gate extends Ground implements Resettable {
         addLocation(locationToMove, destinationName);
 
         // register to reset manager
-        ResetManager.getInstanceReset().registerResettable(this, true);
+        ResetManager.getInstanceReset().registerResettable(this);
 
     }
 

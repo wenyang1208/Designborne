@@ -15,15 +15,16 @@ import game.actions.SellAction;
 import game.items.Sellable;
 
 
- /**
+/**
  * Class representing the Broadsword weapon that can be used to attack the enemy.
  *
  * Created by:
  * @author Koe Rui En
-  *
-  * Modified by:
-  * @author Yang Dan
+ *
+ * Modified by:
+ * @author Yang Dan
  * @author Chua Wen Yang
+ * @author Koe Rui En
  */
 public class Broadsword extends WeaponItem implements Sellable, Purchasable, Upgradable {
 
@@ -76,6 +77,11 @@ public class Broadsword extends WeaponItem implements Sellable, Purchasable, Upg
       */
      private int increasedDamage;
 
+     /**
+      * upgrading price of Broadsword
+      */
+     private static final int upgradePrice = 1000;
+
     /**
      * Constructor of the Broadsword class
      *
@@ -83,10 +89,12 @@ public class Broadsword extends WeaponItem implements Sellable, Purchasable, Upg
      * remainingFocusTurn will be set to 5 when it is created
      */
     public Broadsword() {
+
         super("Broadsword", '1', 110, "slashes", DEFAULT_HIT_RATE);
         this.remainingFocusTurn = FOCUS_DURATION;
         this.addCapability(Ability.FOCUS_SKILL);
         this.increasedDamage = 0;
+
     }
 
 
@@ -112,6 +120,7 @@ public class Broadsword extends WeaponItem implements Sellable, Purchasable, Upg
      */
     @Override
     public void tick(Location currentLocation) {
+
         if (this.hasCapability(Status.FULLY_ACTIVATED)){
             this.removeCapability(Status.FULLY_ACTIVATED);
             this.updateDamageMultiplier(DEFAULT_DAMAGE_MULTIPLIER);
@@ -119,7 +128,6 @@ public class Broadsword extends WeaponItem implements Sellable, Purchasable, Upg
             this.resetFocusTurn();
         }
     }
-
 
     /**
      * Inform a carried Item(Broadsword) of the passage of time.
@@ -161,7 +169,9 @@ public class Broadsword extends WeaponItem implements Sellable, Purchasable, Upg
      */
     @Override
     public ActionList allowableActions(Actor owner) {
+
         return new ActionList(new FocusAction(this, INCREASED_DAMAGE_MULTIPLIER, ACTIVATED_HIT_RATE, REDUCED_STAMINA_RATE));
+
     }
 
      /**
@@ -175,12 +185,16 @@ public class Broadsword extends WeaponItem implements Sellable, Purchasable, Upg
      @Override
      public ActionList allowableActions(Actor otherActor, Location location) {
          ActionList actions = new ActionList();
+
          if (otherActor.hasCapability(Status.HOSTILE_TO_PLAYER))
              actions.add( new AttackAction(otherActor, location.toString(), this) );
+
          if (otherActor.hasCapability(Status.TRADER))
              actions.add(new SellAction(this));
+
          if (otherActor.hasCapability(Status.UPGRADE_PERSON))
            actions.add(new UpgradeAction(this));
+
          return actions;
      }
 
@@ -254,30 +268,55 @@ public class Broadsword extends WeaponItem implements Sellable, Purchasable, Upg
      }
 
    /**
-    * Get the current damage of the broadsword
+    * Override damage method to set new damage done by Broadsword
     *
-    * @return the current damage of the broadsword
+    * @return the new damage done by Broadsword
     */
    @Override
    public int damage() {
+
        return super.damage() + this.increasedDamage;
+
    }
 
+    /**
+     * Get the upgrading price of Broadsword
+     *
+     * Broadsword can be upgraded at 1000 runes
+     *
+     * @return an integer value representing the upgradable Broadsword's price
+     */
+    @Override
+    public int getUpgradingPrice() {
+
+        return upgradePrice;
+
+    }
+
    /**
-    * Upgrade Broadsword from the blacksmith
+    * Upgrade Broadsword from the Blacksmith
     *
-    * @param actor Actor who upgrades the Healing Vial
+    * @param actor Actor who upgrades the Broadsword
     *
     * @return a string showing the result of after upgrading Broadsword
     */
    @Override
    public String upgradedBy(Actor actor) {
-     int price = 1000;
+     int price = getUpgradingPrice();
+
      String string = "";
-     if (actor.getBalance() < price)
-       return string + "The Broadsword requires 1000 runes to upgrade.";
+
+     if (actor.getBalance() < price) {
+         return string + "The " + this + " requires " + price + " runes to upgrade.";
+     }
+
      actor.deductBalance(price);
      this.increasedDamage = this.increasedDamage + 10;
-     return "Broadsword's effectiveness has been improved!";
+
+     string = this + "'s effectiveness has been improved!";
+
+     return string;
+
    }
- }
+
+}

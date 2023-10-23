@@ -23,6 +23,7 @@ import game.utils.Status;
  *
  * Modified by:
  * @author Chua Wen Yang
+ * @author Koe Rui En
  */
 
 public class GreatKnife extends WeaponItem implements Sellable, Purchasable, Upgradable {
@@ -30,7 +31,7 @@ public class GreatKnife extends WeaponItem implements Sellable, Purchasable, Upg
 
     /* Default constants for the stamina used to activate the skill of great knife */
     /**
-     * default constants for the stamina used to activate the skill of grear knife
+     * default constants for the stamina used to activate the skill of great knife
      */
     private static final float REDUCED_STAMINA_RATE = 0.25f;
 
@@ -44,9 +45,14 @@ public class GreatKnife extends WeaponItem implements Sellable, Purchasable, Upg
      */
     private static final int purchasedPrice = 300;
 
+    /**
+     * upgrading price of Great Knife
+     */
+    private static final int upgradePrice = 2000;
+
 
     /**
-     * Constructor of Great Knife class
+     * Constructor of GreatKnife class
      *
      */
     public GreatKnife() {
@@ -56,7 +62,7 @@ public class GreatKnife extends WeaponItem implements Sellable, Purchasable, Upg
 
 
     /**
-     * Player can "use" this weapon to otherActor that is around
+     * Player can "use" Great Knife to otherActor that is around
      *
      * For example, player can attack otherActor with this weapon
      * For example, player can apply skilled attack to otherActor with this weapon
@@ -70,16 +76,23 @@ public class GreatKnife extends WeaponItem implements Sellable, Purchasable, Upg
     @Override
     public ActionList allowableActions(Actor otherActor, Location location) {
         ActionList actions = new ActionList();
+
         // When otherActor is enemy, player can attack with this weapon
         if (otherActor.hasCapability(Status.HOSTILE_TO_PLAYER)) {
             actions.add(new AttackAction(otherActor, location.toString(), this));
             actions.add(new StabAndStepAction(otherActor, REDUCED_STAMINA_RATE, this));
         }
+
         // When otherActor is trader, player can sell this item
-        if (otherActor.hasCapability(Status.TRADER))
+        if (otherActor.hasCapability(Status.TRADER)) {
             actions.add(new SellAction(this));
-        if (otherActor.hasCapability(Status.UPGRADE_PERSON))
+        }
+
+        // When otherActor is blacksmith, player can upgrade this item
+        if (otherActor.hasCapability(Status.UPGRADE_PERSON)) {
             actions.add(new UpgradeAction(this));
+        }
+
         return actions;
 
     }
@@ -110,14 +123,14 @@ public class GreatKnife extends WeaponItem implements Sellable, Purchasable, Upg
     public String soldBy(Actor actor) {
         int price = getSellingPrice();
 
-        actor.removeItemFromInventory( this ); // remove this item from the player's inventory
+        actor.removeItemFromInventory(this); // remove this item from the player's inventory
 
         if (Math.random() <= 0.1){ // there is 10% chance to take at most 175 runes from the player
-            actor.deductBalance( Math.min(actor.getBalance(), price) );
+            actor.deductBalance( Math.min(actor.getBalance(), price));
             return "Traveller takes the runes from " + actor + ".";
         }
 
-        actor.addBalance( price ); // successfully sold it, so add balance
+        actor.addBalance(price); // successfully sold it, so add balance
 
         return actor + " successfully sold " + this + " for " + price + " runes to Traveller.";
     }
@@ -154,17 +167,32 @@ public class GreatKnife extends WeaponItem implements Sellable, Purchasable, Upg
             string = "Traveller asks to pay 3x the original price of the weapon. ";
         }
 
-        if (actor.getBalance() < price)
+        if (actor.getBalance() < price) {
             return string + "Balance is less than what the Traveller asks for, the purchase fails.";
+        }
 
-        actor.deductBalance( price );
+        actor.deductBalance(price);
         actor.addItemToInventory(new GreatKnife());
 
         return string + actor + " successfully purchased " + this + " for " + price + " runes.";
     }
 
     /**
-     * Upgrade Great Knife from the blacksmith
+     * Get the upgrading price of Great Knife
+     *
+     * Great Knife can be upgraded at 2000 runes
+     *
+     * @return an integer value representing the upgradable Great Knife's price
+     */
+    @Override
+    public int getUpgradingPrice() {
+
+        return upgradePrice;
+
+    }
+
+    /**
+     * Upgrade Great Knife from the Blacksmith
      *
      * @param actor Actor who upgrades the Healing Vial
      *
@@ -172,12 +200,24 @@ public class GreatKnife extends WeaponItem implements Sellable, Purchasable, Upg
      */
     @Override
     public String upgradedBy(Actor actor) {
-        int price = 2000;
+        int price = getUpgradingPrice();
+
         String string = "";
-        if (actor.getBalance() < price)
-            return string + "The Great Knife requires 2000 runes to upgrade.";
+
+        // not enough runes to upgrade
+        if (actor.getBalance() < price) {
+            return string + "The " + this + " requires " + price + " runes to upgrade.";
+        }
+
         actor.deductBalance(price);
         increaseHitRate((int) (Math.round(super.chanceToHit() * 0.01)));
-        return "Great Knife's effectiveness has been improved!";
+
+        string = this + "'s effectiveness has been improved!";
+
+        return string;
+
     }
+
+
+
 }

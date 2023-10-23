@@ -21,6 +21,7 @@ import game.utils.Status;
  * Modified by:
  * @author Yang Dan
  * @author Chua Wen Yang
+ * @author Koe Rui En
  */
 public class HealingVial extends Item implements Consumable, Sellable, Purchasable, Upgradable {
 
@@ -39,6 +40,11 @@ public class HealingVial extends Item implements Consumable, Sellable, Purchasab
      * purchasing price of Healing Vial
      */
     private static final int purchasedPrice = 100;
+
+    /**
+     * upgrading price of Healing Vial
+     */
+    private static final int upgradePrice = 250;
 
     /**
      * Constructor of HealingVial class
@@ -184,7 +190,21 @@ public class HealingVial extends Item implements Consumable, Sellable, Purchasab
     }
 
     /**
-     * Update Healing Vial from the blacksmith
+     * Get the upgrading price of Healing Vial
+     *
+     * Healing Vial can be upgraded at 250 runes
+     *
+     * @return an integer value representing the upgradable Healing Vial's price
+     */
+    @Override
+    public int getUpgradingPrice() {
+
+        return upgradePrice;
+
+    }
+
+    /**
+     * Update Healing Vial from the Blacksmith
      *
      * @param actor Actor who upgrades the Healing Vial
      *
@@ -192,13 +212,22 @@ public class HealingVial extends Item implements Consumable, Sellable, Purchasab
      */
     @Override
     public String upgradedBy(Actor actor) {
-        int price = 250;
+        int price = getUpgradingPrice();
+
         String string = "";
-        if (actor.getBalance() < price)
-            return string + "The Healing Vial requires 250 runes to upgrade.";
+
+        if (actor.getBalance() < price) {
+            return string + "The " + this + " requires " + price + " runes to upgrade.";
+        }
+
         actor.deductBalance(price);
+        // can be only upgraded once
         this.addCapability(Status.UPGRADED);
         this.healingPercentage = 0.8f;
-        return "Healing Vial's effectiveness has been improved!";
+        string = this + "'s effectiveness has been improved!";
+
+        return string;
+
     }
+
 }

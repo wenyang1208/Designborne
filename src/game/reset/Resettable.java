@@ -1,13 +1,11 @@
 // declare package
 package game.reset;
 
-import edu.monash.fit2099.engine.positions.GameMap;
-
 /**
  * A Resettable interface to reset all entities including actors, items and grounds
  * in GameMap after player dies due to any causes
  *
- * Created:
+ * Created by:
  * @author Koe Rui En
  */
 // all classes that need to be reset will implement this class
@@ -18,8 +16,5 @@ public interface Resettable {
      * after player dies due to any causes
      */
     void reset();
-
-
-
 
 }

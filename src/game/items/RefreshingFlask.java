@@ -23,6 +23,7 @@ import game.utils.Status;
  * Modified by:
  * @author Yang Dan
  * @author Chua Wen Yang
+ * @author Koe Rui En
  */
 public class RefreshingFlask extends Item implements Consumable, Sellable, Purchasable, Upgradable{
 
@@ -41,6 +42,11 @@ public class RefreshingFlask extends Item implements Consumable, Sellable, Purch
      * purchasing price of Refreshing Flask
      */
     private static final int purchasedPrice = 75;
+
+    /**
+     * upgrading price of Refreshing Flask
+     */
+    private static final int upgradePrice = 175;
 
     /**
      * Constructor for the RefreshingFlask class
@@ -188,7 +194,21 @@ public class RefreshingFlask extends Item implements Consumable, Sellable, Purch
     }
 
     /**
-     * Upgrade Refreshing Flask from the blacksmith
+     * Get the upgrading price of Refreshing Flask
+     *
+     * Refreshing Flask can be upgraded at 175 runes
+     *
+     * @return an integer value representing the upgradable Refreshing Flask's price
+     */
+    @Override
+    public int getUpgradingPrice() {
+
+        return upgradePrice;
+
+    }
+
+    /**
+     * Upgrade Refreshing Flask from the Blacksmith
      *
      * @param actor Actor who upgrades the Refreshing Flask
      *
@@ -196,13 +216,21 @@ public class RefreshingFlask extends Item implements Consumable, Sellable, Purch
      */
     @Override
     public String upgradedBy(Actor actor) {
-        int price = 175;
+        int price = getUpgradingPrice();
+
         String string = "";
-        if (actor.getBalance() < price)
-            return string + "The Refreshing Flask requires 175 runes to upgrade.";
+
+        if (actor.getBalance() < price) {
+            return string + "The " + this + " requires " + price + " runes to upgrade.";
+        }
+
         actor.deductBalance(price);
+        // can be only upgraded once
         this.addCapability(Status.UPGRADED);
         this.healingPercentage = 1.0f;
-        return "Refreshing Flask's effectiveness has been improved!";
+        string = this + "'s effectiveness has been improved!";
+
+        return string;
     }
+
 }

@@ -7,7 +7,7 @@ import game.weather.AffectedByWeather;
 import game.weather.WeatherManager;
 
 /**
- * A class that represents the bushes in the Ancient Woods map
+ * A class that represents the bushes in the different game maps (Ancient Woods and Overgrown Sanctuary Maps)
  *
  * Created by:
  * @author Koe Rui En
