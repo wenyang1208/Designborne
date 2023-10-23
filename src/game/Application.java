@@ -231,7 +231,7 @@ public class Application {
 
         // Set Player
         // 150 hit points (the health attribute) and 200 stamina (29,5)
-        Player player = new Player("The Abstracted One", '@', 1000, 2000, abandonedVillage.at(29, 5));
+        Player player = new Player("The Abstracted One", '@', 150, 200, abandonedVillage.at(29, 5));
 
         // Add player to the map
         world.addPlayer(player, abandonedVillage.at(29, 5));
@@ -274,6 +274,9 @@ public class Application {
 //        overgrownSanctuary.at(12,12).addActor(new LivingBranch(overgrownSanctuary));
 //        Gate gate = new Gate("Burial Ground", burialGround.at(23, 0));
 //        gate.addLocation(overgrownSanctuary.at(12, 10), "Overgrown Sanctuary");
+//        Player player = new Player("The Abstracted One", '@', 1000, 2000, abxervyerBattleRoom.at(12, 10));
+
+
 
         // Run game
         for (String line : FancyMessage.TITLE.split("\n")) {
@@ -284,7 +287,6 @@ public class Application {
                 exception.printStackTrace();
             }
         }
-
 
         world.run();
 
