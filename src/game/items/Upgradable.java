@@ -1,6 +1,7 @@
 package game.items;
 
 import edu.monash.fit2099.engine.actors.Actor;
+
 /**
  * An interface representing items that can be upgraded
  *
