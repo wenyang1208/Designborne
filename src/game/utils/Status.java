@@ -23,6 +23,5 @@ public enum Status {
     TRADER,
     UPGRADE_PERSON,
     UPGRADED,
-    COMPLETE,
 
 }

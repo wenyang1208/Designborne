@@ -42,7 +42,6 @@ public class UpgradeAction extends Action {
    */
   @Override
   public String execute(Actor actor, GameMap map) {
-    actor.addCapability(Status.COMPLETE );
     return item.upgradedBy(actor);
 
   }
