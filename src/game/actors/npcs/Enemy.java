@@ -31,6 +31,7 @@ import java.util.TreeMap;
  * Modified by:
  * @author Yang Dan
  * @author Chua Wen Yang
+ * @author Koe Rui En
  */
 public abstract class Enemy extends Actor implements Resettable{
 
@@ -45,6 +46,9 @@ public abstract class Enemy extends Actor implements Resettable{
      */
     private Rune runes;
 
+    /**
+     * instance of GameMap class to remove all spawning enemies expect Abxvervyer containing at game map
+     */
    private GameMap currMap;
 
     /**
@@ -53,6 +57,8 @@ public abstract class Enemy extends Actor implements Resettable{
      * @param name        the name of the Enemy
      * @param displayChar the character that will represent the Enemy in the display
      * @param hitPoints   the Enemy's starting hit points
+     * @param runes       runes, the currency used in the world of “Designborne”
+     * @param map         instance of GameMap class to remove all spawning enemies expect Abxvervyer containing at game map
      */
     public Enemy(String name, char displayChar, int hitPoints, Rune runes, GameMap map) {
 
@@ -64,6 +70,7 @@ public abstract class Enemy extends Actor implements Resettable{
         addBehaviour(999, new WanderBehaviour());
         addBehaviour(500, new AttackBehaviour());
 
+        // initialise map that containing the enemies
         this.currMap = map;
 
         // register to reset manager
@@ -135,7 +142,7 @@ public abstract class Enemy extends Actor implements Resettable{
      */
     @Override
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
-//        this.currMap = map;
+
         ActionList actions = new ActionList();
         if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)){
             actions.add(new AttackAction(this, direction));
@@ -213,8 +220,8 @@ public abstract class Enemy extends Actor implements Resettable{
 
     // All spawned enemies (not including bosses) will be removed from the map.
     /**
-     * Provides a way for any entities be it actors or items or grounds on the GameMap that have to be reset
-     * after player dies due to any causes
+     * Provides a way for all spawned enemies expect the boss, Abxervyer, on the GameMap will be removed from the
+     * GameMap after player dies due to any causes and trigger the game reset.
      */
     @Override
     public void reset(){

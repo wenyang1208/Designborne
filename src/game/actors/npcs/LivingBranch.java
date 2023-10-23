@@ -37,6 +37,8 @@ public class LivingBranch extends Enemy implements Spawnable{
     /**
      * The constructor of the LivingBranch class.
      *
+     * @param map instance of GameMap class to remove all spawning enemies expect Abxvervyer containing at game map
+     *
      */
     public LivingBranch(GameMap map) {
 
@@ -74,6 +76,8 @@ public class LivingBranch extends Enemy implements Spawnable{
     /**
      * Spawn the LivingBranch instance
      *
+     * @param location spawner location to spawn enemies
+     *
      * @return a new spawned LivingBranch instance
      */
     @Override
@@ -93,8 +97,7 @@ public class LivingBranch extends Enemy implements Spawnable{
     @Override
     public void dropItem(GameMap map) {
 
-//        // 100% drop runes once defeated
-//        this.getRunes().getDropAction(this).execute(this,map);
+        // 100% drop runes once defeated
         super.dropItem(map);
 
         // 50% chance of dropping a Bloodberry.

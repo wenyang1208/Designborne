@@ -47,6 +47,7 @@ public class RedWolf extends Enemy implements Spawnable, AffectedByWeather {
     /**
      * Constructor for the RedWolf class
      *
+     * @param map instance of GameMap class to remove all spawning enemies expect Abxvervyer containing at game map
      */
     public RedWolf(GameMap map) {
 
@@ -82,6 +83,8 @@ public class RedWolf extends Enemy implements Spawnable, AffectedByWeather {
     /**
      * Spawn the RedWolf instance
      *
+     * @param location spawner location to spawn enemies
+     *
      * @return a new spawned RedWolf instance
      */
     @Override
@@ -102,7 +105,6 @@ public class RedWolf extends Enemy implements Spawnable, AffectedByWeather {
     public void dropItem(GameMap map) {
 
         // 100% drop runes once defeated
-//        this.getRunes().getDropAction(this).execute(this,map);
         super.dropItem(map);
 
         // 10% chance to drop a healing vial

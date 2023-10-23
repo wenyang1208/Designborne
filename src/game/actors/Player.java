@@ -45,20 +45,24 @@ public class Player extends Actor implements Resettable {
      */
     private final int hitRate;
 
-    /**
-     * instance of ResetManager class that handles resetting the game entities after player dies
-     */
     // instance of reset manager
+    /**
+     * instance of ResetManager class that handles resetting the game entities after player dies due to any causes
+     */
     private final ResetManager resetManager;
 
     // last location where player stands
+    /**
+     * last location where player stands
+     */
     private Location lastLocation;
 
     // location that the player will be respawned back
+    /**
+     * location that the player will be respawned back
+     */
     private Location respawnLocation;
 
-    // store map
-    private GameMap currMap;
 
     /**
      * Constructor for the Player class
@@ -99,7 +103,6 @@ public class Player extends Actor implements Resettable {
         this.respawnLocation = respawnLocation;
 
     }
-
 
     // Display method - to dump all states of Player instance
     /**
@@ -162,7 +165,6 @@ public class Player extends Actor implements Resettable {
 
     }
 
-
     /**
      * Method that can be executed when the Player is unconscious due to the action of another actor
      *
@@ -185,14 +187,12 @@ public class Player extends Actor implements Resettable {
 
         // get player last stood location
         lastLocation = map.locationOf(this);
-//        currMap = map;
 
         // player dies, run reset manager to reset game entities
         resetManager.run();
 
         // return output
         return "Game is reset";
-//        return super.unconscious(actor, map);
 
     }
 
@@ -224,22 +224,21 @@ public class Player extends Actor implements Resettable {
         // return output
         return "Game is reset";
 
-//        return super.unconscious(map);
-
     }
 
-    /**
-     * Provides a way for any entities be it actors or items or grounds on the GameMap that have to be reset
-     * after player dies due to any causes
-     */
     // player dies, respawned to location where they started their journey
+    /**
+     * Provides a way for the Player to respawn to location where they started their journey,
+     * value of the attributes (HP and stamina) will be reset to full
+     * meanwhile the maximum values of the player’s attributes will be kept as what it was before the player dies,
+     * reset the player's wallet (runes) to 0 and drop these runes in the last location where the player last stood
+     * after player dies due to any causes and triggers the game reset.
+     */
     @Override
     public void reset() {
 
-        respawnLocation.map().moveActor(this, respawnLocation);
-
         // respawned location, move actor
-//        currMap.moveActor(this, respawnLocation);
+        respawnLocation.map().moveActor(this, respawnLocation);
 
         // reset player's attributes
         // maintain the maximum values of player's attributes as before

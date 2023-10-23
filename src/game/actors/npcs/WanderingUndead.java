@@ -32,6 +32,7 @@ public class WanderingUndead extends Enemy implements Spawnable{
     /**
      * Constructor for the WanderingUndead class
      *
+     * @param map instance of GameMap class to remove all spawning enemies expect Abxvervyer containing at game map
      */
     public WanderingUndead(GameMap map) {
 
@@ -60,6 +61,8 @@ public class WanderingUndead extends Enemy implements Spawnable{
     /**
      * Spawn the WanderingUndead instance
      *
+     * @param location spawner location to spawn enemies
+     *
      * @return a new spawned WanderingUndead instance
      */
     @Override
@@ -79,7 +82,6 @@ public class WanderingUndead extends Enemy implements Spawnable{
     public void dropItem(GameMap map) {
 
         // 100% drop runes once defeated
-//        this.getRunes().getDropAction(this).execute(this,map);
         super.dropItem(map);
 
         // 25 % drop old key

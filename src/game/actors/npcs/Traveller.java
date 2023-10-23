@@ -37,6 +37,7 @@ public class Traveller extends Actor implements Speaker {
      * A list of monologues that can be spoken to the player
      */
     private final ArrayList<Monologue> monologues = new ArrayList<>();
+
     /**
      * A list of Purchasable items
      */
@@ -58,10 +59,10 @@ public class Traveller extends Actor implements Speaker {
      * A method to add items to be carried and sold to other actor into a list of Purchasable items
      */
     private void configure(){
-        this.purchasables.add( new HealingVial() );
-        this.purchasables.add( new RefreshingFlask() );
-        this.purchasables.add( new Broadsword() );
-        this.purchasables.add( new GreatKnife() );
+        this.purchasables.add( new HealingVial());
+        this.purchasables.add( new RefreshingFlask());
+        this.purchasables.add( new Broadsword());
+        this.purchasables.add( new GreatKnife());
     }
 
 

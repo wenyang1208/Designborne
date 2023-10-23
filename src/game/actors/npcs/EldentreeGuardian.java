@@ -33,7 +33,9 @@ public class EldentreeGuardian extends Enemy implements Spawnable{
     private final int hitRate;
 
     /**
-     * The constructor of the EldentreeGuardian class.
+     * The constructor of the EldentreeGuardian class
+     *
+     * @param map instance of GameMap class to remove all spawning enemies expect Abxvervyer containing at game map
      *
      */
     public EldentreeGuardian(GameMap map) {
@@ -68,6 +70,8 @@ public class EldentreeGuardian extends Enemy implements Spawnable{
     /**
      * Spawn the EldentreeGuardian instance
      *
+     * @param location spawner location to spawn enemies
+     *
      * @return a new spawned EldentreeGuardian instance
      */
     @Override
@@ -88,8 +92,7 @@ public class EldentreeGuardian extends Enemy implements Spawnable{
     @Override
     public void dropItem(GameMap map) {
 
-//        // 100% drop runes once defeated
-//        this.getRunes().getDropAction(this).execute(this,map);
+        // 100% drop runes once defeated
         super.dropItem(map);
 
         // 25% chance to drop a healing vial

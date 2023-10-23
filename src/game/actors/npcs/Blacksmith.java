@@ -15,7 +15,7 @@ import game.utils.Status;
 import java.util.ArrayList;
 
 /**
- * A class that represents Blacksmith.
+ * A class that represents Blacksmith in the Abandoned Village Map
  *
  * Created by:
  * @author Chua Wen Yang
@@ -31,7 +31,8 @@ public class Blacksmith extends Actor implements Speaker {
   private final ArrayList<Monologue> monologues = new ArrayList<>();
 
   /**
-   * The constructor of the blacksmith class.
+   * The constructor of the Blacksmith class
+   *
    */
   public Blacksmith() {
     super("Blacksmith", 'B', 100);
@@ -54,11 +55,11 @@ public class Blacksmith extends Actor implements Speaker {
   }
 
   /**
-   * Generates a collection of monologues for an Actor based on their capabilities and the game context.
+   * Generates a collection of monologues for an Actor based on their capabilities and the game context
    *
-   * @param actor The Actor for whom the monologues are being generated.
+   * @param actor The Actor for whom the monologues are being generated
    *
-   * @return An ArrayList of Monologue objects containing dialogues tailored to the Actor's capabilities and the game context.
+   * @return An ArrayList of Monologue objects containing dialogues tailored to the Actor's capabilities and the game context
    */
   @Override
   public ArrayList<Monologue> generateMonologues(Actor actor) {
@@ -72,13 +73,13 @@ public class Blacksmith extends Actor implements Speaker {
   }
 
   /**
-   * Returns a new collection of the Actions that the otherActor can do to Traveller
+   * Returns a new collection of the Actions that the otherActor can do to Blacksmith
    *
    * @param otherActor the Actor that might be performing attack
    * @param direction  String representing the direction of the other Actor
    * @param map        current GameMap
    *
-   * @return A collection of Actions.
+   * @return A collection of Actions
    */
   @Override
   public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {

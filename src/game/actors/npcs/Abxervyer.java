@@ -11,9 +11,6 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.behaviours.FollowBehaviour;
-import game.reset.ResetManager;
-import game.reset.Resettable;
-import game.utils.Status;
 import game.weather.WeatherManager;
 import game.grounds.Gate;
 import game.items.Rune;
@@ -29,6 +26,7 @@ import game.utils.FancyMessage;
  * Modified by:
  * @author Yang Dan
  * @author Chai Jun Lun
+ * @author Koe Rui En
  */
 public class Abxervyer extends Enemy{
 
@@ -54,6 +52,9 @@ public class Abxervyer extends Enemy{
 
     /**
      * Constructor for the Abxervyer class
+     *
+     * @param map instance of GameMap class to remove all spawning enemies expect Abxvervyer containing at game map
+     *
      */
     public Abxervyer(GameMap map) {
 
@@ -70,8 +71,6 @@ public class Abxervyer extends Enemy{
         // boss will not get hurt if they walk around in the Void
         this.addCapability(Ability.STEP_ON_VOID);
 
-//        // register to reset manager
-//        ResetManager.getInstanceReset().registerResettable(this);
     }
 
     /**
@@ -128,7 +127,6 @@ public class Abxervyer extends Enemy{
     public void dropItem(GameMap map) {
 
         // 100% chance to drop runes once defeated
-//        this.getRunes().getDropAction(this).execute(this, map);
         super.dropItem(map);
 
         // boss last stood turns into a Gate once defeated
@@ -157,20 +155,18 @@ public class Abxervyer extends Enemy{
             }
 
         }
+
         // To ensure actor has defeated the boss.
         actor.addCapability(Ability.DEFEATED_ABXERVYER);
-
-//        // need to remove from reset manager after died?
-//        ResetManager.getInstanceReset().removeResettable(this);
 
         return super.unconscious(actor, map);
 
     }
 
     /**
-     * Provides a way for any entities be it actors or items or grounds on the GameMap that have to be reset
-     * after player dies due to any causes
-     *
+     * Override the reset() method from the abstract Enemy class to reset the health attribute of Abxervyer
+     * since it does not remove from the map but update its health attribute
+     * after player dies due to any causes and triggers the game reset
      */
     @Override
     public void reset() {
@@ -179,8 +175,6 @@ public class Abxervyer extends Enemy{
         int health = this.getAttributeMaximum(BaseActorAttributes.HEALTH);
         modifyAttribute(BaseActorAttributes.HEALTH, ActorAttributeOperations.UPDATE, health);
 
-        // need to remove from reset manager after reset?
-//        ResetManager.getInstanceReset().removeResettable(this);
     }
 
 }

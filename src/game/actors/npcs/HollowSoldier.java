@@ -32,6 +32,8 @@ public class HollowSoldier extends Enemy implements Spawnable{
     /**
      * Constructor for the HollowSoldier class
      *
+     * @param map instance of GameMap class to remove all spawning enemies expect Abxvervyer containing at game map
+     *
      */
     // constructor
     public HollowSoldier(GameMap map) {
@@ -81,7 +83,6 @@ public class HollowSoldier extends Enemy implements Spawnable{
     public void dropItem(GameMap map) {
 
         // 100% drop runes once defeated
-//        this.getRunes().getDropAction(this).execute(this,map);
         super.dropItem(map);
 
         // 20% chance to drop a healing vial
