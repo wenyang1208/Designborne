@@ -41,6 +41,7 @@ public class Gate extends Ground implements Resettable {
      * location of gate to travel to
      */
     private Location locationToMove;
+
     // map that stores multiple destinations to travel to
     /**
      * a map of collection of destinations to travel to
@@ -135,13 +136,11 @@ public class Gate extends Ground implements Resettable {
 
     }
 
-
-    /**
-     * Provides a way for any entities be it actors or items or grounds on the GameMap that have to be reset
-     * after player dies due to any causes
-     *
-     */
     // player dies, unlocked gates will be locked again.
+    /**
+     * Provides a way for the unlocked gates to be locked again after player dies due to any causes
+     * and triggers the game reset
+     */
     @Override
     public void reset() {
 

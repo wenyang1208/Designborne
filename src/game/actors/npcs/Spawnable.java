@@ -15,6 +15,8 @@ public interface Spawnable {
     /**
      * Spawn the instance of an enemy
      *
+     * @param location spawner location to spawn enemies
+     *
      * @return a new spawned Enemy
      */
     Enemy spawnMethod(Location location);

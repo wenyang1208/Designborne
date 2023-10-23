@@ -54,8 +54,6 @@ public class Void extends Ground {
             // get actor at this location
             Actor target = location.getActor();
 
-//            ret += target + " has stepped into the void" + "\n";
-
             // check target has ability to step on void
             if (!target.hasCapability(Ability.STEP_ON_VOID)){
 
@@ -67,7 +65,7 @@ public class Void extends Ground {
             // target can step on void since it is immune
             else {
 
-                ret += target + " has stepped into the void, but void does not hurt it\n";
+                ret += target + " has stepped into the void, but void does not hurt it";
 
             }
 

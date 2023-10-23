@@ -66,6 +66,7 @@ public class Rune extends Item implements Consumable, Resettable{
    * Consumes the Rune, increasing the actor's balance by the specified value and removing it from the actor's inventory
    *
    * @param owner The actor consuming the Rune
+   *
    * @return A message indicating that the actor has consumed the Rune
    */
   @Override
@@ -76,8 +77,8 @@ public class Rune extends Item implements Consumable, Resettable{
   }
 
   /**
-   * Provides a way for any entities be it actors or items or grounds on the GameMap that have to be reset
-   * after player dies due to any causes
+   * Provides a way for all the runes to wiped off when it is on the ground except the runes dropped by the Player
+   * after player dies due to any causes and triggers the game reset
    */
   @Override
   public void reset() {
