@@ -26,7 +26,7 @@ Sequence diagrams for each requirement for Assignment 3 is located in the "docs\
 A report of combining design rationale, UML class diagrams, sequence diagrams for each requirement for Assignment 3 is located in a pdf file in the "docs\design\assignment3" directory of the repository.
 
 ## Javadocs
-Javadocs have been generated and is located in a folder called "javadoc\assignment 2" in the "docs" directory of the repository for assignment 2.
+Javadocs have been generated and is located in a folder called "javadoc\assignment 2" in the "docs" directory of the repository for assignment 2.\
 Javadocs have been generated and is located in a folder called "javadoc\assignment 3" in the "docs" directory of the repository for assignment 3.
 
 ## Contribution Log
