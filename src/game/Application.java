@@ -234,24 +234,24 @@ public class Application {
         Player player = new Player("The Abstracted One", '@', 150, 200, abandonedVillage.at(29, 5));
 
         // Add player to the map
-        world.addPlayer(player, abandonedVillage.at(29, 5));
+//        world.addPlayer(player, abandonedVillage.at(29, 5));
 //        world.addPlayer(player, burialGround.at(0,10));
 //        world.addPlayer(player, ancientWoods.at(20, 3));
-//        world.addPlayer(player, abxervyerBattleRoom.at(12, 10));
+        world.addPlayer(player, abxervyerBattleRoom.at(12, 10));
 //        world.addPlayer(player, overgrownSanctuary.at(12, 10));
 
 
         // Testing
 
         // inventory
-        player.addItemToInventory(new OldKey());
+//        player.addItemToInventory(new OldKey());
 //        player.addBalance(10000);
-        player.addItemToInventory(new Bloodberry());
-        player.addItemToInventory(new Broadsword());
-        player.addItemToInventory(new GreatKnife());
-        player.addItemToInventory(new HealingVial());
-        player.addItemToInventory(new RefreshingFlask());
-        player.addItemToInventory(new GiantHammer());
+//        player.addItemToInventory(new Bloodberry());
+//        player.addItemToInventory(new Broadsword());
+//        player.addItemToInventory(new GreatKnife());
+//        player.addItemToInventory(new HealingVial());
+//        player.addItemToInventory(new RefreshingFlask());
+//        player.addItemToInventory(new GiantHammer());
 
         // travel
 //        world.addPlayer(player, ancientWoods.at(0, 6));
@@ -277,7 +277,7 @@ public class Application {
 //        Player player = new Player("The Abstracted One", '@', 1000, 2000, abxervyerBattleRoom.at(12, 10));
 
 
-
+//
         // Run game
         for (String line : FancyMessage.TITLE.split("\n")) {
             new Display().println(line);
