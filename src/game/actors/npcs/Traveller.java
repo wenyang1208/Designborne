@@ -112,6 +112,7 @@ public class Traveller extends Actor implements Speaker {
      */
     @Override
     public ArrayList<Monologue> generateMonologues(Actor actor) {
+        monologues.clear();
         monologues.add( new Monologue(true, "\"Of course, I will never give you up, valuable customer!\"", this) );
         monologues.add( new Monologue(true, "\"I promise I will never let you down with the quality of the items that I sell.\"", this) );
         monologues.add( new Monologue(true, "\"You can always find me here. I'm never gonna run around and desert you, dear customer!\"", this) );

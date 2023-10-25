@@ -63,6 +63,7 @@ public class Blacksmith extends Actor implements Speaker {
    */
   @Override
   public ArrayList<Monologue> generateMonologues(Actor actor) {
+    monologues.clear();
     monologues.add( new Monologue(true, "\"I used to be an adventurer like you, but then …. Nevermind, let’s get back to smithing.\"", this) );
     monologues.add( new Monologue(true, "\"It’s dangerous to go alone. Take my creation with you on your adventure!\"", this) );
     monologues.add( new Monologue(true, "\"Ah, it’s you. Let’s get back to make your weapons stronger.\"", this) );
