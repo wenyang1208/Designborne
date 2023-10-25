@@ -36,7 +36,7 @@ public class LivingBranch extends Enemy implements Spawnable{
 
     // Key priority of behaviour
     /**
-     * Key Priority of 999
+     * Key Priority of Wander Behaviour
      */
     private static final int KEY_PRIORITY_999 = 999;
 

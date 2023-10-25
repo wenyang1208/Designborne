@@ -46,7 +46,7 @@ public class RedWolf extends Enemy implements Spawnable, AffectedByWeather {
 
     // Key priority of behaviour
     /**
-     * Key Priority of 1
+     * Key Priority of Follow Behaviour
      */
     private static final int KEY_PRIORITY_1 = 1;
 
