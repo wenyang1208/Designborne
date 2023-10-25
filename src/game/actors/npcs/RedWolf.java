@@ -44,6 +44,18 @@ public class RedWolf extends Enemy implements Spawnable, AffectedByWeather {
      */
     private float damageMultiplier = 1.0f;
 
+    // Key priority of behaviour
+    /**
+     * Key Priority of 1
+     */
+    private static final int KEY_PRIORITY_1 = 1;
+
+    // drop healing vial percentage
+    /**
+     * percentage to drop healing vial 10%
+     */
+    private static final double DROP_HEALING_VIAL_PERCENTAGE = 0.10;
+
     /**
      * Constructor for the RedWolf class
      *
@@ -57,7 +69,7 @@ public class RedWolf extends Enemy implements Spawnable, AffectedByWeather {
         // can attack the player by biting them, dealing 15 damage with 80% accuracy.
         this.damage = 15;
         this.hitRate = 80;
-        this.addBehaviour(1, new FollowBehaviour());
+        this.addBehaviour(KEY_PRIORITY_1, new FollowBehaviour());
 
         // register to weather manager
         WeatherManager.getWeatherInstance().registerWeather(this);
@@ -108,7 +120,7 @@ public class RedWolf extends Enemy implements Spawnable, AffectedByWeather {
         super.dropItem(map);
 
         // 10% chance to drop a healing vial
-        if (dropItemChance(0.10)){
+        if (dropItemChance(DROP_HEALING_VIAL_PERCENTAGE)){
 
             new HealingVial().getDropAction(this).execute(this,map);
 

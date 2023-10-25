@@ -29,6 +29,18 @@ public class WanderingUndead extends Enemy implements Spawnable{
      */
     private final int damage;
 
+    // drop key percentage
+    /**
+     * percentage to drop key 25%
+     */
+    private static final double DROP_KEY_PERCENTAGE = 0.25;
+
+    // drop healing vial percentage
+    /**
+     * percentage to drop healing vial 20%
+     */
+    private static final double DROP_HEALING_VIAL_PERCENTAGE = 0.20;
+
     /**
      * Constructor for the WanderingUndead class
      *
@@ -85,14 +97,14 @@ public class WanderingUndead extends Enemy implements Spawnable{
         super.dropItem(map);
 
         // 25 % drop old key
-        if (dropItemChance(0.25)){
+        if (dropItemChance(DROP_KEY_PERCENTAGE)){
 
             new OldKey().getDropAction(this).execute(this,map);
 
         }
 
         // 20% chance to drop a healing vial
-        if (dropItemChance(0.20)){
+        if (dropItemChance(DROP_HEALING_VIAL_PERCENTAGE)){
 
             new HealingVial().getDropAction(this).execute(this,map);
 

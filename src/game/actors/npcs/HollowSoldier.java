@@ -28,6 +28,17 @@ public class HollowSoldier extends Enemy implements Spawnable{
      */
     private final int damage;
 
+    // drop healing vial percentage
+    /**
+     * percentage to drop healing vial 20%
+     */
+    private static final double DROP_HEALING_VIAL_PERCENTAGE = 0.20;
+
+    // drop refreshing flask percentage
+    /**
+     * percentage to drop refreshing flask 30%
+     */
+    private static final double DROP_REFRESHING_FLASK_PERCENTAGE = 0.30;
 
     /**
      * Constructor for the HollowSoldier class
@@ -86,14 +97,14 @@ public class HollowSoldier extends Enemy implements Spawnable{
         super.dropItem(map);
 
         // 20% chance to drop a healing vial
-        if (dropItemChance(0.20)) {
+        if (dropItemChance(DROP_HEALING_VIAL_PERCENTAGE)) {
 
             new HealingVial().getDropAction(this).execute(this,map);
 
         }
 
         // has a 30% chance to drop a refreshing flask
-        if (dropItemChance(0.30)){
+        if (dropItemChance(DROP_REFRESHING_FLASK_PERCENTAGE)){
 
             new RefreshingFlask().getDropAction(this).execute(this,map);
 

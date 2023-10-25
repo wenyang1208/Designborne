@@ -34,6 +34,18 @@ public class LivingBranch extends Enemy implements Spawnable{
      */
     private final int hitRate;
 
+    // Key priority of behaviour
+    /**
+     * Key Priority of 999
+     */
+    private static final int KEY_PRIORITY_999 = 999;
+
+    // drop healing vial percentage
+    /**
+     * percentage to drop healing vial 50%
+     */
+    private static final double DROP_BLOODBERRY_PERCENTAGE = 0.50;
+
     /**
      * The constructor of the LivingBranch class.
      *
@@ -52,7 +64,7 @@ public class LivingBranch extends Enemy implements Spawnable{
 
         // this enemy cannot wander and follow
         // 999 -> Wander Behaviour
-        this.removeBehaviour(999);
+        this.removeBehaviour(KEY_PRIORITY_999);
 
         // they can walk around in the Void with no consequences.
         this.addCapability(Ability.STEP_ON_VOID);
@@ -101,7 +113,7 @@ public class LivingBranch extends Enemy implements Spawnable{
         super.dropItem(map);
 
         // 50% chance of dropping a Bloodberry.
-        if (dropItemChance(0.50)) {
+        if (dropItemChance(DROP_BLOODBERRY_PERCENTAGE)) {
 
             new Bloodberry().getDropAction(this).execute(this, map);
 
