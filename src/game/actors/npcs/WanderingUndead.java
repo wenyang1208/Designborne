@@ -18,6 +18,8 @@ import game.items.Rune;
  *
  * Modified by:
  * @author Yang Dan
+ * @author Chai Jun Lun
+ * @author Chua Wen Yang
  */
 public class WanderingUndead extends Enemy implements Spawnable{
 
@@ -42,6 +44,11 @@ public class WanderingUndead extends Enemy implements Spawnable{
     private static final double DROP_HEALING_VIAL_PERCENTAGE = 0.20;
 
     /**
+     * constant damage done of the Wandering Undead
+     */
+    private static final int DEFAULT_DAMAGE_OF_WANDERING_UNDEAD = 30;
+
+    /**
      * Constructor for the WanderingUndead class
      *
      * @param map instance of GameMap class to remove all spawning enemies expect Abxvervyer containing at game map
@@ -51,7 +58,7 @@ public class WanderingUndead extends Enemy implements Spawnable{
         super("Wandering Undead", 't', 100,new Rune(50), map);
 
         // can attack the player with its limbs, dealing 30 damage with 50% accuracy
-        this.damage = 30;
+        this.damage = DEFAULT_DAMAGE_OF_WANDERING_UNDEAD;
 
     }
 

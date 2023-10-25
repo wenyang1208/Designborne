@@ -15,7 +15,8 @@ import game.items.Rune;
  *
  * Modified by:
  * @author Yang Dan
- *
+ * @author Chai Jun Lun
+ * @author Chua Wen Yang
  */
 public class HollowSoldier extends Enemy implements Spawnable{
 
@@ -41,6 +42,11 @@ public class HollowSoldier extends Enemy implements Spawnable{
     private static final double DROP_REFRESHING_FLASK_PERCENTAGE = 0.30;
 
     /**
+     * constant damage done of the Hollow Soldier
+     */
+    private static final int DEFAULT_DAMAGE_OF_HOLLOW_SOLDIER = 50;
+
+    /**
      * Constructor for the HollowSoldier class
      *
      * @param map instance of GameMap class to remove all spawning enemies expect Abxvervyer containing at game map
@@ -54,7 +60,7 @@ public class HollowSoldier extends Enemy implements Spawnable{
         super("Hollow Soldier", '&', 200, new Rune(100), map);
 
         // can attack the player with its limbs, dealing 50 damage with 50% accuracy.
-        this.damage = 50;
+        this.damage = DEFAULT_DAMAGE_OF_HOLLOW_SOLDIER;
     }
 
 

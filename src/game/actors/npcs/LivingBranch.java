@@ -9,7 +9,6 @@ import game.items.Bloodberry;
 import game.items.Rune;
 import game.utils.Ability;
 
-import java.util.Locale;
 
 
 /**
@@ -18,6 +17,9 @@ import java.util.Locale;
  * Created by:
  * @author Koe Rui En
  *
+ * Modified by:
+ * @author Chai Jun Lun
+ * @author Chua Wen Yang
  */
 public class LivingBranch extends Enemy implements Spawnable{
 
@@ -42,9 +44,20 @@ public class LivingBranch extends Enemy implements Spawnable{
 
     // drop healing vial percentage
     /**
-     * percentage to drop healing vial 50%
+     * percentage to drop bloodberry 50%
      */
     private static final double DROP_BLOODBERRY_PERCENTAGE = 0.50;
+
+    /**
+     * constant damage done of the Living Branch
+     */
+    private static final int DEFAULT_DAMAGE_OF_LIVING_BRANCH = 250;
+
+    /**
+     * constant hit rate of the Living Branch
+     */
+    private static final int DEFAULT_HIT_RATE_OF_LIVING_BRANCH = 90;
+
 
     /**
      * The constructor of the LivingBranch class.
@@ -59,8 +72,8 @@ public class LivingBranch extends Enemy implements Spawnable{
         super("Living Branch", '?', 75, new Rune(500), map);
 
         // can attack the player with their limbs, dealing 250 damage with 90% accuracy
-        this.damage = 250;
-        this.hitRate = 90;
+        this.damage = DEFAULT_DAMAGE_OF_LIVING_BRANCH;
+        this.hitRate = DEFAULT_HIT_RATE_OF_LIVING_BRANCH;
 
         // this enemy cannot wander and follow
         // 999 -> Wander Behaviour

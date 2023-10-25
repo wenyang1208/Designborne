@@ -21,6 +21,8 @@ import game.weather.WeatherManager;
  *
  * Modified by:
  * @author Yang Dan
+ * @author Chai Jun Lun
+ * @author Chua Wen Yang
  *
  */
 public class RedWolf extends Enemy implements Spawnable, AffectedByWeather {
@@ -57,6 +59,27 @@ public class RedWolf extends Enemy implements Spawnable, AffectedByWeather {
     private static final double DROP_HEALING_VIAL_PERCENTAGE = 0.10;
 
     /**
+     * constant damage done of the Red Wolf
+     */
+    private static final int DEFAULT_DAMAGE_OF_RED_WOLF = 15;
+
+    /**
+     * constant hit rate of the Red Wolf
+     */
+    private static final int DEFAULT_HIT_RATE_OF_RED_WOLF = 80;
+
+    /**
+     * constant damage multiplier of the Red Wolf when affected by sunny
+     */
+    private static final float DAMAGE_MULTIPLIER_SUNNY = 3.0f;
+
+    /**
+     * constant damage multiplier of the Red Wolf when affected by rainy
+     */
+    private static final float DAMAGE_MULTIPLIER_RAINY = 1.0f;
+
+
+    /**
      * Constructor for the RedWolf class
      *
      * @param map instance of GameMap class to remove all spawning enemies expect Abxvervyer containing at game map
@@ -67,8 +90,8 @@ public class RedWolf extends Enemy implements Spawnable, AffectedByWeather {
         super("Red Wolf", 'r', 25,new Rune(25), map);
 
         // can attack the player by biting them, dealing 15 damage with 80% accuracy.
-        this.damage = 15;
-        this.hitRate = 80;
+        this.damage = DEFAULT_DAMAGE_OF_RED_WOLF;
+        this.hitRate = DEFAULT_HIT_RATE_OF_RED_WOLF;
         this.addBehaviour(KEY_PRIORITY_1, new FollowBehaviour());
 
         // register to weather manager
@@ -173,7 +196,7 @@ public class RedWolf extends Enemy implements Spawnable, AffectedByWeather {
 
         // deals 3 times the original damage when attacking the player
         // (i.e. 45% instead of 30%)
-        this.damageMultiplier = 3.0f;
+        this.damageMultiplier = DAMAGE_MULTIPLIER_SUNNY;
 
         result = this + " is becoming more aggressive.";
 
@@ -192,7 +215,7 @@ public class RedWolf extends Enemy implements Spawnable, AffectedByWeather {
         String result = "";
 
         // reset back to ori state
-        this.damageMultiplier = 1.0f;
+        this.damageMultiplier = DAMAGE_MULTIPLIER_RAINY;
 
         result = this + " is becoming less aggressive.";
 

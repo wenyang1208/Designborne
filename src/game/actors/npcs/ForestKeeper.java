@@ -20,6 +20,7 @@ import game.weather.WeatherManager;
  *
  * Modified by:
  * @author Yang Dan
+ * @author Chua Wen Yang
  *
  */
 public class ForestKeeper extends Enemy implements Spawnable, AffectedByWeather {
@@ -54,6 +55,17 @@ public class ForestKeeper extends Enemy implements Spawnable, AffectedByWeather 
     private static final int HEALING_POINT  = 10;
 
     /**
+     * constant damage done of the Forest Keeper
+     */
+    private static final int DEFAULT_DAMAGE_OF_FOREST_KEEPER  = 25;
+
+    /**
+     * hit rate of the Forest Keeper
+     */
+    private static final int DEFAULT_HIT_RATE_OF_FOREST_KEEPER  = 75;
+
+
+    /**
      * Constructor for the ForestKeeper class
      *
      */
@@ -63,8 +75,8 @@ public class ForestKeeper extends Enemy implements Spawnable, AffectedByWeather 
         super("Forest Keeper", '8', 125,new Rune(50), map);
 
         // can attack the player with its limbs, dealing 25 damage with 75% accuracy
-        this.damage = 25;
-        this.hitRate = 75;
+        this.damage = DEFAULT_DAMAGE_OF_FOREST_KEEPER;
+        this.hitRate = DEFAULT_HIT_RATE_OF_FOREST_KEEPER;
 
         // can follow the player
         this.addBehaviour(KEY_PRIORITY_1, new FollowBehaviour());

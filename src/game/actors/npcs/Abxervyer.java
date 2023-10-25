@@ -27,6 +27,7 @@ import game.utils.FancyMessage;
  * @author Yang Dan
  * @author Chai Jun Lun
  * @author Koe Rui En
+ * @author Chua Wen Yang
  */
 public class Abxervyer extends Enemy{
 
@@ -52,7 +53,18 @@ public class Abxervyer extends Enemy{
     /**
      * key priority of follow behaviour
      */
-    private final int KEY_PRIORITY_1 = 1;
+    private final static int KEY_PRIORITY_1 = 1;
+
+    /**
+     * constant damage done of the Abxervyer
+     */
+    private static final int DEFAULT_DAMAGE_OF_ABXERVYER  = 80;
+
+    /**
+     * hit rate of the Abxervyer
+     */
+    private static final int DEFAULT_HIT_RATE_OF_ABXERVYER = 25;
+
 
     /**
      * Constructor for the Abxervyer class
@@ -66,8 +78,8 @@ public class Abxervyer extends Enemy{
         super("Abxervyer, The Forest Watcher", 'Y', 2000, new Rune(5000), map);
 
         // attack the player with its limbs, dealing 80 damage with 25% accuracy
-        this.damage = 80;
-        this.hitRate = 25;
+        this.damage = DEFAULT_DAMAGE_OF_ABXERVYER;
+        this.hitRate = DEFAULT_HIT_RATE_OF_ABXERVYER;
 
         // can follow the player
         this.addBehaviour(KEY_PRIORITY_1, new FollowBehaviour());

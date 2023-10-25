@@ -54,12 +54,12 @@ public abstract class Enemy extends Actor implements Resettable{
   /**
    * key priority of attack behaviour
    */
-   private static final int KEY_PRIORITY_1  = 500;
+   private static final int KEY_PRIORITY_500  = 500;
 
   /**
    * key priority of wander behaviour
    */
-   private static final int KEY_PRIORITY_2  = 999;
+   private static final int KEY_PRIORITY_999  = 999;
 
     /**
      * The constructor of the Enemy class.
@@ -77,8 +77,8 @@ public abstract class Enemy extends Actor implements Resettable{
         this.runes = runes;
 
         // All enemies can wander and attack
-        addBehaviour(KEY_PRIORITY_2, new WanderBehaviour());
-        addBehaviour(KEY_PRIORITY_1, new AttackBehaviour());
+        addBehaviour(KEY_PRIORITY_999, new WanderBehaviour());
+        addBehaviour(KEY_PRIORITY_500, new AttackBehaviour());
 
         // initialise map that containing the enemies
         this.currMap = map;

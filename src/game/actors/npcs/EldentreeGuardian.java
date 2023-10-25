@@ -17,6 +17,8 @@ import game.utils.Ability;
  * Created by:
  * @author Koe Rui En
  *
+ * Modified by:
+ * @author Chua Wen Yang
  */
 public class EldentreeGuardian extends Enemy implements Spawnable{
 
@@ -48,6 +50,16 @@ public class EldentreeGuardian extends Enemy implements Spawnable{
     private static final double DROP_REFRESHING_FLASK_PERCENTAGE  = 0.15;
 
     /**
+     * constant damage done of the Eldentree Guardian
+     */
+    private static final int DEFAULT_DAMAGE_OF_ELDENTREE_GUARDIAN  = 50;
+
+    /**
+     * constant hit rate of the Eldentree Guardian
+     */
+    private static final int DEFAULT_HIT_RATE_OF_ELDENTREE_GUARDIAN  = 80;
+
+    /**
      * The constructor of the EldentreeGuardian class
      *
      * @param map instance of GameMap class to remove all spawning enemies expect Abxvervyer containing at game map
@@ -60,8 +72,8 @@ public class EldentreeGuardian extends Enemy implements Spawnable{
         super("Eldentree Guardian", 'e', 250, new Rune(250), map);
 
         // can attack the player with their limbs, dealing 50 damage with 80% accuracy
-        this.damage = 50;
-        this.hitRate = 80;
+        this.damage = DEFAULT_DAMAGE_OF_ELDENTREE_GUARDIAN;
+        this.hitRate = DEFAULT_HIT_RATE_OF_ELDENTREE_GUARDIAN;
         this.addBehaviour(KEY_PRIORITY_1, new FollowBehaviour());
 
         // they can walk around in the Void with no consequences.
