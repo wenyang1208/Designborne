@@ -33,15 +33,26 @@ public class EldentreeGuardian extends Enemy implements Spawnable{
     private final int hitRate;
 
     /**
+     * key priority of follow behaviour
+     */
+    private static final int KEY_PRIORITY_1  = 1;
+
+    /**
+     * percentage to drop healing vial 25%
+     */
+    private static final double DROP_HEALING_VIAL_PERCENTAGE  = 0.25;
+
+    /**
+     * percentage to drop refreshing flask 15%
+     */
+    private static final double DROP_REFRESHING_FLASK_PERCENTAGE  = 0.15;
+
+    /**
      * The constructor of the EldentreeGuardian class
      *
      * @param map instance of GameMap class to remove all spawning enemies expect Abxvervyer containing at game map
      *
      */
-
-    private static final int KEY_PRIORITY_1  = 1;
-    private static final double DROP_HEALING_VIAL_PERCENTAGE  = 0.25;
-    private static final double DROP_REFRESHING_FLASK_PERCENTAGE  = 0.15;
     public EldentreeGuardian(GameMap map) {
 
         // represented by “e”, 250 hitpoints

@@ -51,7 +51,14 @@ public abstract class Enemy extends Actor implements Resettable{
      */
    private GameMap currMap;
 
+  /**
+   * key priority of attack behaviour
+   */
    private static final int KEY_PRIORITY_1  = 500;
+
+  /**
+   * key priority of wander behaviour
+   */
    private static final int KEY_PRIORITY_2  = 999;
 
     /**

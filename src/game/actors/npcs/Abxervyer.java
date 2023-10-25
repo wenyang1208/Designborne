@@ -49,6 +49,9 @@ public class Abxervyer extends Enemy{
      */
     private Gate droppedGate;
 
+    /**
+     * key priority of follow behaviour
+     */
     private final int KEY_PRIORITY_1 = 1;
 
     /**

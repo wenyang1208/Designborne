@@ -39,14 +39,24 @@ public class ForestKeeper extends Enemy implements Spawnable, AffectedByWeather 
     private final int hitRate;
 
     /**
+     * Key priority of follow behaviour
+     */
+    private static final int KEY_PRIORITY_1  = 1;
+
+    /**
+     * percentage to drop healing vial 20%
+     */
+    private static final double DROP_HEALING_VIAL_PERCENTAGE  = 0.20;
+
+    /**
+     * healing point of 10
+     */
+    private static final int HEALING_POINT  = 10;
+
+    /**
      * Constructor for the ForestKeeper class
      *
      */
-
-    private static final int KEY_PRIORITY_1  = 1;
-    private static final double DROP_HEALING_VIAL_PERCENTAGE  = 0.20;
-
-    private static final int HEALING_POINT  = 10;
     public ForestKeeper(GameMap map) {
 
         // displayed "8", 125 hp
