@@ -38,6 +38,10 @@ public class EldentreeGuardian extends Enemy implements Spawnable{
      * @param map instance of GameMap class to remove all spawning enemies expect Abxvervyer containing at game map
      *
      */
+
+    private static final int KEY_PRIORITY_1  = 1;
+    private static final double DROP_HEALING_VIAL_PERCENTAGE  = 0.25;
+    private static final double DROP_REFRESHING_FLASK_PERCENTAGE  = 0.15;
     public EldentreeGuardian(GameMap map) {
 
         // represented by “e”, 250 hitpoints
@@ -47,7 +51,7 @@ public class EldentreeGuardian extends Enemy implements Spawnable{
         // can attack the player with their limbs, dealing 50 damage with 80% accuracy
         this.damage = 50;
         this.hitRate = 80;
-        this.addBehaviour(1, new FollowBehaviour());
+        this.addBehaviour(KEY_PRIORITY_1, new FollowBehaviour());
 
         // they can walk around in the Void with no consequences.
         this.addCapability(Ability.STEP_ON_VOID);
@@ -96,14 +100,14 @@ public class EldentreeGuardian extends Enemy implements Spawnable{
         super.dropItem(map);
 
         // 25% chance to drop a healing vial
-        if (dropItemChance(0.25)){
+        if (dropItemChance(DROP_HEALING_VIAL_PERCENTAGE)){
 
             new HealingVial().getDropAction(this).execute(this,map);
 
         }
 
         // 15% chance to drop a refreshing flask
-        if (dropItemChance(0.15)){
+        if (dropItemChance(DROP_REFRESHING_FLASK_PERCENTAGE )){
 
             new RefreshingFlask().getDropAction(this).execute(this,map);
 

@@ -42,6 +42,11 @@ public class ForestKeeper extends Enemy implements Spawnable, AffectedByWeather 
      * Constructor for the ForestKeeper class
      *
      */
+
+    private static final int KEY_PRIORITY_1  = 1;
+    private static final double DROP_HEALING_VIAL_PERCENTAGE  = 0.20;
+
+    private static final int HEALING_POINT  = 10;
     public ForestKeeper(GameMap map) {
 
         // displayed "8", 125 hp
@@ -52,7 +57,7 @@ public class ForestKeeper extends Enemy implements Spawnable, AffectedByWeather 
         this.hitRate = 75;
 
         // can follow the player
-        this.addBehaviour(1, new FollowBehaviour());
+        this.addBehaviour(KEY_PRIORITY_1, new FollowBehaviour());
 
         // register to weather manager
         WeatherManager.getWeatherInstance().registerWeather(this);
@@ -86,7 +91,7 @@ public class ForestKeeper extends Enemy implements Spawnable, AffectedByWeather 
         super.dropItem(map);
 
         // 20% chance to drop a healing vial
-        if (dropItemChance(0.20)){
+        if (dropItemChance(DROP_HEALING_VIAL_PERCENTAGE)){
 
             new HealingVial().getDropAction(this).execute(this,map);
 
@@ -159,7 +164,7 @@ public class ForestKeeper extends Enemy implements Spawnable, AffectedByWeather 
     @Override
     public String affectedByRainy() {
         // healed by 10 points
-        this.heal(10);
+        this.heal(HEALING_POINT);
         return this + " feels rejuvenated.";
     }
 }

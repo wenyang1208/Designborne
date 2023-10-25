@@ -49,6 +49,7 @@ public class Abxervyer extends Enemy{
      */
     private Gate droppedGate;
 
+    private final int KEY_PRIORITY_1 = 1;
 
     /**
      * Constructor for the Abxervyer class
@@ -66,7 +67,7 @@ public class Abxervyer extends Enemy{
         this.hitRate = 25;
 
         // can follow the player
-        this.addBehaviour(1, new FollowBehaviour());
+        this.addBehaviour(KEY_PRIORITY_1, new FollowBehaviour());
 
         // boss will not get hurt if they walk around in the Void
         this.addCapability(Ability.STEP_ON_VOID);
