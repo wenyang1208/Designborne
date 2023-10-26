@@ -32,3 +32,6 @@ Javadocs have been generated and is located in a folder called "javadoc\assignme
 ## Contribution Log
 Our team contribution log can be found in the below link:
 https://docs.google.com/spreadsheets/d/1OBfOur537jxrOpjG0ackpzbx9Yf5K546IfU1LPkpP9Q/edit?usp=sharing
+
+## Handover Interview
+Individual video links for handover interview is located in txt file in the "docs\design\assignment3" directory of the repository.
