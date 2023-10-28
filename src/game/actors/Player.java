@@ -90,9 +90,6 @@ public class Player extends Actor implements Resettable {
         this.damage = 15;
         this.hitRate = 80;
 
-        // initialise the wallet balance
-        this.addBalance(5000);
-
         // get instance of reset manager
         this.resetManager = ResetManager.getInstanceReset();
 
